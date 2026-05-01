@@ -1,9 +1,20 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.35.2 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.36.0 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.36.0** (2026-05-02) - Morning punch list (10 fixes from Yash's eyeball pass).
+  - 🎟️ **Trial card body** - removed the literal discount code from the "How it works · Step 1" card. Was: "Code FREETRIAL<3THEBONPET gets the trial pack free, just $9 cold-chain delivery." Now: "Pop your email in the form, we'll auto-apply the discount at checkout." Funnels to form instead of leaking the code.
+  - 🟧 **Footer column headings** changed from terracotta orange → golden amber (`var(--tbp-amber)` #F0A12E). Pops better against dark green footer background.
+  - 🧭 **Nav: "Tools" → "For Pawrents"** dropdown (Feeding Calculator / Feeding Guide / Volume Discounts / FAQ). Brand-voice match.
+  - 🗑️ **Hero "Claim your trial code →" button removed** - was duplicating the same code-claim entry already triggered by the promo bar + hero CTAs + scroll auto-open. One trigger less per fold.
+  - 🎯 **Health-tile "Try a free trial" link** changed from `/products/free-dog-trial-pack` (dog-only, alienated cat owners) to `#open-form` - opens the Shopify Forms popup, user picks dog or cat after submitting. Tile body updated to "Pick dog or cat after."
+  - 🗑️ **`founder_quote` section dropped from homepage** - was rendering the same Yash + Nic illustration as the `founder` section directly above it. Same image twice in 1 viewport.
+  - 🥩 **`/pages/formulas` Raw Recipes tab added** - sits between Dogs and Bone Broths, marked "Soon" pill. Empty placeholder text for now ("Same Google Sheet, new tabs").
+  - ❤️ **Footer copyright** "Made fresh in Singapore with 🐾" → "...with ❤️ 🐾".
+  - ✅ **Footer links 200-check** - all 22 footer links audited (Shop, Support, Company, Community columns). All green.
+  - 📁 Touches: templates/index.json, sections/bonpet-footer.liquid, sections/bonpet-formulas.liquid, sections/bonpet-health-tiles.liquid, layout/theme.liquid. Plus GraphQL menuUpdate.
 - **v3.35.2** (2026-05-02) - Founder copy → first-person to pair with the illustration.
   - 🗣️ Founder hero intro on /pages/founder is now first-person: "That's us. Yash and Nic. Two software engineers with three furkids - Salt, Pepper, and Lola..." Pairs with the illustrated portrait above (you're literally looking at them).
   - 🗣️ Homepage `founder` section body + quote rewritten in first-person plural ("We're software engineers by day...", "That's us, Yash and Nic..."). Closes with the gentle pointer "Every gram still gets published openly on /pages/formulas, you'll see it a section below" instead of restating the moat.

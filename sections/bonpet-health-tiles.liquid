@@ -16,14 +16,26 @@
     <ul class="tbp-health-tiles-grid" role="list">
       {%- for block in section.blocks -%}
         <li class="tbp-health-tile" role="listitem" {{ block.shopify_attributes }}>
-          <a class="tbp-health-tile-link" href="{{ block.settings.link | default: '#' }}">
-            <span class="tbp-health-tile-icon" aria-hidden="true">{{ block.settings.icon }}</span>
-            <strong class="tbp-health-tile-headline">{{ block.settings.headline }}</strong>
-            {%- if block.settings.body != blank -%}
-              <span class="tbp-health-tile-body">{{ block.settings.body }}</span>
-            {%- endif -%}
-            <span class="tbp-health-tile-arrow" aria-hidden="true">→</span>
-          </a>
+          {%- assign tile_link = block.settings.link | default: '#' -%}
+          {%- if tile_link == '#open-form' -%}
+            <a class="tbp-health-tile-link" href="#" onclick="event.preventDefault(); window.openBonPetForm && window.openBonPetForm()">
+              <span class="tbp-health-tile-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+              <strong class="tbp-health-tile-headline">{{ block.settings.headline }}</strong>
+              {%- if block.settings.body != blank -%}
+                <span class="tbp-health-tile-body">{{ block.settings.body }}</span>
+              {%- endif -%}
+              <span class="tbp-health-tile-arrow" aria-hidden="true">→</span>
+            </a>
+          {%- else -%}
+            <a class="tbp-health-tile-link" href="{{ tile_link }}">
+              <span class="tbp-health-tile-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+              <strong class="tbp-health-tile-headline">{{ block.settings.headline }}</strong>
+              {%- if block.settings.body != blank -%}
+                <span class="tbp-health-tile-body">{{ block.settings.body }}</span>
+              {%- endif -%}
+              <span class="tbp-health-tile-arrow" aria-hidden="true">→</span>
+            </a>
+          {%- endif -%}
         </li>
       {%- endfor -%}
     </ul>

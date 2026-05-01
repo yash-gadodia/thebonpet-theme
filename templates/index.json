@@ -48,8 +48,8 @@
                     "settings": {
                         "icon": "\ud83c\udd95",
                         "headline": "Try a free trial",
-                        "body": "$9 cold-chain delivery, no subscription needed.",
-                        "link": "/products/free-dog-trial-pack"
+                        "body": "$9 cold-chain delivery, no subscription. Pick dog or cat after.",
+                        "link": "#open-form"
                     }
                 }
             },
@@ -115,14 +115,15 @@
                 "cta2_label": "\ud83d\udc31 Free Trial for Cats",
                 "cta2_link": "/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-cat-trial-pack",
                 "trial_note": "FREE delivery on $100+ \u00b7 $9 cold-chain on this trial \u00b7 Frozen, island-wide",
-                "code_cta_label": "\ud83c\udf81 Claim your trial code \u2192",
+                "code_cta_label": "",
                 "trust_strip_enabled": true,
                 "trust_strip_item_1": "\ud83d\udd0d Open formulas",
                 "trust_strip_item_2": "\u2744\ufe0f Cold-chain delivery",
                 "trust_strip_item_3": "\ud83d\udc9b SG pet community",
                 "show_rating": true,
                 "rating_value": "4.9",
-                "rating_count": "1,500+ Singapore pawrents"
+                "rating_count": "1,500+ Singapore pawrents",
+                "code_cta_link": ""
             }
         },
         "volume_discount_banner": {
@@ -278,17 +279,6 @@
                 "cta_link": "/pages/formulas"
             }
         },
-        "founder_quote": {
-            "type": "bonpet-founder-quote",
-            "settings": {
-                "eyebrow": "A PROMISE FROM THE FOUNDERS",
-                "quote": "If we wouldn't cook it for ourselves, we won't cook it for your furkid. Every recipe, every gram, every supplement, published openly. That's not a marketing stunt. It's the only way we know how to do this right.",
-                "names": "Yash & Nicolas",
-                "role": "Co-founders, The Bon Pet \u00b7 Singapore \u00b7 since 2024",
-                "cta_label": "See Every Formula \u2192",
-                "cta_link": "/pages/formulas"
-            }
-        },
         "apps_instagram_feed": {
             "type": "apps",
             "blocks": {
@@ -392,7 +382,7 @@
                     "type": "step",
                     "settings": {
                         "title": "Claim Your Free Trial",
-                        "body": "Pick your furkid's protein. Code FREETRIAL<3THEBONPET gets the trial pack free, just $9 cold-chain delivery."
+                        "body": "Pick your furkid's protein. Pop your email in the form, we'll auto-apply the discount at checkout."
                     }
                 },
                 "s2": {
@@ -660,7 +650,6 @@
         "founder",
         "transparency_proof",
         "reassurance_band",
-        "founder_quote",
         "how_it_works",
         "delivery_promise",
         "sku_banner",

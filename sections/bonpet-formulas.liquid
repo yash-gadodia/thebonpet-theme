@@ -30,6 +30,11 @@
           <span class="tbp-formulas-tab-label">Dogs</span>
           <span class="tbp-formulas-tab-count">5</span>
         </button>
+        <button type="button" role="tab" class="tbp-formulas-tab" data-tbp-species="raw" aria-selected="false">
+          <span class="tbp-formulas-tab-emoji">🥩</span>
+          <span class="tbp-formulas-tab-label">Raw</span>
+          <span class="tbp-formulas-tab-count tbp-formulas-tab-count--soon">Soon</span>
+        </button>
         <button type="button" role="tab" class="tbp-formulas-tab" data-tbp-species="broth" aria-selected="false">
           <span class="tbp-formulas-tab-emoji">🍲</span>
           <span class="tbp-formulas-tab-label">Bone Broths</span>
@@ -52,6 +57,14 @@
         <p class="tbp-formulas-panel-sub">300g per portion. 70% protein, 25% vegetables and fruit, 5% supplements.</p>
       </div>
       {{ tbp_dogs_html }}
+    </div>
+
+    <div class="tbp-formulas-panel" data-tbp-species="raw" role="tabpanel" aria-labelledby="tab-raw">
+      <div class="tbp-formulas-panel-head">
+        <h2 class="tbp-formulas-panel-title">🥩 Raw Recipes <span class="tbp-formulas-soon-pill">Coming Soon</span></h2>
+        <p class="tbp-formulas-panel-sub">Frozen raw recipes built on the same open-formulas standard. Same gram-by-gram transparency. Launching soon, drop your email below to get first dibs.</p>
+      </div>
+      <p style="text-align:center; padding: 24px 16px; color: var(--tbp-text-secondary, #666);">Raw formulas will be published here the moment we launch. Same Google Sheet, new tabs.</p>
     </div>
 
     <div class="tbp-formulas-panel" data-tbp-species="broth" role="tabpanel" aria-labelledby="tab-broth">

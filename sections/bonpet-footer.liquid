@@ -106,7 +106,7 @@
     {%- comment -%} Bottom bar {%- endcomment -%}
     <div class="tbp-footer-bottom">
       <p class="tbp-footer-copyright">
-        © {{ 'now' | date: '%Y' }} The Bon Pet. Made fresh in Singapore with 🐾
+        © {{ 'now' | date: '%Y' }} The Bon Pet. Made fresh in Singapore with ❤️ 🐾
       </p>
       <ul class="tbp-footer-payments" aria-label="Payment methods">
         {%- for type in shop.enabled_payment_types -%}
@@ -185,9 +185,9 @@
   .tbp-footer-address strong { color: var(--tbp-white); font-weight: 700; }
   .tbp-footer-contact a { color: rgba(255,255,255,0.9); }
 
-  /* Column heading - terracotta orange per brand guide */
+  /* Column heading - amber for vibrancy on dark green background */
   .tbp-footer-heading {
-    color: var(--tbp-orange);
+    color: var(--tbp-amber);
     font-size: 13px;
     font-weight: 700;
     margin: 4px 0 16px;
