@@ -490,3 +490,30 @@ iframe[src*="envoy-crm.voltade.com"] {
   border: 1.5px solid var(--tbp-primary);
 }
 .tbp-faq-cta--ghost:hover { background: var(--tbp-primary); color: var(--tbp-cream); }
+
+/* ----------------------------------------------------------------------
+ * Shopify Forms embed click-pass-through (added v3.34.2 / 2026-05-02).
+ *
+ * The <shopify-forms-embed> custom element has a closed shadow DOM and
+ * renders an invisible full-viewport overlay that intercepts clicks on
+ * any of our buttons rendered "underneath" it (per the test failures in
+ * buttons-functional.spec.ts and v3-1-triggers.spec.ts).
+ *
+ * Setting pointer-events:none on the host lets clicks pass through to
+ * our buttons (.tbp-hero-code-btn etc.). Shopify Forms internal CSS sets
+ * pointer-events:auto on its teaser pill and dialog when they're shown,
+ * so the popup itself stays interactive.
+ *
+ * Backstop: see snippets/bonpet-forms-trigger.liquid for the JS that
+ * actually opens the form via the shadow-DOM helpers.
+ * --------------------------------------------------------------------*/
+shopify-forms-embed {
+  pointer-events: none;
+}
+shopify-forms-embed [class*="teaserContainer"],
+shopify-forms-embed [role="dialog"],
+shopify-forms-embed dialog,
+shopify-forms-embed [class*="formContainer"],
+shopify-forms-embed [class*="overlay"] {
+  pointer-events: auto;
+}

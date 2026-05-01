@@ -9,8 +9,8 @@
         "founder_hero": {
             "type": "bonpet-founder-hero",
             "settings": {
-                "image": "shopify://shop_images/bonpet-hero-2up-1776736957.jpg",
-                "image_alt": "A cat and dog enjoying their gently cooked Bon Pet meals",
+                "image": "shopify://shop_images/lola-closeup-smiling-founder.jpg",
+                "image_alt": "Lola, Yash's cockapoo, smiling at the camera - the muse for The Bon Pet",
                 "eyebrow": "OUR STORY",
                 "heading": "Started with Salt, Pepper & Lola 🐾",
                 "intro": "Nic's cats Salt and Pepper. Yash's dog Lola. Two software engineers who couldn't find fresh pet food we trusted, so we built it from our kitchen counter."
@@ -38,8 +38,8 @@
                 "quality": {
                     "type": "pillar",
                     "settings": {
-                        "image": "shopify://shop_images/IMG_4081.jpg",
-                        "image_alt": "A bowl of gently cooked pet food on a wooden board with cinnamon, bay leaves and peppercorns - the care that goes into every meal",
+                        "image": "shopify://shop_images/lola-with-bonpet-bowl.jpg",
+                        "image_alt": "Lola eating gently cooked Bon Pet on her balcony - the same recipes we ship to every Singapore pawrent",
                         "icon": "❤️",
                         "title": "Quality as Standard",
                         "body": "We cook with human-grade ingredients and the same care we'd give our own furkids. Sous vide at 80°C. PhD-formulated. AAFCO-certified. No shortcuts ever."
@@ -48,8 +48,8 @@
                 "community": {
                     "type": "pillar",
                     "settings": {
-                        "image": "shopify://shop_images/IMG_4504.jpg",
-                        "image_alt": "A black cat enjoying Bon Pet at a Singapore cat cafe with the community in the background",
+                        "image": "shopify://shop_images/expo-poodle-booth.jpg",
+                        "image_alt": "A poodle eating Bon Pet at our pet expo booth, surrounded by the SG community",
                         "icon": "🐾",
                         "title": "Community First",
                         "body": "We run WhatsApp groups, organise free tastings, answer nutrition questions personally. This isn't a faceless brand. Yash and Nic are here. We care what you think."
@@ -91,8 +91,8 @@
                 "formulas": {
                     "type": "milestone",
                     "settings": {
-                        "image": "shopify://shop_images/1dfe0fd9-6a8a-4a9a-8d37-ab2638aa52c9.jpg",
-                        "image_alt": "Every ingredient laid out before cooking - sweet potato, zucchini, beetroot, ground meat, and the supplement blend that goes into a Bon Pet recipe",
+                        "image": "shopify://shop_images/kitchen-protein-layout.jpg",
+                        "image_alt": "Raw protein laid out for prep at our Pioneer Crescent kitchen - the start of every Bon Pet recipe",
                         "year": "2024",
                         "title": "Published our formulas",
                         "body": "First Singapore fresh pet brand to open-source every ingredient ratio. Public Google Sheet. No secrets. Complete transparency."
@@ -101,8 +101,8 @@
                 "today": {
                     "type": "milestone",
                     "settings": {
-                        "image": "shopify://shop_images/IMG_4499.jpg",
-                        "image_alt": "A real Singapore pawrent's cat enjoying Bon Pet meals at home",
+                        "image": "shopify://shop_images/customer-dog-eating-002.jpg",
+                        "image_alt": "A real Singapore pawrent's dog tucking into a bowl of Bon Pet at home",
                         "year": "Now",
                         "title": "Feeding Singapore furkids",
                         "body": "500+ families trust us with their pets. Growing community. Still personal. Still caring. Still cooking with intention."

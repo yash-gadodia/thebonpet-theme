@@ -1,9 +1,15 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.34.1 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.34.2 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.34.2** (2026-05-02) - Founder photo swaps + main nav update + smoke regression fix.
+  - 📷 12 more curated photos uploaded to Shopify Files (Lola sunlit/grass, expo poodle x2, black cat portrait, tabby cat eating, customer dog x2, kitchen protein layout, kitchen cook process, maltipoo puppy, expo goldendoodle).
+  - 🔄 Founder page image swaps (5 of 8): hero is now Lola closeup (was generic 2-up) · "Quality" pillar is now Lola with Bon Pet bowl (was IMG_4081 wooden board) · "Community" pillar is now expo poodle at booth (was IMG_4504 cat at cafe) · timeline "Published formulas" is now real protein layout (was generic GUID-named jpg) · timeline "Now" is now real customer dog (was IMG_4499 generic). Existing transparency / kitchen / sous-vide images kept (they were already content-strong).
+  - 🧭 Main nav under "Why Bon Pet ▾" now includes 🍽️ Our Meals (Menu) + 🧠 Why Fresh Food. GraphQL menuUpdate via /tmp/update_nav_v2.py.
+  - 🩺 Smoke regression fix - added `shopify-forms-embed { pointer-events: none; }` to bonpet-v3.css so our hero / promo-bar / sticky-CTA buttons get clicks through the embed's invisible overlay. Belt-and-braces selectors target known shadow children (teaserContainer, role="dialog", formContainer, overlay) with pointer-events:auto. If popup form fields stop working post-deploy, revert this block; the document-level event delegation fallback in bonpet-forms-trigger.liquid will still work.
+  - 📁 Touches: assets/bonpet-v3.css, templates/page.founder.json. Plus 12 image uploads + Main Menu GraphQL update.
 - **v3.34.1** (2026-05-02) - Founder page "Real, not stock" photo strip.
   - 📷 4 real iPhone photos uploaded to Shopify Files: Lola closeup, Lola with Bon Pet bowl, Pioneer Crescent sweet-potato kitchen prep, real customer cockapoo with Bon Pet delivery bag.
   - 🆕 New section bonpet-founder-realstrip.liquid - 4-up photo grid with eyebrow + caption per card. Sits between founder_timeline and trust_band on /pages/founder. Replaces the "stock-feeling" gap with actual founder + customer + kitchen content.
