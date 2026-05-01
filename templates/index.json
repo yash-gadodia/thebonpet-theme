@@ -8,683 +8,699 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "health_tiles": {
-      "type": "bonpet-health-tiles",
-      "settings": {
-        "heading": "Where to start",
-        "subheading": "Pick what's most useful and we'll take you there"
-      },
-      "blocks": {
-        "t1": { "type": "tile", "settings": { "icon": "🐶", "headline": "Browse dog meals", "body": "5 proteins, sous vide cooked, AAFCO All Life Stages.", "link": "/collections/dogs" } },
-        "t2": { "type": "tile", "settings": { "icon": "🐱", "headline": "Browse cat meals", "body": "4 proteins for obligate carnivores, 95% whole animal.", "link": "/collections/cats" } },
-        "t3": { "type": "tile", "settings": { "icon": "🔍", "headline": "See our recipes", "body": "Every ingredient and ratio is public. No proprietary blends.", "link": "/pages/formulas" } },
-        "t4": { "type": "tile", "settings": { "icon": "🆕", "headline": "Try a free trial", "body": "$9 cold-chain delivery, no subscription needed.", "link": "/products/free-dog-trial-pack" } }
-      },
-      "block_order": ["t1", "t2", "t3", "t4"]
-    },
-    "reassurance_band": {
-      "type": "bonpet-reassurance-band",
-      "blocks": {
-        "r1": {
-          "type": "item",
-          "settings": {
-            "icon": "🔓",
-            "title": "100% Open Formulas",
-            "subtitle": "Every ingredient public"
-          }
+    "sections": {
+        "health_tiles": {
+            "type": "bonpet-health-tiles",
+            "settings": {
+                "heading": "Where to start",
+                "subheading": "Pick what's most useful and we'll take you there"
+            },
+            "blocks": {
+                "t1": {
+                    "type": "tile",
+                    "settings": {
+                        "icon": "\ud83d\udc36",
+                        "headline": "Browse dog meals",
+                        "body": "5 proteins, sous vide cooked, AAFCO All Life Stages.",
+                        "link": "/collections/dogs"
+                    }
+                },
+                "t2": {
+                    "type": "tile",
+                    "settings": {
+                        "icon": "\ud83d\udc31",
+                        "headline": "Browse cat meals",
+                        "body": "4 proteins for obligate carnivores, 95% whole animal.",
+                        "link": "/collections/cats"
+                    }
+                },
+                "t3": {
+                    "type": "tile",
+                    "settings": {
+                        "icon": "\ud83d\udd0d",
+                        "headline": "See our recipes",
+                        "body": "Every ingredient and ratio is public. No proprietary blends.",
+                        "link": "/pages/formulas"
+                    }
+                },
+                "t4": {
+                    "type": "tile",
+                    "settings": {
+                        "icon": "\ud83c\udd95",
+                        "headline": "Try a free trial",
+                        "body": "$9 cold-chain delivery, no subscription needed.",
+                        "link": "/products/free-dog-trial-pack"
+                    }
+                }
+            },
+            "block_order": [
+                "t1",
+                "t2",
+                "t3",
+                "t4"
+            ]
         },
-        "r2": {
-          "type": "item",
-          "settings": {
-            "icon": "🔬",
-            "title": "PhD-Formulated · AAFCO",
-            "subtitle": "All Life Stages certified"
-          }
+        "reassurance_band": {
+            "type": "bonpet-reassurance-band",
+            "blocks": {
+                "r1": {
+                    "type": "item",
+                    "settings": {
+                        "icon": "\ud83d\udd13",
+                        "title": "100% Open Formulas",
+                        "subtitle": "Every ingredient public"
+                    }
+                },
+                "r2": {
+                    "type": "item",
+                    "settings": {
+                        "icon": "\ud83d\udd2c",
+                        "title": "PhD-Formulated \u00b7 AAFCO",
+                        "subtitle": "All Life Stages certified"
+                    }
+                },
+                "r3": {
+                    "type": "item",
+                    "settings": {
+                        "icon": "\ud83c\uddf8\ud83c\uddec",
+                        "title": "1,500+ SG Pawrents",
+                        "subtitle": "Local community"
+                    }
+                },
+                "r4": {
+                    "type": "item",
+                    "settings": {
+                        "icon": "\u2b50",
+                        "title": "4.9 / 5 Rating",
+                        "subtitle": "319+ Google reviews"
+                    }
+                }
+            },
+            "block_order": [
+                "r1",
+                "r2",
+                "r3",
+                "r4"
+            ],
+            "settings": {}
         },
-        "r3": {
-          "type": "item",
-          "settings": {
-            "icon": "🇸🇬",
-            "title": "1,500+ SG Pawrents",
-            "subtitle": "Local community"
-          }
+        "hero": {
+            "type": "bonpet-hero",
+            "settings": {
+                "eyebrow": "\ud83c\udf81 FREE TRIAL PACK \u00b7 COLD-CHAIN, ISLAND-WIDE \ud83c\uddf8\ud83c\uddec",
+                "heading": "Made fresh in SG. Recipes you can read. Loved by 1,500+ pawrents. \ud83d\udc3e",
+                "subhead": "Sous vide cooked. Every ingredient public. Cold-chain across SG. Suppawt local. \u2764\ufe0f",
+                "cta_label": "\ud83d\udc36 Free Trial for Dogs",
+                "cta_link": "/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-dog-trial-pack",
+                "cta2_label": "\ud83d\udc31 Free Trial for Cats",
+                "cta2_link": "/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-cat-trial-pack",
+                "trial_note": "FREE delivery on $100+ \u00b7 $9 cold-chain on this trial \u00b7 Frozen, island-wide",
+                "code_cta_label": "\ud83c\udf81 Claim your trial code \u2192",
+                "trust_strip_enabled": true,
+                "trust_strip_item_1": "\ud83d\udd0d Open formulas",
+                "trust_strip_item_2": "\u2744\ufe0f Cold-chain delivery",
+                "trust_strip_item_3": "\ud83d\udc9b SG pet community",
+                "show_rating": true,
+                "rating_value": "4.9",
+                "rating_count": "1,500+ Singapore pawrents"
+            }
         },
-        "r4": {
-          "type": "item",
-          "settings": {
-            "icon": "⭐",
-            "title": "4.9 / 5 Rating",
-            "subtitle": "319+ Google reviews"
-          }
+        "volume_discount_banner": {
+            "type": "bonpet-volume-discount-banner",
+            "blocks": {
+                "t1": {
+                    "type": "tier",
+                    "settings": {
+                        "tier_label": "10% off",
+                        "tier_body": "1-29 packs/mo (sub)"
+                    }
+                },
+                "t2": {
+                    "type": "tier",
+                    "settings": {
+                        "tier_label": "25% off",
+                        "tier_body": "30-59 packs/mo"
+                    }
+                },
+                "t3": {
+                    "type": "tier",
+                    "settings": {
+                        "tier_label": "30% off",
+                        "tier_body": "60-99 packs/mo"
+                    }
+                },
+                "t4": {
+                    "type": "tier",
+                    "settings": {
+                        "tier_label": "40% off",
+                        "tier_body": "150+ packs/mo"
+                    }
+                }
+            },
+            "block_order": [
+                "t1",
+                "t2",
+                "t3",
+                "t4"
+            ],
+            "settings": {
+                "eyebrow": "Auto-Tier Subscription Discounts",
+                "heading": "Feeding a big eater or multi-pet home? Save up to 40%.",
+                "body": "Our tier discounts stack on top of Subscribe & Save, automatically at checkout. Built for big-dog households, multi-pet homes, foster carers, and breeders.",
+                "cta_label": "See the tiers \ud83e\uddee",
+                "cta_link": "/pages/volume-discounts",
+                "cta_note": "Applied automatically. No code needed."
+            }
+        },
+        "founder": {
+            "type": "bonpet-founder",
+            "settings": {
+                "image_alt": "Cocker Spaniel sniffing a Bon Pet delivery bag at home",
+                "eyebrow": "RADICALLY TRANSPAWRENT \u00b7 OPEN-SOURCE RECIPES",
+                "heading": "Why we publish every formula",
+                "quote": "If we wouldn't cook it for ourselves, we won't cook it for your furkid. That's why we show you every ingredient, every ratio, every gram. Nothing to hide.",
+                "body": "We started The Bon Pet because pet food labels are deliberately vague. Every competitor gestures at nutritionists and 'premium ingredients,' but none of them show you what's actually in the pack.\n\nWe do. Every recipe is published openly at the link below: PhD-formulated to AAFCO All Life Stages, sous vide cooked at 80\u00b0C, made in our AVS-licensed kitchen at Pioneer Crescent, Singapore.\n\nNo fillers. No shortcuts. No asterisks.",
+                "signature": "Yash & Nicolas, Co-founders",
+                "cta_label": "See Our Open-Source Formulas",
+                "cta_link": "/pages/formulas"
+            }
+        },
+        "transparency_proof": {
+            "type": "bonpet-transparency-proof",
+            "blocks": {
+                "r1": {
+                    "type": "ingredient",
+                    "settings": {
+                        "ingredient": "Chicken Breast",
+                        "amount": "65.16g \u00b7 32.58%",
+                        "role": "Primary lean muscle protein, complete amino acids"
+                    }
+                },
+                "r2": {
+                    "type": "ingredient",
+                    "settings": {
+                        "ingredient": "Chicken Gizzard",
+                        "amount": "58.64g \u00b7 29.32%",
+                        "role": "Lean secretory organ, B vitamins, iron"
+                    }
+                },
+                "r3": {
+                    "type": "ingredient",
+                    "settings": {
+                        "ingredient": "Chicken Heart",
+                        "amount": "52.13g \u00b7 26.06%",
+                        "role": "CoQ10, taurine, B vitamins"
+                    }
+                },
+                "r4": {
+                    "type": "ingredient",
+                    "settings": {
+                        "ingredient": "Chicken Liver",
+                        "amount": "19.55g \u00b7 9.77%",
+                        "role": "Vit A, B12, iron, copper - nature's multivitamin"
+                    }
+                },
+                "r5": {
+                    "type": "ingredient",
+                    "settings": {
+                        "ingredient": "Calcium Carbonate",
+                        "amount": "1.43g \u00b7 0.72%",
+                        "role": "Corrects Ca:P ratio to 1.2:1"
+                    }
+                },
+                "r6": {
+                    "type": "ingredient",
+                    "settings": {
+                        "ingredient": "Cod Liver Oil",
+                        "amount": "0.98g \u00b7 0.49%",
+                        "role": "EPA 320mg, DHA 410mg, Vit A+D per 100g"
+                    }
+                },
+                "r7": {
+                    "type": "ingredient",
+                    "settings": {
+                        "ingredient": "Taurine",
+                        "amount": "0.16g \u00b7 0.08%",
+                        "role": "Essential for cats \u00b7 retinal & cardiac function"
+                    }
+                },
+                "r8": {
+                    "type": "ingredient",
+                    "settings": {
+                        "ingredient": "\u2026and 10 more precision-dosed supplements",
+                        "amount": "",
+                        "role": "Full breakdown on our open-source formula sheet \u2192"
+                    }
+                }
+            },
+            "block_order": [
+                "r1",
+                "r2",
+                "r3",
+                "r4",
+                "r5",
+                "r6",
+                "r7",
+                "r8"
+            ],
+            "settings": {
+                "heading": "See exactly what's in every pack",
+                "subheading": "Here's a real recipe from our public formula sheet. Every gram, every ratio, every function. No 'proprietary blends.' No mystery meat.",
+                "sample_product_ref": "gently-cooked-free-range-chicken-for-cats",
+                "sample_product": "Gently Cooked Free-Range Chicken for Cats",
+                "sample_weight": "200g \u00b7 1 pack",
+                "stat1_value": "95.73%",
+                "stat1_label": "Whole animal protein (breast, gizzard, heart, liver)",
+                "stat2_value": "4.27%",
+                "stat2_label": "Targeted supplements, precision-dosed",
+                "cta_label": "See Every Formula",
+                "cta_link": "/pages/formulas"
+            }
+        },
+        "founder_quote": {
+            "type": "bonpet-founder-quote",
+            "settings": {
+                "eyebrow": "A PROMISE FROM THE FOUNDERS",
+                "quote": "If we wouldn't cook it for ourselves, we won't cook it for your furkid. Every recipe, every gram, every supplement, published openly. That's not a marketing stunt. It's the only way we know how to do this right.",
+                "names": "Yash & Nicolas",
+                "role": "Co-founders, The Bon Pet \u00b7 Singapore \u00b7 since 2024",
+                "cta_label": "See Every Formula \u2192",
+                "cta_link": "/pages/formulas"
+            }
+        },
+        "apps_google_reviews": {
+            "type": "apps",
+            "blocks": {
+                "rocket_google_reviews": {
+                    "type": "shopify://apps/google-reviews-rocket/blocks/app-block/d11c8893-a181-4aff-a280-7446d42cec3b",
+                    "settings": {
+                        "widget_layout": "default"
+                    }
+                }
+            },
+            "block_order": [
+                "rocket_google_reviews"
+            ],
+            "settings": {}
+        },
+        "apps_judge_ugc": {
+            "type": "apps",
+            "blocks": {
+                "judge_me_ugc_grid": {
+                    "type": "shopify://apps/judge-me-reviews/blocks/ugc_media_grid/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                    "settings": {}
+                }
+            },
+            "block_order": [
+                "judge_me_ugc_grid"
+            ],
+            "settings": {}
+        },
+        "apps_instagram_feed": {
+            "type": "apps",
+            "blocks": {
+                "instafeed": {
+                    "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+                    "settings": {
+                        "title": "Our Community",
+                        "title_color": "#16433d",
+                        "title_size_v2": 0,
+                        "alignment": "center",
+                        "instafeed_margin_top": 0,
+                        "instafeed_margin_bottom": 28,
+                        "instafeed_margin_sides": 0,
+                        "show_instagram_link": false,
+                        "link_alignment": "left",
+                        "link_color": "#16433d",
+                        "background_color": "#fff7e4",
+                        "feed_id": "thebonpet",
+                        "html_area": ""
+                    }
+                }
+            },
+            "block_order": [
+                "instafeed"
+            ],
+            "settings": {}
+        },
+        "reviews": {
+            "type": "bonpet-reviews",
+            "blocks": {
+                "r1": {
+                    "type": "review",
+                    "settings": {
+                        "headline": "100/10 from my cats.",
+                        "body": "My cats absolutely devour their Bon Pet chicken meals. What I commend is the team's dedication and transparency, down to the grams, ingredients, and nutrition. I'm a happy customer, and my cats are happier customers \ud83d\udcaf\ud83d\ude38",
+                        "author": "Emily Maria",
+                        "pet": "cat pawrent",
+                        "product": "Chicken for Cats"
+                    }
+                },
+                "r2": {
+                    "type": "review",
+                    "settings": {
+                        "headline": "Even my picky dog finished it.",
+                        "body": "Tried the trial pack for my picky dog, and she absolutely loved it. She usually refuses her freeze-dried and even home-cooked meals, so I was really surprised to see her finish everything so eagerly. Will definitely be ordering again.",
+                        "author": "Katarina Tan",
+                        "pet": "dog pawrent",
+                        "product": "Dog Trial Pack"
+                    }
+                },
+                "r3": {
+                    "type": "review",
+                    "settings": {
+                        "headline": "Subscribed for 6+ months.",
+                        "body": "Our cats have been on The Bon Pet meals since their Wildflower Studio days. We've been on the monthly subscription for 6+ months and our cats really enjoy their gently cooked meals. Love the transparency with the ingredient and formula list. Peace of mind.",
+                        "author": "Joys Tan",
+                        "pet": "ex-Wildflower cats, now home",
+                        "product": "Subscription \u00b7 Cats"
+                    }
+                },
+                "r4": {
+                    "type": "review",
+                    "settings": {
+                        "headline": "Second purchase already.",
+                        "body": "Like their prepacked meals in ready-to-feed portions. This is my second purchase. My dogs love it. I either use it as a topper with kibble or on its own.",
+                        "author": "Veron Zhen",
+                        "pet": "dog pawrent",
+                        "product": "Meals for Dogs"
+                    }
+                },
+                "r5": {
+                    "type": "review",
+                    "settings": {
+                        "headline": "Bowl licked clean.",
+                        "body": "The minced chicken free range has a lightly cooked, healthy recipe recommended by Wildflower Kitty. My cat licked the bowl clean. Fuss Free. Happy Purrs \ud83d\udc3e Thank you for the free trial pack \ud83d\ude4f\ud83c\udffb. Delivery was well received and very responsible.",
+                        "author": "\u732b\u5c0f\u7f8e",
+                        "pet": "cat pawrent",
+                        "product": "Free Range Chicken for Cats"
+                    }
+                }
+            },
+            "block_order": [
+                "r1",
+                "r2",
+                "r3",
+                "r4",
+                "r5"
+            ],
+            "settings": {
+                "heading": "What Singapore pawrents are saying",
+                "subheading": "Real pawrents. Real furkids. Real bowls licked clean.",
+                "pawrent_count": "1,500",
+                "cta_label": "Read all 319+ reviews \u2192",
+                "cta_link": "/pages/the-bon-pet-reviews"
+            }
+        },
+        "how_it_works": {
+            "type": "bonpet-how-it-works",
+            "blocks": {
+                "s1": {
+                    "type": "step",
+                    "settings": {
+                        "title": "Claim Your Free Trial",
+                        "body": "Pick your furkid's protein. Code FREETRIAL<3THEBONPET gets the trial pack free, just $9 cold-chain delivery."
+                    }
+                },
+                "s2": {
+                    "type": "step",
+                    "settings": {
+                        "title": "Made Fresh to Order",
+                        "body": "Every pack is sous vide cooked at 80\u00b0C in our AVS-licensed kitchen in Singapore, then flash-frozen."
+                    }
+                },
+                "s3": {
+                    "type": "step",
+                    "settings": {
+                        "title": "Delivered Frozen",
+                        "body": "Cold-chain delivery island-wide. Pick your 4-hour window. FREE over $100, $4 from $80, $9 under $80."
+                    }
+                },
+                "s4": {
+                    "type": "step",
+                    "settings": {
+                        "title": "Defrost & Serve",
+                        "body": "Thaw overnight, serve at room temperature. No heating, no fuss, just real food your furkid will love."
+                    }
+                }
+            },
+            "block_order": [
+                "s1",
+                "s2",
+                "s3",
+                "s4"
+            ],
+            "settings": {
+                "heading": "How it works",
+                "subheading": "From our kitchen in Singapore to your furkid's bowl. Real food, made simple."
+            }
+        },
+        "delivery_promise": {
+            "type": "bonpet-delivery-promise",
+            "settings": {
+                "quote_rating": "\u2605\u2605\u2605\u2605\u2605"
+            }
+        },
+        "sku_banner": {
+            "type": "bonpet-sku-banner",
+            "blocks": {
+                "s1": {
+                    "type": "sku",
+                    "settings": {
+                        "icon": "\ud83d\udc13",
+                        "label": "Free Range Chicken"
+                    }
+                },
+                "s2": {
+                    "type": "sku",
+                    "settings": {
+                        "icon": "\ud83e\udd86",
+                        "label": "Cage-Free Duck"
+                    }
+                },
+                "s3": {
+                    "type": "sku",
+                    "settings": {
+                        "icon": "\ud83e\udd98",
+                        "label": "Wild Kangaroo"
+                    }
+                },
+                "s4": {
+                    "type": "sku",
+                    "settings": {
+                        "icon": "\ud83d\udc04",
+                        "label": "Grass-Fed Beef"
+                    }
+                },
+                "s5": {
+                    "type": "sku",
+                    "settings": {
+                        "icon": "\ud83d\udc1f",
+                        "label": "Wild-Caught Fish"
+                    }
+                },
+                "s6": {
+                    "type": "sku",
+                    "settings": {
+                        "icon": "\ud83d\udc37",
+                        "label": "Pork (soon)"
+                    }
+                }
+            },
+            "block_order": [
+                "s1",
+                "s2",
+                "s3",
+                "s4",
+                "s5",
+                "s6"
+            ],
+            "settings": {
+                "image_alt": "A dog and a cat eating Bon Pet meals from clear glass dishes",
+                "eyebrow": "OUR FULL RANGE",
+                "heading": "8 proteins. 2 species. Zero shortcuts.",
+                "body": "From free-range chicken to wild kangaroo. PhD-formulated, AAFCO-balanced, sous vide cooked in SG. Pick, rotate, repeat.",
+                "cta_label": "Shop the full range",
+                "cta_link": "shopify://collections/all"
+            }
+        },
+        "product_grid": {
+            "type": "bonpet-product-grid",
+            "settings": {
+                "heading": "Our most-loved meals",
+                "subheading": "Complete & balanced. Single-protein. Loved by 1,500+ Singapore pawrents.",
+                "dog_collection": "dogs",
+                "cat_collection": "cats",
+                "product_limit": 4
+            }
+        },
+        "trial_cta": {
+            "type": "bonpet-trial-cta",
+            "settings": {
+                "eyebrow": "Start Risk-Free",
+                "heading": "A Different Breed",
+                "trial_eyebrow": "Mixed Trial \u00b7 Limited Stock",
+                "trial_title": "Your First Mixed Trial Pack",
+                "trial_desc": "Try 4 proteins for cats or 5 proteins for dogs before committing. Already loved by 1,500+ Singapore pawrents. Your code is applied at checkout, just pick your furkid below.",
+                "trial_price": "Cats $15 (U.P. $36.70) \u00b7 Dogs $25 (U.P. $53.70) \u00b7 while stocks last",
+                "trial_dog_cta_label": "\ud83d\udc36 Claim Dog Trial ($25)",
+                "trial_dog_cta_link": "/discount/DOGTRIAL%253C3THEBONPET?redirect=%2Fproducts%2Fgently-cooked-trial-packs-for-dog",
+                "trial_cat_cta_label": "\ud83d\udc31 Claim Cat Trial ($15)",
+                "trial_cat_cta_link": "/discount/CATTRIAL%253C3THEBONPET?redirect=%2Fproducts%2Fgently-cooked-trial-packs-for-cats",
+                "calc_badge": "Live Now",
+                "calc_title": "Pet Food Calculator",
+                "calc_desc": "Find the right daily portion for your furkid in 30 seconds. Breed, weight, activity, done.",
+                "calc_cta_label": "Try the Calculator \u2192",
+                "calc_cta_link": "/pages/feeding-calculator"
+            }
+        },
+        "paw_forward": {
+            "type": "bonpet-paw-forward",
+            "settings": {
+                "image_alt": "Rescue cats at Wildflower Studio enjoying Bon Pet meals",
+                "eyebrow": "Paw it Forward",
+                "heading": "Help Stray Cats, One Meal at a Time",
+                "quote": "Over 50 rescue cats at Wildflower Studio eat our meals daily and thrive. Known for high standards, Wildflower Studio proudly stands by our food.",
+                "body": "Opt into kindness by donating to support rescue cats. 100% goes to the charity of your choosing, Wildflower Studio or LUNI.",
+                "cta_label": "Donate a Meal",
+                "cta_link": "/collections/support-wildflower-studio",
+                "partners": "Partners: Wildflower Studio \u00b7 LUNI \u00b7 Paws of JB"
+            }
+        },
+        "community_cta": {
+            "type": "bonpet-community-cta",
+            "blocks": {
+                "cat": {
+                    "type": "cta",
+                    "settings": {
+                        "label": "\ud83d\udc31 Cat Pawrents Community",
+                        "link": "https://chat.whatsapp.com/BTh5sXiZBkKIewYLY3HDFC"
+                    }
+                },
+                "dog": {
+                    "type": "cta",
+                    "settings": {
+                        "label": "\ud83d\udc36 Dog Pawrents Community",
+                        "link": "https://chat.whatsapp.com/G3OTmBkC5os1XeJYZT2RRL"
+                    }
+                }
+            },
+            "block_order": [
+                "cat",
+                "dog"
+            ],
+            "settings": {
+                "heading": "Join the Pack",
+                "subheading": "Nutrition tips, exclusive deals, and conversations with fellow pawrents. Our community lives on WhatsApp."
+            }
+        },
+        "faq": {
+            "type": "bonpet-faq",
+            "blocks": {
+                "q1": {
+                    "type": "qa",
+                    "settings": {
+                        "question": "Is fresh pet food worth it compared to kibble?",
+                        "answer": "Fresh gently cooked meals are more digestible, retain heat-sensitive nutrients (taurine, B vitamins) that kibble's extrusion destroys, and typically produce better stool quality, coat shine, and weight management. Start with a free trial pack and see the difference in 2 weeks."
+                    }
+                },
+                "q2": {
+                    "type": "qa",
+                    "settings": {
+                        "question": "How do I transition my pet to The Bon Pet?",
+                        "answer": "Gradual 3-5 day switch: Day 1-2 at 25% new / 75% old \u2192 Day 3-4 at 50/50 \u2192 Day 5+ at 100% new. Monitor stool throughout. If your pet is on kibble, this transition is especially important. WhatsApp us for tailored advice."
+                    }
+                },
+                "q3": {
+                    "type": "qa",
+                    "settings": {
+                        "question": "How long do frozen meals last?",
+                        "answer": "Frozen: up to 1 year from manufacture (Best Before printed on each pack). Thawed: 2-3 days in a sealed container in the fridge. Never refreeze once thawed."
+                    }
+                },
+                "q4": {
+                    "type": "qa",
+                    "settings": {
+                        "question": "My pet has allergies. Can they eat this?",
+                        "answer": "All recipes are single-protein to minimise allergy risk. No artificial preservatives, colours, or fillers. If allergies are known, WhatsApp us with details and we'll recommend a suitable protein (Kangaroo is a popular novel protein for sensitivities)."
+                    }
+                },
+                "q5": {
+                    "type": "qa",
+                    "settings": {
+                        "question": "Do you deliver across Singapore?",
+                        "answer": "Yes, island-wide cold-chain delivery. Pick a 4-hour delivery window at checkout. FREE delivery over $100, $4 from $80 to $99.99, $9 under $80. Same tiers for cat and dog. Driver makes up to 3 delivery attempts."
+                    }
+                },
+                "q6": {
+                    "type": "qa",
+                    "settings": {
+                        "question": "Can I pause or cancel my subscription?",
+                        "answer": "Yes, anytime. Log in to your account or WhatsApp us. Cadences from weekly up to 6-weekly (the 6-week max is the longest subscription interval we offer)."
+                    }
+                }
+            },
+            "block_order": [
+                "q1",
+                "q2",
+                "q3",
+                "q4",
+                "q5",
+                "q6"
+            ],
+            "settings": {
+                "heading": "Frequently Asked Questions",
+                "cta_label": "Still have questions? See all FAQs",
+                "cta_link": "/pages/faq"
+            }
+        },
+        "final_cta": {
+            "type": "bonpet-final-cta",
+            "blocks": {
+                "dogs": {
+                    "type": "card",
+                    "settings": {
+                        "label": "Shop Meals for Dogs \ud83d\udc36",
+                        "link": "shopify://collections/dogs"
+                    }
+                },
+                "cats": {
+                    "type": "card",
+                    "settings": {
+                        "label": "Shop Meals for Cats \ud83d\udc31",
+                        "link": "shopify://collections/cats"
+                    }
+                }
+            },
+            "block_order": [
+                "dogs",
+                "cats"
+            ],
+            "settings": {
+                "heading": "Ready to elevate your furkid's diet?"
+            }
         }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4"
-      ],
-      "settings": {}
     },
-    "hero": {
-      "type": "bonpet-hero",
-      "settings": {
-        "eyebrow": "🎁 FREE TRIAL PACK · COLD-CHAIN, ISLAND-WIDE 🇸🇬",
-        "heading": "Made fresh in SG. Recipes you can read. Loved by 1,500+ pawrents. 🐾",
-        "subhead": "Sous vide cooked. Every ingredient public. Cold-chain across SG. Suppawt local. ❤️",
-        "cta_label": "🐶 Free Trial for Dogs",
-        "cta_link": "/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-dog-trial-pack",
-        "cta2_label": "🐱 Free Trial for Cats",
-        "cta2_link": "/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-cat-trial-pack",
-        "trial_note": "FREE delivery on $100+ · $9 cold-chain on this trial · Frozen, island-wide",
-        "code_cta_label": "🎁 Claim your trial code →",
-        "trust_strip_enabled": true,
-        "trust_strip_item_1": "🔍 Open formulas",
-        "trust_strip_item_2": "❄️ Cold-chain delivery",
-        "trust_strip_item_3": "💛 SG pet community",
-        "show_rating": true,
-        "rating_value": "4.9",
-        "rating_count": "1,500+ Singapore pawrents"
-      }
-    },
-    "suppawt_local_strip": {
-      "type": "bonpet-suppawt-local-strip",
-      "blocks": {
-        "i1": { "type": "item", "settings": { "label": "Small SG team" } },
-        "i2": { "type": "item", "settings": { "label": "PhD-formulated" } },
-        "i3": { "type": "item", "settings": { "label": "Open-source recipes" } }
-      },
-      "block_order": ["i1", "i2", "i3"],
-      "settings": {
-        "aria_label": "Suppawt local",
-        "lead_flag": "🇸🇬",
-        "lead": "Suppawt local"
-      }
-    },
-    "volume_discount_banner": {
-      "type": "bonpet-volume-discount-banner",
-      "blocks": {
-        "t1": { "type": "tier", "settings": { "tier_label": "10% off", "tier_body": "1-29 packs/mo (sub)" } },
-        "t2": { "type": "tier", "settings": { "tier_label": "25% off", "tier_body": "30-59 packs/mo" } },
-        "t3": { "type": "tier", "settings": { "tier_label": "30% off", "tier_body": "60-99 packs/mo" } },
-        "t4": { "type": "tier", "settings": { "tier_label": "40% off", "tier_body": "150+ packs/mo" } }
-      },
-      "block_order": ["t1", "t2", "t3", "t4"],
-      "settings": {
-        "eyebrow": "Auto-Tier Subscription Discounts",
-        "heading": "Feeding a big eater or multi-pet home? Save up to 40%.",
-        "body": "Our tier discounts stack on top of Subscribe & Save, automatically at checkout. Built for big-dog households, multi-pet homes, foster carers, and breeders.",
-        "cta_label": "See the tiers 🧮",
-        "cta_link": "/pages/volume-discounts",
-        "cta_note": "Applied automatically. No code needed."
-      }
-    },
-    "founder": {
-      "type": "bonpet-founder",
-      "settings": {
-        "image_alt": "Cocker Spaniel sniffing a Bon Pet delivery bag at home",
-        "eyebrow": "RADICALLY TRANSPAWRENT · OPEN-SOURCE RECIPES",
-        "heading": "Why we publish every formula",
-        "quote": "If we wouldn't cook it for ourselves, we won't cook it for your furkid. That's why we show you every ingredient, every ratio, every gram. Nothing to hide.",
-        "body": "We started The Bon Pet because pet food labels are deliberately vague. Every competitor gestures at nutritionists and 'premium ingredients,' but none of them show you what's actually in the pack.\n\nWe do. Every recipe is published openly at the link below: PhD-formulated to AAFCO All Life Stages, sous vide cooked at 80°C, made in our AVS-licensed kitchen at Pioneer Crescent, Singapore.\n\nNo fillers. No shortcuts. No asterisks.",
-        "signature": "Yash & Nicolas, Co-founders",
-        "cta_label": "See Our Open-Source Formulas",
-        "cta_link": "/pages/formulas"
-      }
-    },
-    "guarantee": {
-      "type": "bonpet-guarantee",
-      "blocks": {
-        "p1": {
-          "type": "pillar",
-          "settings": {
-            "title": "🔓 Open-Source Formulas",
-            "body": "Only SG fresh pet brand that publishes every ingredient, ratio, and nutrient dose. No secrets, no proprietary blends."
-          }
-        },
-        "p2": {
-          "type": "pillar",
-          "settings": {
-            "title": "🧪 PhD-Formulated · AAFCO Certified",
-            "body": "AAFCO All Life Stages: kittens, puppies, adults, seniors. PhD-balanced. AVS-licensed kitchen."
-          }
-        },
-        "p3": {
-          "type": "pillar",
-          "settings": {
-            "title": "🍖 Sous Vide Gently Cooked",
-            "body": "Cooked at 80°C. Kills pathogens, keeps taurine and B vitamins that kibble extrusion destroys."
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3"
-      ],
-      "settings": {
-        "heading": "The transpawrent pet food company",
-        "footer_label": "See every ingredient, ratio & source for yourself →",
-        "footer_link": "/pages/formulas"
-      }
-    },
-    "transparency_proof": {
-      "type": "bonpet-transparency-proof",
-      "blocks": {
-        "r1": {
-          "type": "ingredient",
-          "settings": {
-            "ingredient": "Chicken Breast",
-            "amount": "65.16g · 32.58%",
-            "role": "Primary lean muscle protein, complete amino acids"
-          }
-        },
-        "r2": {
-          "type": "ingredient",
-          "settings": {
-            "ingredient": "Chicken Gizzard",
-            "amount": "58.64g · 29.32%",
-            "role": "Lean secretory organ, B vitamins, iron"
-          }
-        },
-        "r3": {
-          "type": "ingredient",
-          "settings": {
-            "ingredient": "Chicken Heart",
-            "amount": "52.13g · 26.06%",
-            "role": "CoQ10, taurine, B vitamins"
-          }
-        },
-        "r4": {
-          "type": "ingredient",
-          "settings": {
-            "ingredient": "Chicken Liver",
-            "amount": "19.55g · 9.77%",
-            "role": "Vit A, B12, iron, copper - nature's multivitamin"
-          }
-        },
-        "r5": {
-          "type": "ingredient",
-          "settings": {
-            "ingredient": "Calcium Carbonate",
-            "amount": "1.43g · 0.72%",
-            "role": "Corrects Ca:P ratio to 1.2:1"
-          }
-        },
-        "r6": {
-          "type": "ingredient",
-          "settings": {
-            "ingredient": "Cod Liver Oil",
-            "amount": "0.98g · 0.49%",
-            "role": "EPA 320mg, DHA 410mg, Vit A+D per 100g"
-          }
-        },
-        "r7": {
-          "type": "ingredient",
-          "settings": {
-            "ingredient": "Taurine",
-            "amount": "0.16g · 0.08%",
-            "role": "Essential for cats · retinal & cardiac function"
-          }
-        },
-        "r8": {
-          "type": "ingredient",
-          "settings": {
-            "ingredient": "…and 10 more precision-dosed supplements",
-            "amount": "",
-            "role": "Full breakdown on our open-source formula sheet →"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5",
-        "r6",
-        "r7",
-        "r8"
-      ],
-      "settings": {
-        "heading": "See exactly what's in every pack",
-        "subheading": "Here's a real recipe from our public formula sheet. Every gram, every ratio, every function. No 'proprietary blends.' No mystery meat.",
-        "sample_product_ref": "gently-cooked-free-range-chicken-for-cats",
-        "sample_product": "Gently Cooked Free-Range Chicken for Cats",
-        "sample_weight": "200g · 1 pack",
-        "stat1_value": "95.73%",
-        "stat1_label": "Whole animal protein (breast, gizzard, heart, liver)",
-        "stat2_value": "4.27%",
-        "stat2_label": "Targeted supplements, precision-dosed",
-        "cta_label": "See Every Formula",
-        "cta_link": "/pages/formulas"
-      }
-    },
-    "founder_quote": {
-      "type": "bonpet-founder-quote",
-      "settings": {
-        "eyebrow": "A PROMISE FROM THE FOUNDERS",
-        "quote": "If we wouldn't cook it for ourselves, we won't cook it for your furkid. Every recipe, every gram, every supplement, published openly. That's not a marketing stunt. It's the only way we know how to do this right.",
-        "names": "Yash & Nicolas",
-        "role": "Co-founders, The Bon Pet · Singapore · since 2024",
-        "cta_label": "See Every Formula →",
-        "cta_link": "/pages/formulas"
-      }
-    },
-    "apps_google_reviews": {
-      "type": "apps",
-      "blocks": {
-        "rocket_google_reviews": {
-          "type": "shopify://apps/google-reviews-rocket/blocks/app-block/d11c8893-a181-4aff-a280-7446d42cec3b",
-          "settings": {
-            "widget_layout": "default"
-          }
-        }
-      },
-      "block_order": [
-        "rocket_google_reviews"
-      ],
-      "settings": {}
-    },
-    "apps_judge_ugc": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_ugc_grid": {
-          "type": "shopify://apps/judge-me-reviews/blocks/ugc_media_grid/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "judge_me_ugc_grid"
-      ],
-      "settings": {}
-    },
-    "apps_instagram_feed": {
-      "type": "apps",
-      "blocks": {
-        "instafeed": {
-          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
-          "settings": {
-            "title": "Our Community",
-            "title_color": "#16433d",
-            "title_size_v2": 0,
-            "alignment": "center",
-            "instafeed_margin_top": 0,
-            "instafeed_margin_bottom": 28,
-            "instafeed_margin_sides": 0,
-            "show_instagram_link": false,
-            "link_alignment": "left",
-            "link_color": "#16433d",
-            "background_color": "#fff7e4",
-            "feed_id": "thebonpet",
-            "html_area": ""
-          }
-        }
-      },
-      "block_order": [
-        "instafeed"
-      ],
-      "settings": {}
-    },
-    "reviews": {
-      "type": "bonpet-reviews",
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "headline": "100/10 from my cats.",
-            "body": "My cats absolutely devour their Bon Pet chicken meals. What I commend is the team's dedication and transparency, down to the grams, ingredients, and nutrition. I'm a happy customer, and my cats are happier customers 💯😸",
-            "author": "Emily Maria",
-            "pet": "cat pawrent",
-            "product": "Chicken for Cats"
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "headline": "Even my picky dog finished it.",
-            "body": "Tried the trial pack for my picky dog, and she absolutely loved it. She usually refuses her freeze-dried and even home-cooked meals, so I was really surprised to see her finish everything so eagerly. Will definitely be ordering again.",
-            "author": "Katarina Tan",
-            "pet": "dog pawrent",
-            "product": "Dog Trial Pack"
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "headline": "Subscribed for 6+ months.",
-            "body": "Our cats have been on The Bon Pet meals since their Wildflower Studio days. We've been on the monthly subscription for 6+ months and our cats really enjoy their gently cooked meals. Love the transparency with the ingredient and formula list. Peace of mind.",
-            "author": "Joys Tan",
-            "pet": "ex-Wildflower cats, now home",
-            "product": "Subscription · Cats"
-          }
-        },
-        "r4": {
-          "type": "review",
-          "settings": {
-            "headline": "Second purchase already.",
-            "body": "Like their prepacked meals in ready-to-feed portions. This is my second purchase. My dogs love it. I either use it as a topper with kibble or on its own.",
-            "author": "Veron Zhen",
-            "pet": "dog pawrent",
-            "product": "Meals for Dogs"
-          }
-        },
-        "r5": {
-          "type": "review",
-          "settings": {
-            "headline": "Bowl licked clean.",
-            "body": "The minced chicken free range has a lightly cooked, healthy recipe recommended by Wildflower Kitty. My cat licked the bowl clean. Fuss Free. Happy Purrs 🐾 Thank you for the free trial pack 🙏🏻. Delivery was well received and very responsible.",
-            "author": "猫小美",
-            "pet": "cat pawrent",
-            "product": "Free Range Chicken for Cats"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5"
-      ],
-      "settings": {
-        "heading": "What Singapore pawrents are saying",
-        "subheading": "Real pawrents. Real furkids. Real bowls licked clean.",
-        "pawrent_count": "1,500",
-        "cta_label": "Read all 319+ reviews →",
-        "cta_link": "/pages/the-bon-pet-reviews"
-      }
-    },
-    "how_it_works": {
-      "type": "bonpet-how-it-works",
-      "blocks": {
-        "s1": {
-          "type": "step",
-          "settings": {
-            "title": "Claim Your Free Trial",
-            "body": "Pick your furkid's protein. Code FREETRIAL<3THEBONPET gets the trial pack free, just $9 cold-chain delivery."
-          }
-        },
-        "s2": {
-          "type": "step",
-          "settings": {
-            "title": "Made Fresh to Order",
-            "body": "Every pack is sous vide cooked at 80°C in our AVS-licensed kitchen in Singapore, then flash-frozen."
-          }
-        },
-        "s3": {
-          "type": "step",
-          "settings": {
-            "title": "Delivered Frozen",
-            "body": "Cold-chain delivery island-wide. Pick your 4-hour window. FREE over $100, $4 from $80, $9 under $80."
-          }
-        },
-        "s4": {
-          "type": "step",
-          "settings": {
-            "title": "Defrost & Serve",
-            "body": "Thaw overnight, serve at room temperature. No heating, no fuss, just real food your furkid will love."
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3",
-        "s4"
-      ],
-      "settings": {
-        "heading": "How it works",
-        "subheading": "From our kitchen in Singapore to your furkid's bowl. Real food, made simple."
-      }
-    },
-    "delivery_promise": {
-      "type": "bonpet-delivery-promise",
-      "settings": {
-        "quote_rating": "★★★★★"
-      }
-    },
-    "sku_banner": {
-      "type": "bonpet-sku-banner",
-      "blocks": {
-        "s1": {
-          "type": "sku",
-          "settings": {
-            "icon": "🐓",
-            "label": "Free Range Chicken"
-          }
-        },
-        "s2": {
-          "type": "sku",
-          "settings": {
-            "icon": "🦆",
-            "label": "Cage-Free Duck"
-          }
-        },
-        "s3": {
-          "type": "sku",
-          "settings": {
-            "icon": "🦘",
-            "label": "Wild Kangaroo"
-          }
-        },
-        "s4": {
-          "type": "sku",
-          "settings": {
-            "icon": "🐄",
-            "label": "Grass-Fed Beef"
-          }
-        },
-        "s5": {
-          "type": "sku",
-          "settings": {
-            "icon": "🐟",
-            "label": "Wild-Caught Fish"
-          }
-        },
-        "s6": {
-          "type": "sku",
-          "settings": {
-            "icon": "🐷",
-            "label": "Pork (soon)"
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3",
-        "s4",
-        "s5",
-        "s6"
-      ],
-      "settings": {
-        "image_alt": "A dog and a cat eating Bon Pet meals from clear glass dishes",
-        "eyebrow": "OUR FULL RANGE",
-        "heading": "8 proteins. 2 species. Zero shortcuts.",
-        "body": "From free-range chicken to wild kangaroo. PhD-formulated, AAFCO-balanced, sous vide cooked in SG. Pick, rotate, repeat.",
-        "cta_label": "Shop the full range",
-        "cta_link": "shopify://collections/all"
-      }
-    },
-    "product_grid": {
-      "type": "bonpet-product-grid",
-      "settings": {
-        "heading": "Our most-loved meals",
-        "subheading": "Complete & balanced. Single-protein. Loved by 1,500+ Singapore pawrents.",
-        "dog_collection": "dogs",
-        "cat_collection": "cats",
-        "product_limit": 4
-      }
-    },
-    "trial_cta": {
-      "type": "bonpet-trial-cta",
-      "settings": {
-        "eyebrow": "Start Risk-Free",
-        "heading": "A Different Breed",
-        "trial_eyebrow": "Mixed Trial · Limited Stock",
-        "trial_title": "Your First Mixed Trial Pack",
-        "trial_desc": "Try 4 proteins for cats or 5 proteins for dogs before committing. Already loved by 1,500+ Singapore pawrents. Your code is applied at checkout, just pick your furkid below.",
-        "trial_price": "Cats $15 (U.P. $36.70) · Dogs $25 (U.P. $53.70) · while stocks last",
-        "trial_dog_cta_label": "🐶 Claim Dog Trial ($25)",
-        "trial_dog_cta_link": "/discount/DOGTRIAL%253C3THEBONPET?redirect=%2Fproducts%2Fgently-cooked-trial-packs-for-dog",
-        "trial_cat_cta_label": "🐱 Claim Cat Trial ($15)",
-        "trial_cat_cta_link": "/discount/CATTRIAL%253C3THEBONPET?redirect=%2Fproducts%2Fgently-cooked-trial-packs-for-cats",
-        "calc_badge": "Live Now",
-        "calc_title": "Pet Food Calculator",
-        "calc_desc": "Find the right daily portion for your furkid in 30 seconds. Breed, weight, activity, done.",
-        "calc_cta_label": "Try the Calculator →",
-        "calc_cta_link": "/pages/feeding-calculator"
-      }
-    },
-    "paw_forward": {
-      "type": "bonpet-paw-forward",
-      "settings": {
-        "image_alt": "Rescue cats at Wildflower Studio enjoying Bon Pet meals",
-        "eyebrow": "Paw it Forward",
-        "heading": "Help Stray Cats, One Meal at a Time",
-        "quote": "Over 50 rescue cats at Wildflower Studio eat our meals daily and thrive. Known for high standards, Wildflower Studio proudly stands by our food.",
-        "body": "Opt into kindness by donating to support rescue cats. 100% goes to the charity of your choosing, Wildflower Studio or LUNI.",
-        "cta_label": "Donate a Meal",
-        "cta_link": "/collections/support-wildflower-studio",
-        "partners": "Partners: Wildflower Studio · LUNI · Paws of JB"
-      }
-    },
-    "community_cta": {
-      "type": "bonpet-community-cta",
-      "blocks": {
-        "cat": {
-          "type": "cta",
-          "settings": {
-            "label": "🐱 Cat Pawrents Community",
-            "link": "https://chat.whatsapp.com/BTh5sXiZBkKIewYLY3HDFC"
-          }
-        },
-        "dog": {
-          "type": "cta",
-          "settings": {
-            "label": "🐶 Dog Pawrents Community",
-            "link": "https://chat.whatsapp.com/G3OTmBkC5os1XeJYZT2RRL"
-          }
-        }
-      },
-      "block_order": [
-        "cat",
-        "dog"
-      ],
-      "settings": {
-        "heading": "Join the Pack",
-        "subheading": "Nutrition tips, exclusive deals, and conversations with fellow pawrents. Our community lives on WhatsApp."
-      }
-    },
-    "faq": {
-      "type": "bonpet-faq",
-      "blocks": {
-        "q1": {
-          "type": "qa",
-          "settings": {
-            "question": "Is fresh pet food worth it compared to kibble?",
-            "answer": "Fresh gently cooked meals are more digestible, retain heat-sensitive nutrients (taurine, B vitamins) that kibble's extrusion destroys, and typically produce better stool quality, coat shine, and weight management. Start with a free trial pack and see the difference in 2 weeks."
-          }
-        },
-        "q2": {
-          "type": "qa",
-          "settings": {
-            "question": "How do I transition my pet to The Bon Pet?",
-            "answer": "Gradual 3-5 day switch: Day 1-2 at 25% new / 75% old → Day 3-4 at 50/50 → Day 5+ at 100% new. Monitor stool throughout. If your pet is on kibble, this transition is especially important. WhatsApp us for tailored advice."
-          }
-        },
-        "q3": {
-          "type": "qa",
-          "settings": {
-            "question": "How long do frozen meals last?",
-            "answer": "Frozen: up to 1 year from manufacture (Best Before printed on each pack). Thawed: 2-3 days in a sealed container in the fridge. Never refreeze once thawed."
-          }
-        },
-        "q4": {
-          "type": "qa",
-          "settings": {
-            "question": "My pet has allergies. Can they eat this?",
-            "answer": "All recipes are single-protein to minimise allergy risk. No artificial preservatives, colours, or fillers. If allergies are known, WhatsApp us with details and we'll recommend a suitable protein (Kangaroo is a popular novel protein for sensitivities)."
-          }
-        },
-        "q5": {
-          "type": "qa",
-          "settings": {
-            "question": "Do you deliver across Singapore?",
-            "answer": "Yes, island-wide cold-chain delivery. Pick a 4-hour delivery window at checkout. FREE delivery over $100, $4 from $80 to $99.99, $9 under $80. Same tiers for cat and dog. Driver makes up to 3 delivery attempts."
-          }
-        },
-        "q6": {
-          "type": "qa",
-          "settings": {
-            "question": "Can I pause or cancel my subscription?",
-            "answer": "Yes, anytime. Log in to your account or WhatsApp us. Cadences from weekly up to 6-weekly (the 6-week max is the longest subscription interval we offer)."
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "q6"
-      ],
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "cta_label": "Still have questions? See all FAQs",
-        "cta_link": "/pages/faq"
-      }
-    },
-    "final_cta": {
-      "type": "bonpet-final-cta",
-      "blocks": {
-        "dogs": {
-          "type": "card",
-          "settings": {
-            "label": "Shop Meals for Dogs 🐶",
-            "link": "shopify://collections/dogs"
-          }
-        },
-        "cats": {
-          "type": "card",
-          "settings": {
-            "label": "Shop Meals for Cats 🐱",
-            "link": "shopify://collections/cats"
-          }
-        }
-      },
-      "block_order": [
-        "dogs",
-        "cats"
-      ],
-      "settings": {
-        "heading": "Ready to elevate your furkid's diet?"
-      }
-    }
-  },
-  "order": [
-    "hero",
-    "health_tiles",
-    "reassurance_band",
-    "founder",
-    "transparency_proof",
-    "founder_quote",
-    "how_it_works",
-    "delivery_promise",
-    "sku_banner",
-    "volume_discount_banner",
-    "product_grid",
-    "reviews",
-    "apps_google_reviews",
-    "apps_judge_ugc",
-    "trial_cta",
-    "paw_forward",
-    "apps_instagram_feed",
-    "community_cta",
-    "faq",
-    "final_cta"
-  ]
+    "order": [
+        "hero",
+        "health_tiles",
+        "reassurance_band",
+        "founder",
+        "transparency_proof",
+        "founder_quote",
+        "how_it_works",
+        "delivery_promise",
+        "sku_banner",
+        "volume_discount_banner",
+        "product_grid",
+        "reviews",
+        "apps_google_reviews",
+        "apps_judge_ugc",
+        "trial_cta",
+        "paw_forward",
+        "apps_instagram_feed",
+        "community_cta",
+        "faq",
+        "final_cta"
+    ]
 }
