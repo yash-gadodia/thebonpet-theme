@@ -1,9 +1,14 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.35.0 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.35.1 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.35.1** (2026-05-02) - Founder hero swap to Yash + Nic illustration.
+  - 🎨 Per Yash: founder hero showed an extreme zoom of Lola's face (the `lola-closeup-smiling-founder.jpg` image cropped to 4:3 landscape was super tight on her muzzle). Swapped to the existing AI-illustrated portrait of Yash + Nic - already a theme asset (`bonpet-founders-illustration.jpg`), now also uploaded to Shopify Files as `founders-yash-nic-illustration.jpg`.
+  - 🏠 Same illustration set on the homepage `founder` section (was theme-asset fallback `bonpet-dog-bag-cocker-1776904000.jpg`).
+  - 🧠 Memory note saved (`feedback_ai_illustration_exception.md`): this specific stylised illustration is an approved exception to the "no AI" rule. Real photos still required for everything else.
+  - 📁 Touches: templates/page.founder.json, templates/index.json. Plus 1 image upload via Admin GraphQL.
 - **v3.35.0** (2026-05-02) - Homepage self-audit cleanup (5 fixes from punch list).
   - 🗑️ **Dropped `apps_judge_ugc`** from homepage. Was rendering only 8 words, embed broken/empty.
   - 🗑️ **Dropped `apps_google_reviews`** from homepage. Redundant with the existing `reviews` section (also Judge.me-powered, more visually polished). Result: homepage now has just `reviews` (written) + `apps_instagram_feed` (visual UGC) for social proof, instead of 4 sections in a row.

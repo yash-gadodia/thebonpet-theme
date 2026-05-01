@@ -9,8 +9,8 @@
         "founder_hero": {
             "type": "bonpet-founder-hero",
             "settings": {
-                "image": "shopify://shop_images/lola-closeup-smiling-founder.jpg",
-                "image_alt": "Lola, Yash's goldendoodle, smiling at the camera - the muse for The Bon Pet",
+                "image": "shopify://shop_images/founders-yash-nic-illustration.jpg",
+                "image_alt": "Illustrated portrait of The Bon Pet co-founders Yash and Nic",
                 "eyebrow": "OUR STORY",
                 "heading": "Started with Salt, Pepper & Lola 🐾",
                 "intro": "Nic's cats Salt and Pepper. Yash's dog Lola. Two software engineers who couldn't find fresh pet food we trusted, so we built it from our kitchen counter."
