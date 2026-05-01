@@ -1,9 +1,14 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.34.4 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.34.5 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.34.5** (2026-05-02) - Homepage "Real Singapore furkids" testimonial wall.
+  - 🐾 New section bonpet-testimonial-wall.liquid - 6-tile photo grid (3 dogs + 3 cats), inserted between `reviews` and `apps_google_reviews` on homepage. Each tile has a real customer photo (no stock, no AI), a label (e.g., "BELA · CAVALIER"), and a one-line caption. Hover lift + image zoom for warmth.
+  - 📷 4 more photos uploaded to Shopify Files: customer-bela-cavalier-bowl, customer-white-fluffy-toy-fruits, customer-grey-tabby-kittens, customer-donut-cone-recovery-cat. Plus 2 reused (chow chow, black cat).
+  - 🎯 6 furkids: Bela the Cavalier with custom bowl + egg yolk · Pixie a small white poodle on blue plate · Grey tabby kitten litter · A chow chow with stainless bowl · Midnight the black cat with kraft delivery bag · A recovery-cone fluffy white cat. Diverse breeds, no Lola, all verified-customer (per the new "no doodles unless in customer-* folder" rule).
+  - 📁 Touches: sections/bonpet-testimonial-wall.liquid (new), templates/index.json. Plus 4 image uploads.
 - **v3.34.4** (2026-05-02) - Founder page accuracy + size fixes (per Yash review).
   - 🐱 Real-strip card #4 swapped from "LOLA'S BOWL" (Lola again) to "OUR OTHER MUSES": Nic's cats Salt and Pepper. Yash sent the photo mid-deploy. Two orange tabby brothers, the cat half of the Salt-Pepper-Lola origin trio that the founder hero already names. Strip now reads: Lola muse · Kitchen prep · Customer chow chow · Salt + Pepper. No more duplicate-Lola.
   - 🐶 Lola is a goldendoodle, not a cockapoo. All founder template + section copy and Shopify Files alt-text corrected. Saved to memory: `reference_lola_goldendoodle.md` so future sessions don't repeat.

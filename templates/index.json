@@ -679,6 +679,74 @@
             "settings": {
                 "heading": "Ready to elevate your furkid's diet?"
             }
+        },
+        "furkids_wall": {
+            "type": "bonpet-testimonial-wall",
+            "blocks": {
+                "bela": {
+                    "type": "furkid",
+                    "settings": {
+                        "image": "shopify://shop_images/customer-bela-cavalier-bowl.jpg",
+                        "alt": "Bela the Cavalier with a personalised BELA bowl of Bon Pet beef and egg yolk",
+                        "name": "BELA \u00b7 CAVALIER",
+                        "caption": "Custom bowl, beef plus an egg yolk, every Sunday morning."
+                    }
+                },
+                "fluffy": {
+                    "type": "furkid",
+                    "settings": {
+                        "image": "shopify://shop_images/customer-white-fluffy-toy-fruits.jpg",
+                        "alt": "A small white fluffy customer dog with pink hair clip eating Bon Pet beef from a blue plate",
+                        "name": "PIXIE \u00b7 TOY POODLE",
+                        "caption": "Beef on a fresh blue plate, every meal a little event."
+                    }
+                },
+                "kittens": {
+                    "type": "furkid",
+                    "settings": {
+                        "image": "shopify://shop_images/customer-grey-tabby-kittens.jpg",
+                        "alt": "Two grey tabby kittens snuggled on a soft baby-blue blanket",
+                        "name": "KITTEN DUO \u00b7 GREY TABBIES",
+                        "caption": "Litter-mates, growing up on the same chicken recipe."
+                    }
+                },
+                "chow": {
+                    "type": "furkid",
+                    "settings": {
+                        "image": "shopify://shop_images/customer-dog-eating-002.jpg",
+                        "alt": "A Singapore customer's chow chow waiting eagerly for a fresh bowl of Bon Pet beef",
+                        "name": "CHOW CHOW \u00b7 BEEF",
+                        "caption": "Stainless steel bowl, full focus, no leftovers."
+                    }
+                },
+                "blackcat": {
+                    "type": "furkid",
+                    "settings": {
+                        "image": "shopify://shop_images/customer-blackcat-bonpet-bag.jpg",
+                        "alt": "A real Singapore customer's black cat next to a Bon Pet kraft bag and frozen meal packs",
+                        "name": "MIDNIGHT \u00b7 BLACK CAT",
+                        "caption": "Delivery day. Whole week of frozen vacuum packs in the kraft bag."
+                    }
+                },
+                "donut": {
+                    "type": "furkid",
+                    "settings": {
+                        "image": "shopify://shop_images/customer-donut-cone-recovery-cat.jpg",
+                        "alt": "A fluffy white customer cat in a pink donut-shaped recovery cone",
+                        "name": "RECOVERY DAYS",
+                        "caption": "Donut cone era. Sensitive recipe, gentle on the gut."
+                    }
+                }
+            },
+            "block_order": [
+                "bela",
+                "fluffy",
+                "kittens",
+                "chow",
+                "blackcat",
+                "donut"
+            ],
+            "settings": {}
         }
     },
     "order": [
@@ -694,6 +762,7 @@
         "volume_discount_banner",
         "product_grid",
         "reviews",
+        "furkids_wall",
         "apps_google_reviews",
         "apps_judge_ugc",
         "trial_cta",

@@ -1,0 +1,206 @@
+{%- comment -%}
+  V3 Homepage · Real Singapore furkids testimonial wall.
+  6 real customer photos in a 3-up desktop / 2-up mobile grid. No AI, no stock.
+  Each tile has photo + short caption. Px-only sizing (Dawn 62.5% root trap).
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-furkids-wall" data-section-id="{{ section.id }}">
+  <div class="tbp-container">
+    <header class="tbp-furkids-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="tbp-furkids-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="tbp-furkids-title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.lead != blank -%}
+        <p class="tbp-furkids-lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="tbp-furkids-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'furkid' -%}
+          <figure class="tbp-furkid-card" {{ block.shopify_attributes }}>
+            <div class="tbp-furkid-img">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 720 }}"
+                     alt="{{ block.settings.alt | default: block.settings.caption | escape }}"
+                     loading="lazy" width="360" height="450">
+              {%- endif -%}
+            </div>
+            <figcaption class="tbp-furkid-cap">
+              {%- if block.settings.name != blank -%}
+                <span class="tbp-furkid-name">{{ block.settings.name }}</span>
+              {%- endif -%}
+              {%- if block.settings.caption != blank -%}
+                <span class="tbp-furkid-text">{{ block.settings.caption }}</span>
+              {%- endif -%}
+            </figcaption>
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+      <div class="tbp-furkids-cta">
+        <a href="{{ section.settings.cta_link }}" class="tbp-furkids-cta-btn">{{ section.settings.cta_label }}</a>
+        {%- if section.settings.cta_sub != blank -%}
+          <p class="tbp-furkids-cta-sub">{{ section.settings.cta_sub }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .tbp-furkids-wall {
+    background: #fff;
+    padding: clamp(56px, 8vw, 96px) 0;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-furkids-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto clamp(36px, 5vw, 56px);
+    padding: 0 16px;
+  }
+  .tbp-furkids-eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--tbp-primary, #2d5d3a);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .tbp-furkids-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(28px, 4.6vw, 48px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-furkids-lead {
+    font-size: clamp(16px, 1.6vw, 19px);
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  .tbp-furkids-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  @media (min-width: 900px) { .tbp-furkids-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+
+  .tbp-furkid-card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.18s ease;
+  }
+  .tbp-furkid-card:hover { transform: translateY(-4px); }
+  .tbp-furkid-img {
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--tbp-cream, #faf3e8);
+    box-shadow: 0 6px 20px rgba(45, 93, 58, 0.07);
+  }
+  .tbp-furkid-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .tbp-furkid-card:hover .tbp-furkid-img img { transform: scale(1.04); }
+  .tbp-furkid-cap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 6px;
+  }
+  .tbp-furkid-name {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--tbp-primary, #2d5d3a);
+    text-transform: uppercase;
+  }
+  .tbp-furkid-text {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+
+  .tbp-furkids-cta {
+    text-align: center;
+    margin: clamp(40px, 6vw, 64px) auto 0;
+    padding: 0 16px;
+  }
+  .tbp-furkids-cta-btn {
+    display: inline-block;
+    background: var(--tbp-accent, #ff886b);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .tbp-furkids-cta-btn:hover {
+    background: #ef7558;
+    transform: translateY(-2px);
+    color: #fff;
+  }
+  .tbp-furkids-cta-sub {
+    font-size: 14px;
+    color: var(--tbp-ink-soft, #6a6a6a);
+    margin: 14px 0 0;
+  }
+
+  @media (max-width: 767px) {
+    .tbp-furkid-text { font-size: 14px; }
+    .tbp-furkid-name { font-size: 12px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bon Pet · Furkids wall",
+  "tag": "section",
+  "class": "tbp-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "REAL · NOT STOCK · NO AI" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real Singapore furkids on Bon Pet" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Photos sent in by actual pawrents. Different breeds, different tastes, different bowls. Same recipes, gently cooked at 80°C." },
+    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "🎁 Try a free trial" },
+    { "type": "text", "id": "cta_link", "label": "CTA link", "default": "/products/free-dog-trial-pack" },
+    { "type": "text", "id": "cta_sub", "label": "CTA subline", "default": "Tag @thebonpet on Instagram, your furkid might land on this wall next." }
+  ],
+  "blocks": [
+    {
+      "type": "furkid",
+      "name": "Furkid card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo (4:5 portrait)" },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        { "type": "text", "id": "name", "label": "Name / label", "default": "BELA · CAVALIER" },
+        { "type": "textarea", "id": "caption", "label": "Caption", "default": "Custom bowl, beef plus egg yolk, every Sunday." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bon Pet · Furkids wall"
+    }
+  ]
+}
+{% endschema %}
