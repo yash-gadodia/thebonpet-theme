@@ -185,9 +185,12 @@
   .tbp-footer-address strong { color: var(--tbp-white); font-weight: 700; }
   .tbp-footer-contact a { color: rgba(255,255,255,0.9); }
 
-  /* Column heading - amber for vibrancy on dark green background */
+  /* Column heading - amber for vibrancy on dark green background.
+   * Specificity bump (.tbp-v3 .tbp-footer-heading) so we beat the
+   * global `.tbp-v3 h4 { color: var(--tbp-text-dark) }` rule. */
+  .tbp-v3 .tbp-footer-heading,
   .tbp-footer-heading {
-    color: var(--tbp-amber);
+    color: var(--tbp-amber) !important;
     font-size: 13px;
     font-weight: 700;
     margin: 4px 0 16px;
