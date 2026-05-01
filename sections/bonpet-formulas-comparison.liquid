@@ -71,7 +71,7 @@
     {%- if section.settings.parity_heading != blank or section.blocks.size > 0 -%}
       <div class="tbp-formulas-parity">
         <h3 class="tbp-formulas-parity-title">{{ section.settings.parity_heading | default: 'Where we share ground with other premium SG brands' }}</h3>
-        <p class="tbp-formulas-parity-body">{{ section.settings.parity_body | default: "Most premium SG fresh brands nail the basics: AAFCO, single-protein, gentle cook, cold-chain. What sets us apart is what we let you see. Every gram. Every supplement. Every ratio. In a public Google Sheet." }}</p>
+        <p class="tbp-formulas-parity-body">{{ section.settings.parity_body | default: "Most premium SG fresh brands nail the basics: AAFCO, single-protein, gentle cook, cold-chain. What sets us apart is what we let you see. Every gram, every supplement, every ratio, published openly on this very page." }}</p>
         <a class="tbp-formulas-parity-cta" href="{{ section.settings.cta_link | default: 'https://docs.google.com/spreadsheets/d/1MmEgWyF-GbnkA6RP9WqD69mmV-luKXb0jpFxTgqygYE/edit?gid=802280656' }}" target="_blank" rel="noopener">{{ section.settings.cta_label | default: '🔓 See the formulas sheet' }}</a>
       </div>
     {%- endif -%}

@@ -1,9 +1,14 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.34.5 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.34.6 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.34.6** (2026-05-02) - Homepage redundancy cleanup + recipes-on-site copy update.
+  - 🗑️ Removed `furkids_wall` (the v3.34.5 testimonial wall) from homepage. It duplicated the existing `apps_instagram_feed` "Made by us, Shared by you" UGC carousel. Per memory rule "consolidate over add". Section file kept in repo for future reuse.
+  - 🪑 Moved `reassurance_band` from position 3 to position 5 (after `transparency_proof`). Was visually-redundant with `health_tiles` directly above (two 4-up icon-tile sections back to back). Now broken up by founder + transparency content.
+  - 📝 Bulk copy update across 9 surfaces: "every recipe in a public Google Sheet" → "every recipe on our open formulas page". Sheet stays as secondary "download the source" option. Updated hero subhead, why-fresh cards, founder story body, formulas-comparison parity body, founder timeline body, our-meals lead, about page body, founder-story schema default. Memory record `project_recipes_on_website.md` saved so this stays consistent in future sessions.
+  - 📁 Touches: templates/index.json (drop wall + move reassurance_band + hero subhead), templates/page.founder.json, templates/page.about.json, sections/bonpet-why-fresh.liquid, sections/bonpet-founder-timeline.liquid, sections/bonpet-meals-menu.liquid, sections/bonpet-founder-story.liquid, sections/bonpet-formulas-comparison.liquid.
 - **v3.34.5** (2026-05-02) - Homepage "Real Singapore furkids" testimonial wall.
   - 🐾 New section bonpet-testimonial-wall.liquid - 6-tile photo grid (3 dogs + 3 cats), inserted between `reviews` and `apps_google_reviews` on homepage. Each tile has a real customer photo (no stock, no AI), a label (e.g., "BELA · CAVALIER"), and a one-line caption. Hover lift + image zoom for warmth.
   - 📷 4 more photos uploaded to Shopify Files: customer-bela-cavalier-bowl, customer-white-fluffy-toy-fruits, customer-grey-tabby-kittens, customer-donut-cone-recovery-cat. Plus 2 reused (chow chow, black cat).
