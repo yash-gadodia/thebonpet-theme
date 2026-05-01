@@ -1,0 +1,26 @@
+{%- comment -%}
+  V3 Product Trust section — shipping + guarantee + reviews + open-source.
+  Addresses checkout-completion leak by surfacing shipping cost transparency upfront.
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-product-trust-section" aria-label="Why Bon Pet">
+  <div class="page-width">
+    {% render 'bonpet-product-trust' %}
+  </div>
+</section>
+
+<style>
+  .tbp-product-trust-section {
+    padding: 0 0 var(--tbp-space-5);
+    background: transparent;
+  }
+  .tbp-product-trust-section .tbp-product-trust { max-width: 800px; margin: 0 auto; }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Product Trust",
+  "enabled_on": { "templates": ["product"] },
+  "presets": [{ "name": "TBP Product Trust" }]
+}
+{% endschema %}

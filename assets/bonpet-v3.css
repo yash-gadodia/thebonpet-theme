@@ -1,0 +1,492 @@
+/*
+ * The Bon Pet — V3 design tokens + base primitives
+ * Derived from the Render mock palette + typography (see .claude/website-design.md)
+ */
+
+:root {
+  /* ===== Color palette — aligned to TBP Brand Guidelines (Section 03 / Visual Identity) ===== */
+  --tbp-primary: #16433D;         /* Deep Forest Green — anchors the brand */
+  --tbp-primary-alt: #14423D;
+  --tbp-primary-mid: #107965;     /* button idle, accents */
+  --tbp-primary-light: #39AB6D;   /* gradient-green top */
+  --tbp-primary-deep: #10776B;    /* gradient-green bottom */
+
+  --tbp-cream: #FFF4E4;           /* Warm Cream — softness + approachability */
+  --tbp-cream-alt: #FFF3DF;
+  --tbp-tan: #EDDDC0;             /* Natural Beige — secondary surface */
+  --tbp-tan-mid: #E9D9BD;
+  --tbp-sand: #CCBC9E;            /* subdued surface */
+
+  --tbp-text-dark: #2E2616;       /* body text on cream - darkened for AAA contrast */
+  --tbp-text-mid: #5A4E3C;        /* secondary text - darkened for readability */
+  --tbp-text-near-black: #121212; /* max-contrast text */
+  --tbp-text-slate: #444444;      /* Slate Grey — warmer than near-black for body */
+
+  --tbp-orange: #D96C49;          /* Terracotta Orange — warm accent, key actions */
+  --tbp-orange-soft: rgba(217, 108, 73, 0.1);
+  --tbp-amber: #F0A12E;           /* Golden Amber — vibrant accent, digital/promo */
+  --tbp-accent-pink: #E12B65;     /* legacy highlight (kept for backwards compat) */
+  --tbp-white: #FFFFFF;
+  --tbp-white-60: rgba(255, 255, 255, 0.6);
+  --tbp-white-20: rgba(255, 255, 255, 0.2);
+
+  /* ===== Typography ===== */
+  /* Self-hosted brand fonts: Fredoka variable (body+heading), Fredoka One (display) */
+  --tbp-font-display: 'BonPetDisplay', 'Fredoka One', 'Georgia', serif;
+  --tbp-font-heading: 'BonPetBody', 'Fredoka', system-ui, sans-serif;
+  --tbp-font-body:    'BonPetBody', 'Fredoka', system-ui, -apple-system, sans-serif;
+
+  /* Type scale (fluid). Dawn's html sets font-size: 62.5% so root = 10px.
+     V3 tokens are sized for that 10px root (1.6rem = 16px body baseline).
+     Original clamp values assumed 16px root and rendered ~37% smaller than intended;
+     bumped 1.45x on 2026-04-30 after Yash flagged "text too small". */
+  --tbp-text-xs:   clamp(1.3rem, 1.2rem + 0.3vw, 1.5rem);
+  --tbp-text-sm:   clamp(1.4rem, 1.3rem + 0.3vw, 1.6rem);
+  --tbp-text-base: clamp(1.6rem, 1.5rem + 0.3vw, 1.8rem);
+  --tbp-text-lg:   clamp(1.8rem, 1.7rem + 0.4vw, 2.2rem);
+  --tbp-text-xl:   clamp(2.2rem, 2rem + 0.5vw, 2.6rem);
+  --tbp-text-2xl:  clamp(2.6rem, 2.3rem + 0.8vw, 3.2rem);
+  --tbp-text-3xl:  clamp(2.6rem, 2.3rem + 0.7vw, 3.4rem);
+  --tbp-text-4xl:  clamp(3rem, 2.6rem + 1vw, 4rem);
+  --tbp-text-5xl:  clamp(3.6rem, 3rem + 1.5vw, 5.2rem);
+
+  /* ===== Spacing (8px scale) ===== */
+  --tbp-space-1:  0.25rem;
+  --tbp-space-2:  0.5rem;
+  --tbp-space-3:  0.75rem;
+  --tbp-space-4:  1rem;
+  --tbp-space-5:  1.5rem;
+  --tbp-space-6:  2rem;
+  --tbp-space-7:  3rem;
+  --tbp-space-8:  4rem;
+  --tbp-space-9:  6rem;
+  --tbp-space-10: 8rem;
+
+  /* ===== Radius ===== */
+  --tbp-radius-sm: 6px;
+  --tbp-radius-md: 12px;      /* "rounded-xl" — the global section / card radius */
+  --tbp-radius-lg: 20px;
+  --tbp-radius-pill: 9999px;
+
+  /* ===== Shadows ===== */
+  --tbp-shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --tbp-shadow-md: 0 4px 12px rgba(0,0,0,0.10);
+  --tbp-shadow-lg: 0 12px 28px rgba(0,0,0,0.12);
+
+  /* ===== Layout ===== */
+  --tbp-container-max: 1280px;
+  --tbp-container-pad-mobile: 1rem;
+  --tbp-container-pad-desktop: 2rem;
+}
+
+/* Self-hosted brand fonts — Fredoka (variable, body+heading) + Fredoka One (display script) */
+@font-face {
+  font-family: 'BonPetDisplay';
+  src: url('bonpet-display.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'BonPetBody';
+  src: url('bonpet-body.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== Base resets & primitives ===== */
+
+.tbp-v3 body,
+.tbp-v3 {
+  font-family: var(--tbp-font-body);
+  color: var(--tbp-text-dark);
+  background: var(--tbp-cream);
+  font-size: var(--tbp-text-base);
+  line-height: 1.65;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.tbp-v3 p { font-size: var(--tbp-text-base); line-height: 1.65; }
+.tbp-v3 p, .tbp-v3 li, .tbp-v3 a { font-weight: 500; }
+
+.tbp-v3 h1, .tbp-v3 h2, .tbp-v3 h3, .tbp-v3 h4 {
+  font-family: var(--tbp-font-heading);
+  color: var(--tbp-text-dark);
+  line-height: 1.2;
+  margin: 0 0 var(--tbp-space-4);
+}
+
+.tbp-v3 h1 { font-size: var(--tbp-text-5xl); font-weight: 700; letter-spacing: -0.02em; }
+.tbp-v3 h2 { font-size: var(--tbp-text-4xl); font-weight: 700; letter-spacing: -0.01em; }
+.tbp-v3 h3 { font-size: var(--tbp-text-2xl); font-weight: 700; letter-spacing: -0.01em; }
+.tbp-v3 h4 { font-size: var(--tbp-text-xl); font-weight: 600; }
+
+.tbp-v3 .tbp-display {
+  font-family: var(--tbp-font-display);
+  font-weight: 400;
+}
+
+.tbp-v3 .tbp-container {
+  max-width: var(--tbp-container-max);
+  margin: 0 auto;
+  padding: 0 var(--tbp-container-pad-mobile);
+}
+@media (min-width: 768px) {
+  .tbp-v3 .tbp-container { padding: 0 var(--tbp-container-pad-desktop); }
+}
+
+/* ===== Buttons ===== */
+
+.tbp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tbp-space-2);
+  border: none;
+  border-radius: var(--tbp-radius-md);
+  padding: var(--tbp-space-3) var(--tbp-space-5);
+  min-height: 48px;
+  box-sizing: border-box;
+  font-family: var(--tbp-font-body);
+  font-size: var(--tbp-text-base);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.tbp-btn-primary {
+  background: linear-gradient(180deg, var(--tbp-primary-light) 0%, var(--tbp-primary-deep) 100%);
+  color: var(--tbp-white);
+  border: 3px solid var(--tbp-white-60);
+  box-shadow: var(--tbp-shadow-sm);
+}
+.tbp-btn-primary:hover {
+  transform: scaleX(1.02);
+  box-shadow: var(--tbp-shadow-md);
+  filter: brightness(1.05);
+}
+
+.tbp-btn-secondary {
+  background: transparent;
+  color: var(--tbp-white);
+  border: 1px solid var(--tbp-white-20);
+  border-radius: var(--tbp-radius-pill);
+}
+.tbp-btn-secondary:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.tbp-btn-outline-dark {
+  background: transparent;
+  color: var(--tbp-primary);
+  border: 2px solid var(--tbp-primary);
+  border-radius: var(--tbp-radius-md);
+}
+.tbp-btn-outline-dark:hover {
+  background: var(--tbp-primary);
+  color: var(--tbp-white);
+}
+
+.tbp-btn-lg {
+  font-size: var(--tbp-text-xl);
+  padding: var(--tbp-space-4) var(--tbp-space-6);
+}
+
+/* ===== Sections ===== */
+
+.tbp-section {
+  padding: var(--tbp-space-8) 0;
+}
+@media (max-width: 767px) {
+  .tbp-section { padding: var(--tbp-space-7) 0; }
+  .tbp-container { padding: 0 var(--tbp-space-4); }
+}
+.tbp-section-dark {
+  background: var(--tbp-primary);
+  color: var(--tbp-white);
+}
+.tbp-section-dark > .tbp-container > h1,
+.tbp-section-dark > .tbp-container > h2,
+.tbp-section-dark > .tbp-container > h3,
+.tbp-section-dark > .tbp-container > h4,
+.tbp-section-dark > .tbp-container > * > h1,
+.tbp-section-dark > .tbp-container > * > h2:not(.tbp-card h2),
+.tbp-section-dark .tbp-text-center,
+.tbp-section-dark .tbp-transparency-head h2,
+.tbp-section-dark .tbp-transparency-head h3 {
+  color: var(--tbp-white);
+}
+/* Cards inside dark sections keep their own dark text */
+.tbp-section-dark .tbp-card h2,
+.tbp-section-dark .tbp-card h3,
+.tbp-section-dark .tbp-card h4,
+.tbp-section-dark .tbp-guarantee-title,
+.tbp-section-dark .tbp-transparency-card h2,
+.tbp-section-dark .tbp-transparency-card h3,
+.tbp-section-dark .tbp-transparency-card h4 {
+  color: var(--tbp-text-dark);
+}
+.tbp-section-cream {
+  background: var(--tbp-cream);
+  color: var(--tbp-text-dark);
+}
+
+/* ===== Cards ===== */
+
+.tbp-card {
+  background: var(--tbp-white);
+  border-radius: var(--tbp-radius-md);
+  padding: var(--tbp-space-5);
+  box-shadow: var(--tbp-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tbp-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--tbp-shadow-md);
+}
+
+.tbp-card-tan {
+  background: var(--tbp-tan);
+}
+
+/* ===== Promo bar ===== */
+
+.tbp-promo-bar {
+  background: var(--tbp-primary);
+  color: var(--tbp-white);
+  font-size: var(--tbp-text-sm);
+  padding: var(--tbp-space-3) var(--tbp-space-4);
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+.tbp-promo-bar strong {
+  color: var(--tbp-white);
+  letter-spacing: 0.02em;
+}
+.tbp-promo-bar a {
+  color: var(--tbp-white);
+  text-decoration: underline;
+}
+.tbp-promo-bar .tbp-promo-separator {
+  opacity: 0.5;
+  margin: 0 var(--tbp-space-3);
+}
+
+/* ===== Floating WhatsApp CTA ===== */
+
+.tbp-wa-float {
+  position: fixed;
+  bottom: var(--tbp-space-5);
+  right: var(--tbp-space-5);
+  background: #25D366;
+  color: var(--tbp-white);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--tbp-shadow-lg);
+  z-index: 80;
+  transition: transform 0.2s ease;
+  text-decoration: none;
+}
+.tbp-wa-float:hover { transform: scale(1.08); }
+.tbp-wa-float svg { width: 28px; height: 28px; fill: currentColor; }
+
+/* Defensive hide for any residual Shopify Inbox / Chatwoot injections */
+#shopify-chat-bubble-container,
+#shopify-chat-inbox-bubble-iframe,
+#ShopifyChat,
+.shopify-chat-widget,
+iframe[name="ShopifyChatIframe"],
+iframe[src*="inbox.shopify.com"],
+iframe[id*="shopify-chat"],
+#chatwoot_live_chat_widget,
+.woot-widget-bubble,
+iframe[src*="envoy-crm.voltade.com"] {
+  display: none !important;
+}
+
+/* ===== Utilities ===== */
+
+.tbp-rounded   { border-radius: var(--tbp-radius-md); }
+.tbp-rounded-lg{ border-radius: var(--tbp-radius-lg); }
+.tbp-rounded-pill { border-radius: var(--tbp-radius-pill); }
+.tbp-text-center { text-align: center; }
+.tbp-mt-4 { margin-top: var(--tbp-space-4); }
+.tbp-mt-6 { margin-top: var(--tbp-space-6); }
+.tbp-mt-8 { margin-top: var(--tbp-space-8); }
+.tbp-mb-4 { margin-bottom: var(--tbp-space-4); }
+.tbp-mb-6 { margin-bottom: var(--tbp-space-6); }
+
+.tbp-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--tbp-space-5);
+}
+@media (min-width: 768px) {
+  .tbp-grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+.tbp-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--tbp-space-4);
+}
+@media (min-width: 768px) {
+  .tbp-grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ===== Accessibility ===== */
+
+.tbp-v3 *:focus-visible {
+  outline: 3px solid var(--tbp-primary-light);
+  outline-offset: 2px;
+  border-radius: var(--tbp-radius-sm);
+}
+
+
+/* ===== Reduced motion ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .tbp-btn, .tbp-card, .tbp-wa-float {
+    transition: none;
+  }
+}
+
+/* ===== FAQ page (Lyka pattern: topic groups + native accordion) ===== */
+
+.tbp-faq-page {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: var(--tbp-text-base);
+  line-height: 1.65;
+  padding: var(--tbp-space-2) var(--tbp-space-4) var(--tbp-space-9);
+}
+.tbp-faq-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: var(--tbp-text-xs);
+  font-weight: 700;
+  color: var(--tbp-primary-mid);
+  margin: 0 0 var(--tbp-space-3);
+  text-align: center;
+}
+.tbp-faq-lead {
+  text-align: center;
+  color: var(--tbp-text-mid);
+  margin: 0 auto var(--tbp-space-8);
+  font-size: var(--tbp-text-base);
+  max-width: 580px;
+  line-height: 1.55;
+}
+.tbp-faq-lead a { color: var(--tbp-primary); text-decoration: underline; }
+
+.tbp-faq-group {
+  margin-bottom: var(--tbp-space-7);
+}
+.tbp-faq-group-heading {
+  font-family: var(--tbp-font-display);
+  font-size: var(--tbp-text-2xl);
+  color: var(--tbp-primary);
+  margin: 0 0 var(--tbp-space-4);
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tbp-faq-item {
+  background: var(--tbp-white);
+  border: 1px solid rgba(22,67,61,0.08);
+  border-radius: var(--tbp-radius-md);
+  padding: 0;
+  margin-bottom: var(--tbp-space-3);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+.tbp-faq-item:hover { border-color: rgba(22,67,61,0.18); }
+.tbp-faq-item[open] {
+  box-shadow: 0 4px 14px rgba(22,67,61,0.07);
+  border-color: rgba(22,67,61,0.18);
+}
+.tbp-faq-q {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  color: var(--tbp-text-dark);
+  position: relative;
+  padding: var(--tbp-space-4) 44px var(--tbp-space-4) var(--tbp-space-5);
+  font-size: var(--tbp-text-base);
+  line-height: 1.4;
+}
+.tbp-faq-q::-webkit-details-marker { display: none; }
+.tbp-faq-q::after {
+  content: "+";
+  position: absolute;
+  right: var(--tbp-space-5);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--tbp-primary-mid);
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 22px;
+  transition: transform 0.22s ease;
+}
+.tbp-faq-item[open] .tbp-faq-q::after {
+  content: "−";
+}
+.tbp-faq-a {
+  color: var(--tbp-text-mid);
+  padding: 0 var(--tbp-space-5) var(--tbp-space-4);
+  font-size: var(--tbp-text-sm);
+  line-height: 1.65;
+}
+.tbp-faq-a a { color: var(--tbp-primary); text-decoration: underline; }
+
+.tbp-faq-still-stuck {
+  background: var(--tbp-cream);
+  border-radius: var(--tbp-radius-md);
+  padding: var(--tbp-space-6) var(--tbp-space-5);
+  text-align: center;
+  margin-top: var(--tbp-space-7);
+}
+.tbp-faq-still-stuck h2 {
+  font-family: var(--tbp-font-display);
+  font-size: var(--tbp-text-2xl);
+  color: var(--tbp-primary);
+  margin: 0 0 var(--tbp-space-3);
+  line-height: 1.2;
+}
+.tbp-faq-still-stuck p {
+  color: var(--tbp-text-mid);
+  margin: 0 0 var(--tbp-space-4);
+}
+.tbp-faq-cta {
+  display: inline-block;
+  background: var(--tbp-primary);
+  color: var(--tbp-cream);
+  padding: 12px 24px;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 700;
+  margin: 4px;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.tbp-faq-cta:hover { transform: translateY(-1px); background: var(--tbp-primary-mid); }
+.tbp-faq-cta--ghost {
+  background: transparent;
+  color: var(--tbp-primary);
+  border: 1.5px solid var(--tbp-primary);
+}
+.tbp-faq-cta--ghost:hover { background: var(--tbp-primary); color: var(--tbp-cream); }

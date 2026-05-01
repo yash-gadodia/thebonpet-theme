@@ -1,0 +1,131 @@
+{%- comment -%} V3 Founder pull-quote  -  mission statement, dark teal bg, display font, high impact {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-dark tbp-founder-quote" aria-label="Founder quote">
+  <div class="tbp-container">
+    <div class="tbp-founder-quote-inner">
+      <p class="tbp-founder-quote-eyebrow">{{ section.settings.eyebrow }}</p>
+
+      {%- liquid
+        if section.settings.avatar
+          assign avatar_src = section.settings.avatar | image_url: width: 800
+        else
+          assign avatar_src = 'bonpet-founders-illustration.jpg' | asset_url
+        endif
+      -%}
+      <div class="tbp-founder-quote-hero">
+        <img
+          src="{{ avatar_src }}"
+          alt="{{ section.settings.names | default: 'Co-founders' | escape }}"
+          class="tbp-founder-quote-hero-img"
+          width="400"
+          height="356"
+          loading="lazy"
+        >
+      </div>
+
+      <blockquote class="tbp-founder-quote-text">
+        <span aria-hidden="true" class="tbp-founder-quote-mark">"</span>{{ section.settings.quote }}<span aria-hidden="true" class="tbp-founder-quote-mark tbp-founder-quote-mark--end">"</span>
+      </blockquote>
+
+      <div class="tbp-founder-quote-names">
+        <strong>{{ section.settings.names }}</strong>
+        <span>{{ section.settings.role }}</span>
+      </div>
+
+      {%- if section.settings.cta_label != blank -%}
+        <p class="tbp-founder-quote-cta">
+          <a href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-founder-quote { padding: var(--tbp-space-9) 0; }
+  .tbp-founder-quote-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+  .tbp-founder-quote-eyebrow {
+    color: var(--tbp-amber);
+    font-size: var(--tbp-text-xs); font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: var(--tbp-space-5);
+  }
+  .tbp-founder-quote-text {
+    display: block;
+    font-family: var(--tbp-font-display);
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    font-weight: 400;
+    color: var(--tbp-white) !important;
+    line-height: 1.3;
+    margin: 0 0 var(--tbp-space-6);
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  .tbp-founder-quote-mark {
+    color: var(--tbp-primary-light);
+    font-family: var(--tbp-font-display);
+    opacity: 0.55;
+  }
+  .tbp-founder-quote-mark--end { margin-left: 4px; }
+  .tbp-founder-quote-hero {
+    margin: 0 auto var(--tbp-space-6);
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--tbp-primary-light);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    background: var(--tbp-primary-deep, #03443C);
+  }
+  .tbp-founder-quote-hero-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+  @media (min-width: 768px) {
+    .tbp-founder-quote-hero { width: 260px; height: 260px; }
+  }
+  @media (min-width: 1200px) {
+    .tbp-founder-quote-hero { width: 300px; height: 300px; }
+  }
+
+  .tbp-founder-quote-names {
+    text-align: center;
+    margin-top: var(--tbp-space-5);
+  }
+  .tbp-founder-quote-names strong {
+    display: block; color: var(--tbp-white);
+    font-size: var(--tbp-text-lg); font-weight: 700; letter-spacing: 0.01em;
+  }
+  .tbp-founder-quote-names span {
+    display: block; color: rgba(255,255,255,0.7);
+    font-size: var(--tbp-text-sm); letter-spacing: 0.02em;
+    margin-top: 4px;
+  }
+  .tbp-founder-quote-cta { margin-top: var(--tbp-space-5); }
+  .tbp-founder-quote-cta a {
+    color: var(--tbp-white);
+    font-weight: 600;
+    font-size: var(--tbp-text-sm);
+    text-decoration: underline;
+    letter-spacing: 0.02em;
+  }
+  .tbp-founder-quote-cta a:hover { color: var(--tbp-primary-light); }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Founder Quote",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A PROMISE FROM THE FOUNDERS" },
+    { "type": "textarea", "id": "quote", "label": "Quote",
+      "default": "If we wouldn't cook it for ourselves, we won't cook it for your furkid. Every recipe, every gram, every supplement is published openly. That's not a marketing stunt. It's the only way we know how to do this right." },
+    { "type": "image_picker", "id": "avatar", "label": "Founders avatar (optional)" },
+    { "type": "text", "id": "names", "label": "Names", "default": "Yash & Nicolas" },
+    { "type": "text", "id": "role", "label": "Role", "default": "Co-founders, The Bon Pet · Singapore · since 2024" },
+    { "type": "text", "id": "cta_label", "label": "CTA label (optional)", "default": "Read our full story →" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "TBP Founder Quote" }]
+}
+{% endschema %}

@@ -1,0 +1,109 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "17597705203a4818fb": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_all_reviews_page_paTQDK": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_page/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_all_reviews_page_paTQDK"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17597706127dae5385": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_ugc_media_grid_aNfykw": {
+          "type": "shopify://apps/judge-me-reviews/blocks/ugc_media_grid/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_ugc_media_grid_aNfykw"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "image_with_text_RVzigD": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_ygJUKJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "Help Stray Cats, One Meal at a Time",
+            "heading_size": "h1"
+          }
+        },
+        "text_QriBwr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Opt into kindness by sponsoring to support rescue cats.</p><p>Meals will be delivered to fosterer of your choosing. <a href=\"https://www.wildflowerstudio.sg/\" target=\"_blank\" title=\"Wildflower Studio\">Wildflower Studio</a> or <a href=\"https://luni-singapore.com/\" target=\"_blank\" title=\"LUNI Singapore\">LUNI</a>.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_8pmeAa": {
+          "type": "button",
+          "settings": {
+            "button_label": "Sponsor a Meal",
+            "button_link": "shopify://collections/support-wildflower-studio",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_ygJUKJ",
+        "text_QriBwr",
+        "button_8pmeAa"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/wildflower.png",
+        "video_url": "",
+        "video_image_url": "",
+        "autoplay": false,
+        "show_controls": false,
+        "loop_video": false,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "17597705203a4818fb",
+    "17597706127dae5385",
+    "image_with_text_RVzigD"
+  ]
+}

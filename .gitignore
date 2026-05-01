@@ -1,0 +1,22 @@
+# Test runtime artifacts
+tests/node_modules/
+tests/test-results/
+tests/playwright-report/
+tests/blob-report/
+tests/.last-run.json
+
+# OS / editor noise
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+
+# Local-only environment files (if any get added later)
+.env
+.env.local
+
+# Shopify CLI local cache
+.shopify/

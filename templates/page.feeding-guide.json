@@ -1,0 +1,411 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "image_banner_M7pKR8": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_Vqitj8": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>THE BON PET</strong>",
+            "heading_size": "h0"
+          }
+        },
+        "text_tzpHgH": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Feeding Guide</strong>",
+            "text_style": "body"
+          }
+        },
+        "buttons_i8w7Mq": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "🐶 Meals for Dog",
+            "button_link_1": "shopify://collections/gently-cooked-for-dogs",
+            "button_style_secondary_1": false,
+            "button_label_2": "🐱 Meals for Cats",
+            "button_link_2": "shopify://collections/gently-cooked-for-cats",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Vqitj8",
+        "text_tzpHgH",
+        "buttons_i8w7Mq"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/elevate-your-pet-diet-banner.png",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "ambient",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-2",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "rich_text_MCRH4m": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_XKURdm": {
+          "type": "heading",
+          "settings": {
+            "heading": "HOW TO INTRODUCE",
+            "heading_size": "h1"
+          }
+        },
+        "text_CGqPXa": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Transition from old to new food over a week</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XKURdm",
+        "text_CGqPXa"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    },
+    "multicolumn_fA6zin": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_czThrC": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-introduction-1.png",
+            "title": "",
+            "text": "<p></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_4UzKWF": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-introduction-2.png",
+            "title": "",
+            "text": "<p></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_zmtmzz": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-introduction-3.png",
+            "title": "",
+            "text": "<p></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_dYKGDz": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-introduction-4.png",
+            "title": "",
+            "text": "<p></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_czThrC",
+        "column_4UzKWF",
+        "column_zmtmzz",
+        "column_dYKGDz"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 2,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_KCjxnK": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_jy4TCU": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h2"
+          }
+        },
+        "text_eQtyEJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p><br/>Applicable for both dog and cat formulas.If your pet is known to have a sensitive stomach, you may extend the transition period following steps 1 and 2.<br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jy4TCU",
+        "text_eQtyEJ"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 8
+      }
+    },
+    "rich_text_8fCkWD": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_UFGLiH": {
+          "type": "heading",
+          "settings": {
+            "heading": "HOW TO PREPARE",
+            "heading_size": "h1"
+          }
+        },
+        "text_VKikay": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A quick and simple way to thaw</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UFGLiH",
+        "text_VKikay"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    },
+    "multicolumn_QyijPt": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_znhNmQ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-preparation-1.png",
+            "title": "",
+            "text": "<p></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_yKqArw": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-preparation-2.png",
+            "title": "",
+            "text": "<p></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_XGByxc": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-preparation-3.png",
+            "title": "",
+            "text": "<p></p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_mNFd8T": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-preparation-4.png",
+            "title": "",
+            "text": "<p></p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_znhNmQ",
+        "column_yKqArw",
+        "column_XGByxc",
+        "column_mNFd8T"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 2,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_9dNxpT": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_CQkVc9": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h2"
+          }
+        },
+        "text_LMgezQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Cooking or microwaving is not recommended as it can affect the nutrient content of the formula</p><p>Thawed food can be stored in an airtight container in the chiller at 0-4°C for up to 36 hours.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_CQkVc9",
+        "text_LMgezQ"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 8
+      }
+    },
+    "page_bd87gD": {
+      "type": "page",
+      "name": "t:sections.page.presets.name",
+      "settings": {
+        "page": "{{ page }}",
+        "heading_size": "h0",
+        "color_scheme": "scheme-1",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "cross_links": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_calc": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-introduction-1.png",
+            "title": "Feeding Calculator",
+            "text": "<p>Get the daily gram amount for your pet's age, weight, and activity.</p>",
+            "link_label": "Calculate now",
+            "link": "shopify://pages/feeding-calculator"
+          }
+        },
+        "col_volume": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/multipack-stack-value-cta.jpg",
+            "title": "Volume Discounts",
+            "text": "<p>Save 10-40% with auto-tier pricing on multi-pack subs.</p>",
+            "link_label": "See the tiers",
+            "link": "shopify://pages/volume-discounts"
+          }
+        },
+        "col_formulas": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Feeding_Guide_for_Dogs.jpg",
+            "title": "Open Formulas",
+            "text": "<p>Every recipe published openly. See exact ratios.</p>",
+            "link_label": "View formulas",
+            "link": "shopify://pages/formulas"
+          }
+        }
+      },
+      "block_order": [
+        "col_calc",
+        "col_volume",
+        "col_formulas"
+      ],
+      "settings": {
+        "title": "Keep exploring",
+        "heading_size": "h1",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "button_label": "",
+        "button_link": "",
+        "button_label_secondary": "",
+        "button_link_secondary": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_M7pKR8",
+    "rich_text_MCRH4m",
+    "multicolumn_fA6zin",
+    "rich_text_KCjxnK",
+    "rich_text_8fCkWD",
+    "multicolumn_QyijPt",
+    "rich_text_9dNxpT",
+    "page_bd87gD",
+    "cross_links"
+  ]
+}

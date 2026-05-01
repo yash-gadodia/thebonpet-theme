@@ -1,0 +1,108 @@
+{%- comment -%} V3 Final CTA — dogs/cats split, dark teal bg {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-dark tbp-final-cta">
+  <div class="tbp-container">
+    <h2 class="tbp-text-center tbp-mb-6">{{ section.settings.heading }}</h2>
+
+    <div class="tbp-final-grid">
+      {%- for block in section.blocks -%}
+        {%- assign is_cat = false -%}
+        {%- if block.settings.label contains 'Cat' or block.settings.label contains 'cat' -%}
+          {%- assign is_cat = true -%}
+        {%- endif -%}
+        <a href="{{ block.settings.link }}" class="tbp-final-card {% if is_cat %}tbp-final-card--cat{% else %}tbp-final-card--dog{% endif %}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image -%}
+            <img src="{{ block.settings.image | image_url: width: 1600 }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+          {%- else -%}
+            {%- assign card_fallback = 'bonpet-final-dog-bowl-1776970000.jpg' -%}
+            {%- if is_cat -%}
+              {%- assign card_fallback = 'bonpet-final-cat-feeder.jpg' -%}
+            {%- endif -%}
+            <img src="{{ card_fallback | asset_url }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+          {%- endif -%}
+          <div class="tbp-final-overlay">
+            <span class="tbp-final-label">{{ block.settings.label }}</span>
+            <span class="tbp-final-arrow">→</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-final-cta { padding: var(--tbp-space-8) 0; }
+  .tbp-final-grid { display: grid; grid-template-columns: 1fr; gap: var(--tbp-space-4); }
+  @media (min-width: 768px) { .tbp-final-grid { grid-template-columns: 1fr 1fr; } }
+  .tbp-final-card {
+    position: relative; display: block; overflow: hidden;
+    border-radius: var(--tbp-radius-lg);
+    aspect-ratio: 4/3;
+    background: var(--tbp-primary-mid);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+  @media (min-width: 768px) {
+    .tbp-final-card { aspect-ratio: 3/2; }
+  }
+  .tbp-final-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .tbp-final-card--dog img { object-position: center 50%; }
+  .tbp-final-card--cat img { object-position: center 60%; }
+  .tbp-final-card:hover img { transform: scale(1.06); }
+  .tbp-final-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.75) 100%);
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: var(--tbp-space-6) var(--tbp-space-5);
+    color: var(--tbp-white);
+    gap: var(--tbp-space-3);
+  }
+  .tbp-final-label {
+    font-size: var(--tbp-text-xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+    line-height: 1.2;
+  }
+  @media (min-width: 768px) {
+    .tbp-final-label { font-size: var(--tbp-text-2xl); }
+  }
+  .tbp-final-arrow {
+    font-size: var(--tbp-text-2xl); font-weight: 700;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+    transition: transform 0.3s ease;
+  }
+  .tbp-final-card:hover .tbp-final-arrow { transform: translateX(4px); }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Final CTA",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ready To Elevate Your Pet's Diet?" }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "CTA card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TBP Final CTA",
+      "blocks": [
+        { "type": "card", "settings": { "label": "Meals for Dogs" } },
+        { "type": "card", "settings": { "label": "Meals for Cats" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

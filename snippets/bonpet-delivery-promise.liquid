@@ -1,0 +1,200 @@
+{%- comment -%}
+  V3 shared delivery-promise widget.
+  Surfaces the "best delivery in SG" reassurance: tracking, reminders, reschedule, 3 attempts, Ninja Van cold-chain.
+  Used on / (via sections/bonpet-delivery-promise.liquid) and inside the cart page (via bonpet-cart-reassurance with compact:true).
+
+  Props:
+    compact (bool, default false) - when true, tightens padding + removes the heading + dropquote (cart-page use).
+    quote_body (string, optional) - Google review pull-quote body. When blank, quote block is hidden.
+    quote_author (string, optional) - quote attribution.
+    quote_rating (string, default '★★★★★').
+{%- endcomment -%}
+
+<div class="tbp-delivery-promise {% if compact %}tbp-delivery-promise--compact{% endif %}" aria-label="Delivery experience">
+  {%- unless compact -%}
+    <p class="tbp-delivery-promise-eyebrow">🚚 SUPER FLEXIBLE, SUPER RELIABLE</p>
+    <h2 class="tbp-delivery-promise-heading">Delivery you can actually count on</h2>
+    <p class="tbp-delivery-promise-sub">Cold-chain frozen, NinjaVan-partnered, tracked end-to-end. We message you at every step so your furkid's food never sits at the door.</p>
+  {%- endunless -%}
+
+  <ul class="tbp-delivery-promise-list" role="list">
+    <li class="tbp-delivery-promise-item">
+      <span class="tbp-delivery-promise-icon" aria-hidden="true">📦</span>
+      <div>
+        <strong>Tracking ID at order</strong>
+        <span>Auto-sent the moment you check out, no guessing.</span>
+      </div>
+    </li>
+    <li class="tbp-delivery-promise-item">
+      <span class="tbp-delivery-promise-icon" aria-hidden="true">🚚</span>
+      <div>
+        <strong>Pickup confirmation</strong>
+        <span>Auto-update when NinjaVan picks up your parcel from our kitchen.</span>
+      </div>
+    </li>
+    <li class="tbp-delivery-promise-item">
+      <span class="tbp-delivery-promise-icon" aria-hidden="true">🔔</span>
+      <div>
+        <strong>Delivery-day reminder</strong>
+        <span>Heads-up the morning of, so you can plan around it.</span>
+      </div>
+    </li>
+    <li class="tbp-delivery-promise-item">
+      <span class="tbp-delivery-promise-icon" aria-hidden="true">💬</span>
+      <div>
+        <strong>Reschedule anytime</strong>
+        <span>WhatsApp us, no forms, no hold music. We'll sort it.</span>
+      </div>
+    </li>
+    <li class="tbp-delivery-promise-item">
+      <span class="tbp-delivery-promise-icon" aria-hidden="true">🔄</span>
+      <div>
+        <strong>Up to 3 delivery attempts</strong>
+        <span>Missed it? We'll try twice more, no extra charge.</span>
+      </div>
+    </li>
+    <li class="tbp-delivery-promise-item">
+      <span class="tbp-delivery-promise-icon" aria-hidden="true">❄️</span>
+      <div>
+        <strong>NinjaVan Cold-Chain partner</strong>
+        <span>Direct line to their team. Your furkid's food stays frozen end-to-end.</span>
+      </div>
+    </li>
+  </ul>
+
+  {%- unless compact -%}
+    {%- if quote_body != blank -%}
+      <figure class="tbp-delivery-promise-quote">
+        <span class="tbp-delivery-promise-quote-stars" aria-hidden="true">{{ quote_rating | default: '★★★★★' }}</span>
+        <blockquote>"{{ quote_body }}"</blockquote>
+        {%- if quote_author != blank -%}
+          <figcaption>{{ quote_author }} <span class="tbp-delivery-promise-quote-source">via Google Reviews</span></figcaption>
+        {%- endif -%}
+      </figure>
+    {%- endif -%}
+  {%- endunless -%}
+</div>
+
+<style>
+  .tbp-delivery-promise {
+    background: var(--tbp-white, #fff);
+    border: 1px solid var(--tbp-tan-mid, #e6dfce);
+    border-radius: var(--tbp-radius-lg, 16px);
+    padding: var(--tbp-space-6, 24px);
+    font-family: var(--tbp-font-body, system-ui, sans-serif);
+    color: var(--tbp-text-dark, #16433D);
+  }
+  .tbp-delivery-promise--compact {
+    padding: 14px 16px;
+    margin: 12px 0;
+    border-radius: var(--tbp-radius-md, 12px);
+  }
+
+  .tbp-delivery-promise-eyebrow {
+    display: inline-block;
+    background: var(--tbp-primary, #16433D);
+    color: var(--tbp-white, #fff);
+    padding: 6px 14px;
+    border-radius: var(--tbp-radius-pill, 999px);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin: 0 0 var(--tbp-space-3, 12px);
+  }
+  .tbp-delivery-promise-heading {
+    font-family: var(--tbp-font-heading, var(--tbp-font-body));
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    line-height: 1.15;
+    margin: 0 0 var(--tbp-space-3, 12px);
+    color: var(--tbp-primary, #16433D);
+  }
+  .tbp-delivery-promise-sub {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--tbp-text-mid, #555);
+    margin: 0 0 var(--tbp-space-5, 20px);
+    max-width: 640px;
+  }
+
+  .tbp-delivery-promise-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--tbp-space-4, 16px);
+  }
+  @media (min-width: 600px) {
+    .tbp-delivery-promise-list { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .tbp-delivery-promise:not(.tbp-delivery-promise--compact) .tbp-delivery-promise-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .tbp-delivery-promise--compact .tbp-delivery-promise-list { gap: 10px; }
+
+  .tbp-delivery-promise-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--tbp-space-3, 12px);
+  }
+  .tbp-delivery-promise-icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .tbp-delivery-promise--compact .tbp-delivery-promise-icon { font-size: 18px; }
+  .tbp-delivery-promise-item strong {
+    display: block;
+    color: var(--tbp-primary, #16433D);
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .tbp-delivery-promise--compact .tbp-delivery-promise-item strong { font-size: 13px; }
+  .tbp-delivery-promise-item span:not(.tbp-delivery-promise-icon) {
+    display: block;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--tbp-text-mid, #555);
+    margin-top: 2px;
+  }
+  .tbp-delivery-promise--compact .tbp-delivery-promise-item span:not(.tbp-delivery-promise-icon) {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .tbp-delivery-promise-quote {
+    margin: var(--tbp-space-6, 24px) 0 0;
+    padding: var(--tbp-space-4, 16px) var(--tbp-space-5, 20px);
+    background: var(--tbp-cream, #fff7e4);
+    border-left: 4px solid var(--tbp-primary, #16433D);
+    border-radius: var(--tbp-radius-md, 12px);
+  }
+  .tbp-delivery-promise-quote blockquote {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--tbp-text-dark, #16433D);
+    font-style: italic;
+  }
+  .tbp-delivery-promise-quote figcaption {
+    margin-top: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--tbp-text-mid, #555);
+  }
+  .tbp-delivery-promise-quote-stars {
+    color: #f5a623;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .tbp-delivery-promise-quote-source {
+    font-weight: 400;
+    color: var(--tbp-text-mid, #777);
+  }
+</style>

@@ -1,0 +1,127 @@
+{%- comment -%}
+  V3 Cart Reassurance: shipping progress + trust signals ABOVE checkout button.
+  Addresses the 32% checkout-completion leak by surfacing shipping + guarantee BEFORE checkout surprise.
+  Shipping progress widget is shared with the cart drawer via snippets/bonpet-shipping-progress.liquid.
+{%- endcomment -%}
+
+{%- if cart.item_count > 0 -%}
+<section class="tbp-v3 tbp-cart-reassure" aria-label="Shipping & trust">
+  <div class="page-width">
+    <div class="tbp-cart-reassure-inner">
+
+      {%- comment -%} Shared shipping progress widget (3-tier, FREE-first) {%- endcomment -%}
+      {% render 'bonpet-shipping-progress' %}
+
+      {%- comment -%} Volume tier next-tier nudge (high-LTV multi-pet / big-dog households) {%- endcomment -%}
+      {% render 'bonpet-volume-tier-nudge' %}
+
+      {%- comment -%} Subscribe & Save 1-click upsell (only renders if cart has any non-sub, non-trial line) {%- endcomment -%}
+      {% render 'bonpet-cart-sub-upsell' %}
+
+      {%- comment -%} Trust row: 3 pillars, vertical cards with badge icons {%- endcomment -%}
+      {%- liquid
+        assign tbp_rating = settings.tbp_rating | default: '4.9'
+        assign tbp_review_count = settings.tbp_review_count | default: '319'
+        assign tbp_pawrent_count = settings.tbp_pawrent_count | default: '1,500'
+      -%}
+      <div class="tbp-cart-trust">
+        <div class="tbp-cart-trust-card">
+          <span class="tbp-cart-trust-badge" aria-hidden="true">❄️</span>
+          <strong>Cold-chain delivery</strong>
+          <span>NinjaVan, island-wide SG</span>
+        </div>
+        <div class="tbp-cart-trust-card">
+          <span class="tbp-cart-trust-badge" aria-hidden="true">🍖</span>
+          <strong>Human-grade ingredients</strong>
+          <span>Sous vide cooked, AAFCO certified</span>
+        </div>
+        <div class="tbp-cart-trust-card">
+          <span class="tbp-cart-trust-badge" aria-hidden="true">⭐</span>
+          <strong>{{ tbp_rating }}/5 · {{ tbp_review_count }}+ reviews</strong>
+          <span>{{ tbp_pawrent_count }}+ SG pawrents</span>
+        </div>
+      </div>
+
+      {%- comment -%} V3 delivery-promise (tracking pings, 3 attempts, NinjaVan, WA reschedule), compact for cart {%- endcomment -%}
+      {% render 'bonpet-delivery-promise', compact: true %}
+
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+<style>
+  .tbp-cart-reassure {
+    background: var(--tbp-cream);
+    padding: var(--tbp-space-5) 0 var(--tbp-space-4);
+    font-family: var(--tbp-font-body);
+    color: var(--tbp-text-dark);
+  }
+  .tbp-cart-reassure-inner { max-width: 1100px; margin: 0 auto; }
+  .tbp-cart-reassure .tbp-shipping-progress { margin-bottom: var(--tbp-space-4); }
+
+  .tbp-cart-trust {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--tbp-space-3);
+    margin-bottom: var(--tbp-space-4);
+  }
+  @media (min-width: 600px) {
+    .tbp-cart-trust { grid-template-columns: repeat(3, 1fr); gap: var(--tbp-space-4); }
+  }
+  .tbp-cart-trust-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    background: var(--tbp-white);
+    border: 1px solid var(--tbp-tan-mid);
+    border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-4) var(--tbp-space-3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tbp-cart-trust-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(22,67,61,0.06);
+  }
+  .tbp-cart-trust-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--tbp-cream);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 4px;
+    box-shadow: inset 0 0 0 1px rgba(22,67,61,0.06);
+  }
+  .tbp-cart-trust-card strong {
+    display: block;
+    color: var(--tbp-text-dark);
+    font-size: var(--tbp-text-sm);
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  .tbp-cart-trust-card > span:not(.tbp-cart-trust-badge) {
+    display: block;
+    color: var(--tbp-text-mid);
+    font-size: var(--tbp-text-xs);
+    line-height: 1.4;
+  }
+  @media (max-width: 599px) {
+    .tbp-cart-trust-card { padding: var(--tbp-space-3) var(--tbp-space-3); }
+    .tbp-cart-trust-badge { width: 40px; height: 40px; font-size: 20px; }
+    .tbp-cart-trust-card strong { font-size: 13px; }
+    .tbp-cart-trust-card > span:not(.tbp-cart-trust-badge) { font-size: 11px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Cart Reassurance",
+  "presets": [{ "name": "TBP Cart Reassurance" }]
+}
+{% endschema %}

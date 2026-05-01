@@ -1,0 +1,105 @@
+{%- comment -%} V3 Founder page hero  -  illustration + intro headline {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-white tbp-founder-hero" aria-label="Founder story hero">
+  <div class="tbp-container">
+    <div class="tbp-founder-hero-inner">
+      <div class="tbp-founder-hero-media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            alt="{{ section.settings.image_alt | escape }}"
+            loading="eager"
+            class="tbp-founder-hero-img"
+          >
+        {%- else -%}
+          <img
+            src="{{ 'bonpet-founders-illustration.jpg' | asset_url }}"
+            alt="{{ section.settings.image_alt | escape | default: 'Yash and Nicolas, co-founders of The Bon Pet' }}"
+            loading="eager"
+            class="tbp-founder-hero-img"
+          >
+        {%- endif -%}
+      </div>
+
+      <div class="tbp-founder-hero-content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="tbp-founder-hero-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h1 class="tbp-founder-hero-heading">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+
+        {%- if section.settings.intro != blank -%}
+          <p class="tbp-founder-hero-intro">{{ section.settings.intro }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-founder-hero { padding: var(--tbp-space-8) 0; }
+  .tbp-founder-hero-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--tbp-space-6);
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .tbp-founder-hero-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--tbp-space-8);
+    }
+  }
+  .tbp-founder-hero-media {
+    order: -1;
+  }
+  @media (min-width: 1024px) {
+    .tbp-founder-hero-media {
+      order: 0;
+    }
+  }
+  .tbp-founder-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--tbp-radius-md);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+  .tbp-founder-hero-eyebrow {
+    color: var(--tbp-orange);
+    font-size: var(--tbp-text-sm);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 var(--tbp-space-3);
+  }
+  .tbp-founder-hero-heading {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+    font-family: var(--tbp-font-display);
+    line-height: 1.1;
+    margin: 0 0 var(--tbp-space-4);
+    color: var(--tbp-text-dark);
+  }
+  .tbp-founder-hero-intro {
+    font-size: clamp(1rem, 0.95rem + 0.5vw, 1.25rem);
+    color: var(--tbp-text-mid);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 62ch;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Founder Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Founder image (illustration or photo)" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Yash and Nicolas, co-founders of The Bon Pet" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "OUR STORY" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Started with Salt, Pepper & Lola 🐾" },
+    { "type": "textarea", "id": "intro", "label": "Intro (1-2 sentences)", "default": "Nic's cats Salt and Pepper. Yash's dog Lola. Two software engineers who couldn't find fresh pet food we trusted, so we built it from our kitchen counter." }
+  ],
+  "presets": [{ "name": "TBP Founder Hero" }]
+}
+{% endschema %}

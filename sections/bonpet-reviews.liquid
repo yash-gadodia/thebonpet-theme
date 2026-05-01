@@ -1,0 +1,166 @@
+{%- comment -%} V3 Reviews — real Singapore pawrent reviews grid (social proof before trial CTA) {%- endcomment -%}
+{%- liquid
+  assign live_rating = settings.tbp_rating | default: '4.9'
+  assign live_count = settings.tbp_review_count | default: '319'
+  assign pawrent_count = section.settings.pawrent_count | default: settings.tbp_pawrent_count | default: '1,500'
+-%}
+<section class="tbp-v3 tbp-section tbp-section-cream tbp-reviews" aria-label="Customer reviews">
+  <div class="tbp-container">
+    <div class="tbp-reviews-head tbp-text-center">
+      <p class="tbp-reviews-eyebrow">⭐ LOVED BY {{ pawrent_count }}+ SINGAPORE PAWRENTS</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <p class="tbp-reviews-subhead">{{ section.settings.subheading }}</p>
+      <div class="tbp-reviews-aggregate">
+        <span class="tbp-reviews-stars" aria-hidden="true">★★★★★</span>
+        <span><strong>{{ live_rating }} / 5</strong> from {{ live_count }}+ verified reviews</span>
+      </div>
+    </div>
+
+    <div class="tbp-reviews-grid">
+      {%- for block in section.blocks -%}
+        <article class="tbp-review-card" {{ block.shopify_attributes }}>
+          <div class="tbp-review-stars" aria-label="5 out of 5 stars" aria-hidden="true">★★★★★</div>
+          {%- if block.settings.headline != blank -%}
+            <p class="tbp-review-headline">"{{ block.settings.headline }}"</p>
+          {%- endif -%}
+          <p class="tbp-review-body">{{ block.settings.body }}</p>
+          <div class="tbp-review-meta">
+            <div>
+              <strong>{{ block.settings.author }}</strong>
+              {%- if block.settings.pet != blank -%}
+                <span>{{ block.settings.pet }}</span>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.product != blank -%}
+              <span class="tbp-review-product">{{ block.settings.product }}</span>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    <p class="tbp-text-center tbp-mt-6">
+      <a href="{{ section.settings.cta_link }}" class="tbp-reviews-cta-link">{{ section.settings.cta_label }}</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .tbp-reviews { padding: var(--tbp-space-8) 0; }
+  .tbp-reviews-head { margin-bottom: var(--tbp-space-7); }
+  .tbp-reviews-eyebrow {
+    display: inline-block; background: var(--tbp-primary); color: var(--tbp-white);
+    padding: 6px 16px; border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-xs); font-weight: 700; letter-spacing: 0.1em;
+    margin-bottom: var(--tbp-space-4);
+  }
+  .tbp-reviews-subhead { color: var(--tbp-text-mid); max-width: 640px; margin: 0 auto var(--tbp-space-4); font-size: var(--tbp-text-lg); line-height: 1.5; }
+  .tbp-reviews-aggregate {
+    display: inline-flex; align-items: center; gap: var(--tbp-space-2);
+    background: var(--tbp-white); border: 1px solid var(--tbp-tan-mid);
+    padding: var(--tbp-space-2) var(--tbp-space-4); border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-sm); color: var(--tbp-text-dark);
+  }
+  .tbp-reviews-stars { color: #FFB400; letter-spacing: 2px; font-size: var(--tbp-text-base); }
+
+  /* Mobile: horizontal swipe carousel (compresses 6 cards from 6 viewports to ~1 viewport).
+     Tablet/desktop: regular grid. */
+  .tbp-reviews-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--tbp-space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--tbp-space-4) var(--tbp-space-3);
+    margin: 0 calc(var(--tbp-space-4) * -1);
+    scrollbar-width: none;
+  }
+  .tbp-reviews-grid::-webkit-scrollbar { display: none; }
+  @media (min-width: 640px) {
+    .tbp-reviews-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: var(--tbp-space-4); overflow: visible; padding: 0; margin: 0;
+    }
+  }
+  @media (min-width: 1024px) { .tbp-reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .tbp-review-card {
+    background: var(--tbp-white);
+    border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-5);
+    box-shadow: var(--tbp-shadow-sm);
+    display: flex; flex-direction: column; gap: var(--tbp-space-3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Mobile carousel: each card snaps + takes ~85% viewport */
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+  @media (min-width: 640px) {
+    .tbp-review-card { flex: 1 1 auto; }
+  }
+  .tbp-review-card:hover { transform: translateY(-3px); box-shadow: var(--tbp-shadow-md); }
+  .tbp-review-stars { color: #FFB400; letter-spacing: 2px; font-size: var(--tbp-text-base); }
+  .tbp-review-headline {
+    font-size: var(--tbp-text-lg); font-weight: 700; color: var(--tbp-primary);
+    margin: 0; line-height: 1.35;
+  }
+  .tbp-review-body {
+    color: var(--tbp-text-dark); line-height: 1.55;
+    margin: 0; font-size: var(--tbp-text-sm);
+  }
+  .tbp-review-meta {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-top: auto; padding-top: var(--tbp-space-3);
+    border-top: 1px dashed var(--tbp-tan-mid); gap: var(--tbp-space-3);
+  }
+  .tbp-review-meta strong { display: block; color: var(--tbp-text-dark); font-size: var(--tbp-text-sm); font-weight: 700; }
+  .tbp-review-meta span { display: block; color: var(--tbp-text-mid); font-size: var(--tbp-text-xs); margin-top: 2px; }
+  .tbp-review-product {
+    background: var(--tbp-tan); color: var(--tbp-text-dark) !important;
+    padding: 3px 8px; border-radius: var(--tbp-radius-sm);
+    font-size: var(--tbp-text-xs) !important; font-weight: 600;
+    white-space: nowrap; margin-top: 0 !important;
+  }
+
+  .tbp-reviews-cta-link {
+    color: var(--tbp-primary); font-weight: 700; text-decoration: underline;
+    font-size: var(--tbp-text-base);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Reviews Grid",
+  "max_blocks": 9,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Singapore pawrents are saying" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Real pawrents. Real furkids. Real bowls licked clean." },
+    { "type": "text", "id": "pawrent_count", "label": "Pawrent / customer count (for eyebrow)", "default": "1,500" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Read all 319+ reviews →" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "blocks": [{
+    "type": "review",
+    "name": "Review card",
+    "settings": [
+      { "type": "text", "id": "headline", "label": "Review headline (optional pull-quote)" },
+      { "type": "textarea", "id": "body", "label": "Review body" },
+      { "type": "text", "id": "author", "label": "Author name" },
+      { "type": "text", "id": "pet", "label": "Pet name + detail (optional)" },
+      { "type": "text", "id": "product", "label": "Product pill (optional)" }
+    ]
+  }],
+  "presets": [{
+    "name": "TBP Reviews Grid",
+    "blocks": [
+      { "type": "review", "settings": { "headline": "First bowl, licked clean.", "body": "Milo was the pickiest kibble eater. First bowl of Bon Pet chicken and he actually finished it. 3 weeks in, his coat is glossier and his poops are textbook. Never going back.", "author": "Sarah L.", "pet": "pawrent to Milo (Beagle, 4y)", "product": "Chicken for Dogs" } },
+      { "type": "review", "settings": { "headline": "Ended 2 years of vomiting.", "body": "My cat Mochi has a sensitive gut. We tried 6 brands, all ended in throw-up. Kangaroo from Bon Pet is the first food she's eaten consistently for 4 months straight. Life changing.", "author": "Jia Wei C.", "pet": "pawrent to Mochi", "product": "Kangaroo for Cats" } },
+      { "type": "review", "settings": { "headline": "The open-source formulas sold me.", "body": "I actually read through their recipe sheet before ordering. Every gram, every supplement, every ratio, out in the open. Nobody else in SG does this. That's the kind of transparency you can't fake.", "author": "Marcus T.", "pet": "dad to Bruno", "product": "Beef for Dogs" } },
+      { "type": "review", "settings": { "headline": "Subscription = life saver.", "body": "No more last-minute pet store runs. Ninja Van delivers frozen, on time, every time. Packaging is always pristine. I've paused once when we travelled and it was 2 clicks.", "author": "Rachel N.", "pet": "pawrent to Lucky + Mikan", "product": "Subscription · Mixed" } },
+      { "type": "review", "settings": { "headline": "Niko inhales it in 30 seconds.", "body": "Tried 3 other fresh pet food brands in Singapore before landing on Bon Pet. The sous vide texture is different, you can smell it. AAFCO certification + PhD formulated was the clincher.", "author": "Wei Ming L.", "pet": "pawrent to Niko (Shiba, 6y)", "product": "Chicken for Dogs" } },
+      { "type": "review", "settings": { "headline": "My vet noticed.", "body": "Took Ginger in for her yearly checkup and the vet asked what I changed. Coat shine, weight, energy, everything up. I told her Bon Pet. She asked for the link. Worth every dollar.", "author": "Priya K.", "pet": "mom to Ginger", "product": "Fish for Dogs" } }
+    ]
+  }]
+}
+{% endschema %}

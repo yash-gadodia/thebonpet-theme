@@ -1,0 +1,237 @@
+{%- comment -%} V3 Hero: conversion-optimized with clear value prop, free trial CTA, and trust rating {%- endcomment -%}
+{%- if section.settings.bg_image -%}
+  {%- assign hero_bg_url = section.settings.bg_image | image_url: width: 2400 -%}
+{%- else -%}
+  {%- assign hero_bg_url = 'bonpet-hero-2up-1776736957.jpg' | asset_url -%}
+{%- endif -%}
+{%- if section.settings.bg_image_mobile -%}
+  {%- assign hero_bg_mobile_url = section.settings.bg_image_mobile | image_url: width: 1200 -%}
+{%- else -%}
+  {%- assign hero_bg_mobile_url = 'bonpet-final-cat-feeder.jpg' | asset_url -%}
+{%- endif -%}
+
+<section class="tbp-v3 tbp-hero" aria-label="Hero">
+  <div class="tbp-hero-bg"
+       style="--hero-bg-desktop: url('{{ hero_bg_url }}'); --hero-bg-mobile: url('{{ hero_bg_mobile_url }}');">
+    <div class="tbp-container tbp-hero-inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="tbp-hero-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h2 class="tbp-hero-heading">{{ section.settings.heading }}</h2>
+
+      {%- if section.settings.subhead != blank -%}
+        <p class="tbp-hero-sub">{{ section.settings.subhead }}</p>
+      {%- endif -%}
+
+      <div class="tbp-hero-ctas">
+        {% render 'bonpet-button', label: section.settings.cta_label, href: section.settings.cta_link, variant: 'primary', size: 'lg' %}
+        {%- if section.settings.cta2_label != blank -%}
+          {% render 'bonpet-button', label: section.settings.cta2_label, href: section.settings.cta2_link, variant: 'primary', size: 'lg' %}
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.code_cta_label != blank -%}
+        <button type="button" class="tbp-hero-code-btn"
+          aria-label="Open trial code claim form"
+          onclick="window.openBonPetForm && window.openBonPetForm()">
+          {{ section.settings.code_cta_label }}
+        </button>
+      {%- endif -%}
+
+      {%- if section.settings.trial_note != blank -%}
+        <p class="tbp-hero-trial-note">{{ section.settings.trial_note }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.trust_strip_enabled -%}
+        {%- assign tsi1 = section.settings.trust_strip_item_1 -%}
+        {%- assign tsi2 = section.settings.trust_strip_item_2 -%}
+        {%- assign tsi3 = section.settings.trust_strip_item_3 -%}
+        {%- if tsi1 != blank or tsi2 != blank or tsi3 != blank -%}
+          <ul class="tbp-hero-trust-strip" aria-label="Why pawrents pick The Bon Pet">
+            {%- if tsi1 != blank -%}<li>{{ tsi1 }}</li>{%- endif -%}
+            {%- if tsi2 != blank -%}<li>{{ tsi2 }}</li>{%- endif -%}
+            {%- if tsi3 != blank -%}<li>{{ tsi3 }}</li>{%- endif -%}
+          </ul>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if section.settings.show_rating -%}
+        {%- liquid
+          assign tbp_rating = settings.tbp_rating | default: '4.9'
+          assign tbp_review_count = settings.tbp_review_count | default: '319'
+          assign tbp_pawrent_count = settings.tbp_pawrent_count | default: '1,500'
+        -%}
+        <div class="tbp-hero-rating">
+          <span class="tbp-stars" aria-hidden="true">★★★★★</span>
+          <span><strong>{{ tbp_rating }}</strong>/5 · {{ tbp_review_count }}+ reviews · {{ tbp_pawrent_count }}+ pawrents</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-hero-bg {
+    min-height: 86vh;
+    background-image:
+      linear-gradient(180deg, rgba(3,68,60,0.45) 0%, rgba(3,68,60,0.4) 35%, rgba(3,68,60,0.6) 70%, rgba(3,68,60,0.9) 100%),
+      var(--hero-bg-mobile);
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    color: var(--tbp-white);
+    display: flex; align-items: center; justify-content: center;
+  }
+  @media (min-width: 768px) {
+    .tbp-hero-bg {
+      background-image:
+        linear-gradient(180deg, rgba(3,68,60,0.45) 0%, rgba(3,68,60,0.4) 35%, rgba(3,68,60,0.6) 70%, rgba(3,68,60,0.9) 100%),
+        var(--hero-bg-desktop);
+    }
+  }
+  @media (min-width: 1024px) {
+    .tbp-hero-bg { background-position: center 22%; min-height: 78vh; border-radius: var(--tbp-radius-md); margin: var(--tbp-space-4); }
+  }
+  .tbp-hero-inner { text-align: center; padding: var(--tbp-space-9) 0; max-width: 860px; }
+  .tbp-hero-eyebrow {
+    display: inline-block; background: var(--tbp-white); color: var(--tbp-primary);
+    padding: 6px 16px; border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-xs); font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: var(--tbp-space-5);
+  }
+  .tbp-v3 .tbp-hero-heading {
+    font-family: var(--tbp-font-display);
+    font-size: clamp(4rem, 4.5vw + 2.2rem, 7rem);
+    color: #FFF4E4 !important;
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-shadow:
+      0 2px 4px rgba(0,0,0,0.6),
+      0 4px 20px rgba(0,0,0,0.55),
+      0 0 60px rgba(3,68,60,0.4);
+    margin: 0 auto var(--tbp-space-5);
+    max-width: 960px;
+    position: relative;
+    z-index: 2;
+  }
+  .tbp-v3 .tbp-hero-sub {
+    font-size: clamp(1.125rem, 0.9rem + 0.7vw, 1.5rem);
+    color: #FFF4E4 !important;
+    max-width: 680px;
+    margin: 0 auto var(--tbp-space-6);
+    line-height: 1.45;
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+  }
+  .tbp-hero-ctas {
+    display: flex; flex-wrap: wrap; gap: var(--tbp-space-3);
+    justify-content: center; margin-bottom: var(--tbp-space-5);
+  }
+  .tbp-hero-rating {
+    display: inline-flex; align-items: center; gap: var(--tbp-space-2);
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: var(--tbp-space-2) var(--tbp-space-4);
+    border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-sm);
+    color: var(--tbp-white);
+  }
+  .tbp-stars { color: #FFD54A; letter-spacing: 2px; font-size: var(--tbp-text-base); }
+  .tbp-hero-trial-note {
+    font-size: var(--tbp-text-xs);
+    color: rgba(255,255,255,0.85);
+    margin-top: var(--tbp-space-3);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    letter-spacing: 0.02em;
+  }
+  .tbp-hero-code-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.12);
+    color: #FFF4E4;
+    border: 1.5px solid rgba(255,244,228,0.45);
+    border-radius: var(--tbp-radius-pill);
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: var(--tbp-text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    margin-bottom: var(--tbp-space-3);
+    position: relative;
+    z-index: 100000;
+  }
+  .tbp-hero-code-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,244,228,0.8);
+    transform: translateY(-1px);
+  }
+  .tbp-hero-trust-strip {
+    list-style: none;
+    margin: 0 auto var(--tbp-space-4);
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--tbp-space-2) var(--tbp-space-4);
+    max-width: 720px;
+    color: #FFF4E4;
+    font-size: var(--tbp-text-sm);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .tbp-hero-trust-strip li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+  }
+  .tbp-hero-trust-strip li + li::before {
+    content: "·";
+    color: rgba(255,244,228,0.55);
+    margin-right: var(--tbp-space-4);
+    margin-left: calc(var(--tbp-space-4) * -1);
+  }
+  @media (max-width: 540px) {
+    .tbp-hero-trust-strip { font-size: var(--tbp-text-xs); gap: 6px var(--tbp-space-3); }
+    .tbp-hero-trust-strip li + li::before { margin-right: var(--tbp-space-3); margin-left: calc(var(--tbp-space-3) * -1); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Hero",
+  "settings": [
+    { "type": "image_picker", "id": "bg_image", "label": "Background image (desktop)" },
+    { "type": "image_picker", "id": "bg_image_mobile", "label": "Background image (mobile, portrait-friendly)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow badge", "default": "🎁 FREE TRIAL PACK · COLD-CHAIN, ISLAND-WIDE 🇸🇬" },
+    { "type": "textarea", "id": "heading", "label": "Main heading",
+      "default": "Made fresh in SG. Recipes you can read. Loved by 1,500+ pawrents. 🐾" },
+    { "type": "textarea", "id": "subhead", "label": "Subhead",
+      "default": "Sous vide cooked. Every ingredient public. Cold-chain across SG. Suppawt local. ❤️" },
+    { "type": "text", "id": "cta_label", "label": "Primary CTA (dogs)", "default": "🐶 Free Trial for Dogs" },
+    { "type": "url", "id": "cta_link", "label": "Dogs trial link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary CTA (cats)", "default": "🐱 Free Trial for Cats" },
+    { "type": "url", "id": "cta2_link", "label": "Cats trial link" },
+    { "type": "text", "id": "trial_note", "label": "Trial note (small print)", "default": "FREE delivery on $100+ · $9 cold-chain on this trial · Frozen, island-wide" },
+    { "type": "text", "id": "code_cta_label", "label": "Manual code-claim button label", "default": "🎁 Claim your trial code →" },
+    { "type": "header", "content": "3-pillar trust strip" },
+    { "type": "checkbox", "id": "trust_strip_enabled", "label": "Show 3-pillar trust strip", "default": true },
+    { "type": "text", "id": "trust_strip_item_1", "label": "Pillar 1 (transpawrency)", "default": "🔍 Open formulas" },
+    { "type": "text", "id": "trust_strip_item_2", "label": "Pillar 2 (delivery)", "default": "❄️ Cold-chain delivery" },
+    { "type": "text", "id": "trust_strip_item_3", "label": "Pillar 3 (community)", "default": "💛 SG pet community" },
+    { "type": "header", "content": "Trust rating" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating line", "default": true },
+    { "type": "text", "id": "rating_value", "label": "Rating value", "default": "4.9" },
+    { "type": "text", "id": "rating_count", "label": "Rating count copy", "default": "319+ Google reviews" }
+  ],
+  "presets": [ { "name": "TBP Hero" } ]
+}
+{% endschema %}

@@ -1,0 +1,46 @@
+{%- comment -%} Params: product (required), default_badge (string) {%- endcomment -%}
+{%- liquid
+  assign title_lower = product.title | downcase
+  assign badge = ''
+  if product.metafields.custom.badge != blank
+    assign badge = product.metafields.custom.badge
+  elsif title_lower contains 'pork'
+    assign badge = 'Artisanal Pork'
+  elsif title_lower contains 'duck'
+    assign badge = 'Cage-Free Duck'
+  elsif title_lower contains 'kangaroo'
+    assign badge = 'Wild Kangaroo'
+  elsif title_lower contains 'fish'
+    assign badge = 'Wild-Caught Fish'
+  elsif title_lower contains 'beef'
+    assign badge = 'Grass-Fed Beef'
+  elsif title_lower contains 'chicken'
+    assign badge = 'Free-Range Chicken'
+  elsif title_lower contains 'trial'
+    assign badge = 'Trial Pack'
+  else
+    assign badge = default_badge
+  endif
+-%}
+<article class="tbp-prod-card">
+  {%- if product.featured_image -%}
+    <a href="{{ product.url }}" class="tbp-prod-card-media">
+      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" width="600" height="600">
+    </a>
+  {%- endif -%}
+  <div class="tbp-prod-card-body">
+    <p class="tbp-prod-badge">{{ badge }}</p>
+    <h4><a href="{{ product.url }}">{{ product.title }}</a></h4>
+    <p class="tbp-prod-rating">
+      <span class="tbp-prod-stars" aria-hidden="true">★★★★★</span>
+      <span class="tbp-prod-rating-copy">{{ settings.tbp_rating | default: '4.9' }} · {{ settings.tbp_review_count | default: '319' }}+ reviews</span>
+    </p>
+    <p class="tbp-prod-price">{{ product.price | money }}<span class="tbp-prod-pack">/ pack</span></p>
+    <a href="{{ product.url }}" class="tbp-prod-learn">Learn about ingredients, nutrition &amp; more →</a>
+    <form action="/cart/add" method="post" enctype="multipart/form-data" class="tbp-prod-form">
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <button type="submit" class="tbp-btn tbp-btn-primary" style="width: 100%;">Add to Cart</button>
+    </form>
+  </div>
+</article>

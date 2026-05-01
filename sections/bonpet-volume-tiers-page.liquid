@@ -1,0 +1,599 @@
+{%- comment -%}
+  V3 Volume Tiers Page - full content for /pages/volume-discounts.
+  Display-only: no <form>, no AJAX to cart, no write actions. Calculator is pure local JS.
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-vol-page" aria-label="Volume discounts">
+  <div class="tbp-container tbp-vol-hero">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="tbp-vol-eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="tbp-vol-title">{{ section.settings.heading | default: 'Save up to 40% on the meals they already love.' }}</h1>
+    {%- if section.settings.lead != blank -%}
+      <p class="tbp-vol-lead">{{ section.settings.lead }}</p>
+    {%- endif -%}
+    <div class="tbp-vol-hero-pills">
+      <span class="tbp-vol-hero-pill">✅ Applied automatically at checkout</span>
+      <span class="tbp-vol-hero-pill">✅ Stacks with Subscribe &amp; Save</span>
+      <span class="tbp-vol-hero-pill">✅ No code needed</span>
+    </div>
+  </div>
+
+  <div class="tbp-container tbp-vol-calc-wrap" data-tbp-vol-calc>
+    <div class="tbp-vol-calc">
+      <div class="tbp-vol-calc-head">
+        <h2 class="tbp-vol-calc-title">Find your tier</h2>
+        <p class="tbp-vol-calc-sub">Enter your packs per month (we pack 300g for dogs, 200g for cats). Your tier updates below.</p>
+      </div>
+
+      <div class="tbp-vol-calc-body">
+        <div class="tbp-vol-calc-input-wrap">
+          <label class="tbp-vol-calc-label" for="tbp-vol-calc-input">Packs per month</label>
+          <div class="tbp-vol-calc-stepper">
+            <button type="button" class="tbp-vol-calc-step" data-tbp-step="-1" aria-label="Decrease">−</button>
+            <input id="tbp-vol-calc-input"
+                   class="tbp-vol-calc-input"
+                   type="number"
+                   min="1"
+                   max="500"
+                   step="1"
+                   value="30"
+                   inputmode="numeric"
+                   data-tbp-vol-calc-input
+                   aria-describedby="tbp-vol-calc-hint">
+            <button type="button" class="tbp-vol-calc-step" data-tbp-step="1" aria-label="Increase">+</button>
+          </div>
+          <p class="tbp-vol-calc-hint" id="tbp-vol-calc-hint">Quick picks:</p>
+          <div class="tbp-vol-calc-profiles" role="group" aria-label="Common household profiles">
+            <button type="button" class="tbp-vol-calc-profile" data-tbp-profile="15">🐱 1 cat (~15)</button>
+            <button type="button" class="tbp-vol-calc-profile" data-tbp-profile="30">🐱🐱 2 cats (~30)</button>
+            <button type="button" class="tbp-vol-calc-profile" data-tbp-profile="30">🐶 1 small dog (~30)</button>
+            <button type="button" class="tbp-vol-calc-profile" data-tbp-profile="60">🐶 1 big dog (~60)</button>
+            <button type="button" class="tbp-vol-calc-profile" data-tbp-profile="120">🐶🐶 Multi-dog (~120)</button>
+            <button type="button" class="tbp-vol-calc-profile" data-tbp-profile="180">🏠 Foster / breeder (~180)</button>
+          </div>
+        </div>
+
+        <div class="tbp-vol-calc-output">
+          <div class="tbp-vol-calc-tier-pill" data-tbp-vol-calc-tier-pill>Tier 2</div>
+          <p class="tbp-vol-calc-output-label">Your automatic savings:</p>
+          <div class="tbp-vol-calc-savings">
+            <div class="tbp-vol-calc-saving">
+              <span class="tbp-vol-calc-saving-pct" data-tbp-vol-calc-sub>25%</span>
+              <span class="tbp-vol-calc-saving-label">Subscribe &amp; Save (auto)</span>
+            </div>
+            <div class="tbp-vol-calc-saving">
+              <span class="tbp-vol-calc-saving-pct" data-tbp-vol-calc-ot>15%</span>
+              <span class="tbp-vol-calc-saving-label">One-time order</span>
+            </div>
+          </div>
+          <p class="tbp-vol-calc-note">Final totals are confirmed at checkout. Discount is calculated on the pack subtotal; delivery fees apply as usual.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tbp-container">
+    <h2 class="tbp-vol-table-title">All the tiers</h2>
+    <div class="tbp-vol-table-wrap" role="region" aria-label="Volume discount tier table" tabindex="0">
+      <table class="tbp-vol-table">
+        <thead>
+          <tr>
+            <th scope="col">Packs / month</th>
+            <th scope="col">Subscribe &amp; Save</th>
+            <th scope="col">One-time order</th>
+            <th scope="col">Who this fits</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-tbp-tier-row="1">
+            <th scope="row">1 to 29</th>
+            <td><strong>10% off</strong></td>
+            <td>No extra tier discount</td>
+            <td>1 cat, 1 small dog, or casual topper use</td>
+          </tr>
+          <tr data-tbp-tier-row="2">
+            <th scope="row">30 to 59</th>
+            <td><strong>25% off</strong></td>
+            <td><strong>15% off</strong></td>
+            <td>2 cats, 1 medium dog, or light multi-pet</td>
+          </tr>
+          <tr data-tbp-tier-row="3">
+            <th scope="row">60 to 99</th>
+            <td><strong>30% off</strong></td>
+            <td><strong>20% off</strong></td>
+            <td>1 big dog or multi-pet household</td>
+          </tr>
+          <tr data-tbp-tier-row="4">
+            <th scope="row">100 to 149</th>
+            <td><strong>35% off</strong></td>
+            <td><strong>25% off</strong></td>
+            <td>Multi-dog home, small foster setup</td>
+          </tr>
+          <tr data-tbp-tier-row="5">
+            <th scope="row">150+</th>
+            <td><strong>40% off</strong></td>
+            <td><strong>30% off</strong></td>
+            <td>Breeder, foster network, rescue partner</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbp-vol-table-footnote">Tier discounts apply automatically at checkout based on the total pack count in your order. No promo code needed.</p>
+  </div>
+
+  <div class="tbp-container">
+    <h2 class="tbp-vol-faq-title">How the tier discount works</h2>
+    <div class="tbp-vol-faq">
+      <details class="tbp-vol-faq-item">
+        <summary><span>Does the tier discount stack with Subscribe &amp; Save?</span><span class="tbp-vol-faq-chev" aria-hidden="true">+</span></summary>
+        <div class="tbp-vol-faq-body">
+          <p>Yes. Subscribe &amp; Save is a selling-plan price adjustment, not a cart-level automatic discount, so it applies to each subscription line item first. The tier discount then applies on the order subtotal. Both are calculated automatically at checkout.</p>
+        </div>
+      </details>
+      <details class="tbp-vol-faq-item">
+        <summary><span>Do I need a promo code?</span><span class="tbp-vol-faq-chev" aria-hidden="true">+</span></summary>
+        <div class="tbp-vol-faq-body">
+          <p>No code needed. Tiers trigger automatically based on pack count per order. If you see an existing promo code field empty, that is by design: the tier is already applied to your subtotal.</p>
+        </div>
+      </details>
+      <details class="tbp-vol-faq-item">
+        <summary><span>Does the tier apply to one-time orders too?</span><span class="tbp-vol-faq-chev" aria-hidden="true">+</span></summary>
+        <div class="tbp-vol-faq-body">
+          <p>Yes, from Tier 2 onwards (30+ packs). One-time bulk orders get a flat tier discount without Subscribe &amp; Save on top. Perfect for breeders and fosters who prefer not to subscribe.</p>
+        </div>
+      </details>
+      <details class="tbp-vol-faq-item">
+        <summary><span>Can I mix dog and cat packs to hit a tier?</span><span class="tbp-vol-faq-chev" aria-hidden="true">+</span></summary>
+        <div class="tbp-vol-faq-body">
+          <p>Yes. All Bon Pet meal packs (200g cats, 300g dogs) count toward the pack total. Bone broth and merch do not count.</p>
+        </div>
+      </details>
+      <details class="tbp-vol-faq-item">
+        <summary><span>I feed a rescue or foster network. Can we go beyond Tier 5?</span><span class="tbp-vol-faq-chev" aria-hidden="true">+</span></summary>
+        <div class="tbp-vol-faq-body">
+          <p>Drop us a message at hello@thebonpet.com. We run custom quotes for registered rescues, long-term fosters, and breeders who feed 200+ packs a month.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="tbp-container tbp-vol-cta">
+    <div class="tbp-vol-cta-card">
+      <h2 class="tbp-vol-cta-title">{{ section.settings.cta_heading | default: 'Ready to feed the whole pack?' }}</h2>
+      <p class="tbp-vol-cta-sub">{{ section.settings.cta_sub | default: 'Pick your proteins, pick your cadence. The tier discount is waiting at checkout.' }}</p>
+      <div class="tbp-vol-cta-buttons">
+        <a class="tbp-vol-cta-btn tbp-vol-cta-btn-dog" href="{{ section.settings.cta_dog_link | default: '/collections/dogs' }}">{{ section.settings.cta_dog_label | default: 'Shop Dog Meals 🐶' }}</a>
+        <a class="tbp-vol-cta-btn tbp-vol-cta-btn-cat" href="{{ section.settings.cta_cat_link | default: '/collections/cats' }}">{{ section.settings.cta_cat_label | default: 'Shop Cat Meals 🐱' }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-vol-page { padding: var(--tbp-space-7) 0 var(--tbp-space-9); background: var(--tbp-cream); }
+  .tbp-vol-page > .tbp-container { margin-bottom: var(--tbp-space-8); }
+  .tbp-vol-page > .tbp-container:last-child { margin-bottom: 0; }
+
+  .tbp-vol-hero { text-align: center; max-width: 760px; margin-left: auto; margin-right: auto; }
+  .tbp-vol-eyebrow {
+    display: inline-block;
+    background: var(--tbp-primary);
+    color: var(--tbp-cream);
+    padding: 6px 16px;
+    border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 var(--tbp-space-4);
+  }
+  .tbp-v3 .tbp-vol-title {
+    font-family: var(--tbp-font-display);
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem);
+    color: var(--tbp-primary);
+    line-height: 1.1;
+    margin: 0 0 var(--tbp-space-4);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .tbp-vol-lead {
+    font-size: var(--tbp-text-lg);
+    color: var(--tbp-text-dark);
+    line-height: 1.5;
+    margin: 0 0 var(--tbp-space-5);
+  }
+  .tbp-vol-hero-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--tbp-space-2) var(--tbp-space-3); }
+  .tbp-vol-hero-pill {
+    display: inline-block;
+    background: var(--tbp-white, #fff);
+    border: 1px solid var(--tbp-tan-mid, #e6d9b9);
+    color: var(--tbp-text-dark);
+    padding: 8px 14px;
+    border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-sm);
+    font-weight: 600;
+  }
+
+  .tbp-vol-calc {
+    background: #fff;
+    border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-6);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .tbp-vol-calc-head { text-align: center; margin-bottom: var(--tbp-space-5); }
+  .tbp-v3 .tbp-vol-calc-title {
+    font-family: var(--tbp-font-heading);
+    font-size: var(--tbp-text-2xl);
+    color: var(--tbp-primary);
+    margin: 0 0 var(--tbp-space-2);
+    font-weight: 700;
+  }
+  .tbp-vol-calc-sub { color: var(--tbp-text-mid); font-size: var(--tbp-text-sm); line-height: 1.45; margin: 0; }
+
+  .tbp-vol-calc-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--tbp-space-6);
+    align-items: start;
+  }
+  @media (max-width: 767px) {
+    .tbp-vol-calc-body { grid-template-columns: 1fr; gap: var(--tbp-space-5); }
+    .tbp-vol-calc { padding: var(--tbp-space-5); }
+  }
+
+  .tbp-vol-calc-label {
+    display: block;
+    font-size: var(--tbp-text-xs);
+    font-weight: 700;
+    color: var(--tbp-text-mid);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 var(--tbp-space-2);
+  }
+  .tbp-vol-calc-stepper {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--tbp-primary);
+    border-radius: var(--tbp-radius-md);
+    overflow: hidden;
+    max-width: 320px;
+  }
+  .tbp-vol-calc-step {
+    background: var(--tbp-primary);
+    color: var(--tbp-cream);
+    border: 0;
+    width: 48px;
+    height: 52px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1;
+  }
+  .tbp-vol-calc-step:hover { background: var(--tbp-primary-deep); }
+  .tbp-vol-calc-input {
+    flex: 1;
+    border: 0;
+    padding: 0 var(--tbp-space-3);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--tbp-primary);
+    background: #fff;
+    font-family: inherit;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+  .tbp-vol-calc-input::-webkit-outer-spin-button,
+  .tbp-vol-calc-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .tbp-vol-calc-hint {
+    color: var(--tbp-text-mid);
+    font-size: var(--tbp-text-xs);
+    margin: var(--tbp-space-3) 0 var(--tbp-space-2);
+    font-weight: 600;
+  }
+  .tbp-vol-calc-profiles { display: flex; flex-wrap: wrap; gap: var(--tbp-space-2); }
+  .tbp-vol-calc-profile {
+    background: var(--tbp-cream-alt);
+    border: 1px solid var(--tbp-tan-mid, #e6d9b9);
+    color: var(--tbp-text-dark);
+    padding: 6px 12px;
+    border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-xs);
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .tbp-vol-calc-profile:hover {
+    background: var(--tbp-primary);
+    color: var(--tbp-cream);
+    border-color: var(--tbp-primary);
+  }
+
+  .tbp-vol-calc-output {
+    background: linear-gradient(135deg, var(--tbp-primary) 0%, var(--tbp-primary-deep) 100%);
+    color: var(--tbp-cream);
+    padding: var(--tbp-space-5);
+    border-radius: var(--tbp-radius-md);
+    text-align: center;
+  }
+  .tbp-vol-calc-tier-pill {
+    display: inline-block;
+    background: rgba(255,244,228,0.2);
+    color: var(--tbp-cream);
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--tbp-space-3);
+  }
+  .tbp-vol-calc-output-label {
+    font-size: var(--tbp-text-sm);
+    color: rgba(255,244,228,0.85);
+    margin: 0 0 var(--tbp-space-3);
+    font-weight: 600;
+  }
+  .tbp-vol-calc-savings { display: flex; gap: var(--tbp-space-4); justify-content: center; margin-bottom: var(--tbp-space-4); }
+  .tbp-vol-calc-saving { display: flex; flex-direction: column; gap: 4px; min-width: 120px; }
+  .tbp-vol-calc-saving-pct {
+    font-family: var(--tbp-font-display);
+    font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+    color: var(--tbp-cream);
+    line-height: 1;
+    font-weight: 400;
+  }
+  .tbp-vol-calc-saving-label {
+    font-size: var(--tbp-text-xs);
+    color: rgba(255,244,228,0.85);
+    line-height: 1.3;
+  }
+  .tbp-vol-calc-note {
+    font-size: var(--tbp-text-xs);
+    color: rgba(255,244,228,0.72);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .tbp-v3 .tbp-vol-table-title,
+  .tbp-v3 .tbp-vol-faq-title {
+    font-family: var(--tbp-font-display);
+    font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+    color: var(--tbp-primary);
+    text-align: center;
+    margin: 0 0 var(--tbp-space-5);
+    font-weight: 400;
+  }
+  .tbp-vol-table-wrap {
+    background: #fff;
+    border-radius: var(--tbp-radius-md);
+    overflow-x: auto;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  .tbp-vol-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+  }
+  .tbp-vol-table thead {
+    background: var(--tbp-primary);
+    color: var(--tbp-cream);
+  }
+  .tbp-vol-table th,
+  .tbp-vol-table td {
+    padding: var(--tbp-space-3) var(--tbp-space-4);
+    text-align: left;
+    font-size: var(--tbp-text-sm);
+    border-bottom: 1px solid var(--tbp-cream-alt);
+  }
+  .tbp-vol-table thead th {
+    font-weight: 700;
+    font-size: var(--tbp-text-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: 0;
+  }
+  .tbp-vol-table tbody th {
+    font-weight: 700;
+    color: var(--tbp-primary);
+  }
+  .tbp-vol-table tbody tr.is-active {
+    background: var(--tbp-cream-alt);
+    box-shadow: inset 4px 0 0 var(--tbp-primary-mid);
+  }
+  .tbp-vol-table tbody tr.is-active td,
+  .tbp-vol-table tbody tr.is-active th { color: var(--tbp-primary); }
+  .tbp-vol-table tbody tr:last-child td,
+  .tbp-vol-table tbody tr:last-child th { border-bottom: 0; }
+  .tbp-vol-table-footnote {
+    color: var(--tbp-text-mid);
+    font-size: var(--tbp-text-xs);
+    margin: var(--tbp-space-3) 0 0;
+    text-align: center;
+  }
+
+  .tbp-vol-faq { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--tbp-space-3); }
+  .tbp-vol-faq-item {
+    background: #fff;
+    border-radius: var(--tbp-radius-md);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  .tbp-vol-faq-item summary {
+    list-style: none;
+    padding: var(--tbp-space-4) var(--tbp-space-5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--tbp-space-3);
+    font-weight: 700;
+    color: var(--tbp-primary);
+    font-size: var(--tbp-text-base);
+  }
+  .tbp-vol-faq-item summary::-webkit-details-marker { display: none; }
+  .tbp-vol-faq-chev {
+    font-size: 1.4rem;
+    color: var(--tbp-primary-mid);
+    transition: transform 0.2s ease;
+  }
+  .tbp-vol-faq-item[open] .tbp-vol-faq-chev { transform: rotate(45deg); }
+  .tbp-vol-faq-body {
+    padding: 0 var(--tbp-space-5) var(--tbp-space-4);
+    color: var(--tbp-text-dark);
+    font-size: var(--tbp-text-sm);
+    line-height: 1.55;
+  }
+  .tbp-vol-faq-body p { margin: 0; }
+
+  .tbp-vol-cta-card {
+    background: linear-gradient(135deg, var(--tbp-primary) 0%, var(--tbp-primary-deep) 100%);
+    color: var(--tbp-cream);
+    border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-7) var(--tbp-space-6);
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  }
+  .tbp-v3 .tbp-vol-cta-title {
+    font-family: var(--tbp-font-display);
+    font-size: clamp(1.75rem, 1.4rem + 1.3vw, 2.5rem);
+    color: var(--tbp-cream);
+    margin: 0 0 var(--tbp-space-3);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+  .tbp-vol-cta-sub {
+    color: rgba(255,244,228,0.88);
+    font-size: var(--tbp-text-base);
+    margin: 0 auto var(--tbp-space-5);
+    max-width: 520px;
+    line-height: 1.5;
+  }
+  .tbp-vol-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--tbp-space-3);
+    flex-wrap: wrap;
+  }
+  .tbp-vol-cta-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: var(--tbp-radius-pill);
+    font-weight: 700;
+    font-size: var(--tbp-text-base);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    min-width: 200px;
+  }
+  .tbp-vol-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.22); }
+  .tbp-vol-cta-btn-dog { background: var(--tbp-cream); color: var(--tbp-primary); }
+  .tbp-vol-cta-btn-cat { background: transparent; color: var(--tbp-cream); border: 2px solid var(--tbp-cream); }
+</style>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-tbp-vol-calc]');
+    if (!root) return;
+
+    var TIERS = [
+      { min: 1,   max: 29,  sub: 10, ot: 0,  label: 'Tier 1', oneTime: null },
+      { min: 30,  max: 59,  sub: 25, ot: 15, label: 'Tier 2', oneTime: 15 },
+      { min: 60,  max: 99,  sub: 30, ot: 20, label: 'Tier 3', oneTime: 20 },
+      { min: 100, max: 149, sub: 35, ot: 25, label: 'Tier 4', oneTime: 25 },
+      { min: 150, max: 9999, sub: 40, ot: 30, label: 'Tier 5', oneTime: 30 }
+    ];
+
+    var input = root.querySelector('[data-tbp-vol-calc-input]');
+    var subOut = root.querySelector('[data-tbp-vol-calc-sub]');
+    var otOut = root.querySelector('[data-tbp-vol-calc-ot]');
+    var tierPill = root.querySelector('[data-tbp-vol-calc-tier-pill]');
+    var stepBtns = root.querySelectorAll('[data-tbp-step]');
+    var profileBtns = root.querySelectorAll('[data-tbp-profile]');
+    var rows = document.querySelectorAll('[data-tbp-tier-row]');
+
+    if (!input || !subOut || !otOut || !tierPill) return;
+
+    function findTierIndex(n) {
+      for (var i = 0; i < TIERS.length; i++) {
+        if (n >= TIERS[i].min && n <= TIERS[i].max) return i;
+      }
+      return 0;
+    }
+
+    function update() {
+      var n = parseInt(input.value, 10);
+      if (isNaN(n) || n < 1) n = 1;
+      if (n > 9999) n = 9999;
+      var idx = findTierIndex(n);
+      var t = TIERS[idx];
+      subOut.textContent = t.sub + '%';
+      otOut.textContent = t.oneTime === null ? '-' : t.ot + '%';
+      tierPill.textContent = t.label;
+
+      for (var i = 0; i < rows.length; i++) {
+        if (i === idx) {
+          rows[i].classList.add('is-active');
+        } else {
+          rows[i].classList.remove('is-active');
+        }
+      }
+    }
+
+    input.addEventListener('input', update);
+    input.addEventListener('change', update);
+
+    for (var i = 0; i < stepBtns.length; i++) {
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          var delta = parseInt(btn.getAttribute('data-tbp-step'), 10) || 0;
+          var current = parseInt(input.value, 10) || 0;
+          var next = current + delta;
+          if (next < 1) next = 1;
+          input.value = next;
+          update();
+        });
+      })(stepBtns[i]);
+    }
+
+    for (var j = 0; j < profileBtns.length; j++) {
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          var v = parseInt(btn.getAttribute('data-tbp-profile'), 10);
+          if (!isNaN(v) && v > 0) {
+            input.value = v;
+            update();
+          }
+        });
+      })(profileBtns[j]);
+    }
+
+    update();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TBP Volume Tiers Page",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Auto-tier discounts · no code needed" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Save up to 40% on the meals they already love." },
+    { "type": "textarea", "id": "lead", "label": "Lead paragraph", "default": "Big-eater households, multi-pet homes, breeders, and rescues: your bigger order automatically unlocks a bigger discount. No promo code, no paperwork, no waiting. Here is exactly how it works." },
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Ready to feed the whole pack?" },
+    { "type": "textarea", "id": "cta_sub", "label": "CTA sub", "default": "Pick your proteins, pick your cadence. The tier discount is waiting at checkout." },
+    { "type": "text", "id": "cta_dog_label", "label": "Dog CTA label", "default": "Shop Dog Meals 🐶" },
+    { "type": "url", "id": "cta_dog_link", "label": "Dog CTA link" },
+    { "type": "text", "id": "cta_cat_label", "label": "Cat CTA label", "default": "Shop Cat Meals 🐱" },
+    { "type": "url", "id": "cta_cat_link", "label": "Cat CTA link" }
+  ],
+  "presets": [{ "name": "TBP Volume Tiers Page" }]
+}
+{% endschema %}

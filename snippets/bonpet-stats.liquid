@@ -1,0 +1,38 @@
+{%- comment -%}
+  Canonical source of truth for Bon Pet public stats.
+  Usage: {%- include 'bonpet-stats' -%}  (vars leak out via include, not render)
+
+  Exposes:
+    tbp_rating         e.g. "4.9"
+    tbp_review_count   e.g. "319"
+    tbp_pawrent_count  e.g. "1,500"
+
+  Source priority: theme settings (manually updated from Google Reviews) -> Judge.me metafield -> hardcoded fallback.
+  Update centrally via Theme editor: Theme settings > Bon Pet · Public Stats.
+  Current figures sourced from https://maps.googleapis.com/... (place_id ChIJqWbpqTwX2jERSJWIxogqqsg, Bon Pet Google Business).
+{%- endcomment -%}
+
+{%- assign metafield_rating = shop.metafields.reviews.rating.value.value -%}
+{%- assign metafield_count = shop.metafields.reviews.rating_count.value -%}
+
+{%- if settings.tbp_rating != blank -%}
+  {%- assign tbp_rating = settings.tbp_rating -%}
+{%- elsif metafield_rating != blank -%}
+  {%- assign tbp_rating = metafield_rating | round: 1 -%}
+{%- else -%}
+  {%- assign tbp_rating = '4.9' -%}
+{%- endif -%}
+
+{%- if settings.tbp_review_count != blank -%}
+  {%- assign tbp_review_count = settings.tbp_review_count -%}
+{%- elsif metafield_count != blank -%}
+  {%- assign tbp_review_count = metafield_count | append: '' -%}
+{%- else -%}
+  {%- assign tbp_review_count = '319' -%}
+{%- endif -%}
+
+{%- if settings.tbp_pawrent_count != blank -%}
+  {%- assign tbp_pawrent_count = settings.tbp_pawrent_count -%}
+{%- else -%}
+  {%- assign tbp_pawrent_count = '1,500' -%}
+{%- endif -%}

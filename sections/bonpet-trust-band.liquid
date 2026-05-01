@@ -1,0 +1,101 @@
+{%- comment -%} V3 Trust Band — micro-credibility stats as roving marquee carousel {%- endcomment -%}
+<section class="tbp-v3 tbp-trust-band" aria-label="Trust signals">
+  <div class="tbp-marquee tbp-trust-marquee">
+    <div class="tbp-marquee-track" role="list">
+      {%- for i in (1..2) -%}
+        {%- for block in section.blocks -%}
+          <div class="tbp-trust-item" role="listitem"
+            {% if i == 1 %}{{ block.shopify_attributes }}{% else %}aria-hidden="true"{% endif %}>
+            <span class="tbp-trust-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+            <div>
+              <strong>{{ block.settings.title }}</strong>
+              {%- if block.settings.subtitle != blank -%}
+                <span>{{ block.settings.subtitle }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-trust-band {
+    background: var(--tbp-cream-alt);
+    border-bottom: 1px solid var(--tbp-tan-mid);
+    padding: var(--tbp-space-5) 0;
+    overflow: hidden;
+  }
+
+  /* Marquee container */
+  .tbp-trust-marquee {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+  .tbp-trust-marquee .tbp-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: var(--tbp-space-7);
+    animation: tbp-trust-scroll 40s linear infinite;
+    will-change: transform;
+  }
+  .tbp-trust-marquee:hover .tbp-marquee-track,
+  .tbp-trust-marquee:focus-within .tbp-marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes tbp-trust-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tbp-trust-marquee .tbp-marquee-track { animation: none; transform: none; }
+  }
+
+  /* Item */
+  .tbp-trust-item {
+    display: flex; align-items: center; gap: var(--tbp-space-3);
+    padding: var(--tbp-space-2) var(--tbp-space-3);
+    flex: 0 0 auto;
+  }
+  .tbp-trust-icon { font-size: var(--tbp-text-3xl); line-height: 1; flex-shrink: 0; }
+  .tbp-trust-item strong {
+    display: block; color: var(--tbp-text-dark);
+    font-size: var(--tbp-text-base); line-height: 1.25; font-weight: 700;
+    white-space: nowrap;
+  }
+  .tbp-trust-item span {
+    display: block; color: var(--tbp-text-mid);
+    font-size: var(--tbp-text-sm); line-height: 1.35; margin-top: 2px;
+    white-space: nowrap;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Trust Band",
+  "max_blocks": 6,
+  "blocks": [{
+    "type": "item",
+    "name": "Trust item",
+    "settings": [
+      { "type": "text", "id": "icon", "label": "Icon (emoji)" },
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "subtitle", "label": "Subtitle (optional)" }
+    ]
+  }],
+  "presets": [{
+    "name": "TBP Trust Band",
+    "blocks": [
+      { "type": "item", "settings": { "icon": "🇸🇬", "title": "Made Fresh in SG", "subtitle": "Small local team" } },
+      { "type": "item", "settings": { "icon": "🧪", "title": "PhD-Formulated", "subtitle": "AAFCO · All Life Stages" } },
+      { "type": "item", "settings": { "icon": "✅", "title": "AVS Licensed Kitchen", "subtitle": "Regulated food safety" } },
+      { "type": "item", "settings": { "icon": "❄️", "title": "Cold-Chain Delivered", "subtitle": "Frozen, island-wide" } },
+      { "type": "item", "settings": { "icon": "⭐", "title": "4.9 / 5 Rating", "subtitle": "319+ Google reviews" } }
+    ]
+  }]
+}
+{% endschema %}

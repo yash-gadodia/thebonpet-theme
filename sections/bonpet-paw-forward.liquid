@@ -1,0 +1,60 @@
+{%- comment -%} V3 Paw It Forward — donation split, image + text + CTA {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-paw-fwd">
+  <div class="tbp-container">
+    <div class="tbp-paw-grid">
+      <div class="tbp-paw-media">
+        {%- if section.settings.image -%}
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'bonpet-paw-forward-cat-bag-1776970000.jpg' | asset_url }}" alt="{{ section.settings.image_alt | escape | default: 'Rescue cat peeking out of a The Bon Pet paper bag next to a Culinary Specials box' }}" loading="lazy">
+        {%- endif -%}
+      </div>
+      <div class="tbp-paw-content">
+        <p class="tbp-paw-eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+        <blockquote class="tbp-paw-quote">{{ section.settings.quote }}</blockquote>
+        <p class="tbp-paw-body">{{ section.settings.body }}</p>
+        {%- if section.settings.cta_label != blank -%}
+          {% render 'bonpet-button',
+              label: section.settings.cta_label,
+              href: section.settings.cta_link,
+              variant: 'primary' %}
+        {%- endif -%}
+        {%- if section.settings.partners != blank -%}
+          <p class="tbp-paw-partners">{{ section.settings.partners }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-paw-fwd { padding: var(--tbp-space-8) 0; background: var(--tbp-tan); }
+  .tbp-paw-grid { display: grid; grid-template-columns: 1fr; gap: var(--tbp-space-6); align-items: center; }
+  @media (min-width: 1024px) { .tbp-paw-grid { grid-template-columns: 1fr 1fr; gap: var(--tbp-space-8); } }
+  .tbp-paw-media img { width: 100%; border-radius: var(--tbp-radius-md); aspect-ratio: 4/3; object-fit: cover; }
+  .tbp-paw-eyebrow { color: var(--tbp-orange); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; font-size: var(--tbp-text-sm); margin-bottom: var(--tbp-space-2); }
+  .tbp-paw-quote { font-style: italic; color: var(--tbp-text-dark); border-left: 3px solid var(--tbp-primary); padding-left: var(--tbp-space-4); margin: var(--tbp-space-4) 0; font-size: var(--tbp-text-lg); }
+  .tbp-paw-body { color: var(--tbp-text-mid); margin-bottom: var(--tbp-space-5); }
+  .tbp-paw-partners { color: var(--tbp-text-mid); font-size: var(--tbp-text-sm); margin-top: var(--tbp-space-4); }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Paw It Forward",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image (rescue pets, partner)" },
+    { "type": "text", "id": "image_alt", "label": "Image alt", "default": "Rescue cats enjoying Bon Pet" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Paw it Forward" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Help Stray Cats, One Meal at a Time" },
+    { "type": "textarea", "id": "quote", "label": "Quote",
+      "default": "Over 50 rescue cats at Wildflower Studio eat our meals daily and thrive. Known for high standards, Wildflower Studio proudly stands by our food." },
+    { "type": "textarea", "id": "body", "label": "Body",
+      "default": "Opt into kindness by donating to support rescue cats. 100% goes to the charity of your choosing." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Donate a Meal" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "partners", "label": "Partners line", "default": "Partners: Wildflower Studio · LUNI · Paws of JB" }
+  ],
+  "presets": [ { "name": "TBP Paw It Forward" } ]
+}
+{% endschema %}

@@ -1,0 +1,276 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_kb8tqF": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "subscriptions_app_block_gDA4tk": {
+          "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+          "settings": {
+            "widget_style": "card",
+            "widget_style_card_selector": "radio_button",
+            "subscription_policy_url": "shopify://policies/refund-policy",
+            "color_text_body": "#16433d",
+            "dividers_color": "#16433d",
+            "background_color": "#fff7e4",
+            "border_thickness": 1,
+            "border_radius": 0,
+            "product": "{{ product }}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge_kb8tqF",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "subscriptions_app_block_gDA4tk",
+        "buy_buttons",
+        "description",
+        "share"
+      ],
+      "custom_css": [
+        ".product-form button,.product-form .btn {background-color: #16433d; /* Your new color */ color: #fff; /* Text color */}",
+        ".product-form button:hover,.product-form .btn:hover {background-color: #16433d; /* Hover color */}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": true,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "page_fxPwGV": {
+      "type": "page",
+      "name": "t:sections.page.presets.name",
+      "settings": {
+        "page": "gently-cooked-grass-fed-beef-for-cats",
+        "heading_size": "h1",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "17595822082b0c8e20": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_ugc_media_grid_P8mUHn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/ugc_media_grid/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_ugc_media_grid_P8mUHn"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1759584647c0703d16": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_VgiRFr": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_VgiRFr"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "17595844796636fcd7": {
+      "type": "apps",
+      "blocks": {
+        "rocket_google_reviews_app_block_4cMXTF": {
+          "type": "shopify://apps/google-reviews-rocket/blocks/app-block/d11c8893-a181-4aff-a280-7446d42cec3b",
+          "settings": {
+            "widget_layout": "default"
+          }
+        }
+      },
+      "block_order": [
+        "rocket_google_reviews_app_block_4cMXTF"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "image_with_text_UWppxH": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_apiaVH": {
+          "type": "heading",
+          "settings": {
+            "heading": "Help Stray Cats, One Meal at a Time",
+            "heading_size": "h1"
+          }
+        },
+        "text_kzQQJP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Opt into kindness by sponsoring to support rescue cats.</p><p>Meals will be delivered to fosterer of your choosing. <a href=\"https://www.wildflowerstudio.sg/\" target=\"_blank\" title=\"Wildflower Studio\">Wildflower Studio</a> or <a href=\"https://luni-singapore.com/\" target=\"_blank\" title=\"LUNI Singapore\">LUNI</a>.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_xCAEtL": {
+          "type": "button",
+          "settings": {
+            "button_label": "Sponsor a Meal",
+            "button_link": "https://donate.thebonpet.com/",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_apiaVH",
+        "text_kzQQJP",
+        "button_xCAEtL"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/wildflower.png",
+        "video_url": "",
+        "video_image_url": "",
+        "autoplay": false,
+        "show_controls": false,
+        "loop_video": false,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "apps_8fDHwY": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_JFLzkn": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "Our Community",
+            "title_color": "#16433d",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 28,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#16433d",
+            "background_color": "#fff7e4",
+            "feed_id": "thebonpet",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_JFLzkn"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "page_fxPwGV",
+    "17595822082b0c8e20",
+    "1759584647c0703d16",
+    "related-products",
+    "17595844796636fcd7",
+    "image_with_text_UWppxH",
+    "apps_8fDHwY"
+  ]
+}

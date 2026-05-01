@@ -1,0 +1,102 @@
+{
+  "sections": {
+    "volume_tiers": {
+      "type": "bonpet-volume-tiers-page",
+      "settings": {}
+    },
+    "trust_band": {
+      "type": "bonpet-trust-band",
+      "settings": {}
+    },
+    "final_cta": {
+      "type": "bonpet-final-cta",
+      "blocks": {
+        "dogs": {
+          "type": "card",
+          "settings": {
+            "label": "Shop Meals for Dogs 🐶",
+            "link": "shopify://collections/dogs"
+          }
+        },
+        "cats": {
+          "type": "card",
+          "settings": {
+            "label": "Shop Meals for Cats 🐱",
+            "link": "shopify://collections/cats"
+          }
+        }
+      },
+      "block_order": [
+        "dogs",
+        "cats"
+      ],
+      "settings": {
+        "heading": "Ready to feed the whole pack?"
+      }
+    },
+    "cross_links": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_calc": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-introduction-1.png",
+            "title": "Feeding Calculator",
+            "text": "<p>Calculate exactly how many packs you need per month.</p>",
+            "link_label": "Calculate now",
+            "link": "shopify://pages/feeding-calculator"
+          }
+        },
+        "col_guide": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-preparation-1.png",
+            "title": "Feeding Guide",
+            "text": "<p>How to transition + thaw + serve fresh meals safely.</p>",
+            "link_label": "Read the guide",
+            "link": "shopify://pages/feeding-guideline"
+          }
+        },
+        "col_formulas": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Feeding_Guide_for_Dogs.jpg",
+            "title": "Open Formulas",
+            "text": "<p>Every recipe published openly. See exact ratios.</p>",
+            "link_label": "View formulas",
+            "link": "shopify://pages/formulas"
+          }
+        }
+      },
+      "block_order": [
+        "col_calc",
+        "col_guide",
+        "col_formulas"
+      ],
+      "settings": {
+        "title": "Keep exploring",
+        "heading_size": "h1",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "button_label": "",
+        "button_link": "",
+        "button_label_secondary": "",
+        "button_link_secondary": ""
+      }
+    }
+  },
+  "order": [
+    "volume_tiers",
+    "cross_links",
+    "trust_band",
+    "final_cta"
+  ]
+}

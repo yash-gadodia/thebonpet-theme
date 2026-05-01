@@ -1,0 +1,11 @@
+{%- comment -%}
+  V3 head injection: loads the V3 design system stylesheet + sets brand CSS custom properties.
+  Included from layout/theme.liquid inside <head>. Non-destructive — existing theme styles still apply.
+{%- endcomment -%}
+
+{{ 'bonpet-v3.css' | asset_url | stylesheet_tag: preload: true }}
+
+{%- comment -%} Viewport + brand meta {%- endcomment -%}
+<meta name="theme-color" content="#03443C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">

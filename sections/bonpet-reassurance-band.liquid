@@ -1,0 +1,127 @@
+{%- comment -%} V3 Reassurance Band — static premium grid (Lyka pattern): tile cards with icon + headline + body, evenly spaced, no marquee. {%- endcomment -%}
+<section class="tbp-v3 tbp-reassurance" aria-label="Why pawrents trust The Bon Pet">
+  <div class="tbp-container">
+    <ul class="tbp-reassurance-grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="tbp-reassurance-item" role="listitem" {{ block.shopify_attributes }}>
+          <span class="tbp-reassurance-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+          <strong class="tbp-reassurance-title">{{ block.settings.title }}</strong>
+          {%- if block.settings.subtitle != blank -%}
+            <span class="tbp-reassurance-sub">{{ block.settings.subtitle }}</span>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .tbp-reassurance {
+    background: linear-gradient(180deg, var(--tbp-cream) 0%, var(--tbp-cream-alt) 100%);
+    padding: var(--tbp-space-6) 0;
+    border-bottom: 1px solid rgba(22,67,61,0.08);
+  }
+
+  .tbp-reassurance-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--tbp-space-3);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  @media (min-width: 640px) {
+    .tbp-reassurance-grid { grid-template-columns: repeat(4, 1fr); gap: var(--tbp-space-4); }
+  }
+  @media (min-width: 1024px) {
+    .tbp-reassurance-grid { gap: var(--tbp-space-5); }
+  }
+
+  .tbp-reassurance-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    background: var(--tbp-white);
+    border: 1px solid rgba(22,67,61,0.08);
+    border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-4) var(--tbp-space-3);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  }
+  @media (min-width: 768px) {
+    .tbp-reassurance-item {
+      padding: var(--tbp-space-5) var(--tbp-space-4);
+      gap: 8px;
+    }
+  }
+  .tbp-reassurance-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(22,67,61,0.08);
+    border-color: rgba(22,67,61,0.2);
+  }
+
+  .tbp-reassurance-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--tbp-cream);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 4px;
+    box-shadow: inset 0 0 0 1px rgba(22,67,61,0.05);
+  }
+  @media (min-width: 768px) {
+    .tbp-reassurance-icon { width: 52px; height: 52px; font-size: 26px; }
+  }
+
+  .tbp-reassurance-title {
+    color: var(--tbp-primary);
+    font-size: var(--tbp-text-sm);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+  @media (min-width: 768px) {
+    .tbp-reassurance-title { font-size: var(--tbp-text-base); }
+  }
+
+  .tbp-reassurance-sub {
+    color: var(--tbp-text-mid);
+    font-size: var(--tbp-text-xs);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Reassurance Band",
+  "max_blocks": 12,
+  "blocks": [{
+    "type": "item",
+    "name": "Reassurance item",
+    "settings": [
+      { "type": "text", "id": "icon", "label": "Icon (emoji)" },
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "text", "id": "subtitle", "label": "Subtitle (optional)" }
+    ]
+  }],
+  "presets": [{
+    "name": "TBP Reassurance Band",
+    "blocks": [
+      { "type": "item", "settings": { "icon": "🎁", "title": "Free Trial Pack", "subtitle": "Try before you commit" } },
+      { "type": "item", "settings": { "icon": "🚚", "title": "Free Delivery $100+", "subtitle": "$4 delivery $80-$99, $9 under $80" } },
+      { "type": "item", "settings": { "icon": "💛", "title": "Love-It Guarantee", "subtitle": "Full refund if they hate it" } },
+      { "type": "item", "settings": { "icon": "✨", "title": "Cancel Anytime", "subtitle": "No lock-ins" } },
+      { "type": "item", "settings": { "icon": "🧪", "title": "PhD-Formulated", "subtitle": "AAFCO · All Life Stages" } },
+      { "type": "item", "settings": { "icon": "✅", "title": "AVS Licensed Kitchen", "subtitle": "Food-safety regulated" } },
+      { "type": "item", "settings": { "icon": "🇸🇬", "title": "Made Fresh in SG", "subtitle": "Small local team" } },
+      { "type": "item", "settings": { "icon": "⭐", "title": "4.9 / 5 Rating", "subtitle": "319+ Google reviews" } }
+    ]
+  }]
+}
+{% endschema %}

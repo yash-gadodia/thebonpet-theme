@@ -1,0 +1,53 @@
+{%- comment -%} V3 WhatsApp Community CTA — dark teal section {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-dark tbp-community">
+  <div class="tbp-container tbp-text-center">
+    <h2>{{ section.settings.heading }}</h2>
+    <p class="tbp-community-sub">{{ section.settings.subheading }}</p>
+
+    <div class="tbp-community-ctas">
+      {%- for block in section.blocks -%}
+        {% render 'bonpet-button',
+            label: block.settings.label,
+            href: block.settings.link,
+            variant: 'secondary',
+            size: 'lg' %}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-community { padding: var(--tbp-space-8) 0; }
+  .tbp-community-sub { color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto var(--tbp-space-6); }
+  .tbp-community-ctas { display: flex; flex-wrap: wrap; gap: var(--tbp-space-3); justify-content: center; }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Community CTA",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Join the Pack" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Join our WhatsApp communities for trusted tips on nutrition, health, and exclusive offers." }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "cta",
+      "name": "Community CTA",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "link", "label": "WhatsApp community link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TBP Community CTA",
+      "blocks": [
+        { "type": "cta", "settings": { "label": "🐱 Cat Pawrents Community" } },
+        { "type": "cta", "settings": { "label": "🐶 Dog Pawrents Community" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

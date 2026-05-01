@@ -1,0 +1,173 @@
+{%- comment -%}
+  V3 Health-outcome tile grid (Lyka pattern).
+  Sits below hero, lets visitors self-segment by concern, routes to relevant
+  content/collection page. Schema-driven so each tile is editable in theme editor.
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-section tbp-section-cream tbp-health-tiles" aria-label="Find what fits your pet">
+  <div class="tbp-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="tbp-health-tiles-heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="tbp-health-tiles-sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <ul class="tbp-health-tiles-grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="tbp-health-tile" role="listitem" {{ block.shopify_attributes }}>
+          <a class="tbp-health-tile-link" href="{{ block.settings.link | default: '#' }}">
+            <span class="tbp-health-tile-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+            <strong class="tbp-health-tile-headline">{{ block.settings.headline }}</strong>
+            {%- if block.settings.body != blank -%}
+              <span class="tbp-health-tile-body">{{ block.settings.body }}</span>
+            {%- endif -%}
+            <span class="tbp-health-tile-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .tbp-health-tiles { padding: var(--tbp-space-6) 0; }
+  @media (min-width: 768px) { .tbp-health-tiles { padding: var(--tbp-space-8) 0; } }
+
+  .tbp-health-tiles-heading {
+    font-family: var(--tbp-font-display);
+    font-size: var(--tbp-text-3xl);
+    color: var(--tbp-text-dark);
+    text-align: center;
+    margin: 0 0 var(--tbp-space-3);
+    line-height: 1.1;
+    font-weight: 400;
+  }
+  .tbp-health-tiles-sub {
+    text-align: center;
+    color: var(--tbp-text-mid);
+    font-size: var(--tbp-text-base);
+    line-height: 1.5;
+    max-width: 540px;
+    margin: 0 auto var(--tbp-space-6);
+  }
+
+  .tbp-health-tiles-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--tbp-space-3);
+  }
+  @media (min-width: 768px) {
+    .tbp-health-tiles-grid { grid-template-columns: repeat(4, 1fr); gap: var(--tbp-space-4); }
+  }
+
+  .tbp-health-tile {
+    background: var(--tbp-white);
+    border: 1px solid rgba(22,67,61,0.08);
+    border-radius: var(--tbp-radius-md);
+    overflow: hidden;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    display: flex;
+  }
+  .tbp-health-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(22,67,61,0.1);
+    border-color: rgba(22,67,61,0.2);
+  }
+  .tbp-health-tile:hover .tbp-health-tile-arrow {
+    transform: translateX(4px);
+  }
+
+  .tbp-health-tile-link {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: var(--tbp-space-4) var(--tbp-space-3);
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    position: relative;
+  }
+  @media (min-width: 768px) {
+    .tbp-health-tile-link { padding: var(--tbp-space-5) var(--tbp-space-4); gap: 8px; }
+  }
+
+  .tbp-health-tile-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--tbp-cream);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 4px;
+    box-shadow: inset 0 0 0 1px rgba(22,67,61,0.05);
+  }
+  @media (min-width: 768px) {
+    .tbp-health-tile-icon { width: 56px; height: 56px; font-size: 28px; }
+  }
+
+  .tbp-health-tile-headline {
+    color: var(--tbp-primary);
+    font-size: var(--tbp-text-base);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+  .tbp-health-tile-body {
+    color: var(--tbp-text-mid);
+    font-size: var(--tbp-text-xs);
+    line-height: 1.45;
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  .tbp-health-tile-arrow {
+    margin-top: auto;
+    color: var(--tbp-primary);
+    font-size: var(--tbp-text-sm);
+    font-weight: 700;
+    transition: transform 0.22s ease;
+    align-self: flex-start;
+    padding-top: var(--tbp-space-3);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Health Tiles",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find what fits your furkid" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Tell us about your pet, we'll point you to the right fit" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "🐾" },
+        { "type": "text", "id": "headline", "label": "Headline", "default": "Tile headline" },
+        { "type": "textarea", "id": "body", "label": "Body (optional)", "default": "Short benefit line" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TBP Health Tiles",
+      "blocks": [
+        { "type": "tile", "settings": { "icon": "🥩", "headline": "Picky eater?", "body": "Rotate proteins to find what they love. 8 proteins to try.", "link": "/collections/dogs" } },
+        { "type": "tile", "settings": { "icon": "🤢", "headline": "Sensitive tummy?", "body": "Single-protein recipes, gently cooked, no preservatives.", "link": "/collections/dogs" } },
+        { "type": "tile", "settings": { "icon": "🆕", "headline": "First time fresh?", "body": "Free trial pack. $9 cold-chain ships only.", "link": "/products/free-dog-trial-pack" } },
+        { "type": "tile", "settings": { "icon": "🐱", "headline": "Got cats?", "body": "Obligate carnivore diets. 95% whole animal protein.", "link": "/collections/cats" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

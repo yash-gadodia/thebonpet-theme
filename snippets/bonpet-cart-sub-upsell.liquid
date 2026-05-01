@@ -1,0 +1,212 @@
+{%- comment -%}
+  V3 Subscribe & Save upsell.
+  Detects any cart line WITHOUT a selling_plan_allocation (excluding free trial packs)
+  and shows a one-click "convert to subscription" CTA. JS:
+    1. Fetch /cart.js to enumerate live line keys.
+    2. For each non-sub, non-trial line, fetch /products/{handle}.js to find the
+       first available selling_plan id (typically "Deliver every week, 10% off").
+    3. Sequentially POST /cart/change.js with {id: line_key, quantity, selling_plan}.
+    4. Reload the page on success.
+
+  Skips render when:
+    - cart is empty
+    - all line items already have selling_plan_allocation
+    - cart only contains FREE trial pack(s)
+
+  Props:
+    compact (bool, default false) - tighter layout for cart drawer.
+{%- endcomment -%}
+
+{%- liquid
+  assign convertible_count = 0
+  for item in cart.items
+    if item.selling_plan_allocation == blank
+      unless item.product.handle == 'free-dog-trial-pack' or item.product.handle == 'free-cat-trial-pack'
+        assign convertible_count = convertible_count | plus: 1
+      endunless
+    endif
+  endfor
+-%}
+
+{%- if convertible_count > 0 -%}
+<div class="tbp-sub-upsell {% if compact %}tbp-sub-upsell--compact{% endif %}" aria-label="Subscribe and save upsell">
+  <div class="tbp-sub-upsell-icon" aria-hidden="true">💛</div>
+  <div class="tbp-sub-upsell-body">
+    <p class="tbp-sub-upsell-title">
+      Switch to <strong>Subscribe &amp; Save</strong>
+    </p>
+    <p class="tbp-sub-upsell-sub">
+      Extra <strong>10% off</strong> this order, plus every order. Pause or cancel anytime.
+    </p>
+  </div>
+  <button type="button" class="tbp-sub-upsell-btn" onclick="window.tbpConvertCartToSub && window.tbpConvertCartToSub(this)">
+    🐾 Make it a subscription
+  </button>
+</div>
+{%- endif -%}
+
+<script>
+  (function () {
+    if (window.tbpConvertCartToSub) return;
+    window.tbpConvertCartToSub = function (btn) {
+      if (btn._tbpBusy) return;
+      btn._tbpBusy = true;
+      var orig = btn.textContent;
+      btn.textContent = 'Updating cart...';
+      btn.disabled = true;
+
+      var TRIAL_HANDLES = { 'free-dog-trial-pack': 1, 'free-cat-trial-pack': 1 };
+
+      function fail(msg) {
+        console.error('[bonpet:sub-upsell]', msg);
+        btn.textContent = 'Could not update, try again';
+        setTimeout(function () {
+          btn.textContent = orig;
+          btn._tbpBusy = false;
+          btn.disabled = false;
+        }, 3000);
+      }
+
+      fetch('/cart.js', { credentials: 'include' })
+        .then(function (r) { return r.json(); })
+        .then(function (cart) {
+          var nonSub = cart.items.filter(function (it) {
+            return !it.selling_plan_allocation && !TRIAL_HANDLES[it.handle];
+          });
+          if (!nonSub.length) { location.reload(); return; }
+
+          return Promise.all(nonSub.map(function (it) {
+            return fetch('/products/' + it.handle + '.js', { credentials: 'include' })
+              .then(function (r) { return r.json(); })
+              .then(function (prod) {
+                var groups = prod.selling_plan_groups || [];
+                var sp = groups[0] && groups[0].selling_plans && groups[0].selling_plans[0];
+                if (!sp) return null;
+                return { key: it.key, qty: it.quantity, plan: sp.id };
+              });
+          })).then(function (updates) {
+            updates = updates.filter(Boolean);
+            if (!updates.length) { fail('no selling plans available on any line'); return; }
+
+            return updates.reduce(function (p, u) {
+              return p.then(function () {
+                var body = new URLSearchParams();
+                body.append('id', u.key);
+                body.append('quantity', String(u.qty));
+                body.append('selling_plan', String(u.plan));
+                return fetch('/cart/change.js', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                  body: body.toString(),
+                  credentials: 'include'
+                }).then(function (r) {
+                  if (!r.ok) throw new Error('change ' + r.status);
+                });
+              });
+            }, Promise.resolve()).then(function () {
+              location.reload();
+            });
+          });
+        })
+        .catch(function (err) { fail(String(err)); });
+    };
+  })();
+</script>
+
+<style>
+  .tbp-sub-upsell {
+    background: linear-gradient(135deg, #FFF4E4 0%, #F2F8F4 100%);
+    border: 1.5px solid var(--tbp-primary-mid, #2A6B62);
+    border-radius: var(--tbp-radius-md, 12px);
+    padding: 14px 16px;
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 6px rgba(22,67,61,0.06);
+  }
+  @media (max-width: 540px) {
+    .tbp-sub-upsell {
+      grid-template-columns: 32px 1fr;
+      grid-template-rows: auto auto;
+      gap: 4px 12px;
+      padding: 12px 14px;
+    }
+    .tbp-sub-upsell-btn {
+      grid-column: 1 / -1;
+      margin-top: 6px;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  .tbp-sub-upsell--compact {
+    padding: 10px 12px;
+    margin: 8px 0 12px;
+    grid-template-columns: 28px 1fr;
+    grid-template-rows: auto auto;
+    gap: 4px 10px;
+  }
+  .tbp-sub-upsell--compact .tbp-sub-upsell-btn {
+    grid-column: 1 / -1;
+    margin-top: 6px;
+    width: 100%;
+    justify-content: center;
+  }
+  .tbp-sub-upsell-icon {
+    font-size: 24px;
+    line-height: 1;
+    align-self: start;
+    margin-top: 2px;
+  }
+  .tbp-sub-upsell--compact .tbp-sub-upsell-icon { font-size: 18px; margin-top: 1px; }
+  .tbp-sub-upsell-body { min-width: 0; }
+  .tbp-sub-upsell-title {
+    margin: 0;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--tbp-text-dark, #16433D);
+    line-height: 1.25;
+  }
+  .tbp-sub-upsell-title strong {
+    color: var(--tbp-primary, #16433D);
+    font-weight: 800;
+  }
+  .tbp-sub-upsell-sub {
+    margin: 2px 0 0;
+    font-size: 12.5px;
+    color: var(--tbp-text-mid, #555);
+    line-height: 1.4;
+  }
+  .tbp-sub-upsell-sub strong {
+    color: var(--tbp-primary-mid, #2A6B62);
+    font-weight: 700;
+  }
+  .tbp-sub-upsell--compact .tbp-sub-upsell-title { font-size: 13px; }
+  .tbp-sub-upsell--compact .tbp-sub-upsell-sub { font-size: 11.5px; }
+  .tbp-sub-upsell-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--tbp-primary, #16433D);
+    color: #FFF4E4;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.18s ease, transform 0.18s ease;
+  }
+  .tbp-sub-upsell-btn:hover:not(:disabled) {
+    background: var(--tbp-primary-mid, #2A6B62);
+    transform: translateY(-1px);
+  }
+  .tbp-sub-upsell-btn:disabled {
+    opacity: 0.7;
+    cursor: wait;
+    transform: none;
+  }
+</style>

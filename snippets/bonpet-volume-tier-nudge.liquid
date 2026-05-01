@@ -1,0 +1,165 @@
+{%- comment -%}
+  V3 shared volume-tier nudge widget.
+  Shows current discount tier + packs needed to reach next tier.
+  Used on /cart (via bonpet-cart-reassurance) and inside the cart drawer.
+
+  Tier ladder (mirrors /pages/volume-discounts):
+    1-29:    sub 10% / one-time none
+    30-59:   sub 25% / one-time 15%
+    60-99:   sub 30% / one-time 20%
+    100-149: sub 35% / one-time 25%
+    150+:    sub 40% / one-time 30% (max)
+
+  Props:
+    compact (bool, default false) - when true, tighter layout for drawer.
+
+  Skips render when cart has zero non-trial packs.
+{%- endcomment -%}
+
+{%- liquid
+  assign pack_count = 0
+  assign has_subscription = false
+  assign skip_render = false
+
+  for item in cart.items
+    if item.selling_plan_allocation != blank
+      assign has_subscription = true
+    endif
+    unless item.product.handle == 'free-dog-trial-pack' or item.product.handle == 'free-cat-trial-pack'
+      assign pack_count = pack_count | plus: item.quantity
+    endunless
+  endfor
+
+  if pack_count == 0
+    assign skip_render = true
+  endif
+
+  if pack_count >= 150
+    if has_subscription
+      assign current_pct = 40
+    else
+      assign current_pct = 30
+    endif
+    assign next_threshold = 0
+    assign next_pct = 0
+  elsif pack_count >= 100
+    if has_subscription
+      assign current_pct = 35
+      assign next_pct = 40
+    else
+      assign current_pct = 25
+      assign next_pct = 30
+    endif
+    assign next_threshold = 150
+  elsif pack_count >= 60
+    if has_subscription
+      assign current_pct = 30
+      assign next_pct = 35
+    else
+      assign current_pct = 20
+      assign next_pct = 25
+    endif
+    assign next_threshold = 100
+  elsif pack_count >= 30
+    if has_subscription
+      assign current_pct = 25
+      assign next_pct = 30
+    else
+      assign current_pct = 15
+      assign next_pct = 20
+    endif
+    assign next_threshold = 60
+  else
+    if has_subscription
+      assign current_pct = 10
+    else
+      assign current_pct = 0
+    endif
+    assign next_threshold = 30
+    assign next_pct = 15
+    if has_subscription
+      assign next_pct = 25
+    endif
+  endif
+
+  assign packs_to_next = next_threshold | minus: pack_count
+  if packs_to_next < 0
+    assign packs_to_next = 0
+  endif
+
+  assign pack_word = 'packs'
+  if packs_to_next == 1
+    assign pack_word = 'pack'
+  endif
+-%}
+
+{%- unless skip_render -%}
+<div class="tbp-vol-nudge {% if compact %}tbp-vol-nudge--compact{% endif %}" aria-label="Volume tier discount progress">
+  {%- if next_threshold == 0 -%}
+    <p class="tbp-vol-nudge-msg tbp-vol-nudge-msg--max">
+      🏆 <strong>Top tier unlocked!</strong> Saving {{ current_pct }}% on this order.
+    </p>
+  {%- elsif pack_count >= 30 -%}
+    <p class="tbp-vol-nudge-msg">
+      ✅ <strong>{{ current_pct }}% volume discount active.</strong> {{ packs_to_next }} more {{ pack_word }} → {{ next_pct }}% off.
+    </p>
+  {%- elsif has_subscription -%}
+    <p class="tbp-vol-nudge-msg">
+      ✅ <strong>Subscribe & Save 10% applied.</strong> {{ packs_to_next }} more {{ pack_word }} → {{ next_pct }}% volume discount.
+    </p>
+  {%- else -%}
+    <p class="tbp-vol-nudge-msg">
+      💰 <strong>{{ packs_to_next }} more {{ pack_word }}</strong> unlocks {{ next_pct }}% volume discount. Subscribe for another 10%.
+    </p>
+  {%- endif -%}
+  <a href="/pages/volume-discounts" class="tbp-vol-nudge-link">See all tiers →</a>
+</div>
+{%- endunless -%}
+
+<style>
+  .tbp-vol-nudge {
+    background: var(--tbp-cream, #fff7e4);
+    border: 1px solid var(--tbp-tan-mid, #e6dfce);
+    border-radius: var(--tbp-radius-md, 12px);
+    padding: 12px 16px;
+    font-family: var(--tbp-font-body, system-ui, sans-serif);
+    color: var(--tbp-text-dark, #16433D);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .tbp-vol-nudge--compact {
+    padding: 10px 12px;
+    margin: 8px 0 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .tbp-vol-nudge-msg {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 13.5px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .tbp-vol-nudge--compact .tbp-vol-nudge-msg {
+    font-size: 12.5px;
+  }
+  .tbp-vol-nudge-msg strong {
+    color: var(--tbp-primary, #16433D);
+  }
+  .tbp-vol-nudge-msg--max strong {
+    color: var(--tbp-primary-mid, #2A6B62);
+  }
+  .tbp-vol-nudge-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tbp-primary, #16433D);
+    text-decoration: underline;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,295 @@
+{%- comment -%} V3 Transparency Proof — concrete proof of open-source formula positioning {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-dark tbp-transparency" aria-label="Inside every pack">
+  <div class="tbp-container">
+    <div class="tbp-transparency-head tbp-text-center">
+      <p class="tbp-transparency-eyebrow">🔓 INSIDE EVERY PACK</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <p class="tbp-transparency-sub">{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="tbp-transparency-card">
+      <div class="tbp-transparency-hero">
+        <div class="tbp-transparency-packs">
+          {%- liquid
+            assign pack_product = section.settings.sample_product_ref
+            assign pack_src = blank
+            if pack_product and pack_product.featured_image
+              assign pack_src = pack_product.featured_image | image_url: width: 640
+            elsif section.settings.pack_image
+              assign pack_src = section.settings.pack_image | image_url: width: 640
+            else
+              assign pack_src = 'bonpet-gc-chicken-front.jpg' | asset_url
+            endif
+          -%}
+          <div class="tbp-transparency-pack">
+            <img src="{{ pack_src }}" alt="{{ section.settings.sample_product | escape }} front" loading="lazy">
+          </div>
+        </div>
+        <div class="tbp-transparency-meta">
+          <span class="tbp-transparency-product">{{ section.settings.sample_product }}</span>
+          <span class="tbp-transparency-weight">{{ section.settings.sample_weight }}</span>
+          <span class="tbp-transparency-pack-caption">The back of our pack is our ingredients panel. Every ratio below matches what's printed on the pouch.</span>
+        </div>
+      </div>
+
+      <div class="tbp-transparency-split">
+        <div class="tbp-transparency-stat">
+          <div class="tbp-transparency-big">{{ section.settings.stat1_value }}</div>
+          <div class="tbp-transparency-label">{{ section.settings.stat1_label }}</div>
+        </div>
+        <div class="tbp-transparency-stat">
+          <div class="tbp-transparency-big">{{ section.settings.stat2_value }}</div>
+          <div class="tbp-transparency-label">{{ section.settings.stat2_label }}</div>
+        </div>
+      </div>
+
+      <p class="tbp-transparency-ingredients-head">The Full Recipe · 200g Pack</p>
+      <div class="tbp-transparency-ingredients">
+        {%- for block in section.blocks -%}
+          <div class="tbp-transparency-row" {{ block.shopify_attributes }}>
+            <span class="tbp-transparency-ingredient">{{ block.settings.ingredient }}</span>
+            <span class="tbp-transparency-dot" aria-hidden="true"></span>
+            <span class="tbp-transparency-amount">{{ block.settings.amount }}</span>
+            <span class="tbp-transparency-role">{{ block.settings.role }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="tbp-transparency-cta">
+        {% render 'bonpet-button',
+            label: section.settings.cta_label,
+            href: section.settings.cta_link,
+            variant: 'primary', size: 'lg' %}
+        <p class="tbp-transparency-small">No other fresh pet food brand in Singapore publishes this. We do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-transparency { padding: var(--tbp-space-6) 0; }
+  @media (min-width: 768px) { .tbp-transparency { padding: var(--tbp-space-9) 0; } }
+  .tbp-transparency-head { margin-bottom: var(--tbp-space-5); }
+  @media (min-width: 768px) { .tbp-transparency-head { margin-bottom: var(--tbp-space-7); } }
+  .tbp-transparency-eyebrow {
+    display: inline-block; background: var(--tbp-orange); color: var(--tbp-white);
+    padding: 6px 16px; border-radius: var(--tbp-radius-pill);
+    font-size: var(--tbp-text-xs); font-weight: 700; letter-spacing: 0.1em;
+    margin-bottom: var(--tbp-space-4);
+  }
+  .tbp-transparency-head h2 {
+    color: var(--tbp-white);
+    margin-bottom: var(--tbp-space-4);
+    font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+    max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .tbp-transparency-sub {
+    color: rgba(255,255,255,0.9);
+    max-width: 620px; margin: 0 auto;
+    font-size: var(--tbp-text-lg); line-height: 1.5;
+  }
+
+  .tbp-transparency-card {
+    background: var(--tbp-cream); color: var(--tbp-text-dark);
+    border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-6);
+    max-width: 920px; margin: 0 auto;
+    box-shadow: var(--tbp-shadow-lg);
+  }
+  @media (min-width: 768px) { .tbp-transparency-card { padding: var(--tbp-space-7) var(--tbp-space-8); } }
+
+  .tbp-transparency-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--tbp-space-4);
+    align-items: center;
+    padding-bottom: var(--tbp-space-5);
+    margin-bottom: var(--tbp-space-6);
+    border-bottom: 2px dashed var(--tbp-tan-mid);
+  }
+  @media (min-width: 640px) {
+    .tbp-transparency-hero {
+      grid-template-columns: 300px 1fr;
+      gap: var(--tbp-space-5);
+    }
+  }
+  @media (min-width: 768px) {
+    .tbp-transparency-hero { grid-template-columns: 360px 1fr; gap: var(--tbp-space-6); }
+  }
+  .tbp-transparency-packs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--tbp-space-3);
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  @media (min-width: 640px) {
+    .tbp-transparency-packs { margin: 0; }
+  }
+  .tbp-transparency-pack {
+    position: relative;
+    background: #000;
+    border-radius: var(--tbp-radius-md);
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  }
+  .tbp-transparency-pack img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .tbp-transparency-pack-tag {
+    position: absolute;
+    top: 8px; left: 8px;
+    background: rgba(255,255,255,0.92);
+    color: var(--tbp-primary);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: var(--tbp-radius-pill);
+  }
+  .tbp-transparency-meta {
+    display: flex; flex-direction: column; gap: 6px;
+    text-align: center;
+  }
+  @media (min-width: 640px) {
+    .tbp-transparency-meta { text-align: left; }
+  }
+  .tbp-transparency-pack-caption {
+    color: var(--tbp-text-mid);
+    font-size: var(--tbp-text-xs);
+    font-style: italic;
+    margin-top: 4px;
+  }
+  .tbp-transparency-product {
+    font-weight: 700; font-size: var(--tbp-text-2xl); color: var(--tbp-primary);
+    letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .tbp-transparency-weight {
+    color: var(--tbp-text-mid); font-size: var(--tbp-text-sm);
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .tbp-transparency-split {
+    display: grid; grid-template-columns: 1fr;
+    gap: var(--tbp-space-4); margin-bottom: var(--tbp-space-7);
+  }
+  @media (min-width: 640px) { .tbp-transparency-split { grid-template-columns: 1fr 1fr; gap: var(--tbp-space-5); } }
+
+  .tbp-transparency-stat {
+    background: var(--tbp-white); border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-6) var(--tbp-space-4); text-align: center;
+    border: 1px solid rgba(16,121,101,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tbp-transparency-stat:hover { transform: translateY(-2px); box-shadow: var(--tbp-shadow-md); }
+  .tbp-transparency-big {
+    font-family: var(--tbp-font-display);
+    font-size: clamp(2.5rem, 1.8rem + 3vw, 4rem);
+    font-weight: 700; color: var(--tbp-primary);
+    line-height: 1; margin-bottom: var(--tbp-space-3);
+    letter-spacing: -0.02em;
+  }
+  .tbp-transparency-label {
+    color: var(--tbp-text-dark); font-size: var(--tbp-text-sm);
+    line-height: 1.45; font-weight: 500;
+    max-width: 240px; margin: 0 auto;
+  }
+
+  .tbp-transparency-ingredients-head {
+    text-align: center;
+    font-size: var(--tbp-text-xs); color: var(--tbp-text-mid);
+    letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700;
+    margin-bottom: var(--tbp-space-4);
+  }
+  .tbp-transparency-ingredients {
+    margin-bottom: var(--tbp-space-6);
+    background: var(--tbp-white);
+    border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-5) var(--tbp-space-4);
+  }
+  @media (min-width: 768px) { .tbp-transparency-ingredients { padding: var(--tbp-space-5) var(--tbp-space-6); } }
+  .tbp-transparency-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: var(--tbp-space-3);
+    padding: var(--tbp-space-3) 0;
+    font-size: var(--tbp-text-base);
+    border-bottom: 1px dotted var(--tbp-tan-mid);
+  }
+  .tbp-transparency-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .tbp-transparency-row:first-child { padding-top: 0; }
+  .tbp-transparency-ingredient {
+    font-weight: 700; color: var(--tbp-text-dark); font-size: var(--tbp-text-base);
+  }
+  .tbp-transparency-amount {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    color: var(--tbp-primary); font-weight: 700;
+    font-size: var(--tbp-text-sm); letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .tbp-transparency-role {
+    grid-column: 1 / -1;
+    color: var(--tbp-text-mid); font-size: var(--tbp-text-xs);
+    line-height: 1.4; margin-top: 2px;
+  }
+  @media (min-width: 768px) {
+    .tbp-transparency-row { grid-template-columns: 1.2fr 1fr 2fr; align-items: center; }
+    .tbp-transparency-role { grid-column: auto; margin-top: 0; font-size: var(--tbp-text-sm); }
+  }
+  .tbp-transparency-dot { display: none; }
+
+  .tbp-transparency-cta { text-align: center; padding-top: var(--tbp-space-4); }
+  .tbp-transparency-small {
+    color: var(--tbp-text-mid); font-size: var(--tbp-text-sm);
+    margin-top: var(--tbp-space-4); letter-spacing: 0.02em;
+    font-style: italic;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Transparency Proof",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See exactly what's in every pack" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Here's a real recipe from our open-source formula sheet. Every gram, every ratio, every function. No 'proprietary blends,' no mystery meat." },
+    { "type": "header", "content": "Sample recipe" },
+    { "type": "product", "id": "sample_product_ref", "label": "Pick product (uses its Shopify SKU photo)" },
+    { "type": "image_picker", "id": "pack_image", "label": "Or override front with a custom image" },
+    { "type": "image_picker", "id": "pack_back_image", "label": "Pack back-of-pack image (ingredients side)" },
+    { "type": "text", "id": "sample_product", "label": "Sample product name", "default": "Gently Cooked Free-Range Chicken for Cats" },
+    { "type": "text", "id": "sample_weight", "label": "Pack weight", "default": "200g · 1 pack" },
+    { "type": "text", "id": "stat1_value", "label": "Stat 1 value", "default": "95.73%" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 label", "default": "Whole animal protein (chicken breast, gizzard, heart, liver)" },
+    { "type": "text", "id": "stat2_value", "label": "Stat 2 value", "default": "4.27%" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 label", "default": "Targeted supplements, precision-dosed" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "See Every Formula" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "max_blocks": 12,
+  "blocks": [{
+    "type": "ingredient",
+    "name": "Ingredient row",
+    "settings": [
+      { "type": "text", "id": "ingredient", "label": "Ingredient" },
+      { "type": "text", "id": "amount", "label": "Amount" },
+      { "type": "text", "id": "role", "label": "Role" }
+    ]
+  }],
+  "presets": [{
+    "name": "TBP Transparency Proof",
+    "blocks": [
+      { "type": "ingredient", "settings": { "ingredient": "Chicken Breast", "amount": "65.16g · 32.58%", "role": "Primary lean muscle protein, complete amino acids" } },
+      { "type": "ingredient", "settings": { "ingredient": "Chicken Gizzard", "amount": "58.64g · 29.32%", "role": "Lean organ, B vitamins, iron" } },
+      { "type": "ingredient", "settings": { "ingredient": "Chicken Heart", "amount": "52.13g · 26.06%", "role": "CoQ10, taurine, B vitamins" } },
+      { "type": "ingredient", "settings": { "ingredient": "Chicken Liver", "amount": "19.55g · 9.77%", "role": "Vit A, B12, iron, copper, nature's multivitamin" } },
+      { "type": "ingredient", "settings": { "ingredient": "Calcium Carbonate", "amount": "1.43g · 0.72%", "role": "Corrects Ca:P ratio to 1.2:1" } },
+      { "type": "ingredient", "settings": { "ingredient": "Cod Liver Oil", "amount": "0.98g · 0.49%", "role": "EPA 320mg, DHA 410mg, Vit A+D" } },
+      { "type": "ingredient", "settings": { "ingredient": "Taurine", "amount": "0.16g · 0.08%", "role": "Essential for cats, retinal & cardiac function" } },
+      { "type": "ingredient", "settings": { "ingredient": "...and 10 more precision-dosed supplements", "amount": "", "role": "Full breakdown on our open-source formula sheet" } }
+    ]
+  }]
+}
+{% endschema %}

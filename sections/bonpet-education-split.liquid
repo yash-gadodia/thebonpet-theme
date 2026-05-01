@@ -1,0 +1,82 @@
+{%- comment -%} V3 Tail-Wagging Goodness — split layout, image + education links on cream bg {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-cream tbp-edu-split">
+  <div class="tbp-container tbp-edu-grid">
+    <div class="tbp-edu-media">
+      {%- if section.settings.image -%}
+        <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="tbp-edu-content">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.body }}</p>
+      <div class="tbp-edu-links">
+        {%- for block in section.blocks -%}
+          <a href="{{ block.settings.link }}" class="tbp-edu-link" {{ block.shopify_attributes }}>
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.subtitle }}</span>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-edu-split { padding: var(--tbp-space-8) 0; }
+  .tbp-edu-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--tbp-space-6);
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .tbp-edu-grid { grid-template-columns: 1fr 1fr; gap: var(--tbp-space-8); }
+  }
+  .tbp-edu-media img { width: 100%; border-radius: var(--tbp-radius-md); object-fit: cover; aspect-ratio: 4/3; }
+  .tbp-edu-content h2 { font-size: var(--tbp-text-3xl); margin-bottom: var(--tbp-space-4); }
+  .tbp-edu-content p { color: var(--tbp-text-mid); margin-bottom: var(--tbp-space-5); }
+  .tbp-edu-links { display: flex; flex-direction: column; gap: var(--tbp-space-3); }
+  .tbp-edu-link {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: var(--tbp-space-4) var(--tbp-space-5);
+    background: var(--tbp-white); border-radius: var(--tbp-radius-md);
+    text-decoration: none; color: var(--tbp-text-dark);
+    border: 1px solid var(--tbp-tan-mid);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .tbp-edu-link:hover { transform: translateX(4px); border-color: var(--tbp-primary); }
+  .tbp-edu-link strong { font-size: var(--tbp-text-lg); color: var(--tbp-primary); }
+  .tbp-edu-link span { font-size: var(--tbp-text-sm); color: var(--tbp-text-mid); }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Education Split",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image (pet eating, meal prep, etc.)" },
+    { "type": "text", "id": "image_alt", "label": "Image alt", "default": "Bon Pet meal" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tail-Wagging Goodness in Every Bowl" },
+    { "type": "textarea", "id": "body", "label": "Body",
+      "default": "Learn how to prepare and transition to gently cooked meals for both dog and cat formulas." }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Education link",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Feeding Guide" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "View Meals" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TBP Education Split",
+      "blocks": [
+        { "type": "link", "settings": { "title": "Feeding Guide", "subtitle": "View Meals" } },
+        { "type": "link", "settings": { "title": "How It's Made", "subtitle": "Our process, ratios & formula" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

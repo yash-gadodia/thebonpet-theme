@@ -1,0 +1,185 @@
+{%- comment -%}
+  V3 SEO HEAD — injects OpenGraph, Twitter Card, and schema.org JSON-LD
+  (Organization, LocalBusiness, and homepage FAQPage + AggregateRating).
+  Included from layout/theme.liquid inside <head>.
+{%- endcomment -%}
+{%- liquid
+  assign tbp_rating = settings.tbp_rating | default: '4.9'
+  assign tbp_review_count = settings.tbp_review_count | default: '319'
+  assign tbp_pawrent_count = settings.tbp_pawrent_count | default: '1,500'
+-%}
+
+{%- comment -%} Homepage-specific SEO + AEO (answer-engine) signals {%- endcomment -%}
+{%- if template.name == 'index' -%}
+  <meta name="description" content="Singapore's best fresh pet food delivery. Sous vide gently cooked meals for cats &amp; dogs, AAFCO certified. FREE cold-chain over $100, reschedule anytime. {{ tbp_rating }}/5 ★ from {{ tbp_pawrent_count }}+ pawrents.">
+  <meta name="keywords" content="best fresh pet food delivery singapore, fresh pet food Singapore, gently cooked dog food, gently cooked cat food, sous vide pet food, cold chain pet food delivery, AAFCO pet food Singapore, AVS licensed pet food, PhD formulated pet food, open source pet food, human grade pet food SG, furkid meals, pet food subscription Singapore">
+  <meta name="author" content="The Bon Pet">
+  <meta name="geo.region" content="SG">
+  <meta name="geo.placename" content="Singapore">
+  <meta name="geo.position" content="1.3133;103.7010">
+  <meta name="ICBM" content="1.3133, 103.7010">
+{%- endif -%}
+
+{%- comment -%} Explicitly allow major search + AI crawlers {%- endcomment -%}
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="GPTBot" content="index, follow">
+<meta name="ClaudeBot" content="index, follow">
+<meta name="anthropic-ai" content="index, follow">
+<meta name="Perplexity-ai" content="index, follow">
+<meta name="CCBot" content="index, follow">
+<meta name="PerplexityBot" content="index, follow">
+<meta name="Bingbot" content="index, follow">
+<meta name="Applebot" content="index, follow">
+<meta name="Applebot-Extended" content="index, follow">
+
+{%- comment -%} LLM-facing overview page (create Shopify page /pages/llms-txt to enable). {%- endcomment -%}
+{%- comment -%}
+<link rel="alternate" type="text/plain" href="{{ shop.url }}/pages/llms-txt" title="LLM-optimized brand summary">
+{%- endcomment -%}
+
+
+{%- comment -%} OpenGraph (LinkedIn, Facebook, Slack etc) {%- endcomment -%}
+<meta property="og:site_name" content="The Bon Pet">
+<meta property="og:type" content="{% if template.name == 'product' %}product{% elsif template.name == 'article' %}article{% else %}website{% endif %}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:title" content="{% if template.name == 'index' %}Best Fresh Pet Food Delivery Singapore · The Bon Pet{% elsif page_title != blank %}{{ page_title | escape }}{% else %}The Bon Pet · Fresh Pet Food Delivery Singapore{% endif %}">
+<meta property="og:description" content="{% if template.name == 'index' %}Singapore's best fresh pet food delivery. Sous vide gently cooked meals for cats &amp; dogs, AAFCO certified. FREE cold-chain over $100, reschedule anytime. {{ tbp_rating }}/5 ★ from {{ tbp_pawrent_count }}+ pawrents.{% elsif page_description != blank and page_description contains 'Open-source pet food: every formula' == false %}{{ page_description | escape }}{% else %}Singapore's best fresh pet food delivery. Sous vide gently cooked meals for cats &amp; dogs, AAFCO certified, cold-chain frozen. FREE on $100+, reschedule anytime. {{ tbp_rating }}/5 ★ from {{ tbp_pawrent_count }}+ pawrents.{% endif %}">
+<meta property="og:image" content="{% if template.name == 'index' %}{{ 'bonpet-hero-2up-1776736957.jpg' | asset_url | prepend: 'https:' }}{% elsif product.featured_image %}{{ product.featured_image | image_url: width: 1200 }}{% elsif page_image %}{{ page_image | image_url: width: 1200 }}{% else %}{{ settings.share_image | image_url: width: 1200 }}{% endif %}">
+<meta property="og:locale" content="en_SG">
+
+{%- comment -%} Twitter Cards {%- endcomment -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% if template.name == 'index' %}Best Fresh Pet Food Delivery Singapore · The Bon Pet{% elsif page_title != blank %}{{ page_title | escape }}{% else %}The Bon Pet · Fresh Pet Food Delivery Singapore{% endif %}">
+<meta name="twitter:description" content="{% if template.name == 'index' %}Singapore's best fresh pet food delivery. Sous vide gently cooked meals for cats &amp; dogs, AAFCO certified. FREE cold-chain over $100, reschedule anytime. {{ tbp_rating }}/5 ★ from {{ tbp_pawrent_count }}+ pawrents.{% elsif page_description != blank and page_description contains 'Open-source pet food: every formula' == false %}{{ page_description | escape }}{% else %}Singapore's best fresh pet food delivery. Sous vide gently cooked meals for cats &amp; dogs, AAFCO certified, cold-chain frozen. FREE on $100+, reschedule anytime. {{ tbp_rating }}/5 ★ from {{ tbp_pawrent_count }}+ pawrents.{% endif %}">
+<meta name="twitter:image" content="{% if template.name == 'index' %}{{ 'bonpet-hero-2up-1776736957.jpg' | asset_url | prepend: 'https:' }}{% elsif product.featured_image %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}">
+
+{%- comment -%} Preconnect for performance {%- endcomment -%}
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+{%- comment -%} Organization + LocalBusiness + WebSite schemas (homepage only, AEO-optimized) {%- endcomment -%}
+{%- if template.name == 'index' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "{{ shop.url }}#organization",
+  "name": "The Bon Pet",
+  "alternateName": ["TBP", "Bon Pet"],
+  "url": "{{ shop.url }}",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{{ 'bonpet-logo-beige.png' | asset_url | prepend: 'https:' }}",
+    "width": 1024,
+    "height": 1024
+  },
+  "image": "{{ 'bonpet-hero-2up-1776736957.jpg' | asset_url | prepend: 'https:' }}",
+  "description": "Singapore-based artisanal fresh pet food brand. PhD-formulated, sous vide gently cooked meals for cats and dogs. AAFCO All Life Stages certified. AVS-licensed kitchen at Pioneer Crescent, Singapore. Founder-led since 2024.",
+  "slogan": "Fresh gently cooked meals for picky furkids.",
+  "email": "hello@thebonpet.com",
+  "telephone": "+65-9010-8515",
+  "foundingDate": "2024",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Singapore"
+  },
+  "founder": [
+    { "@type": "Person", "name": "Yash", "jobTitle": "Co-founder" },
+    { "@type": "Person", "name": "Nicolas", "jobTitle": "Co-founder" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "26 Pioneer Crescent, West Park Bizcentral",
+    "addressLocality": "Singapore",
+    "postalCode": "628558",
+    "addressCountry": "SG"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Singapore"
+  },
+  "knowsAbout": [
+    "Fresh pet food",
+    "Gently cooked dog food",
+    "Gently cooked cat food",
+    "Sous vide pet nutrition",
+    "AAFCO pet food standards",
+    "Pet nutrition science",
+    "Species-specific pet diets",
+    "Single-protein pet recipes",
+    "Cold-chain pet food delivery Singapore"
+  ],
+  "makesOffer": [
+    { "@type": "Offer", "name": "Free trial pack", "description": "100% off chicken or beef trial pack with code FREETRIAL<3THEBONPET. $9 delivery." },
+    { "@type": "Offer", "name": "Subscribe & Save", "description": "10% off every recurring order. FREE delivery at $100+, $4 on $80-$99, $9 under $80. Pause or cancel anytime." }
+  ],
+  "award": "AVS licensed kitchen · AAFCO All Life Stages certified",
+  "sameAs": [
+    "https://www.instagram.com/thebonpet/"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "{{ shop.url }}#localbusiness",
+  "name": "The Bon Pet",
+  "image": "{{ 'bonpet-hero-2up-1776736957.jpg' | asset_url | prepend: 'https:' }}",
+  "url": "{{ shop.url }}",
+  "telephone": "+65-9010-8515",
+  "email": "hello@thebonpet.com",
+  "priceRange": "SGD $7 to SGD $45",
+  "currenciesAccepted": "SGD",
+  "paymentAccepted": "Credit Card, PayNow, Apple Pay, Google Pay, Shop Pay",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "26 Pioneer Crescent, West Park Bizcentral",
+    "addressLocality": "Singapore",
+    "postalCode": "628558",
+    "addressCountry": "SG"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "1.3133",
+    "longitude": "103.7010"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Singapore"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59",
+    "description": "Orders accepted 24/7 online. Cold-chain delivery island-wide."
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ tbp_rating | default: '4.9' }}",
+    "reviewCount": "{{ tbp_review_count | default: '319' }}",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "{{ shop.url }}#website",
+  "url": "{{ shop.url }}",
+  "name": "The Bon Pet",
+  "description": "Fresh gently cooked dog and cat food in Singapore.",
+  "publisher": { "@id": "{{ shop.url }}#organization" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ shop.url }}/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{%- endif -%}

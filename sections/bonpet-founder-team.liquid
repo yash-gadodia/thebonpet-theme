@@ -1,0 +1,192 @@
+{%- comment -%} V3 Founder team  -  cards with names, roles, photos {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-cream tbp-founder-team" aria-label="Our team">
+  <div class="tbp-container">
+    <div class="tbp-founder-team-inner">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="tbp-founder-team-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      <div class="tbp-founder-team-grid">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'team_member' -%}
+              <div class="tbp-founder-team-card">
+                <div class="tbp-founder-team-photo">
+                  {%- if block.settings.photo != blank -%}
+                    <img
+                      src="{{ block.settings.photo | image_url: width: 400 }}"
+                      alt="{{ block.settings.name | escape }}"
+                      loading="lazy"
+                      class="tbp-founder-team-photo-img"
+                    >
+                  {%- else -%}
+                    <div class="tbp-founder-team-photo-placeholder">
+                      <span>{{ block.settings.name | split: ' ' | map: 'size: 1' | join: '' }}</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+                <div class="tbp-founder-team-info">
+                  {%- if block.settings.name != blank -%}
+                    <h3 class="tbp-founder-team-name">{{ block.settings.name }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.role != blank -%}
+                    <p class="tbp-founder-team-role">{{ block.settings.role }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.bio != blank -%}
+                    <p class="tbp-founder-team-bio">{{ block.settings.bio }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-founder-team { padding: var(--tbp-space-8) 0; }
+  .tbp-founder-team-inner { max-width: 1200px; margin: 0 auto; }
+  .tbp-founder-team-heading {
+    font-family: var(--tbp-font-display);
+    font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+    line-height: 1.1;
+    margin: 0 0 var(--tbp-space-7);
+    text-align: center;
+    color: var(--tbp-text-dark);
+  }
+  .tbp-founder-team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--tbp-space-6);
+  }
+  @media (min-width: 640px) {
+    .tbp-founder-team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .tbp-founder-team-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .tbp-founder-team-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .tbp-founder-team-photo {
+    margin-bottom: var(--tbp-space-4);
+    border-radius: var(--tbp-radius-md);
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: var(--tbp-white);
+  }
+  .tbp-founder-team-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .tbp-founder-team-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--tbp-primary) 0%, var(--tbp-primary-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tbp-white);
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  .tbp-founder-team-info {
+    flex: 1;
+  }
+  .tbp-founder-team-name {
+    font-size: var(--tbp-text-lg);
+    font-weight: 700;
+    margin: 0 0 var(--tbp-space-1);
+    color: var(--tbp-text-dark);
+  }
+  .tbp-founder-team-role {
+    font-size: var(--tbp-text-sm);
+    color: var(--tbp-primary);
+    font-weight: 600;
+    margin: 0 0 var(--tbp-space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .tbp-founder-team-bio {
+    font-size: var(--tbp-text-base);
+    color: var(--tbp-text-mid);
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Founder Team",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Meet the team" }
+  ],
+  "blocks": [
+    {
+      "name": "Team member",
+      "type": "team_member",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Photo (upload to replace placeholder)" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "role", "label": "Role" },
+        { "type": "textarea", "id": "bio", "label": "Bio (1-2 lines)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TBP Founder Team",
+      "blocks": [
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Yash Gadodia",
+            "role": "Co-founder",
+            "bio": "Software engineer. Dog pawrent to one Golden Retriever mix. Built the systems that keep us cooking consistently."
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Nicolas Yeh",
+            "role": "Co-founder",
+            "bio": "Software engineer. Cat pawrent to two rescues. Obsessed with recipe formulation and nutritional balance."
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Rachel",
+            "role": "Operations",
+            "bio": "Keeps the kitchen running smoothly. Ensures every pack is perfect before it ships out."
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Shaun",
+            "role": "Community & Delivery",
+            "bio": "Local team member. Coordinates WhatsApp groups and helps with pickups around Singapore."
+          }
+        },
+        {
+          "type": "team_member",
+          "settings": {
+            "name": "Bari",
+            "role": "Customer Success",
+            "bio": "Indonesia-based CS agent. Answers nutrition questions and helps pawrents get the most from their orders."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

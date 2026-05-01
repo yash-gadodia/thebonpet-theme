@@ -1,0 +1,530 @@
+{%- comment -%}
+  V3 Open-Source Formulas page - server-rendered from Google Sheet.
+  Use {% include %} (not {% render %}) so the snippet's {% capture %} variables
+  leak into this section's scope.
+{%- endcomment -%}
+{% include 'bonpet-formulas-data' %}
+
+<tbp-formulas-filter>
+  <section class="tbp-v3 tbp-formulas" itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="author" content="The Bon Pet">
+    <meta itemprop="datePublished" content="2026-04-23">
+
+    <div class="tbp-container tbp-formulas-hero">
+      <p class="tbp-formulas-eyebrow">🔓 OPEN-SOURCE · AAFCO ALL LIFE STAGES · SOUS VIDE AT 80°C</p>
+      <h1 class="tbp-formulas-title">{{ section.settings.heading | default: 'Every ingredient. Every gram. Nothing hidden.' }}</h1>
+      <p class="tbp-formulas-lead">
+        {{ section.settings.lead | default: "We're the only Singapore fresh pet food brand that publishes every recipe down to the ingredient, weight, and percentage. No proprietary blends. No marketing fluff. Check before you buy." }}
+      </p>
+    </div>
+
+    <div class="tbp-container">
+      <div class="tbp-formulas-tabs" role="tablist" aria-label="Recipe species filter">
+        <button type="button" role="tab" class="tbp-formulas-tab is-active" data-tbp-species="cat" aria-selected="true">
+          <span class="tbp-formulas-tab-emoji">🐱</span>
+          <span class="tbp-formulas-tab-label">Cats</span>
+          <span class="tbp-formulas-tab-count">4</span>
+        </button>
+        <button type="button" role="tab" class="tbp-formulas-tab" data-tbp-species="dog" aria-selected="false">
+          <span class="tbp-formulas-tab-emoji">🐶</span>
+          <span class="tbp-formulas-tab-label">Dogs</span>
+          <span class="tbp-formulas-tab-count">5</span>
+        </button>
+        <button type="button" role="tab" class="tbp-formulas-tab" data-tbp-species="broth" aria-selected="false">
+          <span class="tbp-formulas-tab-emoji">🍲</span>
+          <span class="tbp-formulas-tab-label">Bone Broths</span>
+          <span class="tbp-formulas-tab-count tbp-formulas-tab-count--soon">Soon</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="tbp-formulas-panel" data-tbp-species="cat" role="tabpanel" aria-labelledby="tab-cat">
+      <div class="tbp-formulas-panel-head">
+        <h2 class="tbp-formulas-panel-title">🐱 Cat Formulas</h2>
+        <p class="tbp-formulas-panel-sub">200g per portion. 95% whole-animal protein. No vegetables. Built for obligate carnivores.</p>
+      </div>
+      {{ tbp_cats_html }}
+    </div>
+
+    <div class="tbp-formulas-panel" data-tbp-species="dog" role="tabpanel" aria-labelledby="tab-dog">
+      <div class="tbp-formulas-panel-head">
+        <h2 class="tbp-formulas-panel-title">🐶 Dog Formulas</h2>
+        <p class="tbp-formulas-panel-sub">300g per portion. 70% protein, 25% vegetables and fruit, 5% supplements.</p>
+      </div>
+      {{ tbp_dogs_html }}
+    </div>
+
+    <div class="tbp-formulas-panel" data-tbp-species="broth" role="tabpanel" aria-labelledby="tab-broth">
+      <div class="tbp-formulas-panel-head">
+        <h2 class="tbp-formulas-panel-title">🍲 Bone Broth Concentrates <span class="tbp-formulas-soon-pill">Coming Soon</span></h2>
+        <p class="tbp-formulas-panel-sub">Slow-simmered 36-48 hours. Collagen and glycine rich. Dog-safe and cat-safe. Launching soon as a meal topper.</p>
+      </div>
+      {{ tbp_broths_html }}
+    </div>
+
+    {%- if tbp_disclaimer_html != blank or tbp_overview_html != blank or tbp_sourcing_html != blank or tbp_cooking_html != blank or tbp_giving_html != blank -%}
+      <div class="tbp-formulas-accordion">
+        <h2 class="tbp-formulas-accordion-title">Behind the recipes</h2>
+        {%- if tbp_overview_html != blank -%}
+          <details class="tbp-formulas-details">
+            <summary><span>💚 Our approach</span><span class="tbp-formulas-details-chev" aria-hidden="true">+</span></summary>
+            <div class="tbp-formulas-details-body">{{ tbp_overview_html }}</div>
+          </details>
+        {%- endif -%}
+        {%- if tbp_sourcing_html != blank -%}
+          <details class="tbp-formulas-details">
+            <summary><span>🌏 Where our meat comes from</span><span class="tbp-formulas-details-chev" aria-hidden="true">+</span></summary>
+            <div class="tbp-formulas-details-body">{{ tbp_sourcing_html }}</div>
+          </details>
+        {%- endif -%}
+        {%- if tbp_cooking_html != blank -%}
+          <details class="tbp-formulas-details">
+            <summary><span>🌡️ Why we cook at 80°C</span><span class="tbp-formulas-details-chev" aria-hidden="true">+</span></summary>
+            <div class="tbp-formulas-details-body">{{ tbp_cooking_html }}</div>
+          </details>
+        {%- endif -%}
+        {%- if tbp_giving_html != blank -%}
+          <details class="tbp-formulas-details">
+            <summary><span>🐾 Giving back to stray animals</span><span class="tbp-formulas-details-chev" aria-hidden="true">+</span></summary>
+            <div class="tbp-formulas-details-body">{{ tbp_giving_html }}</div>
+          </details>
+        {%- endif -%}
+        {%- if tbp_disclaimer_html != blank -%}
+          <details class="tbp-formulas-details tbp-formulas-details--warn">
+            <summary><span>⚠️ Important disclaimer</span><span class="tbp-formulas-details-chev" aria-hidden="true">+</span></summary>
+            <div class="tbp-formulas-details-body">{{ tbp_disclaimer_html }}</div>
+          </details>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%}
+      Internal CTA removed in v3.10.4 - the page.formulas.json template already renders
+      bonpet-final-cta below this section. Two back-to-back dark-teal CTAs looked bad.
+    {%- endcomment -%}
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The Bon Pet Open-Source Formulas",
+        "author": { "@type": "Organization", "name": "The Bon Pet" },
+        "publisher": { "@type": "Organization", "name": "The Bon Pet" },
+        "datePublished": "2026-04-23",
+        "description": "Complete ingredient lists, weights, and percentages for every Bon Pet fresh pet food recipe. PhD-formulated, AAFCO All Life Stages certified, sous vide cooked."
+      }
+    </script>
+  </section>
+</tbp-formulas-filter>
+
+<style>
+  /* Reset the global .tbp-v3 heading/body cascade - font-family, size, spacing all need explicit overrides.
+     Use compound selector .tbp-v3.tbp-formulas (both classes on same element) for higher specificity than .tbp-v3 h1. */
+  .tbp-v3.tbp-formulas,
+  .tbp-v3.tbp-formulas h1,
+  .tbp-v3.tbp-formulas h2,
+  .tbp-v3.tbp-formulas h3,
+  .tbp-v3.tbp-formulas h4,
+  .tbp-v3.tbp-formulas p,
+  .tbp-v3.tbp-formulas li,
+  .tbp-v3.tbp-formulas table,
+  .tbp-v3.tbp-formulas td,
+  .tbp-v3.tbp-formulas th,
+  .tbp-v3.tbp-formulas summary,
+  .tbp-v3.tbp-formulas button,
+  .tbp-v3.tbp-formulas a,
+  .tbp-v3.tbp-formulas span,
+  .tbp-v3.tbp-formulas strong,
+  .tbp-v3.tbp-formulas small {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: normal;
+  }
+
+  /* Neutralise the global .tbp-v3 h1/h2/h3 sizing so our local sizes actually apply */
+  .tbp-v3.tbp-formulas h1,
+  .tbp-v3.tbp-formulas h2,
+  .tbp-v3.tbp-formulas h3 {
+    font-size: inherit;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+
+  /* Section wrapper + flex-column centering for ALL direct children, regardless of any `.tbp-container` class they might still carry from cached HTML */
+  .tbp-v3.tbp-formulas {
+    background: var(--tbp-cream, #fff7e4);
+    padding: var(--tbp-space-8) var(--tbp-space-4) var(--tbp-space-12) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  /* Every direct child is centered on the cross-axis by the flex parent.
+     Explicit max-width per child. No width: 100% here - that would defeat align-items:center.
+     margin-left/right auto is belt-and-suspenders. */
+  .tbp-v3.tbp-formulas > * {
+    box-sizing: border-box !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100%;
+    max-width: 1200px;
+  }
+  /* The flex parent will center each child based on its max-width.
+     width: 100% above lets them fill up to max-width on narrow screens. */
+
+  /* Hero */
+  .tbp-v3.tbp-formulas .tbp-formulas-hero {
+    text-align: center;
+    max-width: 720px !important;
+    padding: var(--tbp-space-5) 0 var(--tbp-space-6);
+  }
+  .tbp-formulas-eyebrow {
+    color: var(--tbp-primary, #16433d);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin: 0 0 var(--tbp-space-3);
+  }
+  .tbp-v3.tbp-formulas .tbp-formulas-title {
+    font-size: clamp(1.35rem, 0.9rem + 1.2vw, 1.85rem);
+    font-weight: 700;
+    color: var(--tbp-primary, #16433d);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 auto var(--tbp-space-3);
+    max-width: 680px;
+  }
+  .tbp-v3.tbp-formulas .tbp-formulas-lead {
+    font-size: 0.95rem;
+    color: var(--tbp-text, #333);
+    line-height: 1.55;
+    margin: 0 auto;
+    max-width: 580px;
+  }
+
+  /* Sticky species tabs */
+  .tbp-v3.tbp-formulas .tbp-formulas-tabs {
+    display: flex;
+    gap: var(--tbp-space-2);
+    padding: var(--tbp-space-2);
+    margin: var(--tbp-space-2) auto var(--tbp-space-10) !important;
+    background: var(--tbp-white, #fff);
+    border-radius: 999px;
+    max-width: 540px !important;
+    box-shadow: 0 4px 20px rgba(22, 67, 61, 0.08);
+    position: sticky;
+    top: 12px;
+    z-index: 10;
+  }
+  .tbp-formulas-tab {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--tbp-text, #333);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .tbp-formulas-tab:hover { background: rgba(22, 67, 61, 0.05); }
+  .tbp-formulas-tab.is-active {
+    background: var(--tbp-primary, #16433d);
+    color: var(--tbp-white, #fff);
+  }
+  .tbp-formulas-tab-emoji { font-size: 1.1rem; line-height: 1; }
+  .tbp-formulas-tab-count {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    background: rgba(22, 67, 61, 0.08);
+    border-radius: 999px;
+    color: var(--tbp-text-secondary, #666);
+  }
+  .tbp-formulas-tab.is-active .tbp-formulas-tab-count { background: rgba(255,255,255,0.2); color: #fff; }
+  .tbp-formulas-tab-count--soon { background: #f59e0b !important; color: #fff !important; }
+  @media (max-width: 520px) {
+    .tbp-formulas-tabs { flex-direction: column; border-radius: 16px; max-width: 100%; }
+    .tbp-formulas-tab { border-radius: 12px; justify-content: flex-start; padding: 12px 16px; }
+  }
+
+  /* Panels - server-rendered; JS hides inactive when enhanced. Explicit padding so we don't depend on .tbp-container. */
+  .tbp-v3.tbp-formulas .tbp-formulas-panel {
+    margin: var(--tbp-space-6) auto var(--tbp-space-10) !important;
+    max-width: 1120px !important;
+    padding: var(--tbp-space-4) 0 0 !important;
+    box-sizing: border-box;
+  }
+  @media (min-width: 768px) { .tbp-v3.tbp-formulas .tbp-formulas-panel { padding-top: var(--tbp-space-6) !important; } }
+  tbp-formulas-filter.is-enhanced .tbp-formulas-panel:not([data-tbp-active]) { display: none; }
+
+  .tbp-formulas-panel-head { margin-bottom: var(--tbp-space-6); text-align: center; }
+  .tbp-v3.tbp-formulas .tbp-formulas-panel-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--tbp-primary, #16433d);
+    margin: 0 0 var(--tbp-space-1);
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+  }
+  .tbp-formulas-panel-sub {
+    color: var(--tbp-text-secondary, #666);
+    font-size: 0.92rem;
+    margin: 0 auto;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  /* Recipe grid */
+  .tbp-formulas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--tbp-space-4);
+  }
+  @media (min-width: 768px) { .tbp-formulas-grid { grid-template-columns: repeat(2, 1fr); gap: var(--tbp-space-5); } }
+  @media (min-width: 1200px) { .tbp-formulas-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .tbp-formulas-card {
+    background: var(--tbp-white, #fff);
+    border-radius: 16px;
+    padding: var(--tbp-space-4) var(--tbp-space-5) var(--tbp-space-5);
+    box-shadow: 0 2px 10px rgba(22, 67, 61, 0.05);
+    border: 1px solid rgba(22, 67, 61, 0.06);
+    transition: box-shadow 0.15s ease;
+  }
+  .tbp-formulas-card:hover { box-shadow: 0 6px 20px rgba(22, 67, 61, 0.1); }
+
+  .tbp-formulas-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--tbp-space-3);
+    padding-bottom: var(--tbp-space-3);
+    margin-bottom: var(--tbp-space-3);
+    border-bottom: 1px solid rgba(22, 67, 61, 0.08);
+  }
+  .tbp-v3.tbp-formulas .tbp-formulas-card-header h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--tbp-primary, #16433d);
+    margin: 0 !important;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+  .tbp-formulas-portion {
+    font-size: 0.72rem;
+    color: var(--tbp-text-secondary, #666);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 3px 8px;
+    background: rgba(22, 67, 61, 0.06);
+    border-radius: 999px;
+  }
+
+  .tbp-formulas-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .tbp-formulas-table th {
+    text-align: left;
+    padding: 6px 8px 6px 0;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--tbp-text-secondary, #666);
+    border-bottom: 1px solid rgba(22, 67, 61, 0.1);
+  }
+  .tbp-formulas-table th:nth-child(2), .tbp-formulas-table th:nth-child(3) { text-align: right; }
+  .tbp-formulas-table td {
+    padding: 7px 8px 7px 0;
+    border-bottom: 1px solid rgba(22, 67, 61, 0.04);
+    vertical-align: top;
+    line-height: 1.3;
+  }
+  .tbp-formulas-table tr:last-child td { border-bottom: none; }
+  .tbp-f-name { color: var(--tbp-text, #333); font-weight: 500; }
+  .tbp-f-amt, .tbp-f-pct {
+    color: var(--tbp-text, #333);
+    white-space: nowrap;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .tbp-f-amt { width: 4.5rem; }
+  .tbp-f-pct { width: 3.8rem; color: var(--tbp-text-secondary, #666); }
+  .tbp-f-specs {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--tbp-text-secondary, #666);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  /* Coming-soon broth cards get a subtle muted treatment */
+  .tbp-formulas-card--soon { opacity: 0.85; background: #fffaf0; }
+  .tbp-formulas-badge {
+    display: inline-block;
+    background: #f59e0b;
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 999px;
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+  .tbp-formulas-soon-pill {
+    display: inline-block;
+    background: #f59e0b;
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+
+  .tbp-formulas-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: var(--tbp-space-8);
+    color: var(--tbp-text-secondary, #666);
+    background: var(--tbp-white, #fff);
+    border-radius: 12px;
+  }
+
+  /* Hide unused ToC (script still emits them but new design ignores them) */
+  .tbp-formulas-toc { display: none; }
+
+  /* Behind-the-recipes accordion - explicit padding + margin, no .tbp-container dependency */
+  .tbp-v3.tbp-formulas .tbp-formulas-accordion {
+    max-width: 780px !important;
+    margin: var(--tbp-space-10) auto var(--tbp-space-12) !important;
+    padding: var(--tbp-space-6) var(--tbp-space-5) var(--tbp-space-5);
+    background: var(--tbp-white, #fff);
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(22, 67, 61, 0.04);
+    box-sizing: border-box;
+  }
+  .tbp-v3.tbp-formulas .tbp-formulas-accordion-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--tbp-primary, #16433d);
+    text-align: center;
+    margin: 0 0 var(--tbp-space-3);
+    letter-spacing: -0.005em;
+  }
+  .tbp-formulas-details {
+    border-bottom: 1px solid rgba(22, 67, 61, 0.08);
+  }
+  .tbp-formulas-details:last-child { border-bottom: none; }
+  .tbp-formulas-details > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: var(--tbp-space-3) var(--tbp-space-2);
+    font-weight: 600;
+    color: var(--tbp-primary, #16433d);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.98rem;
+    user-select: none;
+  }
+  .tbp-formulas-details > summary::-webkit-details-marker { display: none; }
+  .tbp-formulas-details-chev {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--tbp-text-secondary, #666);
+    transition: transform 0.2s ease;
+    font-weight: 300;
+  }
+  .tbp-formulas-details[open] .tbp-formulas-details-chev { transform: rotate(45deg); }
+  .tbp-formulas-details-body {
+    padding: 0 var(--tbp-space-2) var(--tbp-space-4);
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--tbp-text, #333);
+  }
+  .tbp-formulas-details-body p { margin: 0 0 var(--tbp-space-3); }
+  .tbp-formulas-details-body h3 { font-size: 0.98rem; color: var(--tbp-primary, #16433d); margin: var(--tbp-space-3) 0 6px; }
+  .tbp-formulas-details-body ul { padding-left: 1.25rem; margin: var(--tbp-space-2) 0; }
+  .tbp-formulas-details-body li { margin: 4px 0; }
+  .tbp-formulas-details--warn > summary { color: #b45309; }
+
+  /* Internal CTA CSS removed in v3.10.4 - page.formulas.json template's bonpet-final-cta section handles this. */
+</style>
+
+<script>
+  (function () {
+    var host = document.querySelector('tbp-formulas-filter');
+    if (!host) return;
+    host.classList.add('is-enhanced');
+
+    var tabs = host.querySelectorAll('[data-tbp-species]');
+    var panels = host.querySelectorAll('.tbp-formulas-panel');
+
+    function activate(species, pushHash) {
+      var found = false;
+      tabs.forEach(function (t) {
+        var is = t.getAttribute('data-tbp-species') === species;
+        if (t.classList.contains('tbp-formulas-tab')) {
+          t.classList.toggle('is-active', is);
+          t.setAttribute('aria-selected', is ? 'true' : 'false');
+        }
+      });
+      panels.forEach(function (p) {
+        var is = p.getAttribute('data-tbp-species') === species;
+        if (is) { p.setAttribute('data-tbp-active', ''); found = true; }
+        else { p.removeAttribute('data-tbp-active'); }
+      });
+      if (found && pushHash && history.replaceState) {
+        history.replaceState(null, '', '#' + species);
+      }
+    }
+
+    tabs.forEach(function (t) {
+      if (!t.classList.contains('tbp-formulas-tab')) return;
+      t.addEventListener('click', function () {
+        activate(t.getAttribute('data-tbp-species'), true);
+        var top = host.querySelector('.tbp-formulas-tabs');
+        if (top && top.getBoundingClientRect().top < 0) {
+          top.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Initial: honour URL hash, else default to cat
+    var initial = (location.hash || '').replace('#', '');
+    if (!/^(cat|dog|broth)$/.test(initial)) initial = 'cat';
+    activate(initial, false);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Open-Source Formulas",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Page heading", "default": "Every ingredient. Every gram. Nothing hidden." },
+    { "type": "textarea", "id": "lead", "label": "Lead paragraph" }
+  ],
+  "presets": [
+    { "name": "Open-Source Formulas" }
+  ]
+}
+{% endschema %}

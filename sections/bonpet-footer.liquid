@@ -1,0 +1,297 @@
+{%- comment -%} V3 Footer - custom V3-styled, replaces Dawn's stock footer {%- endcomment -%}
+{%- liquid
+  assign tbp_rating = settings.tbp_rating | default: '4.9'
+  assign tbp_review_count = settings.tbp_review_count | default: '319'
+  assign tbp_pawrent_count = settings.tbp_pawrent_count | default: '1,500'
+-%}
+<footer class="tbp-v3 tbp-footer" role="contentinfo">
+  <div class="tbp-container">
+
+    {%- comment -%} Trust band {%- endcomment -%}
+    <div class="tbp-footer-trust">
+      <div class="tbp-footer-trust-item"><span aria-hidden="true">✅</span> AVS Licensed Kitchen</div>
+      <div class="tbp-footer-trust-item"><span aria-hidden="true">🧪</span> AAFCO Certified</div>
+      <div class="tbp-footer-trust-item"><span aria-hidden="true">🔓</span> Open-Source Formulas</div>
+      <div class="tbp-footer-trust-item"><span aria-hidden="true">🇸🇬</span> Made Fresh in Singapore</div>
+      <div class="tbp-footer-trust-item"><span aria-hidden="true">⭐</span> {{ tbp_rating }} / 5 · {{ tbp_review_count }}+ reviews · {{ tbp_pawrent_count }}+ pawrents</div>
+    </div>
+
+    {%- comment -%} Main grid {%- endcomment -%}
+    <div class="tbp-footer-grid">
+      <div class="tbp-footer-brand">
+        <img src="{{ 'bonpet-logo-beige.png' | asset_url }}" alt="The Bon Pet" class="tbp-footer-logo" loading="lazy" width="180" height="54">
+        <p class="tbp-footer-acra">THE BON PET PTE. LTD. (UEN 202423985R) - Registered in Singapore</p>
+        <p class="tbp-footer-tagline">{{ section.settings.tagline }}</p>
+        {%- if section.settings.kitchen_address != blank -%}
+          <p class="tbp-footer-address">
+            <strong>Kitchen:</strong><br>
+            {{ section.settings.kitchen_address }}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.contact_email != blank or section.settings.contact_phone != blank -%}
+          <p class="tbp-footer-contact">
+            {%- if section.settings.contact_email != blank -%}
+              <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a><br>
+            {%- endif -%}
+            {%- if section.settings.contact_phone != blank -%}
+              <a href="tel:{{ section.settings.contact_phone | replace: ' ', '' }}">{{ section.settings.contact_phone }}</a>
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+      </div>
+
+      <div class="tbp-footer-col">
+        <h4 class="tbp-footer-heading">Shop</h4>
+        <ul class="tbp-footer-links">
+          <li><a href="/collections/dogs">🐶 Meals for Dogs</a></li>
+          <li><a href="/collections/cats">🐱 Meals for Cats</a></li>
+          <li><a href="/products/gently-cooked-trial-packs-for-dog">Dog Trial Pack</a></li>
+          <li><a href="/products/gently-cooked-trial-packs-for-cats">Cat Trial Pack</a></li>
+          <li><a href="/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-dog-trial-pack">Free Dog Trial</a></li>
+          <li><a href="/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-cat-trial-pack">Free Cat Trial</a></li>
+          <li><a href="/collections/support-wildflower-studio">Paw It Forward 🐾</a></li>
+        </ul>
+      </div>
+
+      <div class="tbp-footer-col">
+        <h4 class="tbp-footer-heading">Support</h4>
+        <ul class="tbp-footer-links">
+          <li><a href="/pages/feeding-calculator">Feeding Calculator</a></li>
+          <li><a href="/pages/feeding-guideline">Feeding Guide</a></li>
+          <li><a href="/pages/formulas">Open-Source Formulas</a></li>
+          <li><a href="/pages/cooked-dog-food-singapore">Cooked Dog Food in Singapore</a></li>
+          <li><a href="/pages/aafco-dog-food-singapore">AAFCO Approved Dog Food</a></li>
+          <li><a href="/pages/faq">FAQs</a></li>
+          <li><a href="/blogs/news">Blog</a></li>
+          <li><a href="/pages/the-bon-pet-reviews">Reviews</a></li>
+        </ul>
+      </div>
+
+      <div class="tbp-footer-col">
+        <h4 class="tbp-footer-heading">Company</h4>
+        <ul class="tbp-footer-links">
+          <li><a href="/pages/contact">Contact</a></li>
+          <li><a href="/policies/shipping-policy">Shipping & Pickup</a></li>
+          <li class="tbp-footer-delivery-tiers">Delivery: FREE on $100+, $4 from $80, $9 under $80</li>
+          <li><a href="/policies/refund-policy">Refund Policy</a></li>
+          <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <div class="tbp-footer-col tbp-footer-community">
+        <h4 class="tbp-footer-heading">Community</h4>
+        <ul class="tbp-footer-links">
+          <li><a href="https://chat.whatsapp.com/G3OTmBkC5os1XeJYZT2RRL" target="_blank" rel="noopener">🐶 Dog Pawrents WhatsApp</a></li>
+          <li><a href="https://chat.whatsapp.com/BTh5sXiZBkKIewYLY3HDFC" target="_blank" rel="noopener">🐱 Cat Pawrents WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/thebonpet/" target="_blank" rel="noopener">Instagram @thebonpet</a></li>
+          <li><a href="https://share.google/ySEny0AswWT8eawGQ" target="_blank" rel="noopener">⭐ Google Reviews</a></li>
+        </ul>
+
+        <form method="post" action="/contact#ContactFooter" id="ContactFooter" accept-charset="UTF-8" class="tbp-footer-newsletter">
+          <input type="hidden" name="form_type" value="customer">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label for="tbp-newsletter-email" class="tbp-footer-nl-label">Get our nutrition notes & fresh drops</label>
+          <div class="tbp-footer-nl-row">
+            <input type="email" name="contact[email]" id="tbp-newsletter-email" placeholder="hello@yourmail.com" required autocomplete="email" class="tbp-footer-nl-input">
+            <button type="submit" class="tbp-footer-nl-btn">Join →</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {%- comment -%} Bottom bar {%- endcomment -%}
+    <div class="tbp-footer-bottom">
+      <p class="tbp-footer-copyright">
+        © {{ 'now' | date: '%Y' }} The Bon Pet. Made fresh in Singapore with 🐾
+      </p>
+      <ul class="tbp-footer-payments" aria-label="Payment methods">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag: class: 'tbp-footer-payment-icon' }}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Footer-scoped typography - smaller than body default for compact, elegant footer density */
+  .tbp-footer {
+    background: var(--tbp-primary);
+    color: var(--tbp-white);
+    padding: var(--tbp-space-7) 0 var(--tbp-space-4);
+    font-family: var(--tbp-font-body);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .tbp-footer a { color: var(--tbp-white); text-decoration: none; transition: opacity 0.15s ease; }
+  .tbp-footer a:hover { opacity: 0.8; text-decoration: underline; }
+
+  /* Trust band */
+  .tbp-footer-trust {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 8px var(--tbp-space-4);
+    padding-bottom: var(--tbp-space-5);
+    margin-bottom: var(--tbp-space-6);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .tbp-footer-trust-item {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.95);
+    display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 600; letter-spacing: 0.01em;
+    line-height: 1.4;
+  }
+  .tbp-footer-trust-item span { font-size: 15px; }
+
+  /* Main grid */
+  .tbp-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--tbp-space-6) var(--tbp-space-5);
+    padding-bottom: var(--tbp-space-6);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  @media (min-width: 640px) { .tbp-footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) {
+    .tbp-footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr 1.4fr; gap: var(--tbp-space-5); }
+  }
+
+  .tbp-footer-logo { max-width: 160px; height: auto; margin-bottom: 14px; display: block; }
+  .tbp-footer-acra {
+    color: rgba(255,255,255,0.6);
+    font-size: 11.5px;
+    line-height: 1.4;
+    margin: 0 0 10px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .tbp-footer-tagline {
+    color: rgba(255,255,255,0.82);
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0 0 14px;
+    max-width: 280px;
+  }
+  .tbp-footer-address, .tbp-footer-contact {
+    color: rgba(255,255,255,0.82);
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0 0 10px;
+  }
+  .tbp-footer-address strong { color: var(--tbp-white); font-weight: 700; }
+  .tbp-footer-contact a { color: rgba(255,255,255,0.9); }
+
+  /* Column heading - terracotta orange per brand guide */
+  .tbp-footer-heading {
+    color: var(--tbp-orange);
+    font-size: 13px;
+    font-weight: 700;
+    margin: 4px 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .tbp-footer-links {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .tbp-footer-links a {
+    color: rgba(255,255,255,0.88);
+    font-size: 14.5px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .tbp-footer-links a:hover { color: var(--tbp-white); opacity: 1; }
+  .tbp-footer-delivery-tiers {
+    color: rgba(255,255,255,0.88);
+    font-size: 14.5px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  /* Newsletter */
+  .tbp-footer-newsletter { margin-top: var(--tbp-space-4); }
+  .tbp-footer-nl-label {
+    display: block;
+    color: var(--tbp-white);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+  }
+  .tbp-footer-nl-row {
+    display: flex; gap: 0;
+    border-radius: 10px; overflow: hidden;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .tbp-footer-nl-input {
+    flex: 1; border: 0; background: transparent; color: var(--tbp-white);
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none; min-width: 0;
+  }
+  .tbp-footer-nl-input::placeholder { color: rgba(255,255,255,0.45); font-size: 13px; }
+  .tbp-footer-nl-input:focus { background: rgba(255,255,255,0.04); }
+  .tbp-footer-nl-btn {
+    background: var(--tbp-primary-light);
+    color: var(--tbp-white);
+    border: 0;
+    padding: 0 16px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    transition: background 0.15s ease;
+  }
+  .tbp-footer-nl-btn:hover { background: var(--tbp-primary-deep); }
+
+  /* Bottom bar */
+  .tbp-footer-bottom {
+    display: flex; flex-direction: column;
+    gap: var(--tbp-space-3);
+    padding-top: var(--tbp-space-5);
+    align-items: center; text-align: center;
+  }
+  @media (min-width: 768px) {
+    .tbp-footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+  }
+  .tbp-footer-copyright {
+    margin: 0; color: rgba(255,255,255,0.75);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+  }
+  .tbp-footer-payments {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; gap: 8px; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .tbp-footer-payments li { line-height: 0; }
+  .tbp-footer-payment-icon { height: 22px; width: auto; }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline / mission",
+      "default": "The transparent pet food company. Fresh gently cooked meals for dogs & cats, made right here in Singapore."
+    },
+    {
+      "type": "text",
+      "id": "kitchen_address",
+      "label": "Kitchen address (HTML br allowed)",
+      "default": "26 Pioneer Crescent<br>West Park Bizcentral<br>Singapore 628558"
+    },
+    { "type": "text", "id": "contact_email", "label": "Contact email", "default": "hello@thebonpet.com" },
+    { "type": "text", "id": "contact_phone", "label": "Contact phone", "default": "+65 9010 8515" }
+  ],
+  "presets": [{ "name": "TBP Footer" }]
+}
+{% endschema %}

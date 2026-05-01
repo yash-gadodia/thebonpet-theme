@@ -1,0 +1,24 @@
+{%- comment -%}
+  V3 primitive button.
+  Usage:
+    {% render 'bonpet-button', label: 'Shop Now', href: '/collections/dog', variant: 'primary', size: 'lg' %}
+  Variants: primary (default gradient-green), secondary (outline pill), outline-dark
+  Sizes: default, lg
+{%- endcomment -%}
+
+{%- assign btn_variant = variant | default: 'primary' -%}
+{%- assign btn_size = size | default: '' -%}
+{%- assign btn_class = 'tbp-btn tbp-btn-' | append: btn_variant -%}
+{%- if btn_size == 'lg' -%}
+  {%- assign btn_class = btn_class | append: ' tbp-btn-lg' -%}
+{%- endif -%}
+
+{%- if href -%}
+  <a href="{{ href }}" class="{{ btn_class }}"{% if target %} target="{{ target }}" rel="noopener"{% endif %}>
+    {{ label }}
+  </a>
+{%- else -%}
+  <button type="{{ type | default: 'button' }}" class="{{ btn_class }}">
+    {{ label }}
+  </button>
+{%- endif -%}

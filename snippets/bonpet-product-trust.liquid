@@ -1,0 +1,120 @@
+{%- comment -%}
+  V3 Product Trust Block - renders near add-to-cart on every product page.
+  Addresses checkout abandonment by being transparent about shipping, ingredients, and reviews.
+  Also surfaces the open-source formulas page as a trust signal (deep-linked to the right species).
+{%- endcomment -%}
+
+{%- liquid
+  assign tbp_formulas_anchor = '/pages/formulas'
+  if product.handle contains 'cat' or product.type contains 'Cat'
+    assign tbp_formulas_anchor = '/pages/formulas#cat'
+  elsif product.handle contains 'dog' or product.type contains 'Dog'
+    assign tbp_formulas_anchor = '/pages/formulas#dog'
+  endif
+-%}
+
+<div class="tbp-v3 tbp-product-trust">
+  <ul class="tbp-product-trust-list">
+    <li>
+      <span aria-hidden="true">🚚</span>
+      <div>
+        <strong>FREE cold-chain delivery at $100+</strong>
+        <span>$4 from $80, $9 under $80. Frozen, island-wide Singapore.</span>
+      </div>
+    </li>
+    <li>
+      <span aria-hidden="true">🍖</span>
+      <div>
+        <strong>Restaurant-Grade Ingredients</strong>
+        <span>Human-quality meat, offal &amp; supplements. No fillers or 'proprietary blends'.</span>
+      </div>
+    </li>
+    <li>
+      <span aria-hidden="true">🔓</span>
+      <div>
+        <strong>100% Open-Source Recipe</strong>
+        <span>Every gram, every ratio, every supplement published. Check before you buy.</span>
+      </div>
+    </li>
+    <li>
+      <span aria-hidden="true">⭐</span>
+      <div>
+        {%- liquid
+          assign tbp_rating = settings.tbp_rating | default: '4.9'
+          assign tbp_review_count = settings.tbp_review_count | default: '319'
+        -%}
+        <strong>{{ tbp_rating }} / 5 from {{ tbp_review_count }}+ Google reviews</strong>
+        <span>AAFCO All Life Stages certified. AVS-licensed kitchen.</span>
+      </div>
+    </li>
+  </ul>
+
+  <a class="tbp-product-trust-cta" href="{{ tbp_formulas_anchor }}">
+    <span class="tbp-product-trust-cta-icon" aria-hidden="true">🔓</span>
+    <span class="tbp-product-trust-cta-body">
+      <strong>See exactly what's in this pack</strong>
+      <span>Every ingredient, weight, and percentage. No proprietary blends.</span>
+    </span>
+    <span class="tbp-product-trust-cta-arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</div>
+
+<style>
+  .tbp-product-trust {
+    background: var(--tbp-cream);
+    border: 1px solid var(--tbp-tan-mid);
+    border-radius: var(--tbp-radius-md);
+    padding: var(--tbp-space-4) var(--tbp-space-5);
+    margin: var(--tbp-space-4) 0;
+    font-family: var(--tbp-font-body);
+    color: var(--tbp-text-dark);
+  }
+  .tbp-product-trust-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--tbp-space-3); }
+  .tbp-product-trust-list li { display: flex; align-items: flex-start; gap: var(--tbp-space-3); }
+  .tbp-product-trust-list > li > span:first-child { font-size: var(--tbp-text-xl); line-height: 1; flex-shrink: 0; margin-top: 2px; }
+  .tbp-product-trust-list strong { display: block; color: var(--tbp-primary); font-size: var(--tbp-text-sm); line-height: 1.3; font-weight: 700; }
+  .tbp-product-trust-list span:not(:first-child) { display: block; color: var(--tbp-text-mid); font-size: var(--tbp-text-xs); line-height: 1.4; margin-top: 2px; }
+
+  .tbp-product-trust-cta {
+    display: flex;
+    align-items: center;
+    gap: var(--tbp-space-3);
+    margin-top: var(--tbp-space-4);
+    padding: var(--tbp-space-3) var(--tbp-space-4);
+    background: var(--tbp-primary);
+    color: var(--tbp-white) !important;
+    border-radius: var(--tbp-radius-md);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 8px rgba(22, 67, 61, 0.12);
+  }
+  .tbp-product-trust-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(22, 67, 61, 0.22);
+    text-decoration: none;
+  }
+  .tbp-product-trust-cta-icon { font-size: 1.4rem; line-height: 1; flex-shrink: 0; }
+  .tbp-product-trust-cta-body { flex: 1; min-width: 0; }
+  .tbp-product-trust-cta-body strong {
+    display: block;
+    color: var(--tbp-white);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .tbp-product-trust-cta-body span {
+    display: block;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.78rem;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+  .tbp-product-trust-cta-arrow {
+    font-size: 1.2rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.85);
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+  }
+  .tbp-product-trust-cta:hover .tbp-product-trust-cta-arrow { transform: translateX(3px); }
+</style>

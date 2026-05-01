@@ -1,0 +1,108 @@
+{%- comment -%} V3 Suppawt Local Strip - thin trust strip for use below hero or as a standalone band {%- endcomment -%}
+<section class="tbp-v3 tbp-suppawt-strip" aria-label="{{ section.settings.aria_label | default: 'Suppawt local' }}">
+  <div class="tbp-container">
+    <div class="tbp-suppawt-strip-inner">
+      {%- if section.settings.lead_flag != blank -%}
+        <span class="tbp-suppawt-strip-flag" aria-hidden="true">{{ section.settings.lead_flag }}</span>
+      {%- endif -%}
+      {%- if section.settings.lead != blank -%}
+        <strong class="tbp-suppawt-strip-lead">{{ section.settings.lead }}</strong>
+      {%- endif -%}
+      <ul class="tbp-suppawt-strip-items" role="list">
+        {%- for block in section.blocks -%}
+          <li class="tbp-suppawt-strip-item" {{ block.shopify_attributes }}>{{ block.settings.label }}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-suppawt-strip {
+    background: var(--tbp-cream);
+    padding: var(--tbp-space-4) 0;
+    border-top: 1px solid var(--tbp-tan-mid);
+    border-bottom: 1px solid var(--tbp-tan-mid);
+  }
+  .tbp-suppawt-strip-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--tbp-space-2) var(--tbp-space-4);
+    text-align: center;
+  }
+  .tbp-suppawt-strip-flag {
+    font-size: var(--tbp-text-xl);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .tbp-suppawt-strip-lead {
+    color: var(--tbp-primary);
+    font-size: var(--tbp-text-base);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .tbp-suppawt-strip-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tbp-space-2) var(--tbp-space-4);
+    justify-content: center;
+  }
+  .tbp-suppawt-strip-item {
+    color: var(--tbp-text-dark);
+    font-size: var(--tbp-text-sm);
+    font-weight: 600;
+    position: relative;
+    padding-left: var(--tbp-space-4);
+  }
+  .tbp-suppawt-strip-item::before {
+    content: "·";
+    position: absolute;
+    left: calc(var(--tbp-space-4) / -2 - 2px);
+    color: var(--tbp-primary-mid);
+    font-weight: 700;
+  }
+  .tbp-suppawt-strip-item:first-child {
+    padding-left: 0;
+  }
+  .tbp-suppawt-strip-item:first-child::before {
+    content: none;
+  }
+  @media (max-width: 640px) {
+    .tbp-suppawt-strip-inner { gap: var(--tbp-space-1) var(--tbp-space-3); }
+    .tbp-suppawt-strip-items { gap: var(--tbp-space-1) var(--tbp-space-3); }
+    .tbp-suppawt-strip-item { padding-left: var(--tbp-space-3); }
+    .tbp-suppawt-strip-item::before { left: calc(var(--tbp-space-3) / -2 - 1px); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Suppawt Local Strip",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Accessibility label", "default": "Suppawt local" },
+    { "type": "text", "id": "lead_flag", "label": "Lead emoji (optional)", "default": "🇸🇬" },
+    { "type": "text", "id": "lead", "label": "Lead phrase", "default": "Suppawt local" }
+  ],
+  "blocks": [{
+    "type": "item",
+    "name": "Strip item",
+    "settings": [
+      { "type": "text", "id": "label", "label": "Label" }
+    ]
+  }],
+  "presets": [{
+    "name": "TBP Suppawt Local Strip",
+    "blocks": [
+      { "type": "item", "settings": { "label": "Small SG team" } },
+      { "type": "item", "settings": { "label": "PhD-formulated" } },
+      { "type": "item", "settings": { "label": "Open-source recipes" } }
+    ]
+  }]
+}
+{% endschema %}

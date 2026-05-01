@@ -1,0 +1,172 @@
+/*
+ * Founder / About page template
+ *
+ * Comprehensive brand story: hero, narrative, values, timeline, team, CTAs.
+ * This file may be updated via the Shopify theme editor.
+ */
+{
+    "sections": {
+        "founder_hero": {
+            "type": "bonpet-founder-hero",
+            "settings": {
+                "image": "shopify://shop_images/bonpet-hero-2up-1776736957.jpg",
+                "image_alt": "A cat and dog enjoying their gently cooked Bon Pet meals",
+                "eyebrow": "OUR STORY",
+                "heading": "Started with Salt, Pepper & Lola 🐾",
+                "intro": "Nic's cats Salt and Pepper. Yash's dog Lola. Two software engineers who couldn't find fresh pet food we trusted, so we built it from our kitchen counter."
+            }
+        },
+        "founder_story": {
+            "type": "bonpet-founder-story",
+            "settings": {
+                "body": "<p>Nic has two cats, Salt and Pepper. Yash has a dog, Lola. As software engineers with day jobs, we wanted to feed our furkids the best we could find. But every Singapore brand hid their ingredients behind marketing fluff. No transparency. No real answers.</p><p>We started cooking in our own kitchen on weekends, testing recipes on Salt, Pepper, and Lola until we got the nutrition right. Within months, we realised we were hooked. The work was meaningful. Our furkids were thriving. Friends started asking if they could buy packs from us. So we kept cooking.</p><p>The constraint was time. With full-time jobs, home cooking didn't scale. We spent entire nights in the kitchen, crashed on the floor at 6am, then dragged ourselves to the office. We knew there had to be a better way.</p><p>In 2024, we rented industrial-grade facilities at West Park Bizcentral on Pioneer Crescent. Same recipes. Same standards. Same commitment to never cooking anything we wouldn't feed Salt, Pepper, or Lola. We went all-in.</p><p>Today, we publish every ingredient, every ratio, every supplement openly in a public Google Sheet. No proprietary blends. No marketing spin. That's not a brand stunt. It's the only way we know how to do this right.</p>"
+            }
+        },
+        "founder_why": {
+            "type": "bonpet-founder-why",
+            "blocks": {
+                "transparency": {
+                    "type": "pillar",
+                    "settings": {
+                        "image": "shopify://shop_images/vacuum-sealed-beef-pack-cta.jpg",
+                        "image_alt": "Vacuum-sealed pack of gently cooked beef showing every ingredient on the label",
+                        "icon": "🔓",
+                        "title": "Radical Transparency",
+                        "body": "Every gram, every supplement, every ratio is published openly. No proprietary blends. No marketing spin. The only Singapore fresh pet brand that shows you exactly what goes in the pack."
+                    }
+                },
+                "quality": {
+                    "type": "pillar",
+                    "settings": {
+                        "image": "shopify://shop_images/IMG_4081.jpg",
+                        "image_alt": "A bowl of gently cooked pet food on a wooden board with cinnamon, bay leaves and peppercorns - the care that goes into every meal",
+                        "icon": "❤️",
+                        "title": "Quality as Standard",
+                        "body": "We cook with human-grade ingredients and the same care we'd give our own furkids. Sous vide at 80°C. PhD-formulated. AAFCO-certified. No shortcuts ever."
+                    }
+                },
+                "community": {
+                    "type": "pillar",
+                    "settings": {
+                        "image": "shopify://shop_images/IMG_4504.jpg",
+                        "image_alt": "A black cat enjoying Bon Pet at a Singapore cat cafe with the community in the background",
+                        "icon": "🐾",
+                        "title": "Community First",
+                        "body": "We run WhatsApp groups, organise free tastings, answer nutrition questions personally. This isn't a faceless brand. Yash and Nic are here. We care what you think."
+                    }
+                }
+            },
+            "block_order": [
+                "transparency",
+                "quality",
+                "community"
+            ],
+            "settings": {
+                "heading": "Why we started"
+            }
+        },
+        "founder_timeline": {
+            "type": "bonpet-founder-timeline",
+            "blocks": {
+                "kitchen": {
+                    "type": "milestone",
+                    "settings": {
+                        "image": "shopify://shop_images/dog_chicken_meal_prep_layout.jpg",
+                        "image_alt": "Home kitchen meal prep - early Bon Pet recipe testing on Salt, Pepper, and Lola",
+                        "year": "2023",
+                        "title": "Started in our kitchen",
+                        "body": "Testing recipes on Salt, Pepper, and Lola. Yash and Nic cooking until 6am on weekends, crashing on the floor, then back to day jobs."
+                    }
+                },
+                "industrial": {
+                    "type": "milestone",
+                    "settings": {
+                        "image": "shopify://shop_images/sous-vide-immersion-circulators-hero.jpg",
+                        "image_alt": "Industrial sous vide immersion circulators in our AAFCO-certified, AVS-licensed Pioneer Crescent kitchen",
+                        "year": "2024",
+                        "title": "Incorporated, went industrial",
+                        "body": "Rented facilities at West Park Bizcentral, Pioneer Crescent. Built AAFCO-certified, AVS-licensed kitchen. Same recipes, industrial scale."
+                    }
+                },
+                "formulas": {
+                    "type": "milestone",
+                    "settings": {
+                        "image": "shopify://shop_images/1dfe0fd9-6a8a-4a9a-8d37-ab2638aa52c9.jpg",
+                        "image_alt": "Every ingredient laid out before cooking - sweet potato, zucchini, beetroot, ground meat, and the supplement blend that goes into a Bon Pet recipe",
+                        "year": "2024",
+                        "title": "Published our formulas",
+                        "body": "First Singapore fresh pet brand to open-source every ingredient ratio. Public Google Sheet. No secrets. Complete transparency."
+                    }
+                },
+                "today": {
+                    "type": "milestone",
+                    "settings": {
+                        "image": "shopify://shop_images/IMG_4499.jpg",
+                        "image_alt": "A real Singapore pawrent's cat enjoying Bon Pet meals at home",
+                        "year": "Now",
+                        "title": "Feeding Singapore furkids",
+                        "body": "500+ families trust us with their pets. Growing community. Still personal. Still caring. Still cooking with intention."
+                    }
+                }
+            },
+            "block_order": [
+                "kitchen",
+                "industrial",
+                "formulas",
+                "today"
+            ],
+            "settings": {
+                "heading": "How we got here"
+            }
+        },
+        "trust_band": {
+            "type": "bonpet-reassurance-band",
+            "settings": {
+                "heading": "Trusted by Singapore"
+            }
+        },
+        "final_cta": {
+            "type": "bonpet-founder-cta",
+            "blocks": {
+                "dog": {
+                    "type": "cta_button",
+                    "settings": {
+                        "label": "Shop Dog Trial 🐶",
+                        "link": "shopify://products/gently-cooked-trial-packs-for-dog"
+                    }
+                },
+                "cat": {
+                    "type": "cta_button",
+                    "settings": {
+                        "label": "Shop Cat Trial 🐱",
+                        "link": "shopify://products/gently-cooked-trial-packs-for-cats"
+                    }
+                }
+            },
+            "block_order": [
+                "dog",
+                "cat"
+            ],
+            "settings": {
+                "heading": "Ready to feed them like family?",
+                "subheading": "Start with our trial pack. Get 5 different proteins (dogs) or 4 different proteins (cats). Let your furkid decide their favourite."
+            }
+        },
+        "main": {
+            "type": "main-page",
+            "settings": {
+                "padding_top": 0,
+                "padding_bottom": 0
+            }
+        }
+    },
+    "order": [
+        "main",
+        "founder_hero",
+        "founder_story",
+        "founder_why",
+        "founder_timeline",
+        "trust_band",
+        "final_cta"
+    ]
+}

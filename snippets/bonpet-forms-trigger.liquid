@@ -1,0 +1,282 @@
+{%- comment -%}
+  V3 Shopify Forms trigger + post-submission Dog/Cat CTA overlay.
+  Flow:
+    1. Opens Shopify Forms popup on 50% scroll, hero claim-code button, or sticky mobile CTA.
+    2. User fills the Shopify Forms popup (first name, email, WhatsApp) — the ONLY form on the site.
+    3. On submission success we detect via fetch-intercept + shadow-DOM observer, close the
+       Shopify Forms overlay, and show OUR own overlay with Dog + Cat trial redirect buttons
+       plus the discount code copy affordance.
+  Notes:
+    - No <form> element here, so HubSpot's Collected Forms cannot double-capture.
+    - Closed shadow DOM on <shopify-forms-embed> means we cannot inject directly; we cover instead.
+{%- endcomment -%}
+
+<div class="tbp-trial-reveal" id="tbpTrialReveal" aria-hidden="true" role="dialog" aria-labelledby="tbpTrialRevealTitle">
+  <div class="tbp-trial-reveal-backdrop" data-close></div>
+  <div class="tbp-trial-reveal-box" role="document">
+    <button type="button" class="tbp-trial-reveal-close" data-close aria-label="Close">&times;</button>
+    <div class="tbp-trial-reveal-confetti" aria-hidden="true">🎉</div>
+    <h3 id="tbpTrialRevealTitle" class="tbp-trial-reveal-title">You're in, pawrent!</h3>
+    <p class="tbp-trial-reveal-body">Your free trial code is ready. Pick your furkid and we'll auto-apply it at checkout:</p>
+    <div class="tbp-trial-reveal-ctas">
+      <a class="tbp-trial-reveal-btn" href="/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-dog-trial-pack">
+        <span class="tbp-trial-reveal-btn-emoji" aria-hidden="true">🐶</span>
+        <span class="tbp-trial-reveal-btn-label">Claim Dog Trial</span>
+      </a>
+      <a class="tbp-trial-reveal-btn" href="/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-cat-trial-pack">
+        <span class="tbp-trial-reveal-btn-emoji" aria-hidden="true">🐱</span>
+        <span class="tbp-trial-reveal-btn-label">Claim Cat Trial</span>
+      </a>
+    </div>
+    <div class="tbp-trial-reveal-code">
+      <span class="tbp-trial-reveal-code-label">Or copy code:</span>
+      <code>FREETRIAL&lt;3THEBONPET</code>
+      <button type="button" class="tbp-trial-reveal-copy" data-copy="FREETRIAL<3THEBONPET">Copy</button>
+    </div>
+    <p class="tbp-trial-reveal-fine">$9 cold-chain delivery · delivered frozen island-wide 🇸🇬</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var FORMS_SELECTOR = 'shopify-forms-embed';
+  var OPEN_KEY = 'tbp_popup_shown_v3';
+  var SCROLL_THRESHOLD = 0.5;
+  var FALLBACK_MS = 30000;
+  var SUCCESS_TEXT_MARKERS = ['FREETRIAL', 'THEBONPET', "Here's your discount", 'Your discount'];
+
+  var reveal = document.getElementById('tbpTrialReveal');
+  if (!reveal) return;
+  var copyBtn = reveal.querySelector('.tbp-trial-reveal-copy');
+
+  function getEmbed() { return document.querySelector(FORMS_SELECTOR); }
+
+  function openShopifyForm() {
+    var el = getEmbed();
+    if (!el) { console.warn('[Bon Pet] Shopify Forms embed not found.'); return; }
+
+    var inner = el.shadowRoot;
+    if (inner) {
+      var teaser = inner.querySelector('[class*="teaserContainer"], button[class*="teaser"]');
+      if (teaser && typeof teaser.click === 'function') {
+        try { teaser.click(); return; } catch (e) {}
+      }
+    }
+
+    if (typeof el.open === 'function') { try { el.open(); } catch (e) {} }
+    var trigger = el.querySelector('[data-popup-trigger], button, a');
+    if (trigger && typeof trigger.click === 'function') { try { trigger.click(); } catch (e) {} }
+    if (inner) {
+      var popup = inner.querySelector('[role="dialog"], dialog, .popup, [class*="overlay"], [class*="formContainer"]');
+      if (popup) {
+        popup.removeAttribute('hidden');
+        popup.setAttribute('open', '');
+        try { if (typeof popup.showModal === 'function') popup.showModal(); } catch (e) {}
+      }
+      var innerBtns = inner.querySelectorAll('button,[role="button"]');
+      for (var i = 0; i < innerBtns.length; i++) {
+        var cls = (innerBtns[i].className || '') + '';
+        if (/trigger|open|show|invite|popup|teaser/i.test(cls)) { try { innerBtns[i].click(); } catch (e) {} break; }
+      }
+    }
+  }
+
+  function closeShopifyForm() {
+    var el = getEmbed();
+    if (!el) return;
+    if (typeof el.close === 'function') { try { el.close(); } catch (e) {} }
+    var inner = el.shadowRoot;
+    if (inner) {
+      var closeBtns = inner.querySelectorAll('[aria-label*="close" i], [class*="close" i]');
+      for (var i = 0; i < closeBtns.length; i++) { try { closeBtns[i].click(); } catch (e) {} }
+      var popup = inner.querySelector('[role="dialog"], dialog, [class*="overlay"], [class*="formContainer"]');
+      if (popup) { try { popup.setAttribute('hidden', ''); popup.removeAttribute('open'); } catch (e) {} }
+    }
+  }
+
+  window.openBonPetForm = openShopifyForm;
+  window.closeBonPetForm = closeShopifyForm;
+
+  function openReveal() {
+    reveal.setAttribute('aria-hidden', 'false');
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function closeReveal() {
+    reveal.setAttribute('aria-hidden', 'true');
+    document.documentElement.style.overflow = '';
+  }
+
+  reveal.addEventListener('click', function (e) {
+    if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-close')) closeReveal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && reveal.getAttribute('aria-hidden') === 'false') closeReveal();
+  });
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var code = copyBtn.getAttribute('data-copy') || '';
+      try { navigator.clipboard && navigator.clipboard.writeText(code); } catch (e) {}
+      copyBtn.classList.add('copied');
+      copyBtn.textContent = 'Copied ✓';
+      setTimeout(function () { copyBtn.classList.remove('copied'); copyBtn.textContent = 'Copy'; }, 1800);
+    });
+  }
+
+  var submittedFlag = false;
+  function onSubmissionSuccess() {
+    if (submittedFlag) return;
+    submittedFlag = true;
+    setTimeout(function () { closeShopifyForm(); openReveal(); }, 350);
+  }
+
+  if (window.fetch) {
+    var origFetch = window.fetch;
+    window.fetch = function (input, init) {
+      var url = (typeof input === 'string') ? input : (input && input.url) || '';
+      var method = (init && init.method) || (input && input.method) || 'GET';
+      var p = origFetch.apply(this, arguments);
+      if (/POST|PUT/i.test(method) && /forms|subscribe|submissions?|newsletter/i.test(url)) {
+        p.then(function (res) { if (res && res.ok) { try { onSubmissionSuccess(); } catch (e) {} } }, function () {});
+      }
+      return p;
+    };
+  }
+
+  // Intentionally NOT scanning shadow-DOM text for success markers — Shopify Forms pre-renders
+  // the discount-reveal template inside the shadow tree even before submit, causing false-positives
+  // that show our Dog/Cat overlay on page load. Fetch-intercept above is the only trigger.
+
+  function alreadySeen() { try { return !!sessionStorage.getItem(OPEN_KEY); } catch (e) { return false; } }
+  function markSeen() { try { sessionStorage.setItem(OPEN_KEY, '1'); } catch (e) {} }
+
+  function setupAutoOpen() {
+    if (alreadySeen()) return;
+    var fired = false;
+    function fire() {
+      if (fired) return;
+      fired = true;
+      markSeen();
+      window.removeEventListener('scroll', onScroll);
+      openShopifyForm();
+    }
+    function onScroll() {
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight;
+      if (h > 0 && y / h >= SCROLL_THRESHOLD) fire();
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    setTimeout(fire, FALLBACK_MS);
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') setupAutoOpen();
+  else document.addEventListener('DOMContentLoaded', setupAutoOpen, { once: true });
+})();
+</script>
+
+<style>
+  .tbp-trial-reveal {
+    position: fixed; inset: 0; z-index: 999999;
+    display: none; align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  .tbp-trial-reveal[aria-hidden="false"] { display: flex; }
+  .tbp-trial-reveal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(3, 68, 60, 0.78);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    animation: tbpRevealFade 0.2s ease;
+  }
+  .tbp-trial-reveal-box {
+    position: relative;
+    background: var(--tbp-white, #fff);
+    color: var(--tbp-text-dark, #1e1e1e);
+    border-radius: 20px;
+    padding: 36px 26px 24px;
+    max-width: 460px; width: 100%;
+    max-height: 92vh; overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    animation: tbpRevealIn 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @keyframes tbpRevealFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes tbpRevealIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+  .tbp-trial-reveal-close {
+    position: absolute; top: 10px; right: 12px;
+    background: transparent; border: 0; font-size: 28px; line-height: 1;
+    color: var(--tbp-text-mid, #666); cursor: pointer;
+    width: 36px; height: 36px; border-radius: 50%;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .tbp-trial-reveal-close:hover { background: rgba(0, 0, 0, 0.05); color: var(--tbp-text-dark, #1e1e1e); }
+
+  .tbp-trial-reveal-confetti { font-size: 44px; margin-bottom: 6px; }
+  .tbp-trial-reveal-title {
+    font-family: var(--tbp-font-display, inherit);
+    color: var(--tbp-primary, #16433D);
+    font-size: 26px; line-height: 1.2;
+    margin: 0 0 10px;
+  }
+  .tbp-trial-reveal-body {
+    color: var(--tbp-text-mid, #555);
+    font-size: 15px; line-height: 1.55;
+    margin: 0 0 20px;
+  }
+  .tbp-trial-reveal-ctas {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 16px;
+  }
+  .tbp-trial-reveal-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    background: var(--tbp-primary, #16433D);
+    color: var(--tbp-white, #fff);
+    padding: 16px 10px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.15s ease, background 0.15s ease;
+    box-shadow: 0 6px 16px rgba(3, 68, 60, 0.25);
+  }
+  .tbp-trial-reveal-btn:hover {
+    background: var(--tbp-primary-deep, #03443C);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(3, 68, 60, 0.3);
+  }
+  .tbp-trial-reveal-btn-emoji { font-size: 26px; }
+  .tbp-trial-reveal-btn-label { font-size: 14px; }
+
+  .tbp-trial-reveal-code {
+    display: flex; gap: 6px; align-items: center; justify-content: center;
+    background: var(--tbp-cream, #FFF4E4);
+    border: 1.5px dashed var(--tbp-tan, #EDDDC0);
+    border-radius: 10px; padding: 10px 12px;
+    margin-bottom: 12px; font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .tbp-trial-reveal-code-label { color: var(--tbp-text-mid, #555); }
+  .tbp-trial-reveal-code code {
+    font-family: ui-monospace, SF Mono, monospace;
+    font-size: 12px; font-weight: 700;
+    color: var(--tbp-primary, #16433D);
+    word-break: break-all;
+  }
+  .tbp-trial-reveal-copy {
+    background: var(--tbp-primary, #16433D); color: var(--tbp-white, #fff);
+    border: 0; padding: 6px 12px; border-radius: 6px; font-size: 12px;
+    font-weight: 600; cursor: pointer; font-family: inherit;
+    transition: background 0.15s ease;
+  }
+  .tbp-trial-reveal-copy:hover { background: var(--tbp-primary-deep, #03443C); }
+  .tbp-trial-reveal-copy.copied { background: #2e7d32; }
+
+  .tbp-trial-reveal-fine {
+    font-size: 12px; color: var(--tbp-text-mid, #999);
+    margin: 0; line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tbp-trial-reveal-backdrop, .tbp-trial-reveal-box { animation: none; }
+  }
+</style>

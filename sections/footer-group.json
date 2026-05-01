@@ -1,0 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "bonpet-footer",
+      "settings": {
+        "tagline": "The transparent pet food company. Fresh gently cooked meals for dogs & cats, made right here in Singapore.",
+        "kitchen_address": "26 Pioneer Crescent<br>West Park Bizcentral<br>Singapore 628558",
+        "contact_email": "hello@thebonpet.com",
+        "contact_phone": "+65 9010 8515"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

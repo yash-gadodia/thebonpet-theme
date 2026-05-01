@@ -1,0 +1,7 @@
+tests/
+.playwright-mcp/
+node_modules/
+*.log
+.DS_Store
+README-V3.md
+deploy.sh

@@ -1,0 +1,1089 @@
+{% comment %}
+Pet Meal Calculator Section for Shopify
+Based on PRD requirements for calculating daily feeding amounts
+{% endcomment %}
+
+<div class="pet-calculator-section" id="pet-calculator-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.heading != blank %}
+      <h2 class="calculator-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <div class="calculator-description">
+        {{ section.settings.description }}
+      </div>
+    {% endif %}
+
+    <form class="pet-calculator-form" id="petCalculatorForm">
+      <div class="form-stack">
+
+        <!-- Pet Age Field -->
+        <div class="form-group">
+          <label for="petAge">{{ section.settings.age_label | default: "Select your pet's age" }}</label>
+          <select id="petAge" name="petAge" required>
+            <option value="">Select your pet's age</option>
+            <option value="0">&lt;1</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">&gt;10</option>
+          </select>
+        </div>
+
+        <!-- Weight Field -->
+        <div class="form-group">
+          <label for="petWeight">{{ section.settings.weight_label | default: "Pet Weight" }}</label>
+          {% if section.settings.weight_description != blank %}
+            <small class="field-description">{{ section.settings.weight_description }}</small>
+          {% endif %}
+          <input type="number" id="petWeight" name="petWeight" min="0.1" step="0.1" placeholder="Enter weight in kg" required>
+        </div>
+
+        <!-- Pet Type Field -->
+        <div class="form-group">
+          <label>{{ section.settings.pet_type_label | default: "Pet Type" }}</label>
+          <div class="pet-type-buttons">
+            <button type="button" class="pet-type-btn" data-value="1" onclick="selectPetType(1)">
+              {% if section.settings.cat_image != blank %}
+                <img src="{{ section.settings.cat_image | image_url: width: 80 }}" alt="Cat" class="pet-image">
+              {% endif %}
+              <span>Cat</span>
+            </button>
+            <button type="button" class="pet-type-btn" data-value="2" onclick="selectPetType(2)">
+              {% if section.settings.dog_image != blank %}
+                <img src="{{ section.settings.dog_image | image_url: width: 80 }}" alt="Dog" class="pet-image">
+              {% endif %}
+              <span>Dog</span>
+            </button>
+          </div>
+          <input type="hidden" name="petType" id="petTypeValue" required>
+        </div>
+
+        <!-- Neutered Status Field -->
+        <div class="form-group">
+          <label for="neutered">{{ section.settings.neutered_label | default: "Is your pet neutered/spayed?" }}</label>
+          <select id="neutered" name="neutered" required>
+            <option value="1" selected>Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+
+        <!-- Activity Level Field -->
+        <div class="form-group">
+          <label>{{ section.settings.activity_label | default: "Daily Activity Level" }}</label>
+          <div class="activity-buttons">
+            <button type="button" class="activity-btn" data-value="1" onclick="selectActivityLevel(1)">
+              {% if section.settings.cat_low_activity_image != blank %}
+                <img id="lowActivityImage" src="{{ section.settings.cat_low_activity_image | image_url: width: 120 }}" alt="Low Activity" class="activity-image">
+              {% else %}
+                <img id="lowActivityImage" src="" alt="Low Activity" class="activity-image" style="display: none;">
+              {% endif %}
+              <span>Low &lt; 30 mins</span>
+            </button>
+            <button type="button" class="activity-btn" data-value="2" onclick="selectActivityLevel(2)">
+              {% if section.settings.cat_average_activity_image != blank %}
+                <img id="averageActivityImage" src="{{ section.settings.cat_average_activity_image | image_url: width: 120 }}" alt="Average Activity" class="activity-image">
+              {% else %}
+                <img id="averageActivityImage" src="" alt="Average Activity" class="activity-image" style="display: none;">
+              {% endif %}
+              <span>Average 30 mins to 1 hour</span>
+            </button>
+            <button type="button" class="activity-btn" data-value="3" onclick="selectActivityLevel(3)">
+              {% if section.settings.cat_high_activity_image != blank %}
+                <img id="highActivityImage" src="{{ section.settings.cat_high_activity_image | image_url: width: 120 }}" alt="High Activity" class="activity-image">
+              {% else %}
+                <img id="highActivityImage" src="" alt="High Activity" class="activity-image" style="display: none;">
+              {% endif %}
+              <span>High &gt; 1 hour</span>
+            </button>
+          </div>
+          <input type="hidden" name="activityLevel" id="activityLevelValue" required>
+        </div>
+
+      </div>
+
+      <button type="button" class="calculate-btn" onclick="calculateFeeding()">
+        {{ section.settings.button_text | default: "Calculate Feeding Amount" }}
+      </button>
+    </form>
+
+    <!-- Results Section -->
+    <div class="calculator-results" id="calculatorResults" style="display: none;">
+      <h3>{{ section.settings.results_heading | default: "Daily Feeding Requirements" }}</h3>
+
+      <p class="calorie-explanation">You get the Maintenance Energy Requirement (MER), also known as the Daily Energy Requirement (DER), by multiplying the Resting Energy Requirement (RER) by a MER/DER factor. This factor accounts for a pet's individual needs based on species, age, reproductive status, activity level, and body condition.</p>
+
+      <div class="calorie-info">
+        <p class="daily-calories"><strong>Daily Calories Required:</strong> <span id="dailyCalories"></span> kcal</p>
+        <div class="energy-breakdown">
+          <div class="rer-info">
+            <strong>Resting Energy Requirement (RER):</strong> <span id="rerValue"></span> kcal
+          </div>
+          <div class="mer-info">
+            <strong>Maintenance Energy Requirement Factor:</strong> <span id="merValue"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feeding-description">
+        <p>{{ section.settings.feeding_description | default: "Determine your pet's daily feeding amount in grams. We calculate this by using their daily calorie requirement and the calorie content of each meal pack." }}</p>
+      </div>
+
+      <div class="protein-table">
+        <h4>Recommended Daily Amounts</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Protein</th>
+              <th>kcal per gram</th>
+              <th>Grams per day</th>
+            </tr>
+          </thead>
+          <tbody id="proteinResults">
+            <!-- Results will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.pet-calculator-section {
+  padding: 2rem 0;
+  background: {{ section.settings.background_color | default: '#f8f9fa' }};
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.calculator-heading {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: {{ section.settings.heading_color | default: '#333' }};
+}
+
+.calculator-description {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: {{ section.settings.text_color | default: '#666' }};
+}
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: {{ section.settings.label_color | default: '#333' }};
+  font-size: {{ section.settings.label_font_size | default: '1rem' }};
+}
+
+.form-group select,
+.form-group input {
+  padding: 1.5rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 2rem;
+  transition: border-color 0.3s;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  outline: none;
+  border-color: {{ section.settings.accent_color | default: '#007bff' }};
+}
+
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-size: 2rem;
+}
+
+.radio-option:hover {
+  background-color: #f0f0f0;
+}
+
+.radio-option input[type="radio"] {
+  margin: 0;
+}
+
+.pet-type-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.pet-type-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 240px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.pet-type-btn:hover {
+  border-color: {{ section.settings.accent_color | default: '#007bff' }};
+  background-color: #f8f9fa;
+}
+
+.pet-type-btn.selected {
+  border-color: {{ section.settings.accent_color | default: '#007bff' }};
+  background-color: {{ section.settings.accent_color | default: '#007bff' }};
+  color: white;
+}
+
+.pet-image {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.activity-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  justify-content: center;
+}
+
+.activity-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 180px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.activity-btn:hover {
+  border-color: {{ section.settings.accent_color | default: '#007bff' }};
+  background-color: #f8f9fa;
+}
+
+.activity-btn.selected {
+  border-color: {{ section.settings.accent_color | default: '#007bff' }};
+  background-color: {{ section.settings.accent_color | default: '#007bff' }};
+  color: white;
+}
+
+.activity-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.field-description {
+  margin-top: 0.25rem;
+  color: #666;
+  font-style: italic;
+}
+
+.calculate-btn {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  background: {{ section.settings.button_color | default: '#007bff' }};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.calculate-btn:hover {
+  background: {{ section.settings.button_hover_color | default: '#0056b3' }};
+}
+
+.calculator-results {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.calculator-results h3 {
+  font-size: {{ section.settings.results_heading_size | default: '3rem' }};
+  margin-bottom: 1.5rem;
+  color: {{ section.settings.results_heading_color | default: '#333' }};
+}
+
+.calorie-info {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: {{ section.settings.results_background_color | default: '#f8f9fa' }};
+  border-radius: 8px;
+  border: 2px solid {{ section.settings.results_border_color | default: '#dee2e6' }};
+}
+
+.daily-calories {
+  margin-bottom: 1rem;
+  font-size: {{ section.settings.daily_calories_size | default: '2.4rem' }};
+  color: {{ section.settings.daily_calories_color | default: '#333' }};
+}
+
+.calorie-explanation {
+  margin-bottom: 1.5rem;
+  font-size: {{ section.settings.calorie_explanation_size | default: '1.6rem' }};
+  color: {{ section.settings.calorie_explanation_color | default: '#666' }};
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.energy-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rer-info, .mer-info {
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: {{ section.settings.energy_breakdown_size | default: '2rem' }};
+}
+
+.rer-info {
+  background: {{ section.settings.rer_background_color | default: '#e8f4fd' }};
+  color: {{ section.settings.rer_text_color | default: '#0c5460' }};
+  border-left: 4px solid {{ section.settings.rer_accent_color | default: '#0ea5e9' }};
+}
+
+.mer-info {
+  background: {{ section.settings.mer_background_color | default: '#f0fdf4' }};
+  color: {{ section.settings.mer_text_color | default: '#166534' }};
+  border-left: 4px solid {{ section.settings.mer_accent_color | default: '#22c55e' }};
+}
+
+.feeding-description {
+  margin-bottom: 1.5rem;
+  color: #666;
+  font-size: {{ section.settings.feeding_description_size | default: '2rem' }};
+}
+
+.protein-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.protein-table th,
+.protein-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.protein-table h4 {
+  font-size: {{ section.settings.protein_table_heading_size | default: '2.5rem' }};
+  margin-bottom: 1rem;
+  color: {{ section.settings.protein_table_heading_color | default: '#333' }};
+}
+
+.protein-table th,
+.protein-table td {
+  font-size: {{ section.settings.protein_table_text_size | default: '1.8rem' }};
+}
+
+.protein-table th {
+  background: {{ section.settings.table_header_background | default: '#f8f9fa' }};
+  color: {{ section.settings.table_header_text_color | default: '#333' }};
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .form-stack {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .radio-group {
+    flex-direction: column;
+  }
+
+  .pet-type-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pet-type-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .activity-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .activity-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .protein-table {
+    overflow-x: auto;
+  }
+
+  .protein-table th,
+  .protein-table td {
+    padding: 0.5rem;
+    font-size: 1.4rem !important;
+    min-width: 80px;
+  }
+
+  .protein-table th:nth-child(2),
+  .protein-table td:nth-child(2) {
+    white-space: nowrap;
+  }
+}
+</style>
+
+<script>
+function selectPetType(value) {
+  // Remove selected class from all buttons
+  document.querySelectorAll('.pet-type-btn').forEach(btn => {
+    btn.classList.remove('selected');
+  });
+
+  // Add selected class to clicked button
+  event.target.closest('.pet-type-btn').classList.add('selected');
+
+  // Set hidden input value
+  document.getElementById('petTypeValue').value = value;
+
+  // Update activity level images based on pet type
+  updateActivityImages(value);
+}
+
+function updateActivityImages(petType) {
+  const lowImage = document.getElementById('lowActivityImage');
+  const averageImage = document.getElementById('averageActivityImage');
+  const highImage = document.getElementById('highActivityImage');
+
+  if (petType == 1) { // Cat
+    // Show cat activity images
+    {% if section.settings.cat_low_activity_image != blank %}
+      lowImage.src = '{{ section.settings.cat_low_activity_image | image_url: width: 120 }}';
+      lowImage.style.display = 'block';
+    {% else %}
+      lowImage.style.display = 'none';
+    {% endif %}
+
+    {% if section.settings.cat_average_activity_image != blank %}
+      averageImage.src = '{{ section.settings.cat_average_activity_image | image_url: width: 120 }}';
+      averageImage.style.display = 'block';
+    {% else %}
+      averageImage.style.display = 'none';
+    {% endif %}
+
+    {% if section.settings.cat_high_activity_image != blank %}
+      highImage.src = '{{ section.settings.cat_high_activity_image | image_url: width: 120 }}';
+      highImage.style.display = 'block';
+    {% else %}
+      highImage.style.display = 'none';
+    {% endif %}
+  } else if (petType == 2) { // Dog
+    // Show dog activity images
+    {% if section.settings.dog_low_activity_image != blank %}
+      lowImage.src = '{{ section.settings.dog_low_activity_image | image_url: width: 120 }}';
+      lowImage.style.display = 'block';
+    {% else %}
+      lowImage.style.display = 'none';
+    {% endif %}
+
+    {% if section.settings.dog_average_activity_image != blank %}
+      averageImage.src = '{{ section.settings.dog_average_activity_image | image_url: width: 120 }}';
+      averageImage.style.display = 'block';
+    {% else %}
+      averageImage.style.display = 'none';
+    {% endif %}
+
+    {% if section.settings.dog_high_activity_image != blank %}
+      highImage.src = '{{ section.settings.dog_high_activity_image | image_url: width: 120 }}';
+      highImage.style.display = 'block';
+    {% else %}
+      highImage.style.display = 'none';
+    {% endif %}
+  } else {
+    // Hide all images if no pet type selected
+    lowImage.style.display = 'none';
+    averageImage.style.display = 'none';
+    highImage.style.display = 'none';
+  }
+}
+
+function selectActivityLevel(value) {
+  // Remove selected class from all activity buttons
+  document.querySelectorAll('.activity-btn').forEach(btn => {
+    btn.classList.remove('selected');
+  });
+
+  // Add selected class to clicked button
+  event.target.closest('.activity-btn').classList.add('selected');
+
+  // Set hidden input value
+  document.getElementById('activityLevelValue').value = value;
+}
+
+function calculateFeeding() {
+  // Get form values
+  const age = parseInt(document.getElementById('petAge').value);
+  const weight = parseFloat(document.getElementById('petWeight').value);
+  const petType = parseInt(document.getElementById('petTypeValue').value);
+  const neutered = parseInt(document.getElementById('neutered').value);
+  const activityLevel = parseInt(document.getElementById('activityLevelValue').value);
+
+  // Validate all required fields
+  if (isNaN(age) || isNaN(weight) || isNaN(petType) || isNaN(neutered) || isNaN(activityLevel)) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  // Calculate RER (Resting Energy Requirement)
+  const rer = 70 * Math.pow(weight, 0.75);
+
+  // Calculate MER (Maintenance Energy Requirement)
+  let mer;
+  if (age < 1) {
+    mer = 2;
+  } else if (petType === 1) { // Cat
+    if (activityLevel === 1) {
+      mer = 1;
+    } else if (activityLevel === 2) {
+      mer = neutered === 0 ? 1.4 : 1.2;
+    } else if (activityLevel === 3) {
+      mer = 1.4;
+    }
+  } else if (petType === 2) { // Dog
+    if (activityLevel === 1) {
+      mer = 1.4;
+    } else if (activityLevel === 2) {
+      mer = neutered === 0 ? 1.6 : 1.8;
+    } else if (activityLevel === 3) {
+      mer = 1.8;
+    }
+  }
+
+  // Calculate daily calories
+  const dailyCalories = rer * mer;
+
+  // Calculate kcal per gram for each protein
+  const chickenKcal = petType === 1 ? 294.6/200 : 365.7/300;
+  const beefKcal = petType === 1 ? 313.3/200 : 397.8/300;
+  const kangarooKcal = petType === 1 ? 277.9/200 : 303.9/300;
+  const duckKcal = petType === 1 ? 299.5/200 : 0; // Duck only for cats
+  const fishKcal = petType === 1 ? 0 : 375.1/300; // Fish only for dogs
+
+  // Calculate grams per day for each protein
+  const chickenGrams = dailyCalories / chickenKcal;
+  const beefGrams = dailyCalories / beefKcal;
+  const kangarooGrams = dailyCalories / kangarooKcal;
+  const duckGrams = duckKcal > 0 ? dailyCalories / duckKcal : 0;
+  const fishGrams = fishKcal > 0 ? dailyCalories / fishKcal : 0;
+
+  // Display results
+  document.getElementById('rerValue').textContent = rer.toFixed(1);
+  document.getElementById('merValue').textContent = mer.toFixed(1);
+  document.getElementById('dailyCalories').textContent = dailyCalories.toFixed(1);
+
+  // Populate protein results table
+  const proteinResults = document.getElementById('proteinResults');
+  let resultsHTML = `
+    <tr>
+      <td>Chicken</td>
+      <td>${chickenKcal.toFixed(2)}</td>
+      <td>${chickenGrams.toFixed(1)}g</td>
+    </tr>
+    <tr>
+      <td>Beef</td>
+      <td>${beefKcal.toFixed(2)}</td>
+      <td>${beefGrams.toFixed(1)}g</td>
+    </tr>
+    <tr>
+      <td>Kangaroo</td>
+      <td>${kangarooKcal.toFixed(2)}</td>
+      <td>${kangarooGrams.toFixed(1)}g</td>
+    </tr>
+  `;
+
+  // Add Duck only for cats (petType === 1)
+  if (petType === 1) {
+    resultsHTML += `
+    <tr>
+      <td>Duck</td>
+      <td>${duckKcal.toFixed(2)}</td>
+      <td>${duckGrams.toFixed(1)}g</td>
+    </tr>
+    `;
+  }
+
+  // Add Fish only for dogs (petType === 2)
+  if (petType === 2) {
+    resultsHTML += `
+    <tr>
+      <td>Fish</td>
+      <td>${fishKcal.toFixed(2)}</td>
+      <td>${fishGrams.toFixed(1)}g</td>
+    </tr>
+    `;
+  }
+
+  proteinResults.innerHTML = resultsHTML;
+
+  // Show results section
+  document.getElementById('calculatorResults').style.display = 'block';
+
+  // Scroll to results
+  document.getElementById('calculatorResults').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+}
+
+// Add event listeners for real-time validation
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('petCalculatorForm');
+  const inputs = form.querySelectorAll('input, select');
+
+  inputs.forEach(input => {
+    input.addEventListener('change', function() {
+      // Remove any existing error styling
+      this.style.borderColor = '';
+    });
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Pet Meal Calculator",
+  "tag": "section",
+  "class": "pet-calculator-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Calculator Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Pet Meal Calculator"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Calculate the perfect daily feeding amount for your pet based on their individual needs."
+    },
+    {
+      "type": "text",
+      "id": "age_label",
+      "label": "Age Field Label",
+      "default": "Select your pet's age"
+    },
+    {
+      "type": "text",
+      "id": "weight_label",
+      "label": "Weight Field Label",
+      "default": "Pet Weight"
+    },
+    {
+      "type": "textarea",
+      "id": "weight_description",
+      "label": "Weight Field Description",
+      "default": "If your pet is over or underweight, please enter their ideal weight"
+    },
+    {
+      "type": "text",
+      "id": "pet_type_label",
+      "label": "Pet Type Label",
+      "default": "Pet Type"
+    },
+    {
+      "type": "image_picker",
+      "id": "cat_image",
+      "label": "Cat Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "dog_image",
+      "label": "Dog Image"
+    },
+    {
+      "type": "header",
+      "content": "Cat Activity Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "cat_low_activity_image",
+      "label": "Cat Low Activity Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "cat_average_activity_image",
+      "label": "Cat Average Activity Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "cat_high_activity_image",
+      "label": "Cat High Activity Image"
+    },
+    {
+      "type": "header",
+      "content": "Dog Activity Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "dog_low_activity_image",
+      "label": "Dog Low Activity Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "dog_average_activity_image",
+      "label": "Dog Average Activity Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "dog_high_activity_image",
+      "label": "Dog High Activity Image"
+    },
+    {
+      "type": "text",
+      "id": "neutered_label",
+      "label": "Neutered Field Label",
+      "default": "Is your pet neutered/spayed?"
+    },
+    {
+      "type": "text",
+      "id": "activity_label",
+      "label": "Activity Level Label",
+      "default": "Daily Activity Level"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Calculate Button Text",
+      "default": "Calculate Feeding Amount"
+    },
+    {
+      "type": "text",
+      "id": "results_heading",
+      "label": "Results Section Heading",
+      "default": "Daily Feeding Requirements"
+    },
+    {
+      "type": "textarea",
+      "id": "feeding_description",
+      "label": "Feeding Results Description",
+      "default": "Determine your pet's daily feeding amount in grams. We calculate this by using their daily calorie requirement and the calorie content of each meal pack."
+    },
+    {
+      "type": "header",
+      "content": "Styling Options"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#333333"
+    },
+    {
+      "type": "select",
+      "id": "label_font_size",
+      "label": "Question Title Font Size",
+      "options": [
+        { "value": "0.875rem", "label": "Small (14px)" },
+        { "value": "1rem", "label": "Medium (16px)" },
+        { "value": "1.125rem", "label": "Large (18px)" },
+        { "value": "1.25rem", "label": "Extra Large (20px)" },
+        { "value": "1.5rem", "label": "XXL (24px)" }
+      ],
+      "default": "1rem"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#007bff"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Color",
+      "default": "#007bff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button Hover Color",
+      "default": "#0056b3"
+    },
+    {
+      "type": "header",
+      "content": "Results Section Colors"
+    },
+    {
+      "type": "color",
+      "id": "results_background_color",
+      "label": "Results Section Background",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "results_border_color",
+      "label": "Results Section Border",
+      "default": "#dee2e6"
+    },
+    {
+      "type": "color",
+      "id": "daily_calories_color",
+      "label": "Daily Calories Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "rer_background_color",
+      "label": "RER Background Color",
+      "default": "#e8f4fd"
+    },
+    {
+      "type": "color",
+      "id": "rer_text_color",
+      "label": "RER Text Color",
+      "default": "#0c5460"
+    },
+    {
+      "type": "color",
+      "id": "rer_accent_color",
+      "label": "RER Accent Color",
+      "default": "#0ea5e9"
+    },
+    {
+      "type": "color",
+      "id": "mer_background_color",
+      "label": "MER Background Color",
+      "default": "#f0fdf4"
+    },
+    {
+      "type": "color",
+      "id": "mer_text_color",
+      "label": "MER Text Color",
+      "default": "#166534"
+    },
+    {
+      "type": "color",
+      "id": "mer_accent_color",
+      "label": "MER Accent Color",
+      "default": "#22c55e"
+    },
+    {
+      "type": "header",
+      "content": "Results Text Sizes"
+    },
+    {
+      "type": "select",
+      "id": "results_heading_size",
+      "label": "Results Heading Size",
+      "options": [
+        { "value": "2rem", "label": "Small (32px)" },
+        { "value": "2.5rem", "label": "Medium (40px)" },
+        { "value": "3rem", "label": "Large (48px)" },
+        { "value": "3.5rem", "label": "Extra Large (56px)" },
+        { "value": "4rem", "label": "XXL (64px)" }
+      ],
+      "default": "3rem"
+    },
+    {
+      "type": "color",
+      "id": "results_heading_color",
+      "label": "Results Heading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "select",
+      "id": "daily_calories_size",
+      "label": "Daily Calories Text Size",
+      "options": [
+        { "value": "1.8rem", "label": "Small (29px)" },
+        { "value": "2.2rem", "label": "Medium (35px)" },
+        { "value": "2.4rem", "label": "Large (38px)" },
+        { "value": "2.8rem", "label": "Extra Large (45px)" },
+        { "value": "3.2rem", "label": "XXL (51px)" }
+      ],
+      "default": "2.4rem"
+    },
+    {
+      "type": "select",
+      "id": "calorie_explanation_size",
+      "label": "Calorie Explanation Text Size",
+      "options": [
+        { "value": "1.2rem", "label": "Small (19px)" },
+        { "value": "1.4rem", "label": "Medium (22px)" },
+        { "value": "1.6rem", "label": "Large (26px)" },
+        { "value": "1.8rem", "label": "Extra Large (29px)" },
+        { "value": "2rem", "label": "XXL (32px)" }
+      ],
+      "default": "1.6rem"
+    },
+    {
+      "type": "color",
+      "id": "calorie_explanation_color",
+      "label": "Calorie Explanation Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "select",
+      "id": "energy_breakdown_size",
+      "label": "RER/MER Text Size",
+      "options": [
+        { "value": "1.5rem", "label": "Small (24px)" },
+        { "value": "1.8rem", "label": "Medium (29px)" },
+        { "value": "2rem", "label": "Large (32px)" },
+        { "value": "2.2rem", "label": "Extra Large (35px)" },
+        { "value": "2.5rem", "label": "XXL (40px)" }
+      ],
+      "default": "2rem"
+    },
+    {
+      "type": "select",
+      "id": "feeding_description_size",
+      "label": "Feeding Description Text Size",
+      "options": [
+        { "value": "1.5rem", "label": "Small (24px)" },
+        { "value": "1.8rem", "label": "Medium (29px)" },
+        { "value": "2rem", "label": "Large (32px)" },
+        { "value": "2.2rem", "label": "Extra Large (35px)" },
+        { "value": "2.5rem", "label": "XXL (40px)" }
+      ],
+      "default": "2rem"
+    },
+    {
+      "type": "select",
+      "id": "protein_table_heading_size",
+      "label": "Protein Table Heading Size",
+      "options": [
+        { "value": "2rem", "label": "Small (32px)" },
+        { "value": "2.2rem", "label": "Medium (35px)" },
+        { "value": "2.5rem", "label": "Large (40px)" },
+        { "value": "2.8rem", "label": "Extra Large (45px)" },
+        { "value": "3rem", "label": "XXL (48px)" }
+      ],
+      "default": "2.5rem"
+    },
+    {
+      "type": "color",
+      "id": "protein_table_heading_color",
+      "label": "Protein Table Heading Color",
+      "default": "#333333"
+    },
+    {
+      "type": "select",
+      "id": "protein_table_text_size",
+      "label": "Protein Table Text Size",
+      "options": [
+        { "value": "1.2rem", "label": "Small (19px)" },
+        { "value": "1.5rem", "label": "Medium (24px)" },
+        { "value": "1.8rem", "label": "Large (29px)" },
+        { "value": "2rem", "label": "Extra Large (32px)" },
+        { "value": "2.2rem", "label": "XXL (35px)" }
+      ],
+      "default": "1.8rem"
+    },
+    {
+      "type": "color",
+      "id": "table_header_background",
+      "label": "Table Header Background Color",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "table_header_text_color",
+      "label": "Table Header Text Color",
+      "default": "#333333"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet Meal Calculator"
+    }
+  ]
+}
+{% endschema %}

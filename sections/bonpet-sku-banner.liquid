@@ -1,0 +1,125 @@
+{%- comment -%} V3 SKU lineup banner — show the full range of proteins {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-sku-banner" aria-label="Our full range">
+  <div class="tbp-container">
+    <div class="tbp-sku-grid">
+      <div class="tbp-sku-media">
+        {%- if section.settings.image -%}
+          <img src="{{ section.settings.image | image_url: width: 1800 }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'bonpet-hero-2up-1776736957.jpg' | asset_url }}" alt="{{ section.settings.image_alt | escape | default: 'A dog and a cat eating Bon Pet meals from clear glass dishes' }}" loading="lazy">
+        {%- endif -%}
+      </div>
+      <div class="tbp-sku-content">
+        <p class="tbp-sku-eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+        <p class="tbp-sku-body">{{ section.settings.body }}</p>
+        <ul class="tbp-sku-list">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="tbp-sku-list-ico">{{ block.settings.icon }}</span>
+              <span>{{ block.settings.label }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+        {%- if section.settings.cta_label != blank -%}
+          <div class="tbp-sku-ctas">
+            {% render 'bonpet-button',
+                label: section.settings.cta_label,
+                href: section.settings.cta_link,
+                variant: 'primary' %}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-sku-banner { padding: var(--tbp-space-8) 0; background: var(--tbp-cream); }
+  .tbp-sku-grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: var(--tbp-space-6);
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .tbp-sku-grid { grid-template-columns: 6fr 5fr; gap: var(--tbp-space-8); }
+  }
+  .tbp-sku-media img {
+    width: 100%;
+    border-radius: var(--tbp-radius-md);
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  }
+  .tbp-sku-content > * + * { margin-top: var(--tbp-space-3); }
+  .tbp-sku-eyebrow {
+    color: var(--tbp-orange);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700; font-size: var(--tbp-text-sm);
+    margin: 0;
+  }
+  .tbp-sku-content h2 { margin: 0; font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem); line-height: 1.15; }
+  .tbp-sku-body {
+    color: var(--tbp-text-mid); margin: 0;
+    line-height: 1.75;
+    font-size: var(--tbp-text-base);
+    max-width: 50ch;
+  }
+  @media (min-width: 768px) {
+    .tbp-sku-body { font-size: var(--tbp-text-lg); }
+  }
+  .tbp-sku-list {
+    list-style: none; padding: 0; margin: var(--tbp-space-4) 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--tbp-space-2) var(--tbp-space-4);
+  }
+  .tbp-sku-list li {
+    display: flex; align-items: center; gap: var(--tbp-space-2);
+    font-size: var(--tbp-text-sm);
+    color: var(--tbp-text-dark);
+    font-weight: 500;
+  }
+  .tbp-sku-list-ico { font-size: var(--tbp-text-lg); }
+  .tbp-sku-ctas { margin-top: var(--tbp-space-5) !important; }
+</style>
+
+{% schema %}
+{
+  "name": "TBP SKU Lineup",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Lineup photo (all SKUs together)" },
+    { "type": "text", "id": "image_alt", "label": "Image alt", "default": "A dog and a cat eating Bon Pet meals from clear glass dishes" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "OUR FULL RANGE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "8 proteins. 2 species. Zero shortcuts." },
+    { "type": "textarea", "id": "body", "label": "Body",
+      "default": "From free-range chicken to wild kangaroo. PhD-formulated, AAFCO-balanced, sous vide cooked in SG. Pick, rotate, repeat." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop the full range" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "sku",
+      "name": "SKU badge",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "🐓" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Free Range Chicken" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TBP SKU Lineup",
+      "blocks": [
+        { "type": "sku", "settings": { "icon": "🐓", "label": "Free Range Chicken" } },
+        { "type": "sku", "settings": { "icon": "🦆", "label": "Cage-Free Duck" } },
+        { "type": "sku", "settings": { "icon": "🦘", "label": "Wild Kangaroo" } },
+        { "type": "sku", "settings": { "icon": "🐄", "label": "Grass-Fed Beef" } },
+        { "type": "sku", "settings": { "icon": "🐟", "label": "Wild-Caught Fish" } },
+        { "type": "sku", "settings": { "icon": "🐷", "label": "Pork (soon)" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

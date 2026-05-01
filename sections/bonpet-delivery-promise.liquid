@@ -1,0 +1,65 @@
+{%- comment -%}
+  V3 Delivery Promise section. Page-level wrapper around the bonpet-delivery-promise snippet.
+  Used on the homepage between how-it-works and final CTA. Reinforces the "super flexible, super reliable"
+  delivery story (NinjaVan cold-chain, 3 attempts, WA reschedule, automated tracking pings).
+  Pairs with shipping-progress + volume-tier-nudge in the cart-page reassurance band.
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-section tbp-section-cream tbp-delivery-promise-section" aria-label="Delivery promise">
+  <div class="tbp-container">
+    {%- render 'bonpet-delivery-promise',
+      quote_body: section.settings.quote_body,
+      quote_author: section.settings.quote_author,
+      quote_rating: section.settings.quote_rating
+    -%}
+  </div>
+</section>
+
+<style>
+  .tbp-delivery-promise-section {
+    padding: var(--tbp-space-7, 56px) 0;
+    background: var(--tbp-cream, #fff7e4);
+  }
+  .tbp-delivery-promise-section .tbp-container {
+    max-width: 1100px;
+    padding: 0 var(--tbp-space-4, 16px);
+  }
+  @media (min-width: 768px) {
+    .tbp-delivery-promise-section .tbp-container { padding: 0 var(--tbp-space-5, 20px); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Delivery Promise",
+  "tag": "section",
+  "class": "tbp-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Google Review Pull-Quote (optional)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Paste a real 5-star Google review that mentions delivery, frozen condition, NinjaVan, or customer service. Leave blank to hide the quote block."
+    },
+    {
+      "type": "textarea",
+      "id": "quote_body",
+      "label": "Quote body"
+    },
+    {
+      "type": "text",
+      "id": "quote_author",
+      "label": "Quote author"
+    },
+    {
+      "type": "text",
+      "id": "quote_rating",
+      "label": "Star rating",
+      "default": "★★★★★"
+    }
+  ],
+  "presets": [{ "name": "TBP Delivery Promise" }]
+}
+{% endschema %}

@@ -1,0 +1,169 @@
+{%- comment -%}
+  V3.6 sticky mobile Add-to-Cart.
+  Renders only on product template, mobile only (<=767px), NOT on trial PDPs.
+  No <form> element (so HubSpot's Collected Forms cannot auto-capture).
+  Clicks the existing main product form's submit button - no new API call,
+  no interference with Dawn's cart drawer re-render.
+{%- endcomment -%}
+
+{%- if template.name == 'product' -%}
+{%- unless product.handle contains 'free-dog-trial' or product.handle contains 'free-cat-trial' -%}
+
+<div class="tbp-sticky-atc" aria-hidden="true" data-tbp-sticky-atc>
+  <div class="tbp-sticky-atc-info">
+    {%- if product.featured_image -%}
+      <img
+        class="tbp-sticky-atc-img"
+        src="{{ product.featured_image | image_url: width: 120 }}"
+        alt=""
+        loading="lazy"
+        width="44"
+        height="44"
+      >
+    {%- endif -%}
+    <div class="tbp-sticky-atc-text">
+      <p class="tbp-sticky-atc-title">{{ product.title | truncate: 32, '...' }}</p>
+      <p class="tbp-sticky-atc-price" data-tbp-sticky-price>{{ product.price | money }}</p>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="tbp-sticky-atc-btn"
+    aria-label="Add {{ product.title | escape }} to cart"
+    data-tbp-sticky-btn
+  >
+    Add to Cart
+  </button>
+</div>
+
+<script>
+(function () {
+  var sticky = document.querySelector('[data-tbp-sticky-atc]');
+  if (!sticky) return;
+  var btn = sticky.querySelector('[data-tbp-sticky-btn]');
+  var priceEl = sticky.querySelector('[data-tbp-sticky-price]');
+  var mainForm = document.querySelector('product-form form[action*="/cart/add"], form[action*="/cart/add"]');
+
+  if (!mainForm) {
+    sticky.style.display = 'none';
+    return;
+  }
+
+  function reveal() { sticky.setAttribute('aria-hidden', 'false'); }
+  if (document.readyState === 'complete') reveal();
+  else window.addEventListener('load', reveal, { once: true });
+
+  function updatePrice() {
+    try {
+      var priceMain = document.querySelector('.price__regular .price-item--regular, .price__sale .price-item--sale, [data-product-price], .price-item--regular');
+      if (priceMain && priceEl) {
+        var txt = (priceMain.textContent || '').trim();
+        if (txt) priceEl.textContent = txt;
+      }
+    } catch (e) {}
+  }
+
+  if (mainForm) {
+    mainForm.addEventListener('change', updatePrice);
+  }
+  document.addEventListener('variant:change', updatePrice);
+
+  if (btn) {
+    btn.addEventListener('click', function () {
+      var submitBtn = mainForm.querySelector(
+        'button[type="submit"][name="add"], button.product-form__submit, [data-product-submit], button[type="submit"]'
+      );
+      if (submitBtn && !submitBtn.hasAttribute('disabled')) {
+        submitBtn.click();
+        return;
+      }
+      // Fallback: direct POST
+      var variantInput = mainForm.querySelector('[name="id"]');
+      if (!variantInput || !variantInput.value) return;
+      var fd = new FormData(mainForm);
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: fd
+      }).then(function () {
+        var drawer = document.querySelector('cart-drawer');
+        if (drawer && typeof drawer.open === 'function') {
+          drawer.open();
+        } else {
+          window.location.href = '/cart';
+        }
+      }).catch(function () { window.location.href = '/cart'; });
+    });
+  }
+})();
+</script>
+
+<style>
+  .tbp-sticky-atc {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    padding: 10px 14px;
+    background: var(--tbp-white, #fff);
+    border-top: 1px solid var(--tbp-tan, #EDDDC0);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--tbp-font-body, system-ui);
+  }
+  .tbp-sticky-atc[aria-hidden="false"] { display: flex; }
+  .tbp-sticky-atc-info {
+    display: flex; gap: 10px; align-items: center; flex: 1; min-width: 0;
+  }
+  .tbp-sticky-atc-img {
+    width: 44px; height: 44px;
+    border-radius: 8px; object-fit: cover;
+    flex-shrink: 0;
+  }
+  .tbp-sticky-atc-text { flex: 1; min-width: 0; }
+  .tbp-sticky-atc-title {
+    margin: 0; font-size: 13px; font-weight: 600;
+    color: var(--tbp-text-dark, #1e1e1e);
+    line-height: 1.25;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tbp-sticky-atc-price {
+    margin: 2px 0 0; font-size: 14px; font-weight: 700;
+    color: var(--tbp-primary, #16433D);
+  }
+  .tbp-sticky-atc-btn {
+    background: var(--tbp-primary, #16433D);
+    color: var(--tbp-white, #fff);
+    border: 0;
+    padding: 12px 20px;
+    border-radius: var(--tbp-radius-pill, 999px);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .tbp-sticky-atc-btn:hover { background: var(--tbp-primary-deep, #03443C); }
+  .tbp-sticky-atc-btn:active { transform: scale(0.97); }
+
+  @media (min-width: 768px) {
+    .tbp-sticky-atc { display: none !important; }
+  }
+
+  @media (max-width: 767px) {
+    body { padding-bottom: 72px; }
+  }
+
+  /* v3.6.1: on non-trial PDPs, suppress Shopify Forms teaser
+     (it was competing with the sticky ATC for bottom-LHS real estate).
+     Trade-off: promo bar "Claim code" button on PDP can't open the popup
+     here -- users interested in a trial can scroll/navigate to home. */
+  shopify-forms-embed { display: none !important; }
+</style>
+
+{%- endunless -%}
+{%- endif -%}

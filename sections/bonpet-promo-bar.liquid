@@ -1,0 +1,91 @@
+{%- comment -%}
+  V3 promo bar — renders across top of every page.
+  CTA opens Shopify Forms popup (lead-capture before promo code reveal).
+{%- endcomment -%}
+
+<div class="tbp-v3 tbp-promo-bar" role="region" aria-label="Site promotions">
+  <div class="tbp-promo-inner">
+    <span class="tbp-promo-msg">
+      {%- if section.settings.headline != blank -%}
+        {{ section.settings.headline }}
+      {%- endif -%}
+      {%- if section.settings.secondary_msg != blank -%}
+        <span class="tbp-promo-separator">•</span>{{ section.settings.secondary_msg }}
+      {%- endif -%}
+    </span>
+    {%- if section.settings.cta_label != blank -%}
+      <button type="button" class="tbp-promo-cta"
+        aria-label="Open trial code claim form"
+        onclick="window.openBonPetForm && window.openBonPetForm()">
+        {{ section.settings.cta_label }}
+      </button>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .tbp-promo-inner {
+    display: flex; align-items: center; justify-content: center;
+    gap: var(--tbp-space-4); flex-wrap: wrap;
+    max-width: var(--tbp-container-max);
+    margin: 0 auto;
+    padding: 0 var(--tbp-container-pad-mobile);
+  }
+  @media (min-width: 768px) {
+    .tbp-promo-inner { padding: 0 var(--tbp-container-pad-desktop); }
+  }
+  .tbp-promo-msg { text-align: center; }
+  .tbp-promo-cta {
+    background: transparent;
+    color: inherit;
+    border: 1.5px solid currentColor;
+    border-radius: var(--tbp-radius-pill);
+    padding: 4px 14px;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+    position: relative;
+    z-index: 100000;
+  }
+  .tbp-promo-cta:hover {
+    background: var(--tbp-white);
+    color: var(--tbp-primary);
+    border-color: var(--tbp-white);
+  }
+  @media (max-width: 640px) {
+    .tbp-promo-inner { gap: var(--tbp-space-2); padding: 0 var(--tbp-space-3); }
+    .tbp-promo-cta { padding: 3px 10px; font-size: 11px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Promo Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "🎁 Free trial pack for first-time pawrents"
+    },
+    {
+      "type": "text",
+      "id": "secondary_msg",
+      "label": "Secondary message",
+      "default": "Cold-chain frozen delivery · 4.9★ from 319+ Google reviews"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label (opens lead-capture form)",
+      "default": "Claim code →"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

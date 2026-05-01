@@ -1,0 +1,225 @@
+{%- comment -%} V3 Founder timeline  -  milestones (home cooking → industrial → today) {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-white tbp-founder-timeline" aria-label="Journey milestones">
+  <div class="tbp-container">
+    <div class="tbp-founder-timeline-inner">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="tbp-founder-timeline-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      <div class="tbp-founder-timeline-track">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'milestone' -%}
+              <div class="tbp-founder-timeline-item">
+                <div class="tbp-founder-timeline-marker">
+                  {%- if block.settings.year != blank -%}
+                    <span class="tbp-founder-timeline-year">{{ block.settings.year }}</span>
+                  {%- endif -%}
+                </div>
+                <div class="tbp-founder-timeline-content">
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      src="{{ block.settings.image | image_url: width: 720 }}"
+                      srcset="{{ block.settings.image | image_url: width: 480 }} 480w, {{ block.settings.image | image_url: width: 720 }} 720w"
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      alt="{{ block.settings.image_alt | default: block.settings.title | escape }}"
+                      class="tbp-founder-timeline-image"
+                      loading="lazy"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}"
+                    >
+                  {%- endif -%}
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="tbp-founder-timeline-title">{{ block.settings.title }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.body != blank -%}
+                    <p class="tbp-founder-timeline-body">{{ block.settings.body }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-founder-timeline { padding: var(--tbp-space-8) 0; }
+  .tbp-founder-timeline-inner { max-width: 900px; margin: 0 auto; }
+  .tbp-founder-timeline-heading {
+    font-family: var(--tbp-font-display);
+    font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+    line-height: 1.1;
+    margin: 0 0 var(--tbp-space-8);
+    text-align: center;
+    color: var(--tbp-text-dark);
+  }
+  .tbp-founder-timeline-track {
+    position: relative;
+    padding: 0;
+  }
+  .tbp-founder-timeline-track::before {
+    content: "";
+    position: absolute;
+    left: 32px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--tbp-primary), var(--tbp-primary-light));
+  }
+  @media (min-width: 768px) {
+    .tbp-founder-timeline-track::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .tbp-founder-timeline-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--tbp-space-4);
+    margin-bottom: var(--tbp-space-7);
+    position: relative;
+  }
+  @media (min-width: 768px) {
+    .tbp-founder-timeline-item {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--tbp-space-6);
+      align-items: center;
+    }
+    .tbp-founder-timeline-item:nth-child(even) {
+      direction: rtl;
+    }
+    .tbp-founder-timeline-item:nth-child(even) > * {
+      direction: ltr;
+    }
+  }
+  .tbp-founder-timeline-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tbp-founder-timeline-year {
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--tbp-primary);
+    color: var(--tbp-white);
+    font-weight: 700;
+    font-size: var(--tbp-text-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  @media (min-width: 768px) {
+    .tbp-founder-timeline-year {
+      width: 80px;
+      height: 80px;
+      font-size: var(--tbp-text-base);
+    }
+  }
+  .tbp-founder-timeline-content {
+    padding: var(--tbp-space-4);
+    background: var(--tbp-cream);
+    border-radius: var(--tbp-radius-md);
+    border-left: 2px solid var(--tbp-primary);
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .tbp-founder-timeline-content {
+      border-left: none;
+      padding: var(--tbp-space-5);
+    }
+  }
+  .tbp-founder-timeline-image {
+    width: calc(100% + var(--tbp-space-4) * 2);
+    height: auto; /* override HTML height attr so aspect-ratio can compute */
+    margin: calc(var(--tbp-space-4) * -1) calc(var(--tbp-space-4) * -1) var(--tbp-space-4);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--tbp-radius-md) var(--tbp-radius-md) 0 0;
+  }
+  @media (min-width: 768px) {
+    .tbp-founder-timeline-image {
+      width: calc(100% + var(--tbp-space-5) * 2);
+      margin: calc(var(--tbp-space-5) * -1) calc(var(--tbp-space-5) * -1) var(--tbp-space-5);
+    }
+  }
+  .tbp-founder-timeline-title {
+    font-size: var(--tbp-text-lg);
+    font-weight: 700;
+    margin: 0 0 var(--tbp-space-2);
+    color: var(--tbp-text-dark);
+  }
+  .tbp-founder-timeline-body {
+    font-size: var(--tbp-text-base);
+    color: var(--tbp-text-mid);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Founder Timeline",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How we got here" }
+  ],
+  "blocks": [
+    {
+      "name": "Milestone",
+      "type": "milestone",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo (16:9 ratio recommended)" },
+        { "type": "text", "id": "image_alt", "label": "Photo alt text" },
+        { "type": "text", "id": "year", "label": "Year or date" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TBP Founder Timeline",
+      "blocks": [
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2023",
+            "title": "Started in our kitchen",
+            "body": "Testing recipes on our own furkids. Yash and Nic cooking until 6am on weekends, crashing on the floor, then back to day jobs."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2024",
+            "title": "Incorporated, went industrial",
+            "body": "Rented facilities at West Park Bizcentral, Pioneer Crescent. Built AAFCO-certified, AVS-licensed kitchen. Same recipes, industrial scale."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2024",
+            "title": "Published our formulas",
+            "body": "First Singapore fresh pet brand to open-source every ingredient ratio. Public Google Sheet. No secrets. Complete transparency."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "Now",
+            "title": "Feeding Singapore furkids",
+            "body": "500+ families trust us with their pets. Growing community. Still personal. Still caring. Still cooking with intention."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,99 @@
+{%- comment -%} V3 Trial Pack CTA — Trial pack card + Pet Food Calculator teaser split {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-cream tbp-trial">
+  <div class="tbp-container">
+    <div class="tbp-trial-heading tbp-text-center">
+      <p class="tbp-text-mid" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--tbp-text-mid); margin-bottom: var(--tbp-space-2);">{{ section.settings.eyebrow }}</p>
+      <h2 class="tbp-display tbp-trial-title">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="tbp-trial-grid tbp-mt-8">
+      <div class="tbp-trial-card">
+        {%- if section.settings.trial_image -%}
+          <img src="{{ section.settings.trial_image | image_url: width: 900 }}" alt="{{ section.settings.trial_title | escape }}" loading="lazy">
+        {%- endif -%}
+        <div class="tbp-trial-card-body">
+          <p class="tbp-trial-eyebrow">{{ section.settings.trial_eyebrow }}</p>
+          <h3>{{ section.settings.trial_title }}</h3>
+          <p class="tbp-trial-desc">{{ section.settings.trial_desc }}</p>
+          <p class="tbp-trial-price">{{ section.settings.trial_price }}</p>
+          <div class="tbp-trial-ctas">
+            {% render 'bonpet-button',
+                label: section.settings.trial_dog_cta_label,
+                href: section.settings.trial_dog_cta_link,
+                variant: 'primary' %}
+            {% render 'bonpet-button',
+                label: section.settings.trial_cat_cta_label,
+                href: section.settings.trial_cat_cta_link,
+                variant: 'primary' %}
+          </div>
+        </div>
+      </div>
+
+      <div class="tbp-calc-card">
+        <div class="tbp-calc-badge">{{ section.settings.calc_badge }}</div>
+        <h3>{{ section.settings.calc_title }}</h3>
+        <p>{{ section.settings.calc_desc }}</p>
+        {%- if section.settings.calc_cta_label != blank -%}
+          {% render 'bonpet-button',
+              label: section.settings.calc_cta_label,
+              href: section.settings.calc_cta_link,
+              variant: 'outline-dark' %}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-trial { padding: var(--tbp-space-8) 0; }
+  .tbp-trial-title { font-size: var(--tbp-text-4xl); }
+  .tbp-trial-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--tbp-space-5);
+  }
+  @media (min-width: 768px) {
+    .tbp-trial-grid { grid-template-columns: 2fr 1fr; }
+  }
+  .tbp-trial-card, .tbp-calc-card {
+    background: var(--tbp-white); border-radius: var(--tbp-radius-md);
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .tbp-trial-card img { width: 100%; object-fit: cover; aspect-ratio: 16/9; }
+  .tbp-trial-card-body { padding: var(--tbp-space-5); }
+  .tbp-trial-eyebrow { color: var(--tbp-text-mid); font-size: var(--tbp-text-sm); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--tbp-space-2); }
+  .tbp-trial-desc { color: var(--tbp-text-mid); margin-bottom: var(--tbp-space-4); }
+  .tbp-trial-price { font-size: var(--tbp-text-xl); font-weight: 700; color: var(--tbp-primary); margin-bottom: var(--tbp-space-4); }
+  .tbp-trial-ctas { display: flex; flex-wrap: wrap; gap: var(--tbp-space-3); }
+  .tbp-trial-ctas > * { flex: 1 1 180px; }
+  .tbp-calc-card { padding: var(--tbp-space-6); justify-content: center; text-align: center; background: var(--tbp-primary-mid); color: var(--tbp-white); }
+  .tbp-calc-card h3 { color: var(--tbp-white); }
+  .tbp-calc-card p { color: rgba(255,255,255,0.85); margin-bottom: var(--tbp-space-4); }
+  .tbp-calc-badge { background: var(--tbp-orange); color: var(--tbp-white); font-size: var(--tbp-text-xs); padding: 4px 10px; border-radius: var(--tbp-radius-pill); display: inline-block; align-self: center; font-weight: 700; letter-spacing: 0.05em; margin-bottom: var(--tbp-space-3); }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Trial + Calc",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Meals Are" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A Different Breed" },
+    { "type": "header", "content": "Trial card" },
+    { "type": "image_picker", "id": "trial_image", "label": "Trial image" },
+    { "type": "text", "id": "trial_eyebrow", "label": "Eyebrow", "default": "Gently Cooked · Free-Range" },
+    { "type": "text", "id": "trial_title", "label": "Title", "default": "Trial Pack" },
+    { "type": "textarea", "id": "trial_desc", "label": "Description",
+      "default": "Curious about our meals but not ready to commit to a big batch? Featuring three conveniently sized packs to slowly transition your pet." },
+    { "type": "text", "id": "trial_price", "label": "Price", "default": "Cats $15 · Dogs $25 · limited stock" },
+    { "type": "text", "id": "trial_dog_cta_label", "label": "Dog CTA label", "default": "🐶 Claim Dog Trial ($25)" },
+    { "type": "url", "id": "trial_dog_cta_link", "label": "Dog CTA link" },
+    { "type": "text", "id": "trial_cat_cta_label", "label": "Cat CTA label", "default": "🐱 Claim Cat Trial ($15)" },
+    { "type": "url", "id": "trial_cat_cta_link", "label": "Cat CTA link" },
+    { "type": "header", "content": "Pet Food Calculator card" },
+    { "type": "text", "id": "calc_badge", "label": "Badge", "default": "Coming Soon" },
+    { "type": "text", "id": "calc_title", "label": "Title", "default": "Try Our Pet Food Calculator" },
+    { "type": "textarea", "id": "calc_desc", "label": "Description", "default": "Find the right daily portion for your furkid in seconds." },
+    { "type": "text", "id": "calc_cta_label", "label": "CTA label (optional)" },
+    { "type": "url", "id": "calc_cta_link", "label": "CTA link (optional)" }
+  ],
+  "presets": [ { "name": "TBP Trial + Calc" } ]
+}
+{% endschema %}

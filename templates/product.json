@@ -1,0 +1,240 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+    "sections": {
+        "main": {
+            "type": "main-product",
+            "blocks": {
+                "title": {
+                    "type": "title",
+                    "settings": {}
+                },
+                "judge_me_reviews_preview_badge_DPxkUV": {
+                    "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                    "settings": {}
+                },
+                "price": {
+                    "type": "price",
+                    "settings": {}
+                },
+                "variant_picker": {
+                    "type": "variant_picker",
+                    "settings": {
+                        "picker_type": "button",
+                        "swatch_shape": "circle"
+                    }
+                },
+                "quantity_selector": {
+                    "type": "quantity_selector",
+                    "settings": {}
+                },
+                "subscriptions_app_block_gDA4tk": {
+                    "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+                    "settings": {
+                        "subscription_policy_url": "shopify://policies/refund-policy",
+                        "color_text_body": "#16433d",
+                        "dividers_color": "#16433d",
+                        "border_thickness": 1,
+                        "border_radius": 0,
+                        "product": "{{ product }}"
+                    }
+                },
+                "buy_buttons": {
+                    "type": "buy_buttons",
+                    "settings": {
+                        "show_dynamic_checkout": true,
+                        "show_gift_card_recipient": true
+                    }
+                },
+                "description": {
+                    "type": "description",
+                    "settings": {}
+                },
+                "share": {
+                    "type": "share",
+                    "settings": {
+                        "share_label": "Share"
+                    }
+                }
+            },
+            "block_order": [
+                "title",
+                "judge_me_reviews_preview_badge_DPxkUV",
+                "price",
+                "variant_picker",
+                "quantity_selector",
+                "subscriptions_app_block_gDA4tk",
+                "buy_buttons",
+                "description",
+                "share"
+            ],
+            "custom_css": [
+                ".product-form button,.product-form .btn {background-color: #16433d; /* Your new color */ color: #fff; /* Text color */}",
+                ".product-form button:hover,.product-form .btn:hover {background-color: #16433d; /* Hover color */}"
+            ],
+            "settings": {
+                "enable_sticky_info": true,
+                "color_scheme": "scheme-1",
+                "media_size": "medium",
+                "constrain_to_viewport": true,
+                "media_fit": "contain",
+                "gallery_layout": "thumbnail_slider",
+                "mobile_thumbnails": "show",
+                "media_position": "left",
+                "image_zoom": "lightbox",
+                "hide_variants": true,
+                "enable_video_looping": true,
+                "padding_top": 12,
+                "padding_bottom": 12
+            }
+        },
+        "tbp_product_cross_sell": {
+            "type": "bonpet-product-cross-sell",
+            "blocks": {},
+            "block_order": [],
+            "settings": {}
+        },
+        "tbp_product_trust": {
+            "type": "bonpet-product-trust",
+            "settings": {}
+        },
+        "page_N6UQHt": {
+            "type": "page",
+            "name": "t:sections.page.presets.name",
+            "settings": {
+                "page": "gently-cooked-free-range-chicken-for-cats",
+                "heading_size": "h1",
+                "color_scheme": "",
+                "padding_top": 36,
+                "padding_bottom": 36
+            }
+        },
+        "apps_MXwhmb": {
+            "type": "apps",
+            "blocks": {
+                "judge_me_reviews_ugc_media_grid_MhKNXH": {
+                    "type": "shopify://apps/judge-me-reviews/blocks/ugc_media_grid/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                    "settings": {}
+                }
+            },
+            "block_order": [
+                "judge_me_reviews_ugc_media_grid_MhKNXH"
+            ],
+            "settings": {
+                "include_margins": true
+            }
+        },
+        "apps_qy33bW": {
+            "type": "apps",
+            "blocks": {
+                "judge_me_reviews_review_widget_aiiipP": {
+                    "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                    "settings": {
+                        "review_data": "real_data",
+                        "max_width": 1200,
+                        "show_shop_reviews": false,
+                        "empty_state": "empty_widget"
+                    }
+                }
+            },
+            "block_order": [
+                "judge_me_reviews_review_widget_aiiipP"
+            ],
+            "settings": {
+                "include_margins": true
+            }
+        },
+        "related-products": {
+            "type": "related-products",
+            "settings": {
+                "heading": "You may also like",
+                "heading_size": "h2",
+                "products_to_show": 4,
+                "columns_desktop": 4,
+                "columns_mobile": "2",
+                "color_scheme": "scheme-1",
+                "image_ratio": "square",
+                "image_shape": "default",
+                "show_secondary_image": true,
+                "show_vendor": false,
+                "show_rating": true,
+                "padding_top": 28,
+                "padding_bottom": 28
+            }
+        },
+        "apps_6Ugc9J": {
+            "type": "apps",
+            "blocks": {
+                "rocket_google_reviews_app_block_bGRNDX": {
+                    "type": "shopify://apps/google-reviews-rocket/blocks/app-block/d11c8893-a181-4aff-a280-7446d42cec3b",
+                    "settings": {
+                        "widget_layout": "default"
+                    }
+                }
+            },
+            "block_order": [
+                "rocket_google_reviews_app_block_bGRNDX"
+            ],
+            "settings": {
+                "include_margins": true
+            }
+        },
+        "apps_8fDHwY": {
+            "type": "apps",
+            "blocks": {
+                "instafeed_app_block_JFLzkn": {
+                    "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+                    "settings": {
+                        "title": "Our Community",
+                        "title_color": "#16433d",
+                        "title_size_v2": 0,
+                        "alignment": "center",
+                        "instafeed_margin_top": 0,
+                        "instafeed_margin_bottom": 28,
+                        "instafeed_margin_sides": 0,
+                        "show_instagram_link": false,
+                        "link_alignment": "left",
+                        "link_color": "#16433d",
+                        "background_color": "#fff7e4",
+                        "feed_id": "thebonpet",
+                        "html_area": ""
+                    }
+                }
+            },
+            "block_order": [
+                "instafeed_app_block_JFLzkn"
+            ],
+            "settings": {
+                "include_margins": true
+            }
+        },
+        "paw_it_forward": {
+            "type": "bonpet-paw-it-forward",
+            "settings": {
+                "eyebrow": "PAW IT FORWARD",
+                "body": "<p>Opt into kindness by sponsoring a meal for a rescue pet. 100% of your donation goes to the charity of your choosing: <a href=\"https://www.wildflowerstudio.sg/\" target=\"_blank\">Wildflower Studio</a> or <a href=\"https://luni-singapore.com/\" target=\"_blank\">LUNI</a>.</p>",
+                "cta_label": "Donate a Meal",
+                "cta_link": "https://donate.thebonpet.com/"
+            }
+        }
+    },
+    "order": [
+        "main",
+        "tbp_product_cross_sell",
+        "tbp_product_trust",
+        "page_N6UQHt",
+        "apps_MXwhmb",
+        "apps_qy33bW",
+        "related-products",
+        "apps_6Ugc9J",
+        "paw_it_forward",
+        "apps_8fDHwY"
+    ]
+}

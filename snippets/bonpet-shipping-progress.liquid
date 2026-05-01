@@ -1,0 +1,217 @@
+{%- comment -%}
+  V3 shared shipping-progress widget.
+  Renders a 3-tier delivery progress bar (under $80 = $9, $80-$99.99 = $4, $100+ = FREE).
+  Used on /cart (via bonpet-cart-reassurance.liquid) and inside the cart drawer.
+
+  Copy is FREE-first: every state leads with the FREE-delivery goal, not the $9 penalty.
+
+  v3.19.0: tier labels now anchor to their real positions on the bar ($0 at 0%,
+  $80 at 80%, $100 at 100%) instead of an evenly-spaced legend below. Replaces
+  the disconnected 3-column legend. Tick marker at 80% has visible label so
+  users know what the line means.
+
+  Props:
+    compact (bool, default false): when true, tightens padding for cart-drawer use.
+{%- endcomment -%}
+
+{%- liquid
+  assign cart_total_cents = cart.total_price
+  assign mid_tier_cents = 8000
+  assign free_tier_cents = 10000
+  assign remaining_to_mid = mid_tier_cents | minus: cart_total_cents
+  assign remaining_to_free = free_tier_cents | minus: cart_total_cents
+  if remaining_to_mid < 0
+    assign remaining_to_mid = 0
+  endif
+  if remaining_to_free < 0
+    assign remaining_to_free = 0
+  endif
+  assign progress_pct = cart_total_cents | times: 100 | divided_by: free_tier_cents
+  if progress_pct > 100
+    assign progress_pct = 100
+  endif
+  if cart.item_count > 0 and progress_pct < 4
+    assign progress_pct_visual = 4
+  else
+    assign progress_pct_visual = progress_pct
+  endif
+-%}
+
+{%- if cart.item_count > 0 -%}
+<div class="tbp-shipping-progress {% if compact %}tbp-shipping-progress--compact{% endif %} {% if cart_total_cents >= free_tier_cents %}tbp-shipping-progress--won{% endif %}">
+  {%- if cart_total_cents >= free_tier_cents -%}
+    <p class="tbp-shipping-progress-msg tbp-shipping-progress-msg--win">
+      🎉 <strong>FREE cold-chain delivery unlocked!</strong>
+    </p>
+  {%- elsif cart_total_cents >= mid_tier_cents -%}
+    <p class="tbp-shipping-progress-msg">
+      ✅ $4 delivery unlocked. Just <strong>{{ remaining_to_free | money }}</strong> more for FREE 🚚
+    </p>
+  {%- else -%}
+    <p class="tbp-shipping-progress-msg">
+      🚚 You're <strong>{{ remaining_to_free | money }}</strong> from FREE delivery (or <strong>{{ remaining_to_mid | money }}</strong> for $4 off).
+    </p>
+  {%- endif -%}
+
+  <div class="tbp-shipping-progress-track">
+    <div class="tbp-shipping-progress-tiers" aria-hidden="true">
+      <span class="tbp-tier tbp-tier--start">
+        <strong>$0</strong>
+        <small>$9 ship</small>
+      </span>
+      <span class="tbp-tier tbp-tier--mid">
+        <strong>$80</strong>
+        <small>$4 ship</small>
+      </span>
+      <span class="tbp-tier tbp-tier--free">
+        <strong>$100</strong>
+        <small>FREE 🎉</small>
+      </span>
+    </div>
+
+    <div class="tbp-shipping-progress-bar" role="progressbar" aria-valuenow="{{ progress_pct }}" aria-valuemin="0" aria-valuemax="100">
+      <div class="tbp-shipping-progress-fill" style="width: {{ progress_pct_visual }}%;"></div>
+      <span class="tbp-shipping-progress-tick tbp-shipping-progress-tick--mid" aria-hidden="true"></span>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+<style>
+  .tbp-shipping-progress {
+    background: var(--tbp-white, #fff);
+    border: 1px solid var(--tbp-tan-mid, #e6dfce);
+    border-radius: var(--tbp-radius-md, 12px);
+    padding: var(--tbp-space-4, 16px) var(--tbp-space-5, 20px) var(--tbp-space-5, 20px);
+    font-family: var(--tbp-font-body, system-ui, sans-serif);
+    color: var(--tbp-text-dark, #16433D);
+  }
+  .tbp-shipping-progress--compact {
+    padding: 12px 14px 14px;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .tbp-shipping-progress--won {
+    background: linear-gradient(180deg, #fff 0%, #F2F8F4 100%);
+    border-color: var(--tbp-primary-mid, #2A6B62);
+  }
+
+  .tbp-shipping-progress-msg {
+    font-size: var(--tbp-text-base, 15px);
+    margin: 0 0 var(--tbp-space-3, 12px);
+    line-height: 1.4;
+    color: var(--tbp-text-dark, #16433D);
+  }
+  .tbp-shipping-progress--compact .tbp-shipping-progress-msg {
+    font-size: 13px;
+    margin: 0 0 8px;
+    line-height: 1.35;
+  }
+  .tbp-shipping-progress-msg strong { color: var(--tbp-primary, #16433D); }
+  .tbp-shipping-progress-msg--win strong { color: var(--tbp-primary-mid, #2A6B62); }
+
+  .tbp-shipping-progress-track {
+    position: relative;
+    padding-top: 34px;
+  }
+  .tbp-shipping-progress--compact .tbp-shipping-progress-track {
+    padding-top: 30px;
+  }
+
+  .tbp-shipping-progress-tiers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    pointer-events: none;
+  }
+  .tbp-shipping-progress--compact .tbp-shipping-progress-tiers { height: 26px; }
+
+  .tbp-tier {
+    position: absolute;
+    bottom: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.05;
+    text-align: center;
+  }
+  .tbp-tier strong {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--tbp-text-dark, #16433D);
+    letter-spacing: 0.02em;
+  }
+  .tbp-tier small {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--tbp-text-mid, #777);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+  .tbp-shipping-progress--compact .tbp-tier strong { font-size: 10px; }
+  .tbp-shipping-progress--compact .tbp-tier small { font-size: 8.5px; }
+
+  .tbp-tier--start {
+    left: 0;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .tbp-tier--mid {
+    left: 80%;
+    transform: translateX(-50%);
+  }
+  .tbp-tier--free {
+    right: 0;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .tbp-tier--free strong { color: var(--tbp-primary, #16433D); }
+  .tbp-tier--free small { color: var(--tbp-primary-mid, #2A6B62); }
+
+  .tbp-shipping-progress-bar {
+    height: 14px;
+    background: var(--tbp-tan-mid, #e6dfce);
+    border-radius: var(--tbp-radius-pill, 999px);
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
+  }
+  .tbp-shipping-progress--compact .tbp-shipping-progress-bar { height: 10px; }
+
+  .tbp-shipping-progress .tbp-shipping-progress-fill {
+    display: block; /* Dawn baseline has div:empty {display:none}, must override */
+    height: 100%;
+    background: linear-gradient(90deg, var(--tbp-primary, #16433D) 0%, var(--tbp-primary-mid, #2A6B62) 100%);
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: var(--tbp-radius-pill, 999px);
+    min-width: 6px;
+    box-shadow: 0 0 8px rgba(42,107,98,0.35);
+  }
+  .tbp-shipping-progress--won .tbp-shipping-progress-fill {
+    background: linear-gradient(90deg, var(--tbp-primary-mid, #2A6B62) 0%, #4FA89A 100%);
+    box-shadow: 0 0 12px rgba(79,168,154,0.5);
+  }
+
+  .tbp-shipping-progress-tick {
+    position: absolute;
+    top: -2px;
+    width: 2px;
+    height: calc(100% + 4px);
+    background: rgba(22,67,61,0.35);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .tbp-shipping-progress-tick--mid { left: 80%; }
+  .tbp-shipping-progress--won .tbp-shipping-progress-tick { display: none; }
+
+  @media (max-width: 420px) {
+    .tbp-tier strong { font-size: 10px; }
+    .tbp-tier small { font-size: 8.5px; letter-spacing: 0.02em; }
+  }
+  /* Cart drawer compact mode is always narrow (~360-400px), tighten further */
+  .tbp-shipping-progress--compact .tbp-tier small { font-size: 8px; letter-spacing: 0; }
+  .tbp-shipping-progress--compact .tbp-tier--mid { transform: translateX(-55%); }
+</style>

@@ -1,0 +1,135 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_pet_meal_calculator_XJGBEK": {
+      "type": "custom-pet-meal-calculator",
+      "name": "Pet Meal Calculator",
+      "settings": {
+        "heading": "The Bon Pet Meal Calculator",
+        "description": "Calculate the perfect daily feeding amount for your pet based on their individual needs.",
+        "age_label": "Select your pet's age",
+        "weight_label": "Pet Weight",
+        "weight_description": "If your pet is over or underweight, please enter their ideal weight",
+        "pet_type_label": "Pet Type",
+        "cat_image": "shopify://shop_images/cat_activity_3.png",
+        "dog_image": "shopify://shop_images/dog_activity_3.png",
+        "cat_low_activity_image": "shopify://shop_images/cat_activity_1.png",
+        "cat_average_activity_image": "shopify://shop_images/cat_activity_2.png",
+        "cat_high_activity_image": "shopify://shop_images/cat_activity_4.png",
+        "dog_low_activity_image": "shopify://shop_images/dog_activity_1.png",
+        "dog_average_activity_image": "shopify://shop_images/dog_activity_2.png",
+        "dog_high_activity_image": "shopify://shop_images/dog_activity_5.png",
+        "neutered_label": "Is your pet neutered/spayed?",
+        "activity_label": "Daily Activity Level",
+        "button_text": "Calculate Feeding Amount",
+        "results_heading": "Daily Feeding Requirements",
+        "feeding_description": "Determine your pet's daily feeding amount in grams. We calculate this by using their daily calorie requirement and the calorie content of each meal pack.",
+        "background_color": "#fff7e4",
+        "heading_color": "#16433d",
+        "text_color": "#16433d",
+        "label_color": "#16433d",
+        "label_font_size": "1.5rem",
+        "accent_color": "#16433d",
+        "button_color": "#16433d",
+        "button_hover_color": "#16433d",
+        "results_background_color": "#fff7e4",
+        "results_border_color": "#dee2e6",
+        "daily_calories_color": "#333333",
+        "rer_background_color": "#e8f4fd",
+        "rer_text_color": "#0c5460",
+        "rer_accent_color": "#0ea5e9",
+        "mer_background_color": "#f0fdf4",
+        "mer_text_color": "#166534",
+        "mer_accent_color": "#22c55e",
+        "results_heading_size": "3rem",
+        "results_heading_color": "#333333",
+        "daily_calories_size": "2.4rem",
+        "energy_breakdown_size": "2rem",
+        "feeding_description_size": "2rem",
+        "protein_table_heading_size": "2.5rem",
+        "protein_table_heading_color": "#333333",
+        "protein_table_text_size": "1.8rem",
+        "table_header_background": "#16433d",
+        "table_header_text_color": "#fff7e4"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "cross_links": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_guide": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/feeding-guide-preparation-1.png",
+            "title": "Feeding Guide",
+            "text": "<p>How to transition + thaw + serve fresh meals safely.</p>",
+            "link_label": "Read the guide",
+            "link": "shopify://pages/feeding-guideline"
+          }
+        },
+        "col_volume": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/multipack-stack-value-cta.jpg",
+            "title": "Volume Discounts",
+            "text": "<p>Save 10-40% with auto-tier pricing on multi-pack subs.</p>",
+            "link_label": "See the tiers",
+            "link": "shopify://pages/volume-discounts"
+          }
+        },
+        "col_formulas": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Feeding_Guide_for_Cats.jpg",
+            "title": "Open Formulas",
+            "text": "<p>Every recipe published openly. See exact ratios.</p>",
+            "link_label": "View formulas",
+            "link": "shopify://pages/formulas"
+          }
+        }
+      },
+      "block_order": [
+        "col_guide",
+        "col_volume",
+        "col_formulas"
+      ],
+      "settings": {
+        "title": "Keep exploring",
+        "heading_size": "h1",
+        "image_width": "half",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "button_label": "",
+        "button_link": "",
+        "button_label_secondary": "",
+        "button_link_secondary": ""
+      }
+    }
+  },
+  "order": [
+    "custom_pet_meal_calculator_XJGBEK",
+    "cross_links",
+    "main"
+  ]
+}

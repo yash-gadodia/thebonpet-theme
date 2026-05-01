@@ -1,0 +1,254 @@
+{%- comment -%} V3 How It Works — 4-step illustrated timeline on cream bg {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-cream tbp-hiw">
+  <svg class="tbp-hiw-paw-defs" aria-hidden="true" focusable="false">
+    <symbol id="tbp-paw-dog" viewBox="0 0 40 40">
+      <ellipse cx="9" cy="15" rx="3.6" ry="5"/>
+      <ellipse cx="16" cy="8" rx="3.6" ry="5"/>
+      <ellipse cx="24" cy="8" rx="3.6" ry="5"/>
+      <ellipse cx="31" cy="15" rx="3.6" ry="5"/>
+      <path d="M20 18 C 11 18, 8 28, 13 34 C 16 38, 24 38, 27 34 C 32 28, 29 18, 20 18 Z"/>
+    </symbol>
+    <symbol id="tbp-paw-cat" viewBox="0 0 40 40">
+      <circle cx="11" cy="13" r="3.1"/>
+      <circle cx="17" cy="8" r="3.1"/>
+      <circle cx="23" cy="8" r="3.1"/>
+      <circle cx="29" cy="13" r="3.1"/>
+      <path d="M20 17 C 13 17, 10 23, 13 29 C 15 33, 25 33, 27 29 C 30 23, 27 17, 20 17 Z"/>
+    </symbol>
+    <symbol id="tbp-hiw-arrow" viewBox="0 0 100 40">
+      <path d="M5 32 Q 50 -4, 95 28" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+      <path d="M88 18 L 96 28 L 84 32" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <div class="tbp-hiw-bg-paws" aria-hidden="true">
+    <svg class="tbp-hiw-bgpaw" style="--i:0;--x:3%;--y:6%;--s:96px;--r:-20deg"><use href="#tbp-paw-dog"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:1;--x:12%;--y:78%;--s:78px;--r:18deg"><use href="#tbp-paw-cat"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:2;--x:22%;--y:18%;--s:88px;--r:30deg"><use href="#tbp-paw-dog"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:3;--x:33%;--y:92%;--s:82px;--r:-25deg"><use href="#tbp-paw-cat"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:4;--x:44%;--y:5%;--s:92px;--r:10deg"><use href="#tbp-paw-dog"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:5;--x:56%;--y:84%;--s:80px;--r:-15deg"><use href="#tbp-paw-cat"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:6;--x:67%;--y:10%;--s:86px;--r:25deg"><use href="#tbp-paw-dog"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:7;--x:80%;--y:74%;--s:96px;--r:-10deg"><use href="#tbp-paw-cat"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:8;--x:95%;--y:16%;--s:84px;--r:22deg"><use href="#tbp-paw-dog"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:9;--x:6%;--y:46%;--s:72px;--r:5deg"><use href="#tbp-paw-cat"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:10;--x:96%;--y:94%;--s:90px;--r:-30deg"><use href="#tbp-paw-dog"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:11;--x:50%;--y:50%;--s:78px;--r:15deg"><use href="#tbp-paw-cat"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:12;--x:18%;--y:50%;--s:74px;--r:-12deg"><use href="#tbp-paw-cat"/></svg>
+    <svg class="tbp-hiw-bgpaw" style="--i:13;--x:88%;--y:50%;--s:80px;--r:8deg"><use href="#tbp-paw-dog"/></svg>
+  </div>
+
+  <div class="tbp-container">
+    <h2 class="tbp-text-center">{{ section.settings.heading }}</h2>
+    <p class="tbp-text-center tbp-mb-8" style="color: var(--tbp-text-mid);">{{ section.settings.subheading }}</p>
+
+    <div class="tbp-hiw-wrap">
+      <div class="tbp-hiw-arrows" aria-hidden="true">
+        <svg class="tbp-hiw-arrow" style="--i:0;--g:1"><use href="#tbp-hiw-arrow"/></svg>
+        <svg class="tbp-hiw-arrow" style="--i:1;--g:2"><use href="#tbp-hiw-arrow"/></svg>
+        <svg class="tbp-hiw-arrow" style="--i:2;--g:3"><use href="#tbp-hiw-arrow"/></svg>
+      </div>
+
+      <div class="tbp-hiw-grid">
+        {%- for block in section.blocks -%}
+          <div class="tbp-hiw-step" {{ block.shopify_attributes }}>
+            <div class="tbp-hiw-number">{{ forloop.index }}</div>
+            {%- if block.settings.icon -%}
+              <img src="{{ block.settings.icon | image_url: width: 180 }}" alt="" aria-hidden="true" class="tbp-hiw-icon" loading="lazy">
+            {%- else -%}
+              {%- assign fallback_icon = 'bonpet-how-' | append: forloop.index | append: '.png' -%}
+              <img src="{{ fallback_icon | asset_url }}" alt="" aria-hidden="true" class="tbp-hiw-icon" loading="lazy">
+            {%- endif -%}
+            <h4 class="tbp-hiw-title">{{ block.settings.title }}</h4>
+            <p class="tbp-hiw-body">{{ block.settings.body }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function(){
+    var sections = document.querySelectorAll('.tbp-hiw');
+    if (!sections.length) return;
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach(function(s){ s.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    sections.forEach(function(s){ io.observe(s); });
+  })();
+</script>
+
+<style>
+  .tbp-hiw { padding: var(--tbp-space-8) 0; overflow: hidden; position: relative; }
+  .tbp-hiw .tbp-container { position: relative; z-index: 2; }
+  .tbp-hiw-grid {
+    display: grid; grid-template-columns: 1fr; gap: var(--tbp-space-6);
+  }
+  @media (min-width: 640px) {
+    .tbp-hiw-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .tbp-hiw-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  /* Mobile: horizontal swipe carousel (override stacked default) */
+  @media (max-width: 639px) {
+    .tbp-hiw {
+      overflow: hidden;
+    }
+    .tbp-hiw-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      gap: var(--tbp-space-3);
+      padding: 22px 8% var(--tbp-space-4);
+      margin: 0 -5vw;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .tbp-hiw-grid::-webkit-scrollbar { display: none; }
+    .tbp-hiw-step {
+      flex: 0 0 82%;
+      scroll-snap-align: center;
+      margin-top: 18px;
+    }
+  }
+  .tbp-hiw-step {
+    text-align: center; padding: var(--tbp-space-5);
+    background: var(--tbp-white); border-radius: var(--tbp-radius-md);
+    position: relative;
+  }
+  .tbp-hiw-number {
+    position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    background: var(--tbp-primary-mid); color: var(--tbp-white);
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: var(--tbp-text-lg);
+    border: 3px solid var(--tbp-cream);
+  }
+  .tbp-hiw-icon { width: 120px; height: 120px; object-fit: contain; margin: var(--tbp-space-4) auto; display: block; }
+  .tbp-hiw-title { font-size: var(--tbp-text-lg); margin-bottom: var(--tbp-space-2); color: var(--tbp-primary); }
+  .tbp-hiw-body { font-size: var(--tbp-text-sm); color: var(--tbp-text-mid); margin: 0; line-height: 1.6; }
+
+  .tbp-hiw-wrap { position: relative; }
+  .tbp-hiw-paw-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  /* Background wallpaper paws — scattered across the full section width */
+  .tbp-hiw-bg-paws {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .tbp-hiw-bgpaw {
+    position: absolute;
+    left: var(--x, 50%);
+    top: var(--y, 50%);
+    width: var(--s, 80px); height: var(--s, 80px);
+    color: var(--tbp-primary-mid);
+    fill: currentColor;
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(0.8);
+  }
+  .tbp-hiw.in-view .tbp-hiw-bgpaw {
+    animation: tbp-bgpaw-in 700ms cubic-bezier(.4,.0,.2,1) forwards;
+    animation-delay: calc(var(--i, 0) * 70ms + 200ms);
+  }
+  @keyframes tbp-bgpaw-in {
+    to { opacity: 0.12; transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(1); }
+  }
+
+  /* Grid sits above paws */
+  .tbp-hiw-grid { position: relative; z-index: 2; }
+
+  /* Arrows between cards — desktop only */
+  .tbp-hiw-arrows {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .tbp-hiw-arrows { display: block; }
+  }
+  .tbp-hiw-arrow {
+    position: absolute;
+    width: 72px; height: 40px;
+    top: 44%;
+    transform: translate(-50%, -50%) scale(0.6);
+    color: var(--tbp-primary);
+    fill: none;
+    opacity: 0;
+    transition: none;
+  }
+  .tbp-hiw-arrow[style*="--g:1"] { left: 25%; }
+  .tbp-hiw-arrow[style*="--g:2"] { left: 50%; }
+  .tbp-hiw-arrow[style*="--g:3"] { left: 75%; }
+  .tbp-hiw.in-view .tbp-hiw-arrow {
+    animation: tbp-arrow-in 500ms cubic-bezier(.4,.0,.2,1) forwards;
+    animation-delay: calc(var(--i, 0) * 180ms + 600ms);
+  }
+  @keyframes tbp-arrow-in {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+    60% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.08); }
+    100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tbp-hiw.in-view .tbp-hiw-bgpaw {
+      animation: none;
+      opacity: 0.12;
+      transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+    }
+    .tbp-hiw.in-view .tbp-hiw-arrow {
+      animation: none;
+      opacity: 0.7;
+      transform: translate(-50%, -50%);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "TBP How It Works",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How it works" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Our paws ensure you get the best. Every step of the way." }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon / illustration" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TBP How It Works",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Choose Your Pet's Meals", "body": "Select a meal that works best for your Furkid. Receive a free sample pack to make sure your furry friend loves it." } },
+        { "type": "step", "settings": { "title": "Meals Are Made To Order", "body": "Slow-cooked meals are made with love here in Singapore. Meals are frozen to ensure freshness and flavour." } },
+        { "type": "step", "settings": { "title": "Receive Your Meals", "body": "Meals stay frozen until they reach your doorstep with cold-chain delivery. You can also pick up for free." } },
+        { "type": "step", "settings": { "title": "Defrost And Dig In", "body": "No portioning or hard work, simply defrost, serve and watch that tail wiggle!" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

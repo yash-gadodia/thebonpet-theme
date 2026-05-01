@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "formulas": {
+      "type": "bonpet-formulas",
+      "settings": {}
+    },
+    "trust_band": {
+      "type": "bonpet-trust-band",
+      "settings": {}
+    },
+    "final_cta": {
+      "type": "bonpet-final-cta",
+      "blocks": {
+        "dogs": {
+          "type": "card",
+          "settings": {
+            "label": "Shop Meals for Dogs 🐶",
+            "link": "shopify://collections/dogs"
+          }
+        },
+        "cats": {
+          "type": "card",
+          "settings": {
+            "label": "Shop Meals for Cats 🐱",
+            "link": "shopify://collections/cats"
+          }
+        }
+      },
+      "block_order": [
+        "dogs",
+        "cats"
+      ],
+      "settings": {
+        "heading": "Ready to feed them like family?"
+      }
+    }
+  },
+  "order": [
+    "formulas",
+    "trust_band",
+    "final_cta"
+  ]
+}

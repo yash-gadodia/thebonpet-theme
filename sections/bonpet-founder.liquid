@@ -1,0 +1,105 @@
+{%- comment -%} V3 Founder intro — credibility differentiator (none of top 3 competitors has this on homepage) {%- endcomment -%}
+<section class="tbp-v3 tbp-section tbp-section-cream tbp-founder" aria-label="Our story">
+  <div class="tbp-container">
+    <div class="tbp-founder-grid">
+      <div class="tbp-founder-media">
+        {%- if section.settings.image -%}
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image_alt | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'bonpet-dog-bag-cocker-1776904000.jpg' | asset_url }}" alt="{{ section.settings.image_alt | escape | default: 'Cocker Spaniel sniffing a Bon Pet delivery bag at home' }}" loading="lazy">
+        {%- endif -%}
+      </div>
+      <div class="tbp-founder-content">
+        <p class="tbp-founder-eyebrow">{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+        <blockquote class="tbp-founder-pullquote">{{ section.settings.quote }}</blockquote>
+        <div class="tbp-founder-body-block">
+          {%- assign body_html = section.settings.body | strip_html | strip | newline_to_br | replace: '<br /><br />', '</p><p class="tbp-founder-body">' | replace: '<br />', ' ' -%}
+          <p class="tbp-founder-body">{{ body_html }}</p>
+        </div>
+        <p class="tbp-founder-signature">{{ section.settings.signature }}</p>
+        <div class="tbp-founder-ctas">
+          {% render 'bonpet-button', label: section.settings.cta_label, href: section.settings.cta_link, variant: 'outline-dark' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-founder { padding: var(--tbp-space-7) 0; }
+  .tbp-founder-grid {
+    display: grid; grid-template-columns: 1fr;
+    gap: var(--tbp-space-5);
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .tbp-founder-grid { grid-template-columns: 5fr 6fr; gap: var(--tbp-space-7); align-items: center; }
+  }
+  .tbp-founder-media img {
+    width: 100%; border-radius: var(--tbp-radius-md);
+    aspect-ratio: 4/5; object-fit: cover;
+    object-position: center top;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  @media (max-width: 1023px) {
+    .tbp-founder-media img {
+      aspect-ratio: 4/3;
+      max-height: 52vh;
+    }
+  }
+  .tbp-founder-content > * + * { margin-top: var(--tbp-space-4); }
+  .tbp-founder-content h2 { margin: 0; font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem); line-height: 1.15; }
+  .tbp-founder-eyebrow {
+    color: var(--tbp-orange); text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700; font-size: var(--tbp-text-sm);
+    margin: 0 0 var(--tbp-space-2);
+  }
+  .tbp-founder-pullquote {
+    display: block;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+    font-style: italic; color: var(--tbp-text-dark);
+    border-left: 3px solid var(--tbp-primary);
+    padding: var(--tbp-space-1) 0 var(--tbp-space-1) var(--tbp-space-4);
+    margin: var(--tbp-space-4) 0 0 !important;
+    line-height: 1.6;
+    max-width: 56ch;
+  }
+  .tbp-founder-body-block { max-width: 62ch; }
+  .tbp-founder-body {
+    color: var(--tbp-text-mid); margin: 0;
+    line-height: 1.8;
+    font-size: var(--tbp-text-base);
+  }
+  .tbp-founder-body + .tbp-founder-body { margin-top: var(--tbp-space-3); }
+  @media (min-width: 768px) {
+    .tbp-founder-body { font-size: var(--tbp-text-lg); line-height: 1.75; }
+  }
+  .tbp-founder-pullquote { margin: var(--tbp-space-4) 0 var(--tbp-space-5) !important; }
+  .tbp-founder-signature {
+    color: var(--tbp-primary); font-weight: 600;
+    font-size: var(--tbp-text-sm); font-style: italic;
+    margin: var(--tbp-space-5) 0 0 !important;
+  }
+  .tbp-founder-ctas { margin-top: var(--tbp-space-5) !important; }
+</style>
+
+{% schema %}
+{
+  "name": "TBP Founder Story",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Founder photo (Yash + Nic, or kitchen shot)" },
+    { "type": "text", "id": "image_alt", "label": "Image alt", "default": "Yash and Nicolas, co-founders of The Bon Pet" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FOUNDER-LED · SINGAPORE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built by pawrents, for pawrents" },
+    { "type": "textarea", "id": "quote", "label": "Founder quote",
+      "default": "We started The Bon Pet because we couldn't find food for our furkids that we'd actually feel good feeding them. So we built it." },
+    { "type": "textarea", "id": "body", "label": "Body paragraph",
+      "default": "Small local team in Singapore. Every recipe is PhD-formulated to AAFCO All Life Stages, gently cooked sous vide at 80°C, and delivered frozen straight from our AVS-licensed kitchen. No fillers. No shortcuts. Just real food for furkids." },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "Yash & Nicolas, Co-founders" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Read Our Story" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [ { "name": "TBP Founder Story" } ]
+}
+{% endschema %}
