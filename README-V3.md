@@ -1,9 +1,15 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.33.0 (2026-05-01) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.34.0 (2026-05-01) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.34.0** (2026-05-01) - Lyka audit Phase 2: /pages/why-fresh-food long-form education page.
+  - 🧠 NEW `/pages/why-fresh-food` (id 129934622777) - long-form, citation-backed education page mirroring Lyka's /why-real-food but localised for Singapore and leaning on the open-formulas moat. 6 inner sections: hero ("What's actually in your dog's bowl?"), "Three things most kibble does to your furkid's food" (3 reason cards: heat damage, mycotoxins, opacity, with inline citations), "Common myths, actual research" (4 myth-vs-fact cards), "How we do it differently" (4 pillars: sous vide / AAFCO / open formulas / single-protein), "Sources & Science" (9 numbered citations linking to peer-reviewed papers / FDA / AAFCO / Cornell), "Try it on your own furkid" CTA. New section bonpet-why-fresh.liquid (px-only sizing, no rem trap).
+  - 📚 Every claim cited inline via superscript link to the Sources block. Sources include PMC/NCBI peer-reviewed papers (lysine bioavailability, Maillard reaction, mycotoxin contamination, extrusion starch digestibility, fresh food meta-analysis), Frontiers in Immunology (AGEs immunomodulation), Cornell Riney Center (periodontal disease prevalence + senior dog metabolomics), AAFCO (All Life Stages standards doc), and FDA (DCM grain-free investigation). No claims without sources. Dropped "live to 29" and "+2.5 yrs lifespan" because not rigorously sourceable.
+  - 🎯 SEO targeting: page title "Why Fresh Food vs Kibble: The Science | The Bon Pet Singapore" + meta description, set via global.title_tag / global.description_tag metafields. Targets "fresh dog food vs kibble singapore", "kibble vs cooked", "why fresh pet food".
+  - 🦶 Footer Support column gets "🧠 Why Fresh Food" link below "🍽️ Our Meals".
+  - 📁 Touches: sections/bonpet-why-fresh.liquid (new), templates/page.why-fresh-food.json (new), sections/bonpet-footer.liquid. Plus Shopify page + 2 metafields via Admin API.
 - **v3.33.0** (2026-05-01) - Lyka audit Phase 1: visual meals menu + benefit-led hero copy.
   - 🍽️ NEW `/pages/our-meals` (id 129934458937) - visual menu showing all 9 protein meals (5 dog + 4 cat) in a 3-col desktop / 2-col mobile grid. Each card has the real product photo (1200x1200 from Shopify Files), source-claim badge (FREE-RANGE / GRASS-FED / WILD AUSTRALIAN / WILD-CAUGHT / CAGE-FREE / ARTISANAL), the protein name in display font, a one-line health outcome ("Lean, low-fat. Easy on sensitive tummies."), pack size + price, and dual CTAs ("Try Chicken" → product page, "See recipe →" → /pages/formulas). Tier separator between Dog and Cat. "Coming soon: Raw" callout below to set up the upcoming raw line. Footer CTA → free trial. Lyka /our-food pattern but localised, with the open-formulas moat reinforced via every "See recipe" link. New section bonpet-meals-menu.liquid (px-only, no rem trap).
   - 🏠 Homepage hero copy refresh from product-led to benefit-led (Lyka audit finding: we lead with "Made fresh in SG" not health benefit).

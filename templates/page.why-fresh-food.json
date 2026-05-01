@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "why_fresh": {
+      "type": "bonpet-why-fresh",
+      "settings": {}
+    },
+    "trust_band": {
+      "type": "bonpet-trust-band",
+      "settings": {}
+    }
+  },
+  "order": ["why_fresh", "trust_band"]
+}

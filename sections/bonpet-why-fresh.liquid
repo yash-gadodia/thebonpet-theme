@@ -1,0 +1,430 @@
+{%- comment -%}
+  V3 /pages/why-fresh-food · Long-form education page (Lyka /why-real-food pattern).
+  6 inner sections in one file: hero, 3 reasons kibble is broken, myth vs fact,
+  how Bon Pet does it differently, sources, trial CTA.
+  All citations are real and linked at the bottom. Inline superscripts route to
+  numbered references in the Sources section. Px-only sizing.
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-why-fresh" data-section-id="{{ section.id }}">
+  <div class="tbp-container">
+
+    {%- comment -%} 1. Hero {%- endcomment -%}
+    <header class="tbp-why-hero">
+      <p class="tbp-why-eyebrow">{{ section.settings.eyebrow | default: 'WHY FRESH FOOD' }}</p>
+      <h1 class="tbp-why-title">{{ section.settings.heading | default: "What's actually in your dog's bowl?" }}</h1>
+      <p class="tbp-why-lead">{{ section.settings.lead | default: "Most commercial kibble is extruded at 130-180°C, hides its formula, and trace-tests positive for aflatoxins. Bon Pet's gently cooked at 80°C, openly published, made fresh in Singapore. Here's the science." }}</p>
+    </header>
+
+    {%- comment -%} 2. Three reasons kibble is broken {%- endcomment -%}
+    <section class="tbp-why-block tbp-why-reasons">
+      <h2 class="tbp-why-h2">{{ section.settings.reasons_heading | default: 'Three things most kibble does to your furkid\'s food' }}</h2>
+      <p class="tbp-why-h2-sub">{{ section.settings.reasons_sub | default: 'Not an attack on any brand. Just facts published in peer-reviewed journals and FDA filings.' }}</p>
+
+      <div class="tbp-why-cards">
+        <article class="tbp-why-card">
+          <span class="tbp-why-card-icon" aria-hidden="true">🔥</span>
+          <h3 class="tbp-why-card-title">Heat damages nutrients</h3>
+          <p class="tbp-why-card-body">Extrusion (the standard kibble process) cooks at 130-180°C. Reactive lysine bioavailability can drop by up to 61.8%<sup><a href="#cite-1">1</a></sup>. Heat also creates Maillard reaction products and AGEs linked to chronic inflammation<sup><a href="#cite-2">2</a></sup>. Sous vide at 80°C, like ours, doesn't.</p>
+        </article>
+        <article class="tbp-why-card">
+          <span class="tbp-why-card-icon" aria-hidden="true">🧫</span>
+          <h3 class="tbp-why-card-title">Mycotoxins survive cooking</h3>
+          <p class="tbp-why-card-body">Over 60% of commercial pet food samples tested globally contain detectable aflatoxins or deoxynivalenol<sup><a href="#cite-3">3</a></sup>. High-heat cooking does not eliminate these toxins. Fresh, frozen-stored meals avoid the long shelf-life mold conditions that create them.</p>
+        </article>
+        <article class="tbp-why-card">
+          <span class="tbp-why-card-icon" aria-hidden="true">🔒</span>
+          <h3 class="tbp-why-card-title">Opaque ingredients</h3>
+          <p class="tbp-why-card-body">Most brands publish an ingredient list but never the ratios. You don't know how much chicken vs filler is actually in the bag. Bon Pet publishes every gram of every ingredient in a <a href="https://docs.google.com/spreadsheets/d/1MmEgWyF-GbnkA6RP9WqD69mmV-luKXb0jpFxTgqygYE/edit?gid=802280656" target="_blank" rel="noopener">public Google Sheet</a> you can download right now.</p>
+        </article>
+      </div>
+    </section>
+
+    {%- comment -%} 3. Myth vs Fact {%- endcomment -%}
+    <section class="tbp-why-block tbp-why-myths">
+      <h2 class="tbp-why-h2">Common myths, actual research</h2>
+      <p class="tbp-why-h2-sub">Sourced from peer-reviewed veterinary journals and FDA filings.</p>
+
+      <div class="tbp-why-myth-grid">
+        <article class="tbp-why-myth">
+          <p class="tbp-why-myth-label">MYTH</p>
+          <p class="tbp-why-myth-body">Kibble cleans dogs' teeth.</p>
+          <p class="tbp-why-fact-label">FACT</p>
+          <p class="tbp-why-fact-body">Periodontal disease still affects 80-89% of dogs over age 3<sup><a href="#cite-4">4</a></sup>. Brushing and dental chews do more than diet texture for oral health.</p>
+        </article>
+        <article class="tbp-why-myth">
+          <p class="tbp-why-myth-label">MYTH</p>
+          <p class="tbp-why-myth-body">"AAFCO complete and balanced" is enough.</p>
+          <p class="tbp-why-fact-label">FACT</p>
+          <p class="tbp-why-fact-body">AAFCO has tiers. "Adult Maintenance" is the easiest to meet. "All Life Stages" requires meeting growth + reproduction nutrient profiles too. Bon Pet meets All Life Stages<sup><a href="#cite-5">5</a></sup>.</p>
+        </article>
+        <article class="tbp-why-myth">
+          <p class="tbp-why-myth-label">MYTH</p>
+          <p class="tbp-why-myth-body">Fresh food is marketing fluff.</p>
+          <p class="tbp-why-fact-label">FACT</p>
+          <p class="tbp-why-fact-body">A 2024 Cornell metabolomics study on senior dogs found fresh food reduced AGEs and increased antioxidant markers (ergothioneine, carnosine) vs kibble<sup><a href="#cite-6">6</a></sup>.</p>
+        </article>
+        <article class="tbp-why-myth">
+          <p class="tbp-why-myth-label">MYTH</p>
+          <p class="tbp-why-myth-body">Grain-free is automatically healthier.</p>
+          <p class="tbp-why-fact-label">FACT</p>
+          <p class="tbp-why-fact-body">The FDA investigated 553 cases of grain-free diets potentially linked to canine dilated cardiomyopathy (DCM) by 2018<sup><a href="#cite-7">7</a></sup>. Causation is unclear, but grain-free isn't a free pass.</p>
+        </article>
+      </div>
+    </section>
+
+    {%- comment -%} 4. How Bon Pet does it differently {%- endcomment -%}
+    <section class="tbp-why-block tbp-why-howwedoit">
+      <h2 class="tbp-why-h2">{{ section.settings.howwedoit_heading | default: 'How we do it differently' }}</h2>
+      <p class="tbp-why-h2-sub">{{ section.settings.howwedoit_sub | default: 'Four things we built into the brand from day one.' }}</p>
+
+      <div class="tbp-why-pillars">
+        <article class="tbp-why-pillar">
+          <span class="tbp-why-pillar-icon" aria-hidden="true">🌡️</span>
+          <h3 class="tbp-why-pillar-title">Sous vide at 80°C</h3>
+          <p class="tbp-why-pillar-body">Vacuum-sealed, gently cooked. Preserves taurine, lysine, B vitamins. No Maillard browning, no AGE creation at scale.</p>
+        </article>
+        <article class="tbp-why-pillar">
+          <span class="tbp-why-pillar-icon" aria-hidden="true">🏆</span>
+          <h3 class="tbp-why-pillar-title">AAFCO All Life Stages</h3>
+          <p class="tbp-why-pillar-body">Same recipe meets nutrient minimums for puppies, kittens, adults, seniors, and pregnant pets. No reformulating as your furkid grows.</p>
+        </article>
+        <article class="tbp-why-pillar">
+          <span class="tbp-why-pillar-icon" aria-hidden="true">🔓</span>
+          <h3 class="tbp-why-pillar-title">Every gram published</h3>
+          <p class="tbp-why-pillar-body">Public Google Sheet. Every ingredient, every supplement, every ratio. No SG fresh-pet brand has matched this. <a href="/pages/formulas">See the comparison</a>.</p>
+        </article>
+        <article class="tbp-why-pillar">
+          <span class="tbp-why-pillar-icon" aria-hidden="true">🐾</span>
+          <h3 class="tbp-why-pillar-title">Single-protein recipes</h3>
+          <p class="tbp-why-pillar-body">One animal protein per recipe. Built for sensitive guts, novel-protein elimination diets, and picky eaters. <a href="/pages/our-meals">Browse the menu</a>.</p>
+        </article>
+      </div>
+    </section>
+
+    {%- comment -%} 5. Sources & Science {%- endcomment -%}
+    <section class="tbp-why-block tbp-why-sources" id="sources">
+      <h2 class="tbp-why-h2">Sources &amp; Science</h2>
+      <p class="tbp-why-h2-sub">Every claim above traces to one of these. We update this list when sources change.</p>
+
+      <ol class="tbp-why-citations">
+        <li id="cite-1"><strong>Lysine bioavailability loss in kibble.</strong> "Nutrient and Maillard reaction product concentrations of commercially available pet foods and treats." PMC/NCBI, peer-reviewed, 2023. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9667973/" target="_blank" rel="noopener">View paper</a></li>
+        <li id="cite-2"><strong>Maillard reaction products and AGEs in pet food.</strong> "Immunomodulation by Processed Animal Feed: The Role of Maillard Reaction Products and Advanced Glycation End-Products." Frontiers in Immunology, 2018. <a href="https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2018.02088/full" target="_blank" rel="noopener">View paper</a></li>
+        <li id="cite-3"><strong>Mycotoxin contamination in commercial pet food.</strong> "Natural mycotoxin contamination in dog food: A review on toxicity and detoxification methods." ScienceDirect, peer-reviewed, 2023. <a href="https://www.sciencedirect.com/science/article/pii/S0147651323004529" target="_blank" rel="noopener">View paper</a></li>
+        <li id="cite-4"><strong>Periodontal disease prevalence in dogs.</strong> Cornell University Riney Canine Health Center; multiple peer-reviewed studies. <a href="https://www.vet.cornell.edu/departments-centers-and-institutes/riney-canine-health-center/health-topics/canine-health-information/periodontal-disease" target="_blank" rel="noopener">View page</a></li>
+        <li id="cite-5"><strong>AAFCO All Life Stages standards.</strong> AAFCO Model Regulations for Pet Food, 2023. <a href="https://www.aafco.org/wp-content/uploads/2023/04/9._FINAL_PFC_MBRC_for_Pet_Food_and_Specialty_Pet_Food.pdf" target="_blank" rel="noopener">View document</a></li>
+        <li id="cite-6"><strong>Fresh food and senior dog metabolic markers.</strong> Cornell University metabolomic study on senior sled dogs (Dr. Heather Huson), 2024. <a href="https://www.petfoodindustry.com/nutrition/research-notes/news/15769793/study-fresh-dog-food-supports-healthier-aging-in-seniors" target="_blank" rel="noopener">View summary</a></li>
+        <li id="cite-7"><strong>FDA investigation of grain-free diets and DCM.</strong> US FDA, ongoing investigation, 553 reported cases by 2018. <a href="https://www.fda.gov/animal-veterinary/outbreaks-and-advisories/fda-investigation-potential-link-between-certain-diets-and-canine-dilated-cardiomyopathy" target="_blank" rel="noopener">View FDA filing</a></li>
+        <li id="cite-8"><strong>Extrusion processing and starch digestibility.</strong> "Extrusion Processing Modifications of a Dog Kibble at Large Scale Alter Levels of Starch Available to Animal Enzymatic Digestion." PMC/NCBI, peer-reviewed, 2022. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8621379/" target="_blank" rel="noopener">View paper</a></li>
+        <li id="cite-9"><strong>Systematic review on fresh pet food claims.</strong> "Systematic Review and Meta-Analysis of Quality Claims Associated with Fresh Pet Food." PMC/NCBI, 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12784728/" target="_blank" rel="noopener">View paper</a></li>
+      </ol>
+    </section>
+
+    {%- comment -%} 6. Trial CTA {%- endcomment -%}
+    <section class="tbp-why-block tbp-why-cta">
+      <h2 class="tbp-why-cta-title">{{ section.settings.cta_heading | default: 'Try it on your own furkid.' }}</h2>
+      <p class="tbp-why-cta-body">{{ section.settings.cta_body | default: 'Free trial pack, $9 cold-chain delivery to your door. No subscription required, no commitment. If your dog or cat doesn\'t love it, drop us a note and we\'ll make it right.' }}</p>
+      <div class="tbp-why-cta-actions">
+        <a class="tbp-why-cta-btn" href="{{ section.settings.cta1_link | default: '/products/free-dog-trial-pack' }}">{{ section.settings.cta1_label | default: '🐶 Free Dog Trial' }}</a>
+        <a class="tbp-why-cta-btn tbp-why-cta-btn--ghost" href="{{ section.settings.cta2_link | default: '/products/free-cat-trial-pack' }}">{{ section.settings.cta2_label | default: '🐱 Free Cat Trial' }}</a>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<style>
+  /* All sizes in px to bypass Dawn's 62.5% root. */
+  .tbp-why-fresh {
+    background: var(--tbp-cream, #faf3e8);
+    padding: clamp(56px, 8vw, 104px) 0;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+
+  /* Hero */
+  .tbp-why-hero {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto clamp(56px, 7vw, 96px);
+    padding: 0 16px;
+  }
+  .tbp-why-eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--tbp-primary, #2d5d3a);
+    margin: 0 0 16px;
+    text-transform: uppercase;
+  }
+  .tbp-why-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(36px, 5.6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0 0 24px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-why-lead {
+    font-size: clamp(17px, 1.8vw, 22px);
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  /* Generic block */
+  .tbp-why-block { margin: 0 auto clamp(64px, 9vw, 120px); max-width: 1080px; padding: 0 16px; }
+  .tbp-why-block:last-of-type { margin-bottom: 0; }
+  .tbp-why-h2 {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15;
+    margin: 0 0 12px;
+    text-align: center;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-why-h2-sub {
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #6a6a6a);
+    text-align: center;
+    margin: 0 auto clamp(32px, 4vw, 48px);
+    max-width: 680px;
+  }
+
+  /* 2. Reasons cards */
+  .tbp-why-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  @media (min-width: 900px) { .tbp-why-cards { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
+  .tbp-why-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px 26px 30px;
+    box-shadow: 0 6px 20px rgba(45, 93, 58, 0.07);
+  }
+  .tbp-why-card-icon {
+    display: inline-block;
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  .tbp-why-card-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-why-card-body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+  .tbp-why-card-body a, .tbp-why-fact-body a, .tbp-why-pillar-body a {
+    color: var(--tbp-primary, #2d5d3a);
+    text-decoration: underline;
+  }
+  .tbp-why-card-body sup, .tbp-why-fact-body sup {
+    font-size: 12px;
+    margin-left: 1px;
+  }
+  .tbp-why-card-body sup a, .tbp-why-fact-body sup a {
+    color: var(--tbp-primary, #2d5d3a);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  /* 3. Myth grid */
+  .tbp-why-myth-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  @media (min-width: 768px) { .tbp-why-myth-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  .tbp-why-myth {
+    background: #fff;
+    border-radius: 18px;
+    padding: 26px 24px;
+    box-shadow: 0 4px 16px rgba(45, 93, 58, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tbp-why-myth-label, .tbp-why-fact-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .tbp-why-myth-label { color: #b53a47; }
+  .tbp-why-fact-label { color: var(--tbp-primary, #2d5d3a); margin-top: 8px; }
+  .tbp-why-myth-body {
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--tbp-ink, #1a1a1a);
+    margin: 0;
+  }
+  .tbp-why-fact-body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  /* 4. How we do it pillars */
+  .tbp-why-pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 600px) { .tbp-why-pillars { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  @media (min-width: 1024px) { .tbp-why-pillars { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+  .tbp-why-pillar {
+    background: rgba(45, 93, 58, 0.05);
+    border-radius: 16px;
+    padding: 26px 22px;
+  }
+  .tbp-why-pillar-icon {
+    display: inline-block;
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+  .tbp-why-pillar-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    color: var(--tbp-primary, #2d5d3a);
+  }
+  .tbp-why-pillar-body {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  /* 5. Citations */
+  .tbp-why-sources { background: #fff; border-radius: 24px; padding: clamp(32px, 4vw, 56px) clamp(24px, 4vw, 48px); }
+  .tbp-why-citations {
+    list-style-position: outside;
+    padding-left: 22px;
+    margin: 0;
+    counter-reset: cite;
+    color: var(--tbp-ink-soft, #4a4a4a);
+  }
+  .tbp-why-citations li {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    padding-left: 4px;
+  }
+  .tbp-why-citations li:last-child { margin-bottom: 0; }
+  .tbp-why-citations li a {
+    color: var(--tbp-primary, #2d5d3a);
+    text-decoration: underline;
+  }
+  .tbp-why-citations li strong {
+    color: var(--tbp-ink, #1a1a1a);
+    font-weight: 700;
+  }
+
+  /* 6. CTA */
+  .tbp-why-cta {
+    background: var(--tbp-primary, #2d5d3a);
+    color: #fff;
+    border-radius: 24px;
+    padding: clamp(40px, 6vw, 72px) clamp(24px, 4vw, 48px);
+    text-align: center;
+  }
+  .tbp-why-cta-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15;
+    margin: 0 0 16px;
+    color: #fff;
+  }
+  .tbp-why-cta-body {
+    font-size: clamp(16px, 1.6vw, 19px);
+    line-height: 1.6;
+    margin: 0 auto 28px;
+    max-width: 640px;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .tbp-why-cta-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tbp-why-cta-btn {
+    display: inline-block;
+    background: var(--tbp-accent, #ff886b);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .tbp-why-cta-btn:hover {
+    transform: translateY(-2px);
+    background: #ef7558;
+    color: #fff;
+  }
+  .tbp-why-cta-btn--ghost {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+  }
+  .tbp-why-cta-btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+
+  @media (max-width: 767px) {
+    .tbp-why-card { padding: 22px 20px 24px; }
+    .tbp-why-card-icon { font-size: 30px; margin-bottom: 12px; }
+    .tbp-why-card-title { font-size: 19px; }
+    .tbp-why-card-body { font-size: 15px; }
+    .tbp-why-myth-body { font-size: 16px; }
+    .tbp-why-fact-body { font-size: 14px; }
+    .tbp-why-pillar { padding: 22px 18px; }
+    .tbp-why-citations li { font-size: 14px; }
+    .tbp-why-cta-actions { flex-direction: column; }
+    .tbp-why-cta-btn { width: 100%; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bon Pet · Why fresh",
+  "tag": "section",
+  "class": "tbp-section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "WHY FRESH FOOD" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What's actually in your dog's bowl?" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Most commercial kibble is extruded at 130-180°C, hides its formula, and trace-tests positive for aflatoxins. Bon Pet's gently cooked at 80°C, openly published, made fresh in Singapore. Here's the science." },
+    { "type": "header", "content": "Reasons section" },
+    { "type": "text", "id": "reasons_heading", "label": "Heading", "default": "Three things most kibble does to your furkid's food" },
+    { "type": "textarea", "id": "reasons_sub", "label": "Sub", "default": "Not an attack on any brand. Just facts published in peer-reviewed journals and FDA filings." },
+    { "type": "header", "content": "How we do it differently" },
+    { "type": "text", "id": "howwedoit_heading", "label": "Heading", "default": "How we do it differently" },
+    { "type": "text", "id": "howwedoit_sub", "label": "Sub", "default": "Four things we built into the brand from day one." },
+    { "type": "header", "content": "Trial CTA" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Try it on your own furkid." },
+    { "type": "textarea", "id": "cta_body", "label": "Body", "default": "Free trial pack, $9 cold-chain delivery to your door. No subscription required, no commitment. If your dog or cat doesn't love it, drop us a note and we'll make it right." },
+    { "type": "text", "id": "cta1_label", "label": "Primary CTA label", "default": "🐶 Free Dog Trial" },
+    { "type": "text", "id": "cta1_link", "label": "Primary CTA link", "default": "/products/free-dog-trial-pack" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary CTA label", "default": "🐱 Free Cat Trial" },
+    { "type": "text", "id": "cta2_link", "label": "Secondary CTA link", "default": "/products/free-cat-trial-pack" }
+  ],
+  "presets": [
+    { "name": "Bon Pet · Why fresh" }
+  ]
+}
+{% endschema %}
