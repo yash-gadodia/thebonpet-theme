@@ -1,9 +1,13 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.35.1 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.35.2 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.35.2** (2026-05-02) - Founder copy → first-person to pair with the illustration.
+  - 🗣️ Founder hero intro on /pages/founder is now first-person: "That's us. Yash and Nic. Two software engineers with three furkids - Salt, Pepper, and Lola..." Pairs with the illustrated portrait above (you're literally looking at them).
+  - 🗣️ Homepage `founder` section body + quote rewritten in first-person plural ("We're software engineers by day...", "That's us, Yash and Nic..."). Closes with the gentle pointer "Every gram still gets published openly on /pages/formulas, you'll see it a section below" instead of restating the moat.
+  - 📁 Touches: templates/page.founder.json, templates/index.json.
 - **v3.35.1** (2026-05-02) - Founder hero swap to Yash + Nic illustration.
   - 🎨 Per Yash: founder hero showed an extreme zoom of Lola's face (the `lola-closeup-smiling-founder.jpg` image cropped to 4:3 landscape was super tight on her muzzle). Swapped to the existing AI-illustrated portrait of Yash + Nic - already a theme asset (`bonpet-founders-illustration.jpg`), now also uploaded to Shopify Files as `founders-yash-nic-illustration.jpg`.
   - 🏠 Same illustration set on the homepage `founder` section (was theme-asset fallback `bonpet-dog-bag-cocker-1776904000.jpg`).
