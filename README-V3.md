@@ -1,9 +1,19 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.32.1 (2026-05-01) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.33.0 (2026-05-01) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.33.0** (2026-05-01) - Lyka audit Phase 1: visual meals menu + benefit-led hero copy.
+  - 🍽️ NEW `/pages/our-meals` (id 129934458937) - visual menu showing all 9 protein meals (5 dog + 4 cat) in a 3-col desktop / 2-col mobile grid. Each card has the real product photo (1200x1200 from Shopify Files), source-claim badge (FREE-RANGE / GRASS-FED / WILD AUSTRALIAN / WILD-CAUGHT / CAGE-FREE / ARTISANAL), the protein name in display font, a one-line health outcome ("Lean, low-fat. Easy on sensitive tummies."), pack size + price, and dual CTAs ("Try Chicken" → product page, "See recipe →" → /pages/formulas). Tier separator between Dog and Cat. "Coming soon: Raw" callout below to set up the upcoming raw line. Footer CTA → free trial. Lyka /our-food pattern but localised, with the open-formulas moat reinforced via every "See recipe" link. New section bonpet-meals-menu.liquid (px-only, no rem trap).
+  - 🏠 Homepage hero copy refresh from product-led to benefit-led (Lyka audit finding: we lead with "Made fresh in SG" not health benefit).
+    - Heading was: "Made fresh in SG. Recipes you can read. Loved by 1,500+ pawrents. 🐾"
+    - Heading now: "Better food for your furkid. Every gram openly listed."
+    - Subhead now: "Sous vide cooked at 80°C, AAFCO All Life Stages, restaurant-grade ingredients. Every recipe in a public Google Sheet."
+    - Alternative copy options Yash can swap to via theme editor: (a) "Healthier furkids, no marketing fluff." (b) "Real food, fully open. Made in our Singapore kitchen." (d) "Fresh meals your furkid will love. Recipes you can read."
+  - 🦶 Footer Support column reordered + added "🍽️ Our Meals (Menu)" link near the top so the new page is discoverable.
+  - 📁 Touches: sections/bonpet-meals-menu.liquid (new), templates/page.our-meals.json (new), templates/index.json (hero copy), sections/bonpet-footer.liquid (link). Plus Shopify page created via Admin API.
+  - ⏸️ Deferred to v3.33.1: founder team-photo block + AVS-licensed cert band (waiting on photos from Yash's iCloud / Synology), main-nav menu update for /pages/our-meals.
 - **v3.32.1** (2026-05-01) - Formulas page readability fix.
   - 🔍 Per Yash: "still too small, too wordy, cant read properly". Root cause: Dawn sets `html { font-size: 62.5% }` (10px), so all `rem` values in the formulas + comparison sections were rendering at 60% intended size (e.g., `0.58rem` rendered as 5.8px badge text). Same trap as v3.22.0 hero fix.
   - 📐 Converted all 22 `rem` font-size values + 3 `rem` widths in `sections/bonpet-formulas.liquid` to explicit `px` calibrated to 16px-base. Recipe table body 14px, panel sub 15px, badges 10-12px (was 5.8-7px).

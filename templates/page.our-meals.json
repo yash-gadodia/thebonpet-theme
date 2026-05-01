@@ -1,0 +1,193 @@
+{
+  "sections": {
+    "menu": {
+      "type": "bonpet-meals-menu",
+      "blocks": {
+        "dog_chicken": {
+          "type": "meal",
+          "settings": {
+            "species": "dog",
+            "protein": "Chicken",
+            "fallback_emoji": "🐔",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-dog-chicken-square.png",
+            "image_alt": "Gently cooked free-range chicken meal for dogs",
+            "source": "FREE-RANGE",
+            "outcome": "Lean, low-fat. Easy on sensitive tummies.",
+            "pack_size": "300g · from $8.60",
+            "product_link": "/products/gently-cooked-free-range-chicken-for-dogs",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        },
+        "dog_beef": {
+          "type": "meal",
+          "settings": {
+            "species": "dog",
+            "protein": "Beef",
+            "fallback_emoji": "🥩",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-dog-beef-square.png",
+            "image_alt": "Gently cooked grass-fed beef meal for dogs",
+            "source": "GRASS-FED",
+            "outcome": "Moderate-fat, iron-rich. Sustained energy for active dogs.",
+            "pack_size": "300g · from $9.70",
+            "product_link": "/products/gently-cooked-free-range-beef-for-dogs",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        },
+        "dog_kangaroo": {
+          "type": "meal",
+          "settings": {
+            "species": "dog",
+            "protein": "Kangaroo",
+            "fallback_emoji": "🦘",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-dog-kangaroo-square.png",
+            "image_alt": "Gently cooked wild kangaroo meal for dogs",
+            "source": "WILD AUSTRALIAN",
+            "outcome": "Hypoallergenic novel protein for sensitive dogs.",
+            "pack_size": "300g · from $13.30",
+            "product_link": "/products/gently-cooked-wild-kangaroo-for-dogs",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        },
+        "dog_fish": {
+          "type": "meal",
+          "settings": {
+            "species": "dog",
+            "protein": "Fish",
+            "fallback_emoji": "🐟",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-dog-fish-square.png",
+            "image_alt": "Gently cooked wild-caught fish meal for dogs",
+            "source": "WILD-CAUGHT",
+            "outcome": "Omega-3 rich. Skin and coat support.",
+            "pack_size": "300g · from $13.30",
+            "product_link": "/products/gently-cooked-wild-caught-fish-for-dogs",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        },
+        "dog_pork": {
+          "type": "meal",
+          "settings": {
+            "species": "dog",
+            "protein": "Pork",
+            "fallback_emoji": "🐷",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-dog-pork-square.png",
+            "image_alt": "Gently cooked artisanal pork meal for dogs",
+            "source": "ARTISANAL",
+            "outcome": "Highly digestible. Gentle on sensitive guts.",
+            "pack_size": "300g · from $8.80",
+            "product_link": "/products/gently-cooked-artisanal-pork-for-dogs",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        },
+        "cat_chicken": {
+          "type": "meal",
+          "settings": {
+            "species": "cat",
+            "protein": "Chicken",
+            "fallback_emoji": "🐔",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-cat-chicken-square.png",
+            "image_alt": "Gently cooked free-range chicken meal for cats",
+            "source": "FREE-RANGE",
+            "outcome": "Lean, low-fat protein for obligate carnivores.",
+            "pack_size": "200g · from $7.10",
+            "product_link": "/products/gently-cooked-free-range-chicken-for-cats",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        },
+        "cat_beef": {
+          "type": "meal",
+          "settings": {
+            "species": "cat",
+            "protein": "Beef",
+            "fallback_emoji": "🥩",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-cat-beef-square.png",
+            "image_alt": "Gently cooked grass-fed beef meal for cats",
+            "source": "GRASS-FED",
+            "outcome": "Iron-rich. Built for active cats.",
+            "pack_size": "200g · from $9.00",
+            "product_link": "/products/gently-cooked-grass-fed-for-cats",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        },
+        "cat_kangaroo": {
+          "type": "meal",
+          "settings": {
+            "species": "cat",
+            "protein": "Kangaroo",
+            "fallback_emoji": "🦘",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-cat-kangaroo-square.png",
+            "image_alt": "Gently cooked wild kangaroo meal for cats",
+            "source": "WILD AUSTRALIAN",
+            "outcome": "Hypoallergenic novel protein for sensitive cats.",
+            "pack_size": "200g · from $11.90",
+            "product_link": "/products/gently-cooked-wild-kangaroo-for-cats",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        },
+        "cat_duck": {
+          "type": "meal",
+          "settings": {
+            "species": "cat",
+            "protein": "Duck",
+            "fallback_emoji": "🦆",
+            "image": "shopify://shop_images/thebonpet-gently-cooked-cat-duck-square.png",
+            "image_alt": "Gently cooked cage-free duck meal for cats",
+            "source": "CAGE-FREE",
+            "outcome": "Highly palatable. Even picky cats love it.",
+            "pack_size": "200g · from $8.70",
+            "product_link": "/products/gently-cooked-cage-free-duck-for-cats",
+            "secondary_label": "See recipe →",
+            "secondary_link": "/pages/formulas"
+          }
+        }
+      },
+      "block_order": [
+        "dog_chicken",
+        "dog_beef",
+        "dog_kangaroo",
+        "dog_fish",
+        "dog_pork",
+        "cat_chicken",
+        "cat_beef",
+        "cat_kangaroo",
+        "cat_duck"
+      ],
+      "settings": {}
+    },
+    "trust_band": {
+      "type": "bonpet-trust-band",
+      "settings": {}
+    },
+    "final_cta": {
+      "type": "bonpet-final-cta",
+      "blocks": {
+        "dogs": {
+          "type": "card",
+          "settings": {
+            "label": "Shop Meals for Dogs 🐶",
+            "link": "shopify://collections/dogs"
+          }
+        },
+        "cats": {
+          "type": "card",
+          "settings": {
+            "label": "Shop Meals for Cats 🐱",
+            "link": "shopify://collections/cats"
+          }
+        }
+      },
+      "block_order": ["dogs", "cats"],
+      "settings": {
+        "heading": "Ready to feed them like family?"
+      }
+    }
+  },
+  "order": ["menu", "trust_band", "final_cta"]
+}

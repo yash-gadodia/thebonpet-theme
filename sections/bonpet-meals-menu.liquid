@@ -1,0 +1,476 @@
+{%- comment -%}
+  V3 /pages/our-meals · Visual menu of our 8 proteins (Lyka /our-food pattern).
+  9 cards: 5 dog meals + 4 cat meals. Each card has a real product photo, a
+  source-claim badge, the health-outcome line, pack size, and links to the
+  recipe + product page. Raw tier sits below as a "coming soon" callout.
+  All sizes in px (Dawn root is 62.5%/10px so rem would render 60% size).
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-meals-menu" data-section-id="{{ section.id }}">
+  <div class="tbp-container">
+    <header class="tbp-meals-menu-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="tbp-meals-menu-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="tbp-meals-menu-title">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.lead != blank -%}
+        <p class="tbp-meals-menu-lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </header>
+
+    {%- liquid
+      assign dog_blocks = ''
+      assign cat_blocks = ''
+      for block in section.blocks
+        if block.type == 'meal'
+          if block.settings.species == 'dog'
+            assign dog_blocks = dog_blocks | append: block.id | append: ','
+          elsif block.settings.species == 'cat'
+            assign cat_blocks = cat_blocks | append: block.id | append: ','
+          endif
+        endif
+      endfor
+    -%}
+
+    {%- comment -%} Dog tier {%- endcomment -%}
+    <div class="tbp-meals-tier">
+      <div class="tbp-meals-tier-head">
+        <h2 class="tbp-meals-tier-title">{{ section.settings.dog_heading | default: '🐶 Dog Meals' }}</h2>
+        <p class="tbp-meals-tier-sub">{{ section.settings.dog_sub | default: '5 proteins · 300g packs · 70% protein, 25% veg + fruit, 5% supplements' }}</p>
+      </div>
+      <div class="tbp-meals-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'meal' and block.settings.species == 'dog' -%}
+            <article class="tbp-meal-card" {{ block.shopify_attributes }}>
+              <div class="tbp-meal-card-image">
+                {%- if block.settings.source != blank -%}
+                  <span class="tbp-meal-card-source">{{ block.settings.source }}</span>
+                {%- endif -%}
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 720 }}" alt="{{ block.settings.image_alt | default: block.settings.protein }}" loading="lazy" width="360" height="360">
+                {%- else -%}
+                  <div class="tbp-meal-card-image-fallback" aria-hidden="true">{{ block.settings.fallback_emoji | default: '🍖' }}</div>
+                {%- endif -%}
+              </div>
+              <div class="tbp-meal-card-body">
+                <h3 class="tbp-meal-card-name">{{ block.settings.protein }}</h3>
+                {%- if block.settings.outcome != blank -%}
+                  <p class="tbp-meal-card-outcome">{{ block.settings.outcome }}</p>
+                {%- endif -%}
+                {%- if block.settings.pack_size != blank -%}
+                  <p class="tbp-meal-card-pack">{{ block.settings.pack_size }}</p>
+                {%- endif -%}
+                <div class="tbp-meal-card-actions">
+                  {%- if block.settings.product_link != blank -%}
+                    <a class="tbp-meal-card-cta" href="{{ block.settings.product_link }}">Try {{ block.settings.protein }}</a>
+                  {%- endif -%}
+                  {%- if block.settings.secondary_link != blank and block.settings.secondary_label != blank -%}
+                    <a class="tbp-meal-card-secondary" href="{{ block.settings.secondary_link }}">{{ block.settings.secondary_label }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} Cat tier {%- endcomment -%}
+    <div class="tbp-meals-tier">
+      <div class="tbp-meals-tier-head">
+        <h2 class="tbp-meals-tier-title">{{ section.settings.cat_heading | default: '🐱 Cat Meals' }}</h2>
+        <p class="tbp-meals-tier-sub">{{ section.settings.cat_sub | default: '4 proteins · 200g packs · 95% whole-animal protein. Built for obligate carnivores.' }}</p>
+      </div>
+      <div class="tbp-meals-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'meal' and block.settings.species == 'cat' -%}
+            <article class="tbp-meal-card" {{ block.shopify_attributes }}>
+              <div class="tbp-meal-card-image">
+                {%- if block.settings.source != blank -%}
+                  <span class="tbp-meal-card-source">{{ block.settings.source }}</span>
+                {%- endif -%}
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 720 }}" alt="{{ block.settings.image_alt | default: block.settings.protein }}" loading="lazy" width="360" height="360">
+                {%- else -%}
+                  <div class="tbp-meal-card-image-fallback" aria-hidden="true">{{ block.settings.fallback_emoji | default: '🍖' }}</div>
+                {%- endif -%}
+              </div>
+              <div class="tbp-meal-card-body">
+                <h3 class="tbp-meal-card-name">{{ block.settings.protein }}</h3>
+                {%- if block.settings.outcome != blank -%}
+                  <p class="tbp-meal-card-outcome">{{ block.settings.outcome }}</p>
+                {%- endif -%}
+                {%- if block.settings.pack_size != blank -%}
+                  <p class="tbp-meal-card-pack">{{ block.settings.pack_size }}</p>
+                {%- endif -%}
+                <div class="tbp-meal-card-actions">
+                  {%- if block.settings.product_link != blank -%}
+                    <a class="tbp-meal-card-cta" href="{{ block.settings.product_link }}">Try {{ block.settings.protein }}</a>
+                  {%- endif -%}
+                  {%- if block.settings.secondary_link != blank and block.settings.secondary_label != blank -%}
+                    <a class="tbp-meal-card-secondary" href="{{ block.settings.secondary_link }}">{{ block.settings.secondary_label }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} Coming soon · Raw {%- endcomment -%}
+    {%- if section.settings.soon_heading != blank -%}
+      <div class="tbp-meals-soon">
+        <span class="tbp-meals-soon-pill">{{ section.settings.soon_label | default: 'COMING SOON' }}</span>
+        <h2 class="tbp-meals-soon-title">{{ section.settings.soon_heading }}</h2>
+        {%- if section.settings.soon_body != blank -%}
+          <p class="tbp-meals-soon-body">{{ section.settings.soon_body }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Footer CTA {%- endcomment -%}
+    {%- if section.settings.cta_heading != blank -%}
+      <div class="tbp-meals-cta">
+        <h2 class="tbp-meals-cta-title">{{ section.settings.cta_heading }}</h2>
+        {%- if section.settings.cta_body != blank -%}
+          <p class="tbp-meals-cta-body">{{ section.settings.cta_body }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_link != blank and section.settings.cta_label != blank -%}
+          <a class="tbp-meals-cta-btn" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .tbp-meals-menu {
+    background: var(--tbp-cream, #faf3e8);
+    padding: clamp(56px, 8vw, 104px) 0;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-meals-menu-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto clamp(40px, 6vw, 64px);
+    padding: 0 16px;
+  }
+  .tbp-meals-menu-eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--tbp-primary, #2d5d3a);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .tbp-meals-menu-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(34px, 5.4vw, 60px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-meals-menu-lead {
+    font-size: clamp(17px, 1.7vw, 21px);
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  .tbp-meals-tier { margin: 0 0 clamp(56px, 7vw, 88px); }
+  .tbp-meals-tier:last-of-type { margin-bottom: 0; }
+  .tbp-meals-tier-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(28px, 4vw, 40px);
+    padding: 0 16px;
+  }
+  .tbp-meals-tier-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(26px, 3.4vw, 36px);
+    line-height: 1.2;
+    margin: 0 0 12px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-meals-tier-sub {
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  .tbp-meals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  @media (min-width: 1024px) { .tbp-meals-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
+
+  .tbp-meal-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(45, 93, 58, 0.07);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .tbp-meal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(45, 93, 58, 0.14);
+  }
+  .tbp-meal-card-image {
+    aspect-ratio: 1 / 1;
+    background: var(--tbp-cream, #faf3e8);
+    overflow: hidden;
+    position: relative;
+  }
+  .tbp-meal-card-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .tbp-meal-card-image-fallback {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 88px;
+    background: linear-gradient(135deg, var(--tbp-cream, #faf3e8), #e8dcc4);
+  }
+  .tbp-meal-card-source {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--tbp-primary, #2d5d3a);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+  .tbp-meal-card-body {
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+  .tbp-meal-card-name {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: 24px;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-meal-card-outcome {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+  .tbp-meal-card-pack {
+    font-size: 13px;
+    color: var(--tbp-ink-soft, #6a6a6a);
+    letter-spacing: 0.04em;
+    margin: 0;
+    padding-top: 4px;
+    border-top: 1px solid rgba(45, 93, 58, 0.08);
+  }
+  .tbp-meal-card-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-top: 12px;
+  }
+  .tbp-meal-card-cta {
+    flex: 1;
+    background: var(--tbp-accent, #ff886b);
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 12px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .tbp-meal-card-cta:hover {
+    background: #ef7558;
+    transform: translateY(-1px);
+    color: #fff;
+  }
+  .tbp-meal-card-secondary {
+    color: var(--tbp-primary, #2d5d3a);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+    white-space: nowrap;
+  }
+  .tbp-meal-card-secondary:hover {
+    color: var(--tbp-primary-deep, #1f4429);
+  }
+
+  .tbp-meals-soon {
+    margin: clamp(56px, 7vw, 88px) auto 0;
+    max-width: 720px;
+    padding: clamp(28px, 4vw, 44px);
+    background: rgba(255, 136, 107, 0.08);
+    border: 1px dashed rgba(255, 136, 107, 0.4);
+    border-radius: 20px;
+    text-align: center;
+  }
+  .tbp-meals-soon-pill {
+    display: inline-block;
+    background: var(--tbp-accent, #ff886b);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .tbp-meals-soon-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(24px, 3vw, 32px);
+    margin: 0 0 12px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-meals-soon-body {
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.6;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  .tbp-meals-cta {
+    margin: clamp(56px, 7vw, 88px) auto 0;
+    max-width: 720px;
+    padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 44px);
+    background: #fff;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(45, 93, 58, 0.07);
+  }
+  .tbp-meals-cta-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.2;
+    margin: 0 0 14px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-meals-cta-body {
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0 0 24px;
+  }
+  .tbp-meals-cta-btn {
+    display: inline-block;
+    background: var(--tbp-primary, #2d5d3a);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .tbp-meals-cta-btn:hover {
+    background: var(--tbp-primary-deep, #1f4429);
+    transform: translateY(-2px);
+    color: #fff;
+  }
+
+  @media (max-width: 767px) {
+    .tbp-meals-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .tbp-meal-card-body { padding: 16px 16px 18px; gap: 10px; }
+    .tbp-meal-card-name { font-size: 20px; }
+    .tbp-meal-card-outcome { font-size: 14px; }
+    .tbp-meal-card-source { font-size: 10px; padding: 5px 10px; top: 10px; left: 10px; }
+    .tbp-meal-card-actions { flex-direction: column; gap: 8px; align-items: stretch; }
+    .tbp-meal-card-secondary { text-align: center; padding: 6px 0; }
+  }
+  @media (max-width: 374px) { .tbp-meals-grid { grid-template-columns: 1fr; } }
+</style>
+
+{% schema %}
+{
+  "name": "Bon Pet · Meals menu",
+  "tag": "section",
+  "class": "tbp-section",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "OUR MEALS · ALL OPEN" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every meal, every gram, openly published." },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "Sous vide cooked at 80°C. AAFCO All Life Stages. Every recipe published in a public Google Sheet you can download right now." },
+    { "type": "header", "content": "Dog tier" },
+    { "type": "text", "id": "dog_heading", "label": "Heading", "default": "🐶 Dog Meals" },
+    { "type": "textarea", "id": "dog_sub", "label": "Sub", "default": "5 proteins · 300g packs · 70% protein, 25% veg + fruit, 5% supplements" },
+    { "type": "header", "content": "Cat tier" },
+    { "type": "text", "id": "cat_heading", "label": "Heading", "default": "🐱 Cat Meals" },
+    { "type": "textarea", "id": "cat_sub", "label": "Sub", "default": "4 proteins · 200g packs · 95% whole-animal protein. Built for obligate carnivores." },
+    { "type": "header", "content": "Coming soon (Raw tier)" },
+    { "type": "text", "id": "soon_label", "label": "Pill label", "default": "COMING SOON" },
+    { "type": "text", "id": "soon_heading", "label": "Heading", "default": "Raw meals" },
+    { "type": "textarea", "id": "soon_body", "label": "Body", "default": "Frozen raw recipes built on the same open-formulas standard. Launching soon. Drop us a note if you'd like first dibs." },
+    { "type": "header", "content": "Footer CTA" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Not sure where to start?" },
+    { "type": "textarea", "id": "cta_body", "label": "Body", "default": "Pick a free trial pack and let your furkid taste the difference. $9 cold-chain delivery, then it's on us." },
+    { "type": "text", "id": "cta_label", "label": "Button", "default": "🎁 Try a free trial" },
+    { "type": "text", "id": "cta_link", "label": "Link", "default": "/products/free-dog-trial-pack" }
+  ],
+  "blocks": [
+    {
+      "type": "meal",
+      "name": "Meal card",
+      "settings": [
+        { "type": "select", "id": "species", "label": "Species", "default": "dog",
+          "options": [
+            { "value": "dog", "label": "🐶 Dog" },
+            { "value": "cat", "label": "🐱 Cat" }
+          ]
+        },
+        { "type": "text", "id": "protein", "label": "Protein name", "default": "Chicken" },
+        { "type": "text", "id": "fallback_emoji", "label": "Fallback emoji (if image missing)", "default": "🍖" },
+        { "type": "image_picker", "id": "image", "label": "Card image (1:1 square)" },
+        { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Bon Pet gently cooked meal" },
+        { "type": "text", "id": "source", "label": "Source claim", "default": "FREE-RANGE" },
+        { "type": "textarea", "id": "outcome", "label": "Health outcome (1 line)", "default": "Lean, low-fat. Easy on sensitive tummies." },
+        { "type": "text", "id": "pack_size", "label": "Pack info", "default": "300g · from $8.60" },
+        { "type": "url", "id": "product_link", "label": "Try-it link (product page)" },
+        { "type": "text", "id": "secondary_label", "label": "Secondary link label", "default": "See recipe →" },
+        { "type": "url", "id": "secondary_link", "label": "Secondary link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bon Pet · Meals menu",
+      "blocks": [
+        { "type": "meal", "settings": { "species": "dog", "protein": "Chicken", "fallback_emoji": "🐔", "source": "FREE-RANGE", "outcome": "Lean, low-fat. Easy on sensitive tummies.", "pack_size": "300g · from $8.60" } },
+        { "type": "meal", "settings": { "species": "dog", "protein": "Beef", "fallback_emoji": "🥩", "source": "GRASS-FED AUSTRALIAN", "outcome": "Moderate-fat. Sustained energy for active dogs.", "pack_size": "300g · from $9.70" } },
+        { "type": "meal", "settings": { "species": "dog", "protein": "Kangaroo", "fallback_emoji": "🦘", "source": "WILD AUSTRALIAN", "outcome": "Hypoallergenic novel protein. For sensitive pets.", "pack_size": "300g · from $13.30" } },
+        { "type": "meal", "settings": { "species": "dog", "protein": "Fish", "fallback_emoji": "🐟", "source": "WILD-CAUGHT", "outcome": "Omega-3 rich. Skin and coat support.", "pack_size": "300g · from $13.30" } },
+        { "type": "meal", "settings": { "species": "dog", "protein": "Pork", "fallback_emoji": "🐷", "source": "FREE-RANGE", "outcome": "Highly digestible. Gentle on sensitive guts.", "pack_size": "300g · from $8.80" } },
+        { "type": "meal", "settings": { "species": "cat", "protein": "Chicken", "fallback_emoji": "🐔", "source": "FREE-RANGE", "outcome": "Lean, low-fat protein for obligate carnivores.", "pack_size": "200g · from $7.10" } },
+        { "type": "meal", "settings": { "species": "cat", "protein": "Beef", "fallback_emoji": "🥩", "source": "GRASS-FED AUSTRALIAN", "outcome": "Iron-rich. Great for active cats.", "pack_size": "200g · from $9.00" } },
+        { "type": "meal", "settings": { "species": "cat", "protein": "Kangaroo", "fallback_emoji": "🦘", "source": "WILD AUSTRALIAN", "outcome": "Hypoallergenic novel protein for sensitive cats.", "pack_size": "200g · from $11.90" } },
+        { "type": "meal", "settings": { "species": "cat", "protein": "Duck", "fallback_emoji": "🦆", "source": "FREE-RANGE", "outcome": "Highly palatable. Even picky cats love it.", "pack_size": "200g · from $8.70" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
