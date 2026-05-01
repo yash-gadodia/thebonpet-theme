@@ -11,7 +11,7 @@
       <p class="tbp-formulas-compare-eyebrow">{{ section.settings.eyebrow | default: 'TRANSPARENCY · COMPARED' }}</p>
       <h2 class="tbp-formulas-compare-title">{{ section.settings.heading | default: 'How we stack up on transparency' }}</h2>
       <p class="tbp-formulas-compare-lead">
-        {{ section.settings.lead | default: "Every premium fresh brand in Singapore tells you what's in the food. Only one tells you exactly how much. Here's what each Singapore brand publishes on their public website." }}
+        {{ section.settings.lead | default: "Every brand lists ingredients. Only one shows you exactly how much. Here's what each Singapore fresh-food brand publishes on their public site." }}
       </p>
     </header>
 
@@ -71,7 +71,7 @@
     {%- if section.settings.parity_heading != blank or section.blocks.size > 0 -%}
       <div class="tbp-formulas-parity">
         <h3 class="tbp-formulas-parity-title">{{ section.settings.parity_heading | default: 'Where we share ground with other premium SG brands' }}</h3>
-        <p class="tbp-formulas-parity-body">{{ section.settings.parity_body | default: "We're not the only Singapore brand that takes nutrition seriously. AAFCO standards, single-protein recipes, gentle cooking, cold-chain delivery, no artificial preservatives - these are table stakes for premium fresh food in 2026, and good ones do it. What sets us apart is what we let you see. Every gram. Every supplement. Every ratio. In a public Google Sheet you can download right now." }}</p>
+        <p class="tbp-formulas-parity-body">{{ section.settings.parity_body | default: "Most premium SG fresh brands nail the basics: AAFCO, single-protein, gentle cook, cold-chain. What sets us apart is what we let you see. Every gram. Every supplement. Every ratio. In a public Google Sheet." }}</p>
         <a class="tbp-formulas-parity-cta" href="{{ section.settings.cta_link | default: 'https://docs.google.com/spreadsheets/d/1MmEgWyF-GbnkA6RP9WqD69mmV-luKXb0jpFxTgqygYE/edit?gid=802280656' }}" target="_blank" rel="noopener">{{ section.settings.cta_label | default: '🔓 See the formulas sheet' }}</a>
       </div>
     {%- endif -%}
@@ -79,32 +79,37 @@
 </section>
 
 <style>
+  /* All sizes in px (not rem) — Dawn sets html font-size to 62.5% (10px),
+   * so rem values would render at 60% intended. Tested against this directly. */
   .tbp-formulas-compare {
     background: var(--tbp-cream, #faf3e8);
-    padding: clamp(48px, 7vw, 96px) 0;
+    padding: clamp(56px, 8vw, 104px) 0;
+    color: var(--tbp-ink, #1a1a1a);
   }
   .tbp-formulas-compare-head {
     text-align: center;
-    max-width: 720px;
-    margin: 0 auto clamp(32px, 5vw, 56px);
+    max-width: 760px;
+    margin: 0 auto clamp(36px, 5vw, 60px);
+    padding: 0 16px;
   }
   .tbp-formulas-compare-eyebrow {
-    font-size: 0.78rem;
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     color: var(--tbp-primary, #2d5d3a);
-    margin: 0 0 12px;
+    margin: 0 0 16px;
     text-transform: uppercase;
   }
   .tbp-formulas-compare-title {
-    font-family: var(--tbp-font-display, serif);
-    font-size: clamp(28px, 4.6vw, 48px);
-    line-height: 1.15;
-    margin: 0 0 16px;
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
     color: var(--tbp-ink, #1a1a1a);
   }
   .tbp-formulas-compare-lead {
-    font-size: clamp(16px, 1.7vw, 19px);
+    font-size: clamp(17px, 1.7vw, 21px);
     line-height: 1.55;
     color: var(--tbp-ink-soft, #4a4a4a);
     margin: 0;
@@ -113,16 +118,18 @@
   .tbp-formulas-compare-table-wrap {
     background: #fff;
     border-radius: 20px;
-    padding: clamp(8px, 1.5vw, 18px);
+    padding: clamp(10px, 1.5vw, 20px);
     box-shadow: 0 6px 24px rgba(45, 93, 58, 0.07);
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    max-width: 1080px;
+    margin: 0 auto;
   }
   .tbp-formulas-compare-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    min-width: 640px;
+    min-width: 720px;
   }
   .tbp-formulas-compare-table caption.tbp-visually-hidden {
     position: absolute;
@@ -133,19 +140,17 @@
   }
   .tbp-formulas-compare-table th,
   .tbp-formulas-compare-table td {
-    padding: 14px 12px;
+    padding: 18px 14px;
     text-align: center;
     vertical-align: middle;
-    border-bottom: 1px solid rgba(45, 93, 58, 0.08);
+    border-bottom: 1px solid rgba(45, 93, 58, 0.10);
   }
   .tbp-formulas-compare-table thead th {
-    font-size: 0.92rem;
+    font-size: 16px;
     font-weight: 700;
     color: var(--tbp-ink, #1a1a1a);
     background: rgba(250, 243, 232, 0.5);
-    border-bottom: 2px solid rgba(45, 93, 58, 0.18);
-    position: sticky;
-    top: 0;
+    border-bottom: 2px solid rgba(45, 93, 58, 0.20);
   }
   .tbp-formulas-compare-table thead th.tbp-formulas-compare-col--us,
   .tbp-formulas-compare-table tbody td.tbp-formulas-compare-cell--us {
@@ -153,7 +158,8 @@
   }
   .tbp-formulas-compare-table thead th.tbp-formulas-compare-col--us {
     color: var(--tbp-primary, #2d5d3a);
-    background: rgba(45, 93, 58, 0.12);
+    background: rgba(45, 93, 58, 0.14);
+    font-size: 17px;
   }
   .tbp-formulas-compare-table tbody tr:last-child th,
   .tbp-formulas-compare-table tbody tr:last-child td {
@@ -163,36 +169,37 @@
     text-align: left !important;
     font-weight: 600;
     color: var(--tbp-ink, #1a1a1a);
-    min-width: 220px;
+    min-width: 250px;
   }
   .tbp-formulas-compare-rowtitle {
     display: block;
-    font-size: 0.97rem;
+    font-size: 17px;
+    line-height: 1.4;
   }
   .tbp-formulas-compare-rowdetail {
     display: block;
-    font-size: 0.8rem;
+    font-size: 14px;
     font-weight: 400;
     color: var(--tbp-ink-soft, #6a6a6a);
-    margin-top: 3px;
-    line-height: 1.35;
+    margin-top: 5px;
+    line-height: 1.4;
   }
   .tbp-formulas-compare-mark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     border-radius: 999px;
-    font-size: 1rem;
+    font-size: 18px;
     line-height: 1;
   }
   .tbp-formulas-compare-mark[data-state="yes"] {
-    background: rgba(45, 93, 58, 0.12);
+    background: rgba(45, 93, 58, 0.14);
     color: var(--tbp-primary, #2d5d3a);
   }
   .tbp-formulas-compare-mark[data-state="no"] {
-    background: rgba(220, 53, 69, 0.10);
+    background: rgba(220, 53, 69, 0.12);
     color: #b53a47;
   }
   .tbp-formulas-compare-mark[data-state="partial"],
@@ -202,12 +209,13 @@
   }
 
   .tbp-formulas-compare-footnote {
-    margin: 16px auto 0;
+    margin: 20px auto 0;
     text-align: center;
-    font-size: 0.85rem;
+    font-size: 14px;
     color: var(--tbp-ink-soft, #6a6a6a);
-    line-height: 1.5;
+    line-height: 1.55;
     max-width: 720px;
+    padding: 0 16px;
   }
   .tbp-formulas-compare-footnote a {
     color: var(--tbp-primary, #2d5d3a);
@@ -215,34 +223,35 @@
   }
 
   .tbp-formulas-parity {
-    margin: clamp(40px, 6vw, 64px) auto 0;
-    padding: clamp(24px, 4vw, 40px);
+    margin: clamp(48px, 6vw, 72px) auto 0;
+    padding: clamp(28px, 4vw, 44px);
     background: #fff;
     border-radius: 20px;
     text-align: center;
-    max-width: 760px;
+    max-width: 720px;
     box-shadow: 0 6px 24px rgba(45, 93, 58, 0.07);
   }
   .tbp-formulas-parity-title {
-    font-family: var(--tbp-font-display, serif);
-    font-size: clamp(20px, 2.6vw, 28px);
-    margin: 0 0 16px;
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.2;
+    margin: 0 0 18px;
     color: var(--tbp-ink, #1a1a1a);
   }
   .tbp-formulas-parity-body {
-    font-size: clamp(15px, 1.5vw, 17px);
+    font-size: clamp(16px, 1.6vw, 19px);
     line-height: 1.6;
     color: var(--tbp-ink-soft, #4a4a4a);
-    margin: 0 0 24px;
+    margin: 0 0 28px;
   }
   .tbp-formulas-parity-cta {
     display: inline-block;
     background: var(--tbp-accent, #ff886b);
     color: #fff;
-    padding: 14px 28px;
+    padding: 16px 32px;
     border-radius: 999px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 17px;
     text-decoration: none;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
@@ -254,15 +263,17 @@
 
   @media (max-width: 767px) {
     .tbp-formulas-compare-table {
-      font-size: 0.88rem;
+      font-size: 14px;
+      min-width: 600px;
     }
-    .tbp-formulas-compare-rowhead {
-      min-width: 160px;
-    }
+    .tbp-formulas-compare-rowtitle { font-size: 15px; }
+    .tbp-formulas-compare-rowdetail { font-size: 13px; }
+    .tbp-formulas-compare-rowhead { min-width: 180px; }
     .tbp-formulas-compare-table th,
-    .tbp-formulas-compare-table td {
-      padding: 12px 8px;
-    }
+    .tbp-formulas-compare-table td { padding: 14px 10px; }
+    .tbp-formulas-compare-mark { width: 32px; height: 32px; font-size: 16px; }
+    .tbp-formulas-compare-table thead th { font-size: 14px; }
+    .tbp-formulas-compare-table thead th.tbp-formulas-compare-col--us { font-size: 15px; }
   }
 </style>
 
@@ -274,11 +285,11 @@
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "TRANSPARENCY · COMPARED" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "How we stack up on transparency" },
-    { "type": "textarea", "id": "lead", "label": "Lead paragraph", "default": "Every premium fresh brand in Singapore tells you what's in the food. Only one tells you exactly how much. Here's what each Singapore brand publishes on their public website." },
+    { "type": "textarea", "id": "lead", "label": "Lead paragraph", "default": "Every brand lists ingredients. Only one shows you exactly how much. Here's what each Singapore fresh-food brand publishes on their public site." },
     { "type": "text", "id": "last_verified", "label": "Last verified", "default": "May 2026" },
     { "type": "header", "content": "Parity callout" },
     { "type": "text", "id": "parity_heading", "label": "Heading", "default": "Where we share ground with other premium SG brands" },
-    { "type": "textarea", "id": "parity_body", "label": "Body", "default": "We're not the only Singapore brand that takes nutrition seriously. AAFCO standards, single-protein recipes, gentle cooking, cold-chain delivery, no artificial preservatives - these are table stakes for premium fresh food in 2026, and good ones do it. What sets us apart is what we let you see. Every gram. Every supplement. Every ratio. In a public Google Sheet you can download right now." },
+    { "type": "textarea", "id": "parity_body", "label": "Body", "default": "Most premium SG fresh brands nail the basics: AAFCO, single-protein, gentle cook, cold-chain. What sets us apart is what we let you see. Every gram. Every supplement. Every ratio. In a public Google Sheet." },
     { "type": "text", "id": "cta_link", "label": "CTA link (external URL or relative path)", "default": "https://docs.google.com/spreadsheets/d/1MmEgWyF-GbnkA6RP9WqD69mmV-luKXb0jpFxTgqygYE/edit?gid=802280656" },
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "🔓 See the formulas sheet" }
   ],

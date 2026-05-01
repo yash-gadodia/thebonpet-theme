@@ -1,9 +1,15 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.32.0 (2026-05-01) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.32.1 (2026-05-01) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.32.1** (2026-05-01) - Formulas page readability fix.
+  - 🔍 Per Yash: "still too small, too wordy, cant read properly". Root cause: Dawn sets `html { font-size: 62.5% }` (10px), so all `rem` values in the formulas + comparison sections were rendering at 60% intended size (e.g., `0.58rem` rendered as 5.8px badge text). Same trap as v3.22.0 hero fix.
+  - 📐 Converted all 22 `rem` font-size values + 3 `rem` widths in `sections/bonpet-formulas.liquid` to explicit `px` calibrated to 16px-base. Recipe table body 14px, panel sub 15px, badges 10-12px (was 5.8-7px).
+  - 📐 Rewrote `sections/bonpet-formulas-comparison.liquid` CSS in `px` from the ground up. Eyebrow 14px (was 7.8px), table body 16-17px (was 9-10px), comparison title clamps 32-56px (was 28-48px), parity body clamps 16-19px (was 15-17px), mark badges 36px diameter with 18px icon (was 28px/16px). Fonts feel proper Lyka-scale now.
+  - ✂️ Trimmed wordy copy: lead paragraph "Every premium fresh brand..." → "Every brand lists ingredients. Only one shows you exactly how much." Parity body "We're not the only Singapore brand..." → "Most premium SG fresh brands nail the basics: AAFCO, single-protein, gentle cook, cold-chain. What sets us apart is what we let you see."
+  - Touches sections/bonpet-formulas.liquid + sections/bonpet-formulas-comparison.liquid only.
 - **v3.32.0** (2026-05-01) - Formulas page transparency comparison + founder story tighten.
   - 🆚 New section `bonpet-formulas-comparison.liquid` on `/pages/formulas`: a 7-row comparison table that names PetCubes, BomBom, The Grateful Pet by brand and shows what each publishes on their public website. The 3 differentiator rows (full ingredient ratios, public formula sheet, supplement names + dosages) make Bon Pet's transparency moat obvious. The 4 parity rows (cooking method, single-protein, SG-made, cold-chain) reinforce we're at par with other premium SG fresh brands on the basics. Every cell verified May 2026 against the brand's public site (sub-agent cross-check).
   - 📚 "Where we share ground" parity callout below the table - honest framing, points to the formulas Google Sheet as the single thing that sets us apart.
