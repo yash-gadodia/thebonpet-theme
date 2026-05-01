@@ -4,6 +4,20 @@
       "type": "bonpet-formulas",
       "settings": {}
     },
+    "comparison": {
+      "type": "bonpet-formulas-comparison",
+      "blocks": {
+        "row1": { "type": "row", "settings": { "dimension": "Full ingredient ratios published", "detail": "How much of each ingredient (% or grams)", "bonpet": "yes", "petcubes": "no", "bombom": "no", "grateful": "no" } },
+        "row2": { "type": "row", "settings": { "dimension": "Public, downloadable formula sheet", "detail": "Open to anyone, copy-able", "bonpet": "yes", "petcubes": "no", "bombom": "no", "grateful": "no" } },
+        "row3": { "type": "row", "settings": { "dimension": "Supplement names + dosages disclosed", "detail": "Which vitamin/mineral, how much per pack", "bonpet": "yes", "petcubes": "no", "bombom": "no", "grateful": "no" } },
+        "row4": { "type": "row", "settings": { "dimension": "Cooking method + temperature stated", "detail": "Sous vide at 80°C", "bonpet": "yes", "petcubes": "partial", "bombom": "yes", "grateful": "yes" } },
+        "row5": { "type": "row", "settings": { "dimension": "Single-protein recipes", "detail": "One animal protein per recipe", "bonpet": "yes", "petcubes": "unstated", "bombom": "yes", "grateful": "yes" } },
+        "row6": { "type": "row", "settings": { "dimension": "Singapore-made", "detail": "Cooked in Singapore", "bonpet": "yes", "petcubes": "unstated", "bombom": "yes", "grateful": "yes" } },
+        "row7": { "type": "row", "settings": { "dimension": "Cold-chain frozen delivery (SG)", "detail": "Stays frozen door-to-door", "bonpet": "yes", "petcubes": "unstated", "bombom": "yes", "grateful": "yes" } }
+      },
+      "block_order": ["row1", "row2", "row3", "row4", "row5", "row6", "row7"],
+      "settings": {}
+    },
     "trust_band": {
       "type": "bonpet-trust-band",
       "settings": {}
@@ -37,6 +51,7 @@
   },
   "order": [
     "formulas",
+    "comparison",
     "trust_band",
     "final_cta"
   ]

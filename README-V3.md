@@ -1,9 +1,16 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.31.0 (2026-05-01) — marker in `layout/theme.liquid` line 2.
+**Current version:** v3.32.0 (2026-05-01) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.32.0** (2026-05-01) - Formulas page transparency comparison + founder story tighten.
+  - 🆚 New section `bonpet-formulas-comparison.liquid` on `/pages/formulas`: a 7-row comparison table that names PetCubes, BomBom, The Grateful Pet by brand and shows what each publishes on their public website. The 3 differentiator rows (full ingredient ratios, public formula sheet, supplement names + dosages) make Bon Pet's transparency moat obvious. The 4 parity rows (cooking method, single-protein, SG-made, cold-chain) reinforce we're at par with other premium SG fresh brands on the basics. Every cell verified May 2026 against the brand's public site (sub-agent cross-check).
+  - 📚 "Where we share ground" parity callout below the table - honest framing, points to the formulas Google Sheet as the single thing that sets us apart.
+  - 🎨 White table card on cream bg, mobile-scroll friendly (min-width 640px), responsive padding clamps. Bon Pet column visually highlighted (primary green tint).
+  - ✂️ Tightened `/pages/founder` story copy from 5 paragraphs to 3 punchy ones - removes redundancy with the timeline below it. Same story, less scroll.
+  - 🐙 First deploy with git mirror to private GitHub `yash-gadodia/thebonpet-theme` (deploy.sh now auto-commits + pushes after Shopify push).
+  - Touches sections/bonpet-formulas-comparison.liquid (new) + templates/page.formulas.json + templates/page.founder.json.
 - **v3.31.0** (2026-05-01) - FAQ page revamp (Lyka pattern: topic-grouped accordion).
   - 📚 Replaced /pages/faq legacy paragraph-dump (numbered Q&A in plain `<p>` tags, no semantic structure) with 5 topic-grouped accordion sections covering all 19 canonical Q&As: 🍽️ About the food (6) · 🚚 Delivery (3) · 📦 Storage & handling (3) · 🐾 Feeding & transition (6) · ❤️ Subscription & account (1).
   - 🎨 Native `<details>`/`<summary>` accordion (no JS, accessible, mobile-friendly) with white card style, soft border, hover lift, animated +/− toggle. CSS namespaced under `.tbp-faq-page` in bonpet-v3.css.

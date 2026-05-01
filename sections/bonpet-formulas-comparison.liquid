@@ -1,0 +1,342 @@
+{%- comment -%}
+  V3 Formulas page · Transparency comparison.
+  Names PetCubes, BomBom, The Grateful Pet by brand. Every cell is verified
+  against the brand's public website on the date in section.settings.last_verified.
+  Update that date AND the cells whenever the data is re-checked.
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-formulas-compare" data-section-id="{{ section.id }}">
+  <div class="tbp-container">
+    <header class="tbp-formulas-compare-head">
+      <p class="tbp-formulas-compare-eyebrow">{{ section.settings.eyebrow | default: 'TRANSPARENCY · COMPARED' }}</p>
+      <h2 class="tbp-formulas-compare-title">{{ section.settings.heading | default: 'How we stack up on transparency' }}</h2>
+      <p class="tbp-formulas-compare-lead">
+        {{ section.settings.lead | default: "Every premium fresh brand in Singapore tells you what's in the food. Only one tells you exactly how much. Here's what each Singapore brand publishes on their public website." }}
+      </p>
+    </header>
+
+    {%- liquid
+      assign brands = 'bonpet|petcubes|bombom|grateful' | split: '|'
+      assign brand_labels = 'The Bon Pet|PetCubes|BomBom|The Grateful Pet' | split: '|'
+      assign brand_emojis = '🐾|🟧|🟦|🟩' | split: '|'
+    -%}
+
+    <div class="tbp-formulas-compare-table-wrap" role="region" aria-label="Transparency comparison table">
+      <table class="tbp-formulas-compare-table">
+        <caption class="tbp-visually-hidden">What each Singapore fresh pet food brand publishes on their public website. Verified {{ section.settings.last_verified | default: 'May 2026' }}.</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="tbp-formulas-compare-rowhead">What's public</th>
+            <th scope="col" class="tbp-formulas-compare-col tbp-formulas-compare-col--us">
+              <span class="tbp-formulas-compare-brand">The Bon Pet</span>
+            </th>
+            <th scope="col" class="tbp-formulas-compare-col">PetCubes</th>
+            <th scope="col" class="tbp-formulas-compare-col">BomBom</th>
+            <th scope="col" class="tbp-formulas-compare-col">The Grateful Pet</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'row' -%}
+              <tr {{ block.shopify_attributes }}>
+                <th scope="row" class="tbp-formulas-compare-rowhead">
+                  <span class="tbp-formulas-compare-rowtitle">{{ block.settings.dimension }}</span>
+                  {%- if block.settings.detail != blank -%}
+                    <span class="tbp-formulas-compare-rowdetail">{{ block.settings.detail }}</span>
+                  {%- endif -%}
+                </th>
+                <td class="tbp-formulas-compare-cell tbp-formulas-compare-cell--us" data-state="{{ block.settings.bonpet }}" aria-label="The Bon Pet: {{ block.settings.bonpet }}">
+                  <span class="tbp-formulas-compare-mark" data-state="{{ block.settings.bonpet }}" aria-hidden="true">{%- if block.settings.bonpet == 'yes' -%}✅{%- elsif block.settings.bonpet == 'no' -%}✕{%- elsif block.settings.bonpet == 'partial' -%}◐{%- else -%}-{%- endif -%}</span>
+                </td>
+                <td class="tbp-formulas-compare-cell" data-state="{{ block.settings.petcubes }}" aria-label="PetCubes: {{ block.settings.petcubes }}">
+                  <span class="tbp-formulas-compare-mark" data-state="{{ block.settings.petcubes }}" aria-hidden="true">{%- if block.settings.petcubes == 'yes' -%}✅{%- elsif block.settings.petcubes == 'no' -%}✕{%- elsif block.settings.petcubes == 'partial' -%}◐{%- else -%}-{%- endif -%}</span>
+                </td>
+                <td class="tbp-formulas-compare-cell" data-state="{{ block.settings.bombom }}" aria-label="BomBom: {{ block.settings.bombom }}">
+                  <span class="tbp-formulas-compare-mark" data-state="{{ block.settings.bombom }}" aria-hidden="true">{%- if block.settings.bombom == 'yes' -%}✅{%- elsif block.settings.bombom == 'no' -%}✕{%- elsif block.settings.bombom == 'partial' -%}◐{%- else -%}-{%- endif -%}</span>
+                </td>
+                <td class="tbp-formulas-compare-cell" data-state="{{ block.settings.grateful }}" aria-label="The Grateful Pet: {{ block.settings.grateful }}">
+                  <span class="tbp-formulas-compare-mark" data-state="{{ block.settings.grateful }}" aria-hidden="true">{%- if block.settings.grateful == 'yes' -%}✅{%- elsif block.settings.grateful == 'no' -%}✕{%- elsif block.settings.grateful == 'partial' -%}◐{%- else -%}-{%- endif -%}</span>
+                </td>
+              </tr>
+            {%- endif -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="tbp-formulas-compare-footnote">
+      Verified {{ section.settings.last_verified | default: 'May 2026' }} against each brand's public website. ✅ = clearly stated. ❌ = not stated, or stated otherwise. <span aria-hidden="true">-</span> not publicly stated. If anything's out of date, <a href="mailto:hello@thebonpet.com">tell us</a> and we'll update.
+    </p>
+
+    {%- if section.settings.parity_heading != blank or section.blocks.size > 0 -%}
+      <div class="tbp-formulas-parity">
+        <h3 class="tbp-formulas-parity-title">{{ section.settings.parity_heading | default: 'Where we share ground with other premium SG brands' }}</h3>
+        <p class="tbp-formulas-parity-body">{{ section.settings.parity_body | default: "We're not the only Singapore brand that takes nutrition seriously. AAFCO standards, single-protein recipes, gentle cooking, cold-chain delivery, no artificial preservatives - these are table stakes for premium fresh food in 2026, and good ones do it. What sets us apart is what we let you see. Every gram. Every supplement. Every ratio. In a public Google Sheet you can download right now." }}</p>
+        <a class="tbp-formulas-parity-cta" href="{{ section.settings.cta_link | default: 'https://docs.google.com/spreadsheets/d/1MmEgWyF-GbnkA6RP9WqD69mmV-luKXb0jpFxTgqygYE/edit?gid=802280656' }}" target="_blank" rel="noopener">{{ section.settings.cta_label | default: '🔓 See the formulas sheet' }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .tbp-formulas-compare {
+    background: var(--tbp-cream, #faf3e8);
+    padding: clamp(48px, 7vw, 96px) 0;
+  }
+  .tbp-formulas-compare-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(32px, 5vw, 56px);
+  }
+  .tbp-formulas-compare-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--tbp-primary, #2d5d3a);
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+  .tbp-formulas-compare-title {
+    font-family: var(--tbp-font-display, serif);
+    font-size: clamp(28px, 4.6vw, 48px);
+    line-height: 1.15;
+    margin: 0 0 16px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-formulas-compare-lead {
+    font-size: clamp(16px, 1.7vw, 19px);
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  .tbp-formulas-compare-table-wrap {
+    background: #fff;
+    border-radius: 20px;
+    padding: clamp(8px, 1.5vw, 18px);
+    box-shadow: 0 6px 24px rgba(45, 93, 58, 0.07);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tbp-formulas-compare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 640px;
+  }
+  .tbp-formulas-compare-table caption.tbp-visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+  .tbp-formulas-compare-table th,
+  .tbp-formulas-compare-table td {
+    padding: 14px 12px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(45, 93, 58, 0.08);
+  }
+  .tbp-formulas-compare-table thead th {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--tbp-ink, #1a1a1a);
+    background: rgba(250, 243, 232, 0.5);
+    border-bottom: 2px solid rgba(45, 93, 58, 0.18);
+    position: sticky;
+    top: 0;
+  }
+  .tbp-formulas-compare-table thead th.tbp-formulas-compare-col--us,
+  .tbp-formulas-compare-table tbody td.tbp-formulas-compare-cell--us {
+    background: rgba(45, 93, 58, 0.06);
+  }
+  .tbp-formulas-compare-table thead th.tbp-formulas-compare-col--us {
+    color: var(--tbp-primary, #2d5d3a);
+    background: rgba(45, 93, 58, 0.12);
+  }
+  .tbp-formulas-compare-table tbody tr:last-child th,
+  .tbp-formulas-compare-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .tbp-formulas-compare-rowhead {
+    text-align: left !important;
+    font-weight: 600;
+    color: var(--tbp-ink, #1a1a1a);
+    min-width: 220px;
+  }
+  .tbp-formulas-compare-rowtitle {
+    display: block;
+    font-size: 0.97rem;
+  }
+  .tbp-formulas-compare-rowdetail {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--tbp-ink-soft, #6a6a6a);
+    margin-top: 3px;
+    line-height: 1.35;
+  }
+  .tbp-formulas-compare-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .tbp-formulas-compare-mark[data-state="yes"] {
+    background: rgba(45, 93, 58, 0.12);
+    color: var(--tbp-primary, #2d5d3a);
+  }
+  .tbp-formulas-compare-mark[data-state="no"] {
+    background: rgba(220, 53, 69, 0.10);
+    color: #b53a47;
+  }
+  .tbp-formulas-compare-mark[data-state="partial"],
+  .tbp-formulas-compare-mark[data-state="unstated"] {
+    background: rgba(155, 155, 155, 0.14);
+    color: #8a8a8a;
+  }
+
+  .tbp-formulas-compare-footnote {
+    margin: 16px auto 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--tbp-ink-soft, #6a6a6a);
+    line-height: 1.5;
+    max-width: 720px;
+  }
+  .tbp-formulas-compare-footnote a {
+    color: var(--tbp-primary, #2d5d3a);
+    text-decoration: underline;
+  }
+
+  .tbp-formulas-parity {
+    margin: clamp(40px, 6vw, 64px) auto 0;
+    padding: clamp(24px, 4vw, 40px);
+    background: #fff;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 760px;
+    box-shadow: 0 6px 24px rgba(45, 93, 58, 0.07);
+  }
+  .tbp-formulas-parity-title {
+    font-family: var(--tbp-font-display, serif);
+    font-size: clamp(20px, 2.6vw, 28px);
+    margin: 0 0 16px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-formulas-parity-body {
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.6;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0 0 24px;
+  }
+  .tbp-formulas-parity-cta {
+    display: inline-block;
+    background: var(--tbp-accent, #ff886b);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .tbp-formulas-parity-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 136, 107, 0.3);
+    color: #fff;
+  }
+
+  @media (max-width: 767px) {
+    .tbp-formulas-compare-table {
+      font-size: 0.88rem;
+    }
+    .tbp-formulas-compare-rowhead {
+      min-width: 160px;
+    }
+    .tbp-formulas-compare-table th,
+    .tbp-formulas-compare-table td {
+      padding: 12px 8px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bon Pet · Formulas comparison",
+  "tag": "section",
+  "class": "tbp-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "TRANSPARENCY · COMPARED" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How we stack up on transparency" },
+    { "type": "textarea", "id": "lead", "label": "Lead paragraph", "default": "Every premium fresh brand in Singapore tells you what's in the food. Only one tells you exactly how much. Here's what each Singapore brand publishes on their public website." },
+    { "type": "text", "id": "last_verified", "label": "Last verified", "default": "May 2026" },
+    { "type": "header", "content": "Parity callout" },
+    { "type": "text", "id": "parity_heading", "label": "Heading", "default": "Where we share ground with other premium SG brands" },
+    { "type": "textarea", "id": "parity_body", "label": "Body", "default": "We're not the only Singapore brand that takes nutrition seriously. AAFCO standards, single-protein recipes, gentle cooking, cold-chain delivery, no artificial preservatives - these are table stakes for premium fresh food in 2026, and good ones do it. What sets us apart is what we let you see. Every gram. Every supplement. Every ratio. In a public Google Sheet you can download right now." },
+    { "type": "url", "id": "cta_link", "label": "CTA link", "default": "https://docs.google.com/spreadsheets/d/1MmEgWyF-GbnkA6RP9WqD69mmV-luKXb0jpFxTgqygYE/edit?gid=802280656" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "🔓 See the formulas sheet" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison row",
+      "settings": [
+        { "type": "text", "id": "dimension", "label": "Dimension", "default": "Full ingredient ratios published" },
+        { "type": "text", "id": "detail", "label": "Sub-detail (optional)", "default": "How much of each ingredient (% or grams)" },
+        { "type": "select", "id": "bonpet", "label": "Bon Pet", "default": "yes",
+          "options": [
+            { "value": "yes", "label": "✅ Yes" },
+            { "value": "no", "label": "❌ No" },
+            { "value": "partial", "label": "◐ Partial" },
+            { "value": "unstated", "label": "- Not stated" }
+          ]
+        },
+        { "type": "select", "id": "petcubes", "label": "PetCubes", "default": "no",
+          "options": [
+            { "value": "yes", "label": "✅ Yes" },
+            { "value": "no", "label": "❌ No" },
+            { "value": "partial", "label": "◐ Partial" },
+            { "value": "unstated", "label": "- Not stated" }
+          ]
+        },
+        { "type": "select", "id": "bombom", "label": "BomBom", "default": "no",
+          "options": [
+            { "value": "yes", "label": "✅ Yes" },
+            { "value": "no", "label": "❌ No" },
+            { "value": "partial", "label": "◐ Partial" },
+            { "value": "unstated", "label": "- Not stated" }
+          ]
+        },
+        { "type": "select", "id": "grateful", "label": "The Grateful Pet", "default": "no",
+          "options": [
+            { "value": "yes", "label": "✅ Yes" },
+            { "value": "no", "label": "❌ No" },
+            { "value": "partial", "label": "◐ Partial" },
+            { "value": "unstated", "label": "- Not stated" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bon Pet · Formulas comparison",
+      "blocks": [
+        { "type": "row", "settings": { "dimension": "Full ingredient ratios published", "detail": "How much of each ingredient (% or grams)", "bonpet": "yes", "petcubes": "no", "bombom": "no", "grateful": "no" } },
+        { "type": "row", "settings": { "dimension": "Public, downloadable formula sheet", "detail": "Open to anyone, copy-able", "bonpet": "yes", "petcubes": "no", "bombom": "no", "grateful": "no" } },
+        { "type": "row", "settings": { "dimension": "Supplement names + dosages disclosed", "detail": "Which vitamin/mineral, how much per pack", "bonpet": "yes", "petcubes": "no", "bombom": "no", "grateful": "no" } },
+        { "type": "row", "settings": { "dimension": "Cooking method + temperature stated", "detail": "Sous vide, 80°C", "bonpet": "yes", "petcubes": "partial", "bombom": "yes", "grateful": "yes" } },
+        { "type": "row", "settings": { "dimension": "Single-protein recipes", "detail": "One animal protein per recipe", "bonpet": "yes", "petcubes": "unstated", "bombom": "yes", "grateful": "yes" } },
+        { "type": "row", "settings": { "dimension": "Singapore-made", "detail": "Cooked in Singapore", "bonpet": "yes", "petcubes": "unstated", "bombom": "yes", "grateful": "yes" } },
+        { "type": "row", "settings": { "dimension": "Cold-chain frozen delivery (SG)", "detail": "Stays frozen door-to-door", "bonpet": "yes", "petcubes": "unstated", "bombom": "yes", "grateful": "yes" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
