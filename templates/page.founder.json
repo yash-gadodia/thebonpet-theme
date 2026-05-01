@@ -10,7 +10,7 @@
             "type": "bonpet-founder-hero",
             "settings": {
                 "image": "shopify://shop_images/lola-closeup-smiling-founder.jpg",
-                "image_alt": "Lola, Yash's cockapoo, smiling at the camera - the muse for The Bon Pet",
+                "image_alt": "Lola, Yash's goldendoodle, smiling at the camera - the muse for The Bon Pet",
                 "eyebrow": "OUR STORY",
                 "heading": "Started with Salt, Pepper & Lola 🐾",
                 "intro": "Nic's cats Salt and Pepper. Yash's dog Lola. Two software engineers who couldn't find fresh pet food we trusted, so we built it from our kitchen counter."
@@ -38,8 +38,8 @@
                 "quality": {
                     "type": "pillar",
                     "settings": {
-                        "image": "shopify://shop_images/lola-with-bonpet-bowl.jpg",
-                        "image_alt": "Lola eating gently cooked Bon Pet on her balcony - the same recipes we ship to every Singapore pawrent",
+                        "image": "shopify://shop_images/customer-rescue-puppy-pack.jpg",
+                        "image_alt": "A rescue puppy with a Bon Pet beef pack - the same quality food we ship to every Singapore pawrent",
                         "icon": "❤️",
                         "title": "Quality as Standard",
                         "body": "We cook with human-grade ingredients and the same care we'd give our own furkids. Sous vide at 80°C. PhD-formulated. AAFCO-certified. No shortcuts ever."
@@ -48,8 +48,8 @@
                 "community": {
                     "type": "pillar",
                     "settings": {
-                        "image": "shopify://shop_images/expo-poodle-booth.jpg",
-                        "image_alt": "A poodle eating Bon Pet at our pet expo booth, surrounded by the SG community",
+                        "image": "shopify://shop_images/customer-blackcat-bonpet-bag.jpg",
+                        "image_alt": "A real Singapore customer's black cat with a Bon Pet kraft delivery bag and frozen meal packs",
                         "icon": "🐾",
                         "title": "Community First",
                         "body": "We run WhatsApp groups, organise free tastings, answer nutrition questions personally. This isn't a faceless brand. Yash and Nic are here. We care what you think."
@@ -166,9 +166,9 @@
                     "type": "photo",
                     "settings": {
                         "image": "shopify://shop_images/lola-closeup-smiling-founder.jpg",
-                        "alt": "Lola, Yash's cockapoo, smiling at the camera",
+                        "alt": "Lola, Yash's goldendoodle, smiling at the camera",
                         "label": "OUR MUSE",
-                        "caption": "Lola, Yash's cockapoo. The dog who made us start cooking on weekends."
+                        "caption": "Lola, Yash's goldendoodle. The dog who made us start cooking on weekends."
                     }
                 },
                 "kitchen": {
@@ -183,23 +183,23 @@
                 "pawrent": {
                     "type": "photo",
                     "settings": {
-                        "image": "shopify://shop_images/real-pawrent-cockapoo-bonpet-bag.jpg",
-                        "alt": "A real Singapore pawrent's cockapoo with a Bon Pet delivery bag",
+                        "image": "shopify://shop_images/customer-dog-eating-002.jpg",
+                        "alt": "A Singapore customer's chow chow waiting for a fresh bowl of Bon Pet beef",
                         "label": "REAL PAWRENTS",
-                        "caption": "An actual Singapore customer's cockapoo with a Bon Pet delivery bag at home."
+                        "caption": "An actual Singapore customer's chow chow eyeing a fresh bowl of Bon Pet beef."
                     }
                 },
-                "bowl": {
+                "saltpepper": {
                     "type": "photo",
                     "settings": {
-                        "image": "shopify://shop_images/lola-with-bonpet-bowl.jpg",
-                        "alt": "Lola eating gently cooked Bon Pet on her balcony",
-                        "label": "LOLA'S BOWL",
-                        "caption": "Same recipes Lola eats every morning. Same standards in every pack we ship."
+                        "image": "shopify://shop_images/salt-and-pepper-nics-cats.jpg",
+                        "alt": "Salt and Pepper, Nic's two orange tabby cats - the other half of why we started cooking",
+                        "label": "OUR OTHER MUSES",
+                        "caption": "Salt and Pepper, Nic's two cats. The other half of the trio that made us start cooking."
                     }
                 }
             },
-            "block_order": ["muse", "kitchen", "pawrent", "bowl"],
+            "block_order": ["muse", "kitchen", "pawrent", "saltpepper"],
             "settings": {}
         }
     },

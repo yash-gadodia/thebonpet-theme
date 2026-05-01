@@ -1,9 +1,18 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.34.3 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.34.4 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.34.4** (2026-05-02) - Founder page accuracy + size fixes (per Yash review).
+  - 🐱 Real-strip card #4 swapped from "LOLA'S BOWL" (Lola again) to "OUR OTHER MUSES": Nic's cats Salt and Pepper. Yash sent the photo mid-deploy. Two orange tabby brothers, the cat half of the Salt-Pepper-Lola origin trio that the founder hero already names. Strip now reads: Lola muse · Kitchen prep · Customer chow chow · Salt + Pepper. No more duplicate-Lola.
+  - 🐶 Lola is a goldendoodle, not a cockapoo. All founder template + section copy and Shopify Files alt-text corrected. Saved to memory: `reference_lola_goldendoodle.md` so future sessions don't repeat.
+  - 🔁 Real-strip "REAL PAWRENTS" photo swapped from `real-pawrent-cockapoo-bonpet-bag.jpg` (which was actually Lola again, not a customer) to `customer-dog-eating-002.jpg` (a real Singapore customer's chow chow with a fresh bowl of beef). Different breed, clearly not Lola.
+  - 🔁 "Quality as Standard" why-pillar swapped from `lola-with-bonpet-bowl.jpg` to `customer-rescue-puppy-pack.jpg` (rescue puppy with Bon Pet beef pack in a Singapore shelter). Quality of food shown by who's eating it.
+  - 🔁 "Community First" why-pillar swapped from `expo-poodle-booth.jpg` (also likely Lola) to `customer-blackcat-bonpet-bag.jpg` (real customer's black cat with kraft delivery bag and frozen meal packs). Different species adds visual variety.
+  - 📐 Founder hero image was rendering too tall (portrait Lola closeup at width:100% / height:auto = ~700-800px tall on desktop). Capped with `max-height:480px` (360 mobile) + `aspect-ratio:4/3` + `object-fit:cover` + `object-position:center 30%` so Lola's face stays in frame. Image now ~480x360 max instead of natural portrait crop.
+  - 📷 2 more photos uploaded to Shopify Files: customer-blackcat-bonpet-bag.jpg, customer-rescue-puppy-pack.jpg.
+  - 📁 Touches: templates/page.founder.json, sections/bonpet-founder-realstrip.liquid, sections/bonpet-founder-hero.liquid. Plus 2 image uploads + 2 Shopify Files alt-text fixes via Admin API.
 - **v3.34.3** (2026-05-02) - Visual band on /pages/why-fresh-food (kitchen photo).
   - 📷 Inserted a 16:9 photo band between "How we do it differently" and "Sources & Science" on /pages/why-fresh-food. Uses kitchen-cook-process.jpg (real Pioneer Crescent kitchen). Caption: "Real kitchen, real cook, 80°C. No factory in the photo." Breaks up the text wall and gives visual weight to the transparency claim.
 - **v3.34.2** (2026-05-02) - Founder photo swaps + main nav update + smoke regression fix.
