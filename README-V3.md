@@ -1,9 +1,16 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.34.6 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.35.0 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.35.0** (2026-05-02) - Homepage self-audit cleanup (5 fixes from punch list).
+  - 🗑️ **Dropped `apps_judge_ugc`** from homepage. Was rendering only 8 words, embed broken/empty.
+  - 🗑️ **Dropped `apps_google_reviews`** from homepage. Redundant with the existing `reviews` section (also Judge.me-powered, more visually polished). Result: homepage now has just `reviews` (written) + `apps_instagram_feed` (visual UGC) for social proof, instead of 4 sections in a row.
+  - ✏️ **Reframed `founder` section on homepage**. Was leading with transparency claims that duplicated `transparency_proof` immediately below. Now the founder section is the STORY (Salt + Pepper + Lola, two engineers, kitchen-counter origin), and the transparency proof section gets to do the heavy lifting on "show every gram". Eyebrow: OUR STORY · Heading: "Started with Salt, Pepper & Lola" · Body trimmed.
+  - ✏️ **`trial_cta` heading** "A Different Breed" → "Try us before you commit". Was cryptic, now connects directly to the "mixed trial pack" body.
+  - ✏️ **`final_cta` heading** "Ready to elevate your furkid's diet?" → "Ready to feed them better?". Drops the "elevate" AI-marketing-tell, more direct.
+  - 📁 Touches: templates/index.json only.
 - **v3.34.6** (2026-05-02) - Homepage redundancy cleanup + recipes-on-site copy update.
   - 🗑️ Removed `furkids_wall` (the v3.34.5 testimonial wall) from homepage. It duplicated the existing `apps_instagram_feed` "Made by us, Shared by you" UGC carousel. Per memory rule "consolidate over add". Section file kept in repo for future reuse.
   - 🪑 Moved `reassurance_band` from position 3 to position 5 (after `transparency_proof`). Was visually-redundant with `health_tiles` directly above (two 4-up icon-tile sections back to back). Now broken up by founder + transparency content.
