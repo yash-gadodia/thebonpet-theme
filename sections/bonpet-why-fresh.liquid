@@ -18,7 +18,7 @@
 
     {%- comment -%} 2. Three reasons kibble is broken {%- endcomment -%}
     <section class="tbp-why-block tbp-why-reasons">
-      <h2 class="tbp-why-h2">{{ section.settings.reasons_heading | default: 'Three things most kibble does to your furkid\'s food' }}</h2>
+      <h2 class="tbp-why-h2">{{ section.settings.reasons_heading | default: "Three things most kibble does to your furkid's food" }}</h2>
       <p class="tbp-why-h2-sub">{{ section.settings.reasons_sub | default: 'Not an attack on any brand. Just facts published in peer-reviewed journals and FDA filings.' }}</p>
 
       <div class="tbp-why-cards">
@@ -123,7 +123,7 @@
     {%- comment -%} 6. Trial CTA {%- endcomment -%}
     <section class="tbp-why-block tbp-why-cta">
       <h2 class="tbp-why-cta-title">{{ section.settings.cta_heading | default: 'Try it on your own furkid.' }}</h2>
-      <p class="tbp-why-cta-body">{{ section.settings.cta_body | default: 'Free trial pack, $9 cold-chain delivery to your door. No subscription required, no commitment. If your dog or cat doesn\'t love it, drop us a note and we\'ll make it right.' }}</p>
+      <p class="tbp-why-cta-body">{{ section.settings.cta_body | default: "Free trial pack, $9 cold-chain delivery to your door. No subscription required, no commitment. If your dog or cat doesn't love it, drop us a note and we'll make it right." }}</p>
       <div class="tbp-why-cta-actions">
         <a class="tbp-why-cta-btn" href="{{ section.settings.cta1_link | default: '/products/free-dog-trial-pack' }}">{{ section.settings.cta1_label | default: '🐶 Free Dog Trial' }}</a>
         <a class="tbp-why-cta-btn tbp-why-cta-btn--ghost" href="{{ section.settings.cta2_link | default: '/products/free-cat-trial-pack' }}">{{ section.settings.cta2_label | default: '🐱 Free Cat Trial' }}</a>
