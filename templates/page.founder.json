@@ -158,6 +158,49 @@
                 "padding_top": 0,
                 "padding_bottom": 0
             }
+        },
+        "real_strip": {
+            "type": "bonpet-founder-realstrip",
+            "blocks": {
+                "muse": {
+                    "type": "photo",
+                    "settings": {
+                        "image": "shopify://shop_images/lola-closeup-smiling-founder.jpg",
+                        "alt": "Lola, Yash's cockapoo, smiling at the camera",
+                        "label": "OUR MUSE",
+                        "caption": "Lola, Yash's cockapoo. The dog who made us start cooking on weekends."
+                    }
+                },
+                "kitchen": {
+                    "type": "photo",
+                    "settings": {
+                        "image": "shopify://shop_images/kitchen-sweet-potato-prep.jpg",
+                        "alt": "Sweet potato hand-prepped in our Pioneer Crescent kitchen",
+                        "label": "OUR KITCHEN",
+                        "caption": "Sweet potato hand-prepped at our Pioneer Crescent kitchen. Sous vide at 80°C."
+                    }
+                },
+                "pawrent": {
+                    "type": "photo",
+                    "settings": {
+                        "image": "shopify://shop_images/real-pawrent-cockapoo-bonpet-bag.jpg",
+                        "alt": "A real Singapore pawrent's cockapoo with a Bon Pet delivery bag",
+                        "label": "REAL PAWRENTS",
+                        "caption": "An actual Singapore customer's cockapoo with a Bon Pet delivery bag at home."
+                    }
+                },
+                "bowl": {
+                    "type": "photo",
+                    "settings": {
+                        "image": "shopify://shop_images/lola-with-bonpet-bowl.jpg",
+                        "alt": "Lola eating gently cooked Bon Pet on her balcony",
+                        "label": "LOLA'S BOWL",
+                        "caption": "Same recipes Lola eats every morning. Same standards in every pack we ship."
+                    }
+                }
+            },
+            "block_order": ["muse", "kitchen", "pawrent", "bowl"],
+            "settings": {}
         }
     },
     "order": [
@@ -166,6 +209,7 @@
         "founder_story",
         "founder_why",
         "founder_timeline",
+        "real_strip",
         "trust_band",
         "final_cta"
     ]

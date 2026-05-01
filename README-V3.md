@@ -1,9 +1,14 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.34.0 (2026-05-01) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.34.1 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.34.1** (2026-05-02) - Founder page "Real, not stock" photo strip.
+  - 📷 4 real iPhone photos uploaded to Shopify Files: Lola closeup, Lola with Bon Pet bowl, Pioneer Crescent sweet-potato kitchen prep, real customer cockapoo with Bon Pet delivery bag.
+  - 🆕 New section bonpet-founder-realstrip.liquid - 4-up photo grid with eyebrow + caption per card. Sits between founder_timeline and trust_band on /pages/founder. Replaces the "stock-feeling" gap with actual founder + customer + kitchen content.
+  - Headline copy: "The actual people, dogs, and kitchen behind the brand". Lead: "These are real iPhone photos. Lola, our muse. Our Pioneer Crescent kitchen, mid-prep. Real Singapore pawrents who've trusted us with their furkids. No stock, no AI."
+  - 📁 Touches: sections/bonpet-founder-realstrip.liquid (new), templates/page.founder.json. Plus 4 image uploads via Shopify Admin GraphQL stagedUploadsCreate + fileCreate.
 - **v3.34.0** (2026-05-01) - Lyka audit Phase 2: /pages/why-fresh-food long-form education page.
   - 🧠 NEW `/pages/why-fresh-food` (id 129934622777) - long-form, citation-backed education page mirroring Lyka's /why-real-food but localised for Singapore and leaning on the open-formulas moat. 6 inner sections: hero ("What's actually in your dog's bowl?"), "Three things most kibble does to your furkid's food" (3 reason cards: heat damage, mycotoxins, opacity, with inline citations), "Common myths, actual research" (4 myth-vs-fact cards), "How we do it differently" (4 pillars: sous vide / AAFCO / open formulas / single-protein), "Sources & Science" (9 numbered citations linking to peer-reviewed papers / FDA / AAFCO / Cornell), "Try it on your own furkid" CTA. New section bonpet-why-fresh.liquid (px-only sizing, no rem trap).
   - 📚 Every claim cited inline via superscript link to the Sources block. Sources include PMC/NCBI peer-reviewed papers (lysine bioavailability, Maillard reaction, mycotoxin contamination, extrusion starch digestibility, fresh food meta-analysis), Frontiers in Immunology (AGEs immunomodulation), Cornell Riney Center (periodontal disease prevalence + senior dog metabolomics), AAFCO (All Life Stages standards doc), and FDA (DCM grain-free investigation). No claims without sources. Dropped "live to 29" and "+2.5 yrs lifespan" because not rigorously sourceable.

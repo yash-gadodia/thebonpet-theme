@@ -1,0 +1,169 @@
+{%- comment -%}
+  V3 Founder page · "Real" photo strip - one row of 4 images bridging
+  the founder timeline to the trust band. Uses real iPhone photos from
+  Yash + Nic + the community: Lola (the muse), our Pioneer Crescent kitchen
+  prep, and real Singapore pawrents. No stock, no AI. Px-only sizing.
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-founder-real" data-section-id="{{ section.id }}">
+  <div class="tbp-container">
+    <header class="tbp-founder-real-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="tbp-founder-real-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="tbp-founder-real-title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.lead != blank -%}
+        <p class="tbp-founder-real-lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="tbp-founder-real-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'photo' -%}
+          <figure class="tbp-founder-real-card" {{ block.shopify_attributes }}>
+            <div class="tbp-founder-real-img">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.alt | default: block.settings.caption }}" loading="lazy" width="400" height="500">
+              {%- endif -%}
+            </div>
+            <figcaption class="tbp-founder-real-cap">
+              {%- if block.settings.label != blank -%}
+                <span class="tbp-founder-real-label">{{ block.settings.label }}</span>
+              {%- endif -%}
+              {%- if block.settings.caption != blank -%}
+                <span class="tbp-founder-real-text">{{ block.settings.caption }}</span>
+              {%- endif -%}
+            </figcaption>
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tbp-founder-real {
+    background: #fff;
+    padding: clamp(56px, 8vw, 96px) 0;
+  }
+  .tbp-founder-real-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(36px, 5vw, 56px);
+    padding: 0 16px;
+  }
+  .tbp-founder-real-eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--tbp-primary, #2d5d3a);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .tbp-founder-real-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15;
+    margin: 0 0 16px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-founder-real-lead {
+    font-size: clamp(16px, 1.6vw, 19px);
+    line-height: 1.55;
+    color: var(--tbp-ink-soft, #4a4a4a);
+    margin: 0;
+  }
+
+  .tbp-founder-real-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  @media (min-width: 900px) { .tbp-founder-real-grid { grid-template-columns: repeat(4, 1fr); gap: 22px; } }
+
+  .tbp-founder-real-card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .tbp-founder-real-img {
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--tbp-cream, #faf3e8);
+  }
+  .tbp-founder-real-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .tbp-founder-real-card:hover .tbp-founder-real-img img {
+    transform: scale(1.04);
+  }
+  .tbp-founder-real-cap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 4px;
+  }
+  .tbp-founder-real-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--tbp-primary, #2d5d3a);
+    text-transform: uppercase;
+  }
+  .tbp-founder-real-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+
+  @media (max-width: 767px) {
+    .tbp-founder-real-text { font-size: 14px; }
+    .tbp-founder-real-img { border-radius: 12px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bon Pet · Real strip",
+  "tag": "section",
+  "class": "tbp-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "REAL · NOT STOCK" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The actual people, dogs, and kitchen behind the brand" },
+    { "type": "textarea", "id": "lead", "label": "Lead", "default": "These are real iPhone photos. Lola, our muse. Our Pioneer Crescent kitchen, mid-prep. Real Singapore pawrents who've trusted us with their furkids. No stock, no AI." }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (4:5 portrait)" },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "Real Bon Pet photo" },
+        { "type": "text", "id": "label", "label": "Small label", "default": "OUR MUSE" },
+        { "type": "textarea", "id": "caption", "label": "Caption", "default": "Lola, Yash's cockapoo, the dog who made us start cooking." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bon Pet · Real strip",
+      "blocks": [
+        { "type": "photo", "settings": { "label": "OUR MUSE", "caption": "Lola, Yash's cockapoo. The dog who made us start cooking on weekends." } },
+        { "type": "photo", "settings": { "label": "OUR KITCHEN", "caption": "Sweet potato hand-prepped at our Pioneer Crescent kitchen. Sous vide at 80°C." } },
+        { "type": "photo", "settings": { "label": "REAL PAWRENTS", "caption": "An actual Singapore customer's cockapoo with a Bon Pet delivery bag at home." } },
+        { "type": "photo", "settings": { "label": "LOLA'S BOWL", "caption": "Same recipes Lola eats every morning. Same standards in every pack we ship." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
