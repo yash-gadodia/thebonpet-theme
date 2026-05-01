@@ -60,6 +60,6 @@ Claude automatically follows a development workflow (clarify - plan - implement 
 - Don't add a second `<form>` element to the site - HubSpot Collected Forms auto-captures it and fires duplicate welcome emails (2026-04-23 incident).
 - Don't `{% include '<snippet>' %}` inside `<head>` or other restricted contexts. Use `{% render %}` or inline `{%- liquid -%}`.
 - Don't push to live with `@smoke` failing unless the user explicitly authorises it.
-- Don't `git commit` here - this folder is not a git repo. `shopify theme push` is the deploy mechanism.
+- Don't manually `git commit` between deploys. `./deploy.sh` runs `git add -A && commit && push` for you so git history mirrors Shopify versions 1:1. Mirror repo: `yash-gadodia/thebonpet-theme` (private).
 - Don't drop `--allow-live` from push commands - there is only one theme and it is live.
 - Don't version-churn. If the same fix class has failed twice, stop coding and research. Every push must be backed by a failing-then-passing reproduction test.

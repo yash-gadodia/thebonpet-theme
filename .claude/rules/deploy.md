@@ -1,15 +1,18 @@
 ---
 name: deploy
-description: Shopify theme deploy rules. This folder is NOT a git repo — deploy = shopify theme push. Default target is the live theme.
+description: Shopify theme deploy rules. Default target is the live theme. deploy.sh pushes to Shopify AND mirrors to private GitHub backup.
 ---
 
-## The repo is not git-versioned
-`/Users/yash/Documents/TheBonPet/shopify-theme-v3-remote/` has no `.git`. Version history is tracked via:
+## Git-versioned with private GitHub backup (since 2026-04-29)
+`/Users/yash/Documents/TheBonPet/shopify-theme-v3-remote/` is a git repo mirrored to private `yash-gadodia/thebonpet-theme`. Version history is tracked via four layers:
 - `layout/theme.liquid` line 2 comment marker (`<!-- tbp-theme-version: X.Y.Z · YYYY-MM-DD -->`)
 - `README-V3.md` changelog
+- Git history on the `main` branch (one commit per `./deploy.sh` invocation)
 - Shopify's theme version history (not programmatically accessible)
 
-Never run `git commit`, `git add`, or `gh pr create` here. The deploy is the commit.
+`./deploy.sh` runs `git add -A && git commit -m "Deploy vX.Y.Z" && git push` AFTER a successful Shopify push. Backup is best-effort: a git failure never fails the deploy. If a push fails, the commit stays local, push manually with `git push origin HEAD`.
+
+Do NOT manually `git commit` between deploys. Let `deploy.sh` bundle each push so git history mirrors the Shopify version markers 1:1.
 
 ## The deploy command
 Always use `./deploy.sh`. It:

@@ -149,4 +149,35 @@ EOF
 
 notify_weslee || true
 
+# Mirror the deploy to GitHub (private backup repo: yash-gadodia/thebonpet-theme).
+# Never fails the deploy: any git error is logged + swallowed.
+git_backup() {
+  if [[ ! -d .git ]]; then
+    echo "🐙 (git backup skipped: no .git here)"
+    return 0
+  fi
+
+  local version
+  version=$(sed -n '2p' layout/theme.liquid | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true)
+  version="${version:-unknown}"
+
+  if [[ -z "$(git status --porcelain 2>/dev/null)" ]]; then
+    echo "🐙 (git backup skipped: tree clean)"
+    return 0
+  fi
+
+  git add -A 2>/dev/null || { echo "🐙 (git add failed; deploy itself succeeded)"; return 0; }
+  if ! git -c commit.gpgsign=false commit -q -m "Deploy v${version}" 2>/dev/null; then
+    echo "🐙 (git commit failed or nothing staged; deploy itself succeeded)"
+    return 0
+  fi
+  if git push -q origin HEAD 2>/dev/null; then
+    echo "🐙 Pushed v${version} to GitHub backup."
+  else
+    echo "🐙 (git push failed; commit kept locally — push manually with: git push origin HEAD)"
+  fi
+}
+
+git_backup || true
+
 echo "🎉 Deploy complete."
