@@ -102,6 +102,14 @@
       </div>
     </section>
 
+    {%- comment -%} 4b. Visual band - real kitchen photo to break up the text wall {%- endcomment -%}
+    <figure class="tbp-why-band">
+      <img src="https://cdn.shopify.com/s/files/1/0668/4373/8169/files/kitchen-cook-process.jpg"
+           alt="Sous vide bags simmering at 80°C in our Pioneer Crescent kitchen"
+           loading="lazy" width="1600" height="900">
+      <figcaption>Real kitchen, real cook, 80°C. No factory in the photo.</figcaption>
+    </figure>
+
     {%- comment -%} 5. Sources & Science {%- endcomment -%}
     <section class="tbp-why-block tbp-why-sources" id="sources">
       <h2 class="tbp-why-h2">Sources &amp; Science</h2>
@@ -305,6 +313,29 @@
     line-height: 1.55;
     color: var(--tbp-ink-soft, #4a4a4a);
     margin: 0;
+  }
+
+  /* 4b. Visual band */
+  .tbp-why-band {
+    margin: 0 auto clamp(64px, 9vw, 120px);
+    max-width: 1080px;
+    padding: 0 16px;
+  }
+  .tbp-why-band img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    box-shadow: 0 8px 28px rgba(45, 93, 58, 0.10);
+  }
+  .tbp-why-band figcaption {
+    text-align: center;
+    margin: 18px 0 0;
+    font-size: 14px;
+    color: var(--tbp-ink-soft, #6a6a6a);
+    font-style: italic;
   }
 
   /* 5. Citations */

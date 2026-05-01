@@ -1,9 +1,11 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.34.2 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.34.3 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.34.3** (2026-05-02) - Visual band on /pages/why-fresh-food (kitchen photo).
+  - 📷 Inserted a 16:9 photo band between "How we do it differently" and "Sources & Science" on /pages/why-fresh-food. Uses kitchen-cook-process.jpg (real Pioneer Crescent kitchen). Caption: "Real kitchen, real cook, 80°C. No factory in the photo." Breaks up the text wall and gives visual weight to the transparency claim.
 - **v3.34.2** (2026-05-02) - Founder photo swaps + main nav update + smoke regression fix.
   - 📷 12 more curated photos uploaded to Shopify Files (Lola sunlit/grass, expo poodle x2, black cat portrait, tabby cat eating, customer dog x2, kitchen protein layout, kitchen cook process, maltipoo puppy, expo goldendoodle).
   - 🔄 Founder page image swaps (5 of 8): hero is now Lola closeup (was generic 2-up) · "Quality" pillar is now Lola with Bon Pet bowl (was IMG_4081 wooden board) · "Community" pillar is now expo poodle at booth (was IMG_4504 cat at cafe) · timeline "Published formulas" is now real protein layout (was generic GUID-named jpg) · timeline "Now" is now real customer dog (was IMG_4499 generic). Existing transparency / kitchen / sous-vide images kept (they were already content-strong).
