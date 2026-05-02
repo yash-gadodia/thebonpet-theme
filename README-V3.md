@@ -1,9 +1,13 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.37.0 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.37.1 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.37.1** (2026-05-02) - Mobile hero declutter + promo-code reveal fix on quiz.
+  - 📱 **Mobile hero stripped of secondary chrome** (≤767px). Yash flagged the hero as "super cluttered" on iPhone - it had eyebrow pill + heading + subhead + 2 trial CTAs + quiz CTA + trial note + 3-pillar trust strip + rating + sticky bottom CTA + WA bubble all in the first viewport. Now mobile shows only heading -> subhead -> 2 trial CTAs -> quiz CTA -> rating. Hidden on mobile: eyebrow pill, trial note, trust strip. Heading + subhead + quiz pill all sized down. Desktop unchanged.
+  - 🎁 **Quiz fine-print no longer leaks the promo code.** v3.37.0 result step had "Code FREETRIAL<3THEBONPET applies to your first trial..." in body copy. Same leak class as the v3.36.0 trial-card fix - rewrote to "We auto-apply the trial discount at checkout". Saved memory rule (`feedback_no_promo_code_in_body_copy.md`) so I never do this again across sessions.
+  - 📁 Touches: sections/bonpet-hero.liquid, sections/bonpet-quiz.liquid.
 - **v3.37.0** (2026-05-02) - 🎯 New: Lyka-style 3-step quiz at /pages/find-your-meal.
   - 🧭 **TLDR:** the single biggest delta vs Lyka. We had no funnel for "I don't know which protein to start with." Now we do. 3 questions, 30 seconds, lands on a recommended pack with a direct add-to-cart link.
   - 🎯 **New section `bonpet-quiz`** (vanilla-JS state machine, no framework). Step 1: dog or cat. Step 2: sensitive tummy / picky / active / senior / allergies. Step 3: result with protein recommendation, source, why-it-fits blurb, pack price, and "Try [protein] →" link to the matching product page. 10-cell recommendation matrix (2 species × 5 concerns).

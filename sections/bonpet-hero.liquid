@@ -237,6 +237,17 @@
     .tbp-hero-trust-strip { font-size: var(--tbp-text-xs); gap: 6px var(--tbp-space-3); }
     .tbp-hero-trust-strip li + li::before { margin-right: var(--tbp-space-3); margin-left: calc(var(--tbp-space-3) * -1); }
   }
+  /* Mobile declutter: drop secondary chrome so the hero is heading -> subhead -> CTAs -> quiz -> rating only */
+  @media (max-width: 767px) {
+    .tbp-hero-eyebrow { display: none; }
+    .tbp-hero-trial-note { display: none; }
+    .tbp-hero-trust-strip { display: none; }
+    .tbp-hero-inner { padding: var(--tbp-space-7) 0; }
+    .tbp-v3 .tbp-hero-heading { font-size: clamp(3.2rem, 7vw + 1rem, 4.8rem); margin-bottom: var(--tbp-space-3); }
+    .tbp-v3 .tbp-hero-sub { font-size: var(--tbp-text-base); margin-bottom: var(--tbp-space-4); max-width: 540px; }
+    .tbp-hero-ctas { gap: var(--tbp-space-2); margin-bottom: var(--tbp-space-3); }
+    .tbp-hero-quiz-link { font-size: var(--tbp-text-sm); padding: 10px 16px; margin-bottom: var(--tbp-space-3); }
+  }
 </style>
 
 {% schema %}
