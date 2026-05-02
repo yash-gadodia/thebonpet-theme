@@ -116,6 +116,8 @@
                 "cta2_link": "/discount/FREETRIAL%253C3THEBONPET?redirect=%2Fproducts%2Ffree-cat-trial-pack",
                 "trial_note": "FREE delivery on $100+ \u00b7 $9 cold-chain on this trial \u00b7 Frozen, island-wide",
                 "code_cta_label": "",
+                "quiz_cta_label": "🎯 Not sure which protein? Take our 30s quiz →",
+                "quiz_cta_link": "/pages/find-your-meal",
                 "trust_strip_enabled": true,
                 "trust_strip_item_1": "\ud83d\udd0d Open formulas",
                 "trust_strip_item_2": "\u2744\ufe0f Cold-chain delivery",

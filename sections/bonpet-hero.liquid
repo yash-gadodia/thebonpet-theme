@@ -39,6 +39,12 @@
         </button>
       {%- endif -%}
 
+      {%- if section.settings.quiz_cta_label != blank and section.settings.quiz_cta_link != blank -%}
+        <a href="{{ section.settings.quiz_cta_link }}" class="tbp-hero-quiz-link" data-tbp-quiz-cta>
+          {{ section.settings.quiz_cta_label }}
+        </a>
+      {%- endif -%}
+
       {%- if section.settings.trial_note != blank -%}
         <p class="tbp-hero-trial-note">{{ section.settings.trial_note }}</p>
       {%- endif -%}
@@ -172,6 +178,34 @@
     border-color: rgba(255,244,228,0.8);
     transform: translateY(-1px);
   }
+  .tbp-hero-quiz-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--tbp-amber, #F4A24B);
+    color: #2A1B0E;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: var(--tbp-radius-pill);
+    padding: 11px 22px;
+    font-family: inherit;
+    font-size: var(--tbp-text-sm);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: var(--tbp-space-3);
+    position: relative;
+    z-index: 100000;
+  }
+  .tbp-hero-quiz-link:hover {
+    background: #FFB967;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+    color: #2A1B0E;
+  }
+  .tbp-hero-quiz-link:focus-visible {
+    outline: 3px solid rgba(255,244,228,0.85);
+    outline-offset: 3px;
+  }
   .tbp-hero-trust-strip {
     list-style: none;
     margin: 0 auto var(--tbp-space-4);
@@ -222,6 +256,9 @@
     { "type": "url", "id": "cta2_link", "label": "Cats trial link" },
     { "type": "text", "id": "trial_note", "label": "Trial note (small print)", "default": "FREE delivery on $100+ · $9 cold-chain on this trial · Frozen, island-wide" },
     { "type": "text", "id": "code_cta_label", "label": "Manual code-claim button label", "default": "🎁 Claim your trial code →" },
+    { "type": "header", "content": "Quiz CTA (links to /pages/find-your-meal)" },
+    { "type": "text", "id": "quiz_cta_label", "label": "Quiz CTA label", "default": "🎯 Not sure which protein? Take our 30s quiz →" },
+    { "type": "text", "id": "quiz_cta_link", "label": "Quiz CTA link", "default": "/pages/find-your-meal" },
     { "type": "header", "content": "3-pillar trust strip" },
     { "type": "checkbox", "id": "trust_strip_enabled", "label": "Show 3-pillar trust strip", "default": true },
     { "type": "text", "id": "trust_strip_item_1", "label": "Pillar 1 (transpawrency)", "default": "🔍 Open formulas" },

@@ -1,9 +1,15 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.36.0 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.37.0 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.37.0** (2026-05-02) - 🎯 New: Lyka-style 3-step quiz at /pages/find-your-meal.
+  - 🧭 **TLDR:** the single biggest delta vs Lyka. We had no funnel for "I don't know which protein to start with." Now we do. 3 questions, 30 seconds, lands on a recommended pack with a direct add-to-cart link.
+  - 🎯 **New section `bonpet-quiz`** (vanilla-JS state machine, no framework). Step 1: dog or cat. Step 2: sensitive tummy / picky / active / senior / allergies. Step 3: result with protein recommendation, source, why-it-fits blurb, pack price, and "Try [protein] →" link to the matching product page. 10-cell recommendation matrix (2 species × 5 concerns).
+  - 📄 **New page `/pages/find-your-meal`** (Shopify page id 129947959353, template_suffix `find-your-meal`). SEO metafields target "find your pet's perfect meal" + "30 second quiz" intent.
+  - 🏠 **Hero CTA wire-up** - new `quiz_cta_label` + `quiz_cta_link` schema slot on `bonpet-hero`. Renders an amber pill link below the trial CTAs: "🎯 Not sure which protein? Take our 30s quiz →" → `/pages/find-your-meal`. Doesn't replace the trial CTAs, sits below as a tertiary entry for users who aren't ready to commit yet.
+  - 📁 Touches: sections/bonpet-quiz.liquid (new), templates/page.find-your-meal.json (new), sections/bonpet-hero.liquid (new schema fields + render), templates/index.json (hero settings).
 - **v3.36.0** (2026-05-02) - Morning punch list (10 fixes from Yash's eyeball pass).
   - 🎟️ **Trial card body** - removed the literal discount code from the "How it works · Step 1" card. Was: "Code FREETRIAL<3THEBONPET gets the trial pack free, just $9 cold-chain delivery." Now: "Pop your email in the form, we'll auto-apply the discount at checkout." Funnels to form instead of leaking the code.
   - 🟧 **Footer column headings** changed from terracotta orange → golden amber (`var(--tbp-amber)` #F0A12E). Pops better against dark green footer background.

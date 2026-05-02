@@ -1,0 +1,501 @@
+{%- comment -%}
+  V3 /pages/find-your-meal · 3-step quiz (Lyka /get-started pattern).
+  All steps + results live in one section as a vanilla-JS state machine.
+  Email capture reuses existing Shopify Forms popup (window.openBonPetForm)
+  -> existing trial-reveal overlay. No new ESP wiring needed.
+
+  Recommendation matrix (10 cells = 2 species × 5 concerns):
+    DOG · sensitive  -> Pork (highly digestible)
+    DOG · picky      -> Kangaroo (novel protein)
+    DOG · active     -> Beef (sustained energy)
+    DOG · senior     -> Fish (omega-3, lean)
+    DOG · allergies  -> Kangaroo (hypoallergenic novel)
+    CAT · sensitive  -> Duck (gentle, easily digested)
+    CAT · picky      -> Duck (highly palatable)
+    CAT · active     -> Beef (iron-rich)
+    CAT · senior     -> Chicken (lean, low-fat)
+    CAT · allergies  -> Kangaroo (hypoallergenic novel)
+
+  Px-only sizing (Dawn 62.5% root trap).
+{%- endcomment -%}
+
+<section class="tbp-v3 tbp-quiz" data-section-id="{{ section.id }}">
+  <div class="tbp-container">
+    <header class="tbp-quiz-head">
+      <p class="tbp-quiz-eyebrow">{{ section.settings.eyebrow | default: 'FIND YOUR MEAL · 30 SECONDS' }}</p>
+      <h1 class="tbp-quiz-title">{{ section.settings.heading | default: 'Three quick questions and we will pick a meal for your furkid.' }}</h1>
+    </header>
+
+    <div class="tbp-quiz-frame">
+      <ol class="tbp-quiz-progress" aria-label="Quiz progress">
+        <li class="tbp-quiz-dot is-active" data-step="1"><span>1</span></li>
+        <li class="tbp-quiz-dot" data-step="2"><span>2</span></li>
+        <li class="tbp-quiz-dot" data-step="3"><span>3</span></li>
+      </ol>
+
+      {%- comment -%} STEP 1 · pet type {%- endcomment -%}
+      <div class="tbp-quiz-step is-active" data-step="1">
+        <h2 class="tbp-quiz-q">First things first - who are we feeding?</h2>
+        <div class="tbp-quiz-tiles tbp-quiz-tiles--2">
+          <button type="button" class="tbp-quiz-tile" data-pick="dog">
+            <span class="tbp-quiz-tile-emoji" aria-hidden="true">🐶</span>
+            <span class="tbp-quiz-tile-label">A dog</span>
+          </button>
+          <button type="button" class="tbp-quiz-tile" data-pick="cat">
+            <span class="tbp-quiz-tile-emoji" aria-hidden="true">🐱</span>
+            <span class="tbp-quiz-tile-label">A cat</span>
+          </button>
+        </div>
+      </div>
+
+      {%- comment -%} STEP 2 · concern {%- endcomment -%}
+      <div class="tbp-quiz-step" data-step="2">
+        <h2 class="tbp-quiz-q">What is your furkid going through?</h2>
+        <p class="tbp-quiz-q-sub">Pick the closest one. We will fine-tune from there.</p>
+        <div class="tbp-quiz-tiles tbp-quiz-tiles--list">
+          <button type="button" class="tbp-quiz-tile tbp-quiz-tile--list" data-pick="sensitive">
+            <span class="tbp-quiz-tile-emoji" aria-hidden="true">🤢</span>
+            <span class="tbp-quiz-tile-body">
+              <span class="tbp-quiz-tile-label">Sensitive tummy</span>
+              <span class="tbp-quiz-tile-desc">Easy to upset, soft stools, switching food often.</span>
+            </span>
+          </button>
+          <button type="button" class="tbp-quiz-tile tbp-quiz-tile--list" data-pick="picky">
+            <span class="tbp-quiz-tile-emoji" aria-hidden="true">😼</span>
+            <span class="tbp-quiz-tile-body">
+              <span class="tbp-quiz-tile-label">Picky eater</span>
+              <span class="tbp-quiz-tile-desc">Sniffs and walks away. Bores easily.</span>
+            </span>
+          </button>
+          <button type="button" class="tbp-quiz-tile tbp-quiz-tile--list" data-pick="active">
+            <span class="tbp-quiz-tile-emoji" aria-hidden="true">🦴</span>
+            <span class="tbp-quiz-tile-body">
+              <span class="tbp-quiz-tile-label">Active and lean</span>
+              <span class="tbp-quiz-tile-desc">Long walks, dog parks, lots of zoomies.</span>
+            </span>
+          </button>
+          <button type="button" class="tbp-quiz-tile tbp-quiz-tile--list" data-pick="senior">
+            <span class="tbp-quiz-tile-emoji" aria-hidden="true">👴</span>
+            <span class="tbp-quiz-tile-body">
+              <span class="tbp-quiz-tile-label">Senior or slowing down</span>
+              <span class="tbp-quiz-tile-desc">Stiff joints, less appetite, gentle on the gut.</span>
+            </span>
+          </button>
+          <button type="button" class="tbp-quiz-tile tbp-quiz-tile--list" data-pick="allergies">
+            <span class="tbp-quiz-tile-emoji" aria-hidden="true">🤧</span>
+            <span class="tbp-quiz-tile-body">
+              <span class="tbp-quiz-tile-label">Allergies / itchy skin</span>
+              <span class="tbp-quiz-tile-desc">Vet flagged a sensitivity. Need a novel protein.</span>
+            </span>
+          </button>
+        </div>
+        <button type="button" class="tbp-quiz-back" data-back>← Back</button>
+      </div>
+
+      {%- comment -%} STEP 3 · result + email capture trigger {%- endcomment -%}
+      <div class="tbp-quiz-step" data-step="3">
+        <p class="tbp-quiz-result-eyebrow">YOUR MATCH</p>
+        <h2 class="tbp-quiz-result-headline" data-result-headline>We would start with...</h2>
+        <div class="tbp-quiz-result-card">
+          <img class="tbp-quiz-result-img" data-result-img alt="" loading="lazy" width="600" height="600">
+          <div class="tbp-quiz-result-body">
+            <p class="tbp-quiz-result-source" data-result-source></p>
+            <h3 class="tbp-quiz-result-name" data-result-name></h3>
+            <p class="tbp-quiz-result-why" data-result-why></p>
+            <p class="tbp-quiz-result-pack" data-result-pack></p>
+            <a class="tbp-quiz-result-cta" href="#" data-result-cta-link>Try this protein →</a>
+          </div>
+        </div>
+
+        <div class="tbp-quiz-claim">
+          <h3>🎁 Want it on us?</h3>
+          <p>Drop your email and we will send a free trial pack code. $9 cold-chain delivery, no subscription needed.</p>
+          <button type="button" class="tbp-quiz-claim-btn" onclick="window.openBonPetForm && window.openBonPetForm()">
+            Claim your free trial →
+          </button>
+          <p class="tbp-quiz-claim-fine">Code FREETRIAL&lt;3THEBONPET applies to your first trial. By submitting you agree to occasional nutrition emails.</p>
+        </div>
+
+        <div class="tbp-quiz-result-foot">
+          <button type="button" class="tbp-quiz-back" data-back>← Pick another concern</button>
+          <a class="tbp-quiz-secondary" href="/pages/our-meals">See the full menu →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var section = document.querySelector('[data-section-id="{{ section.id }}"]');
+  if (!section) return;
+
+  var state = { species: null, concern: null };
+  var steps = section.querySelectorAll('.tbp-quiz-step');
+  var dots = section.querySelectorAll('.tbp-quiz-dot');
+
+  // Recommendation matrix - 2 species × 5 concerns = 10 outcomes.
+  var matrix = {
+    'dog|sensitive': { protein: 'Pork', source: 'ARTISANAL FREE-RANGE', why: 'Pork is the gentlest of our proteins. Highly digestible, low in inflammation triggers, kind to a sensitive gut.', pack: '300g · from $8.80', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-dog-pork-square.png', link: '/products/gently-cooked-artisanal-pork-for-dogs' },
+    'dog|picky':     { protein: 'Kangaroo', source: 'WILD AUSTRALIAN', why: 'A novel protein your dog has never had. Lean, gamey, irresistible to dogs that ignore everything else.', pack: '300g · from $13.30', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-dog-kangaroo-square.png', link: '/products/gently-cooked-wild-kangaroo-for-dogs' },
+    'dog|active':    { protein: 'Beef', source: 'GRASS-FED', why: 'Iron-rich, moderate-fat, built for sustained energy. The classic working-dog protein.', pack: '300g · from $9.70', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-dog-beef-square.png', link: '/products/gently-cooked-free-range-beef-for-dogs' },
+    'dog|senior':    { protein: 'Fish', source: 'WILD-CAUGHT', why: 'Wild-caught fish is omega-3 rich, lean, and easy on aging joints. Skin and coat support too.', pack: '300g · from $13.30', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-dog-fish-square.png', link: '/products/gently-cooked-wild-caught-fish-for-dogs' },
+    'dog|allergies': { protein: 'Kangaroo', source: 'WILD AUSTRALIAN', why: 'Novel protein with the lowest allergy risk in our range. The standard vet-recommended starting point for elimination diets.', pack: '300g · from $13.30', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-dog-kangaroo-square.png', link: '/products/gently-cooked-wild-kangaroo-for-dogs' },
+    'cat|sensitive': { protein: 'Duck', source: 'CAGE-FREE', why: 'Duck is gentle and easily digested. A common pick for cats with mild GI sensitivities.', pack: '200g · from $8.70', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-cat-duck-square.png', link: '/products/gently-cooked-cage-free-duck-for-cats' },
+    'cat|picky':     { protein: 'Duck', source: 'CAGE-FREE', why: 'Highly palatable, novel-ish protein. Even our pickiest cat customers come back for it.', pack: '200g · from $8.70', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-cat-duck-square.png', link: '/products/gently-cooked-cage-free-duck-for-cats' },
+    'cat|active':    { protein: 'Beef', source: 'GRASS-FED', why: 'Iron-rich and built for energetic cats. Cats are obligate carnivores so the higher protein density of beef matters.', pack: '200g · from $9.00', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-cat-beef-square.png', link: '/products/gently-cooked-grass-fed-for-cats' },
+    'cat|senior':    { protein: 'Chicken', source: 'FREE-RANGE', why: 'Lean and low-fat. The most digestible protein in our range, ideal for older cats with reduced appetite.', pack: '200g · from $7.10', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-cat-chicken-square.png', link: '/products/gently-cooked-free-range-chicken-for-cats' },
+    'cat|allergies': { protein: 'Kangaroo', source: 'WILD AUSTRALIAN', why: 'Novel protein, lowest allergy risk in our range. The standard starting point for cat elimination diets.', pack: '200g · from $11.90', img: 'https://cdn.shopify.com/s/files/1/0668/4373/8169/files/thebonpet-gently-cooked-cat-kangaroo-square.png', link: '/products/gently-cooked-wild-kangaroo-for-cats' }
+  };
+
+  function showStep(n) {
+    steps.forEach(function (el) { el.classList.toggle('is-active', el.dataset.step === String(n)); });
+    dots.forEach(function (el) {
+      var s = parseInt(el.dataset.step, 10);
+      el.classList.toggle('is-active', s === n);
+      el.classList.toggle('is-done', s < n);
+    });
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderResult() {
+    var key = state.species + '|' + state.concern;
+    var rec = matrix[key];
+    if (!rec) return;
+
+    var headlineEl = section.querySelector('[data-result-headline]');
+    var imgEl = section.querySelector('[data-result-img]');
+    var sourceEl = section.querySelector('[data-result-source]');
+    var nameEl = section.querySelector('[data-result-name]');
+    var whyEl = section.querySelector('[data-result-why]');
+    var packEl = section.querySelector('[data-result-pack]');
+    var ctaEl = section.querySelector('[data-result-cta-link]');
+
+    var speciesEmoji = state.species === 'dog' ? '🐶' : '🐱';
+    headlineEl.innerHTML = 'For your ' + speciesEmoji + ', we would start with ' + rec.protein + '.';
+    imgEl.src = rec.img;
+    imgEl.alt = 'Bon Pet gently cooked ' + rec.protein.toLowerCase() + ' for ' + state.species + 's';
+    sourceEl.textContent = rec.source;
+    nameEl.textContent = rec.protein;
+    whyEl.textContent = rec.why;
+    packEl.textContent = rec.pack;
+    ctaEl.href = rec.link;
+    ctaEl.textContent = 'Try ' + rec.protein + ' →';
+  }
+
+  // Pet type tiles
+  section.querySelectorAll('[data-step="1"] [data-pick]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.species = b.dataset.pick;
+      showStep(2);
+    });
+  });
+
+  // Concern tiles
+  section.querySelectorAll('[data-step="2"] [data-pick]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.concern = b.dataset.pick;
+      renderResult();
+      showStep(3);
+    });
+  });
+
+  // Back buttons
+  section.querySelectorAll('[data-back]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var current = parseInt(section.querySelector('.tbp-quiz-step.is-active').dataset.step, 10);
+      showStep(Math.max(1, current - 1));
+    });
+  });
+})();
+</script>
+
+<style>
+  .tbp-quiz {
+    background: var(--tbp-cream, #faf3e8);
+    padding: clamp(48px, 7vw, 96px) 0;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-quiz-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto clamp(32px, 4vw, 56px);
+    padding: 0 16px;
+  }
+  .tbp-quiz-eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--tbp-primary, #2d5d3a);
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+  .tbp-quiz-title {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(28px, 4.4vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+
+  .tbp-quiz-frame {
+    background: #fff;
+    border-radius: 24px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 48px);
+    box-shadow: 0 12px 40px rgba(45, 93, 58, 0.08);
+  }
+
+  /* Progress dots */
+  .tbp-quiz-progress {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 clamp(28px, 4vw, 40px);
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  .tbp-quiz-dot {
+    width: 28px; height: 28px;
+    border-radius: 999px;
+    background: rgba(45, 93, 58, 0.10);
+    color: var(--tbp-ink-soft, #6a6a6a);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .tbp-quiz-dot.is-active {
+    background: var(--tbp-primary, #2d5d3a);
+    color: #fff;
+  }
+  .tbp-quiz-dot.is-done {
+    background: var(--tbp-primary, #2d5d3a);
+    color: #fff;
+    opacity: 0.6;
+  }
+
+  /* Steps */
+  .tbp-quiz-step { display: none; }
+  .tbp-quiz-step.is-active { display: block; }
+  .tbp-quiz-q {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(22px, 2.8vw, 30px);
+    line-height: 1.2;
+    margin: 0 0 8px;
+    color: var(--tbp-ink, #1a1a1a);
+    text-align: center;
+  }
+  .tbp-quiz-q-sub {
+    text-align: center;
+    color: var(--tbp-ink-soft, #6a6a6a);
+    font-size: 15px;
+    margin: 0 0 24px;
+  }
+
+  /* Tiles - 2-up (pet) or list (concern) */
+  .tbp-quiz-tiles { display: grid; gap: 14px; margin: 24px 0 0; }
+  .tbp-quiz-tiles--2 { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tbp-quiz-tiles--list { grid-template-columns: 1fr; }
+
+  .tbp-quiz-tile {
+    appearance: none;
+    border: 2px solid rgba(45, 93, 58, 0.10);
+    background: #fff;
+    border-radius: 16px;
+    padding: clamp(18px, 3vw, 28px);
+    cursor: pointer;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    color: var(--tbp-ink, #1a1a1a);
+    font-family: inherit;
+  }
+  .tbp-quiz-tile:hover {
+    border-color: var(--tbp-primary, #2d5d3a);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(45, 93, 58, 0.10);
+  }
+  .tbp-quiz-tile-emoji { font-size: 44px; line-height: 1; }
+  .tbp-quiz-tile-label { font-size: 18px; font-weight: 700; }
+
+  /* List-style tile (concern step) */
+  .tbp-quiz-tile--list {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+  }
+  .tbp-quiz-tile--list .tbp-quiz-tile-emoji { font-size: 32px; flex-shrink: 0; }
+  .tbp-quiz-tile-body { display: flex; flex-direction: column; gap: 4px; }
+  .tbp-quiz-tile-desc { font-size: 14px; color: var(--tbp-ink-soft, #6a6a6a); font-weight: 400; line-height: 1.4; }
+
+  /* Back */
+  .tbp-quiz-back {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--tbp-primary, #2d5d3a);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 24px;
+    padding: 8px 0;
+  }
+  .tbp-quiz-back:hover { text-decoration: underline; }
+
+  /* Step 3 - Result */
+  .tbp-quiz-result-eyebrow {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--tbp-accent, #ff886b);
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
+  .tbp-quiz-result-headline {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.2;
+    text-align: center;
+    margin: 0 0 24px;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-quiz-result-card {
+    background: var(--tbp-cream, #faf3e8);
+    border-radius: 18px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 600px) {
+    .tbp-quiz-result-card { grid-template-columns: 1fr 1fr; }
+  }
+  .tbp-quiz-result-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    display: block;
+  }
+  .tbp-quiz-result-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .tbp-quiz-result-source {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--tbp-primary, #2d5d3a);
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .tbp-quiz-result-name {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--tbp-ink, #1a1a1a);
+  }
+  .tbp-quiz-result-why { font-size: 15px; line-height: 1.55; color: var(--tbp-ink-soft, #4a4a4a); margin: 0; }
+  .tbp-quiz-result-pack { font-size: 13px; color: var(--tbp-ink-soft, #6a6a6a); margin: 4px 0 0; padding-top: 8px; border-top: 1px solid rgba(45, 93, 58, 0.10); }
+  .tbp-quiz-result-cta {
+    margin-top: auto;
+    display: inline-block;
+    background: var(--tbp-primary, #2d5d3a);
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: background 0.15s ease;
+  }
+  .tbp-quiz-result-cta:hover { background: var(--tbp-primary-deep, #1f4429); color: #fff; }
+
+  /* Claim block */
+  .tbp-quiz-claim {
+    margin: 28px 0 0;
+    padding: 24px 22px;
+    background: var(--tbp-primary, #2d5d3a);
+    color: #fff;
+    border-radius: 18px;
+    text-align: center;
+  }
+  .tbp-quiz-claim h3 {
+    font-family: var(--tbp-font-display, Georgia, serif);
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    color: #fff;
+  }
+  .tbp-quiz-claim p {
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0 0 16px;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .tbp-quiz-claim-btn {
+    appearance: none;
+    background: var(--tbp-accent, #ff886b);
+    color: #fff;
+    border: 0;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .tbp-quiz-claim-btn:hover { transform: translateY(-2px); background: #ef7558; }
+  .tbp-quiz-claim-fine {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 12px 0 0;
+    line-height: 1.5;
+  }
+
+  .tbp-quiz-result-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tbp-quiz-secondary {
+    color: var(--tbp-primary, #2d5d3a);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid currentColor;
+  }
+  .tbp-quiz-secondary:hover { color: var(--tbp-primary-deep, #1f4429); }
+
+  @media (max-width: 600px) {
+    .tbp-quiz-tiles--2 { gap: 12px; }
+    .tbp-quiz-tile-emoji { font-size: 36px; }
+    .tbp-quiz-tile-label { font-size: 16px; }
+    .tbp-quiz-tile--list { padding: 14px; }
+    .tbp-quiz-tile--list .tbp-quiz-tile-emoji { font-size: 26px; }
+    .tbp-quiz-tile-desc { font-size: 13px; }
+    .tbp-quiz-result-body { padding: 18px 20px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bon Pet · Quiz",
+  "tag": "section",
+  "class": "tbp-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FIND YOUR MEAL · 30 SECONDS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Three quick questions and we will pick a meal for your furkid." }
+  ],
+  "presets": [
+    { "name": "Bon Pet · Quiz" }
+  ]
+}
+{% endschema %}
