@@ -647,6 +647,7 @@
         }
     },
     "order": [
+
         "hero",
         "health_tiles",
         "founder",
