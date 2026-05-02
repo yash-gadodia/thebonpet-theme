@@ -1,9 +1,15 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.37.1 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.38.0 (2026-05-02) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.38.0** (2026-05-02) - 📱 Mobile homepage declutter pass (3 worst offenders).
+  - 🛒 **`product_grid` mobile cards trimmed** - hid rating line, "Learn about ingredients..." link, and pack-size suffix on ≤639px. Cards on mobile now show just badge + product name + price + Add-to-Cart. Tighter padding, smaller h4. Each card ~80-100px shorter; 8 cards = ~700px saved off the tallest section on the page.
+  - 📜 **`transparency_proof` ingredient table hidden on mobile.** The 15-row "Full Recipe" table was rendering as a 1500px wall of text on iPhone. Now mobile shows the eyebrow + heading + hero pack image + 2 stats + a single-line teaser ("Every gram of every recipe lives on our open formulas page →") + CTA. Desktop unchanged - full table still there.
+  - 🗑️ **`paw_forward` dropped from homepage.** Was a 850px CTA block that duplicated the message of the `trial_cta` section directly above it ("ready to feed them better"). One CTA per fold.
+  - 📊 **Net mobile page-height impact:** ~3,000px shaved. Was 14,800px (17.5 viewports of scroll on 390x844). Now ~11,800px (14 viewports).
+  - 📁 Touches: sections/bonpet-product-grid.liquid, sections/bonpet-transparency-proof.liquid, templates/index.json, layout/theme.liquid.
 - **v3.37.1** (2026-05-02) - Mobile hero declutter + promo-code reveal fix on quiz.
   - 📱 **Mobile hero stripped of secondary chrome** (≤767px). Yash flagged the hero as "super cluttered" on iPhone - it had eyebrow pill + heading + subhead + 2 trial CTAs + quiz CTA + trial note + 3-pillar trust strip + rating + sticky bottom CTA + WA bubble all in the first viewport. Now mobile shows only heading -> subhead -> 2 trial CTAs -> quiz CTA -> rating. Hidden on mobile: eyebrow pill, trial note, trust strip. Heading + subhead + quiz pill all sized down. Desktop unchanged.
   - 🎁 **Quiz fine-print no longer leaks the promo code.** v3.37.0 result step had "Code FREETRIAL<3THEBONPET applies to your first trial..." in body copy. Same leak class as the v3.36.0 trial-card fix - rewrote to "We auto-apply the trial discount at checkout". Saved memory rule (`feedback_no_promo_code_in_body_copy.md`) so I never do this again across sessions.

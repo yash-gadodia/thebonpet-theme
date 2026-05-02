@@ -134,6 +134,15 @@
   .tbp-prod-learn:hover { color: var(--tbp-primary); text-decoration: underline; }
   .tbp-prod-form { margin-top: auto; padding-top: var(--tbp-space-3); }
   .tbp-prod-form .tbp-btn { font-size: var(--tbp-text-sm); min-height: 42px; padding: 10px var(--tbp-space-4); }
+  /* Mobile card trim: drop rating + learn-link + pack-size to compact the grid */
+  @media (max-width: 639px) {
+    .tbp-prod-card-body { padding: var(--tbp-space-3); gap: 6px; }
+    .tbp-prod-card-body h4 { font-size: var(--tbp-text-sm); }
+    .tbp-prod-rating { display: none; }
+    .tbp-prod-learn { display: none; }
+    .tbp-prod-pack { display: none; }
+    .tbp-prod-form .tbp-btn { font-size: 0.8rem; min-height: 38px; padding: 8px var(--tbp-space-3); }
+  }
 </style>
 
 {% schema %}

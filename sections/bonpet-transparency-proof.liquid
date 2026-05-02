@@ -54,6 +54,10 @@
           </div>
         {%- endfor -%}
       </div>
+      <p class="tbp-transparency-mobile-teaser">
+        Every gram of every recipe lives on
+        <a href="/pages/formulas">our open formulas page →</a>
+      </p>
 
       <div class="tbp-transparency-cta">
         {% render 'bonpet-button',
@@ -246,6 +250,27 @@
     color: var(--tbp-text-mid); font-size: var(--tbp-text-sm);
     margin-top: var(--tbp-space-4); letter-spacing: 0.02em;
     font-style: italic;
+  }
+  .tbp-transparency-mobile-teaser { display: none; }
+  /* Mobile collapse: hide the long ingredient table + small italic line, show one-line teaser linking to /pages/formulas */
+  @media (max-width: 767px) {
+    .tbp-transparency-ingredients-head { display: none; }
+    .tbp-transparency-ingredients { display: none; }
+    .tbp-transparency-small { display: none; }
+    .tbp-transparency-mobile-teaser {
+      display: block;
+      text-align: center;
+      color: var(--tbp-cream);
+      font-size: var(--tbp-text-sm);
+      margin: var(--tbp-space-4) auto 0;
+      max-width: 480px;
+      line-height: 1.5;
+    }
+    .tbp-transparency-mobile-teaser a {
+      color: var(--tbp-cream);
+      text-decoration: underline;
+      font-weight: 700;
+    }
   }
 </style>
 
