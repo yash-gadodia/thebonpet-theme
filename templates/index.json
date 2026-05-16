@@ -519,19 +519,6 @@
                 "calc_cta_link": "/pages/feeding-calculator"
             }
         },
-        "paw_forward": {
-            "type": "bonpet-paw-forward",
-            "settings": {
-                "image_alt": "Rescue cats at Wildflower Studio enjoying Bon Pet meals",
-                "eyebrow": "Paw it Forward",
-                "heading": "Help Stray Cats, One Meal at a Time",
-                "quote": "Over 50 rescue cats at Wildflower Studio eat our meals daily and thrive. Known for high standards, Wildflower Studio proudly stands by our food.",
-                "body": "Opt into kindness by donating to support rescue cats. 100% goes to the charity of your choosing, Wildflower Studio or LUNI.",
-                "cta_label": "Donate a Meal",
-                "cta_link": "/collections/support-wildflower-studio",
-                "partners": "Partners: Wildflower Studio \u00b7 LUNI \u00b7 Paws of JB"
-            }
-        },
         "community_cta": {
             "type": "bonpet-community-cta",
             "blocks": {

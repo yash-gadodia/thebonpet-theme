@@ -1,9 +1,13 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.38.0 (2026-05-02) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.39.0 (2026-05-16) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.39.0** (2026-05-16) - 📣 Promo bar secondary message: self-collect launch + free shipping tier.
+  - 🚚 **Free-shipping tier surfaced site-wide.** Audit flagged "shipping cost hidden until checkout" as the single biggest checkout-completion leak (32% vs 55-70% benchmark). New secondary line: "🚚 Free delivery on orders $100+ · 🏪 NEW: Self-collect at 5 Siglap Road".
+  - 🏪 **Self-collect feature announcement.** Self-Collection shipping option is live; promoting via top bar on every page.
+  - 📁 Touches: sections/header-group.json, layout/theme.liquid.
 - **v3.38.0** (2026-05-02) - 📱 Mobile homepage declutter pass (3 worst offenders).
   - 🛒 **`product_grid` mobile cards trimmed** - hid rating line, "Learn about ingredients..." link, and pack-size suffix on ≤639px. Cards on mobile now show just badge + product name + price + Add-to-Cart. Tighter padding, smaller h4. Each card ~80-100px shorter; 8 cards = ~700px saved off the tallest section on the page.
   - 📜 **`transparency_proof` ingredient table hidden on mobile.** The 15-row "Full Recipe" table was rendering as a 1500px wall of text on iPhone. Now mobile shows the eyebrow + heading + hero pack image + 2 stats + a single-line teaser ("Every gram of every recipe lives on our open formulas page →") + CTA. Desktop unchanged - full table still there.
