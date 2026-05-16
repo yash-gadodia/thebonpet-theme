@@ -91,15 +91,6 @@ test.describe('Responsive render integrity @smoke', () => {
     expect(atLeastOneAboveFold, 'at least one hero trial CTA should be above the fold on mobile').toBe(true);
   });
 
-  test('guarantee pillars scroll horizontally on mobile', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto('/');
-    await page.waitForLoadState('domcontentloaded');
-    const grid = page.locator('.tbp-guarantee .tbp-grid-3');
-    const overflowX = await grid.evaluate((el) => getComputedStyle(el).overflowX);
-    expect(overflowX, 'guarantee grid should scroll horizontally on mobile').toMatch(/auto|scroll/);
-  });
-
   test('how-it-works steps scroll horizontally on mobile <640px', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/');

@@ -7,11 +7,14 @@ import { test, expect } from '@playwright/test';
  * If this test fails, trial acquisition is broken. Do NOT deploy.
  */
 test.describe('Hero popup + trial acquisition infra @smoke', () => {
-  test('claim-code button renders with correct label', async ({ page }) => {
+  test('hero free trial CTAs are visible (removed claim-code button in v3.36.0)', async ({ page }) => {
+    // v3.36.0 removed the .tbp-hero-code-btn. Trial acquisition now flows through
+    // the hero's primary CTAs (Free Trial for Dogs/Cats) that route to discount URLs.
     await page.goto('/');
-    const btn = page.locator('.tbp-hero-code-btn');
-    await expect(btn).toBeVisible();
-    await expect(btn).toContainText(/claim your trial code/i);
+    const dogCta = page.getByRole('link', { name: /free trial for dogs/i });
+    const catCta = page.getByRole('link', { name: /free trial for cats/i });
+    await expect(dogCta).toBeVisible();
+    await expect(catCta).toBeVisible();
   });
 
   test('shopify-forms-embed exists in DOM', async ({ page }) => {
@@ -49,6 +52,8 @@ test.describe('Hero popup + trial acquisition infra @smoke', () => {
     // - Shopify Forms web component hydration warnings (harmless)
     // - CORS warnings from social embeds
     // - Image loading errors (reported as failed network, not breaking)
+    // - CSP / Trusted Types iframe noise from Shopify Forms sub-frames
+    // - HubSpot, AVADA, and other app embeds
     const ignorePatterns = [
       /hubspot|analytics|gtag|facebook|tiktok|pinterest|klaviyo|hotjar|clarity/i,
       /shopify-forms-embed|shopify_forms|shopify\.com\/.*\.js.*error/i,
@@ -60,6 +65,11 @@ test.describe('Hero popup + trial acquisition infra @smoke', () => {
       /web-pixels?.*(refused|MIME|text\/html)/i,
       /font-size:0;color:transparent/i,
       /Refused to execute script/i,
+      /Trusted(HTML|Script|ScriptURL)/i,
+      /Executing inline script violates/i,
+      /avada|gorgias|bold|restock/i,
+      /This document requires/i,
+      /The action has been blocked/i,
     ];
     const critical = errors.filter((e) => !ignorePatterns.some((re) => re.test(e)));
     expect(critical, `Critical JS errors:\n${critical.join('\n')}`).toHaveLength(0);

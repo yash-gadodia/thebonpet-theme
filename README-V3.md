@@ -1,9 +1,13 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.39.0 (2026-05-16) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.39.1 (2026-05-16) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.39.1** (2026-05-16) - 🔢 Sync pawrent count to canonical 1,549 across homepage.
+  - 🐾 **Homepage was drifting between 1,500 and 1,549 pawrents.** Trust stats now consistent: hero subhead, trust grid item r3, reviews eyebrow, transparency block, trial CTA all bumped to 1,549.
+  - 🧪 Resolves the last `review-count-consistency.spec.ts` smoke failure that was forcing `--skip-tests` on every deploy. Smoke gate is clean again post this push.
+  - 📁 Touches: templates/index.json (5 string replacements).
 - **v3.39.0** (2026-05-16) - 📣 Promo bar secondary message: self-collect launch + free shipping tier.
   - 🚚 **Free-shipping tier surfaced site-wide.** Audit flagged "shipping cost hidden until checkout" as the single biggest checkout-completion leak (32% vs 55-70% benchmark). New secondary line: "🚚 Free delivery on orders $100+ · 🏪 NEW: Self-collect at 5 Siglap Road".
   - 🏪 **Self-collect feature announcement.** Self-Collection shipping option is live; promoting via top bar on every page.

@@ -83,7 +83,7 @@
                     "type": "item",
                     "settings": {
                         "icon": "\ud83c\uddf8\ud83c\uddec",
-                        "title": "1,500+ SG Pawrents",
+                        "title": "1,549+ SG Pawrents",
                         "subtitle": "Local community"
                     }
                 },
@@ -124,7 +124,7 @@
                 "trust_strip_item_3": "\ud83d\udc9b SG pet community",
                 "show_rating": true,
                 "rating_value": "4.9",
-                "rating_count": "1,500+ Singapore pawrents",
+                "rating_count": "1,549+ Singapore pawrents",
                 "code_cta_link": ""
             }
         },
@@ -372,7 +372,7 @@
             "settings": {
                 "heading": "What Singapore pawrents are saying",
                 "subheading": "Real pawrents. Real furkids. Real bowls licked clean.",
-                "pawrent_count": "1,500",
+                "pawrent_count": "1,549",
                 "cta_label": "Read all 319+ reviews \u2192",
                 "cta_link": "/pages/the-bon-pet-reviews"
             }
@@ -493,7 +493,7 @@
             "type": "bonpet-product-grid",
             "settings": {
                 "heading": "Our most-loved meals",
-                "subheading": "Complete & balanced. Single-protein. Loved by 1,500+ Singapore pawrents.",
+                "subheading": "Complete & balanced. Single-protein. Loved by 1,549+ Singapore pawrents.",
                 "dog_collection": "dogs",
                 "cat_collection": "cats",
                 "product_limit": 4
@@ -506,7 +506,7 @@
                 "heading": "Try us before you commit",
                 "trial_eyebrow": "Mixed Trial \u00b7 Limited Stock",
                 "trial_title": "Your First Mixed Trial Pack",
-                "trial_desc": "Try 4 proteins for cats or 5 proteins for dogs before committing. Already loved by 1,500+ Singapore pawrents. Your code is applied at checkout, just pick your furkid below.",
+                "trial_desc": "Try 4 proteins for cats or 5 proteins for dogs before committing. Already loved by 1,549+ Singapore pawrents. Your code is applied at checkout, just pick your furkid below.",
                 "trial_price": "Cats $15 (U.P. $36.70) \u00b7 Dogs $25 (U.P. $53.70) \u00b7 while stocks last",
                 "trial_dog_cta_label": "\ud83d\udc36 Claim Dog Trial ($25)",
                 "trial_dog_cta_link": "/discount/DOGTRIAL%253C3THEBONPET?redirect=%2Fproducts%2Fgently-cooked-trial-packs-for-dog",

@@ -15,8 +15,8 @@ import { test, expect } from '@playwright/test';
 // Current figures from Google Business Profile place_id ChIJqWbpqTwX2jERSJWIxogqqsg.
 const CANONICAL = {
   rating: '4.9',
-  review_count: '318',
-  pawrent_count: '1,500',
+  review_count: '319',
+  pawrent_count: '1,549',
 };
 
 test.describe('Review + pawrent count consistency across homepage @smoke', () => {

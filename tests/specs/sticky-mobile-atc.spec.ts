@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test';
  * button (no new <form>, no HubSpot capture).
  */
 
-const PROBE_PRODUCT = '/products/gently-cooked-chicken-dog';
+const PROBE_PRODUCT = '/products/gently-cooked-free-range-chicken-for-dogs';
 
 async function popupDismiss(page) {
   await page.addInitScript(() => {
