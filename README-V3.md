@@ -1,9 +1,18 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.39.1 (2026-05-16) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.40.0 (2026-05-16) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.40.0** (2026-05-16) - 🚚 Surface delivery cost + self-collect on PDPs and in cart drawer.
+  - 📦 **PDP delivery notice (new)**: tan-cream callout under price on every product page reads "🚚 Cold-chain delivery from $9 · FREE on orders $100+" and "🏪 Or self-collect FREE at 5 Siglap Road". Kills the shipping-shock-at-checkout pattern surfaced by the abandoned-cart audit (97% of abandons were under $80, 62% had a trial code applied).
+  - 🛒 **Cart drawer + cart page progress bar**: added a self-collect fallback line under the existing $80/$100 progress widget. Customers under $100 see "🏪 Or self-collect FREE at 5 Siglap Road" so they have an out without paying delivery.
+  - 📁 New snippet: snippets/bonpet-product-delivery-notice.liquid. Touched: sections/main-product.liquid (render call after price block), snippets/bonpet-shipping-progress.liquid (selfcollect line + styles), layout/theme.liquid.
+- **v3.39.2** (2026-05-16) - 🖼️ Nicer "Why we started" photos on /pages/founder.
+  - 🔓 **Transparency tile**: swapped generic vacuum-sealed beef pack for a real Chicken Ragu pack with the full ingredient label legible (98% breakdown + 2% supplements). The pillar literally promises "we show you exactly what goes in the pack" - now the photo backs the claim.
+  - 🐾 **Community tile**: swapped black-cat-with-bag for Yash holding a customer's calico at a tasting event, GC meals banner + kraft sample bags in frame. Delivers "Yash and Nic are here" + "we organise free tastings" head-on.
+  - ✅ Quality tile (rescue puppy + beef pack) unchanged - already on-message.
+  - 📁 Touches: templates/page.founder.json (2 image refs + alts).
 - **v3.39.1** (2026-05-16) - 🔢 Sync pawrent count to canonical 1,549 across homepage.
   - 🐾 **Homepage was drifting between 1,500 and 1,549 pawrents.** Trust stats now consistent: hero subhead, trust grid item r3, reviews eyebrow, transparency block, trial CTA all bumped to 1,549.
   - 🧪 Resolves the last `review-count-consistency.spec.ts` smoke failure that was forcing `--skip-tests` on every deploy. Smoke gate is clean again post this push.

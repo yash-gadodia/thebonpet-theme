@@ -1,0 +1,62 @@
+{%- comment -%}
+  Inline delivery-cost notice rendered under the product price.
+
+  Why: 97% of abandoned checkouts are under the $80 free-ship threshold and 62%
+  had a trial code applied. The leak is shipping shock at checkout, not a UX
+  bug. Surfacing delivery cost AND the free self-collect option on the PDP
+  removes the surprise and lets the customer self-select before they get to
+  payment.
+
+  Renders on every product page (Dawn main-product section, after price block).
+  No setting flags - simple inline note, brand colour bg.
+{%- endcomment -%}
+
+<div class="tbp-pdp-delivery-notice" aria-label="Delivery options">
+  <p class="tbp-pdp-delivery-notice-line">
+    <span aria-hidden="true">🚚</span>
+    <span><strong>Cold-chain delivery from $9</strong> · FREE on orders $100+</span>
+  </p>
+  <p class="tbp-pdp-delivery-notice-line">
+    <span aria-hidden="true">🏪</span>
+    <span>Or <strong>self-collect FREE</strong> at 5 Siglap Road</span>
+  </p>
+</div>
+
+<style>
+  .tbp-pdp-delivery-notice {
+    background: var(--tbp-tan-light, #F5EFE0);
+    border: 1px solid var(--tbp-tan-mid, #e6dfce);
+    border-radius: var(--tbp-radius-md, 12px);
+    padding: 10px 14px;
+    margin: 12px 0 16px;
+    font-family: var(--tbp-font-body, system-ui, sans-serif);
+    color: var(--tbp-text-dark, #16433D);
+  }
+  .tbp-pdp-delivery-notice-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 3px 0;
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+  .tbp-pdp-delivery-notice-line strong {
+    font-weight: 700;
+    color: var(--tbp-primary, #16433D);
+  }
+  .tbp-pdp-delivery-notice-line span[aria-hidden="true"] {
+    font-size: 15px;
+    flex-shrink: 0;
+    width: 18px;
+    text-align: center;
+  }
+  @media (max-width: 480px) {
+    .tbp-pdp-delivery-notice {
+      padding: 9px 12px;
+    }
+    .tbp-pdp-delivery-notice-line {
+      font-size: 12.5px;
+    }
+  }
+</style>

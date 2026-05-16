@@ -28,8 +28,8 @@
                 "transparency": {
                     "type": "pillar",
                     "settings": {
-                        "image": "shopify://shop_images/vacuum-sealed-beef-pack-cta.jpg",
-                        "image_alt": "Vacuum-sealed pack of gently cooked beef showing every ingredient on the label",
+                        "image": "shopify://shop_images/transparency-chicken-pack-label.jpg",
+                        "image_alt": "The Bon Pet Signature Chicken Ragu pack with full ingredient label visible - 98% chicken breast, liver, gizzard, heart and 2% supplements - radical transparency in every pack",
                         "icon": "🔓",
                         "title": "Radical Transparency",
                         "body": "Every gram, every supplement, every ratio is published openly. No proprietary blends. No marketing spin. The only Singapore fresh pet brand that shows you exactly what goes in the pack."
@@ -48,8 +48,8 @@
                 "community": {
                     "type": "pillar",
                     "settings": {
-                        "image": "shopify://shop_images/customer-blackcat-bonpet-bag.jpg",
-                        "image_alt": "A real Singapore customer's black cat with a Bon Pet kraft delivery bag and frozen meal packs",
+                        "image": "shopify://shop_images/community-yash-tasting-event.jpg",
+                        "image_alt": "Yash holding a customer's calico cat at a Bon Pet tasting event with the GC meals banner and kraft sample bags - free tastings and personal nutrition answers from the founders",
                         "icon": "🐾",
                         "title": "Community First",
                         "body": "We run WhatsApp groups, organise free tastings, answer nutrition questions personally. This isn't a faceless brand. Yash and Nic are here. We care what you think."
