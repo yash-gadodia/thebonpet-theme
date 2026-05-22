@@ -43,19 +43,59 @@ test.describe('Brand voice: no em/en dashes in customer-facing copy @smoke', () 
     test(`${path} has no em-dashes or en-dashes in rendered body`, async ({ page }) => {
       await page.goto(path);
       await page.waitForLoadState('domcontentloaded');
-      await page.waitForTimeout(1200);
-      const visible = await page.evaluate((selectors) => {
-        const clone = document.body.cloneNode(true) as HTMLElement;
-        clone.querySelectorAll(selectors.join(',')).forEach((el) => el.remove());
-        return clone.textContent || '';
-      }, THIRD_PARTY_WIDGET_SELECTORS);
+      // Wait for app blocks (Subscriptions, Instafeed, etc.) to finish rendering before
+      // we sample the DOM. networkidle with a generous timeout catches lazy-loaded
+      // app content that intermittently injected em-dashes and caused flake.
+      try {
+        await page.waitForLoadState('networkidle', { timeout: 8000 });
+      } catch { /* some apps poll forever, fall through */ }
+      await page.waitForTimeout(2000);
 
-      for (const ch of FORBIDDEN_CHARS) {
-        const idx = visible.indexOf(ch);
-        if (idx !== -1) {
-          const ctx = visible.slice(Math.max(0, idx - 40), idx + 40).replace(/\s+/g, ' ');
-          throw new Error(`Found forbidden "${ch}" in ${path}: "...${ctx}..."`);
+      // Locate em/en-dashes via TreeWalker so we can report the DOM ancestry of every
+      // hit. Old impl returned 80 chars of stripped text - useless for tracing which
+      // section/snippet/app rendered the offending character. Now we get the parent
+      // chain so the fix is mechanical.
+      const findings = await page.evaluate((args) => {
+        const { selectors, chars } = args;
+        const stripSet = new Set<Element>();
+        document.querySelectorAll(selectors.join(',')).forEach((el) => stripSet.add(el));
+        const isInsideStripped = (node: Node) => {
+          let el: Element | null = node.parentElement;
+          while (el) { if (stripSet.has(el)) return true; el = el.parentElement; }
+          return false;
+        };
+        const out: { ch: string; ctx: string; path: string }[] = [];
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        let n: Node | null;
+        while ((n = walker.nextNode())) {
+          const t = n.textContent || '';
+          if (!chars.some((c) => t.includes(c))) continue;
+          if (isInsideStripped(n)) continue;
+          for (const ch of chars) {
+            const i = t.indexOf(ch);
+            if (i < 0) continue;
+            const ctx = t.slice(Math.max(0, i - 50), i + 50).replace(/\s+/g, ' ');
+            const segs: string[] = [];
+            let el: Element | null = n.parentElement;
+            while (el && segs.length < 6) {
+              let s = el.tagName.toLowerCase();
+              if (el.id) s += `#${el.id}`;
+              const cls = (typeof el.className === 'string' ? el.className : '').trim().split(/\s+/).filter(Boolean).slice(0, 2).join('.');
+              if (cls) s += `.${cls}`;
+              segs.push(s);
+              el = el.parentElement;
+            }
+            out.push({ ch, ctx, path: segs.join(' > ') });
+          }
         }
+        return out;
+      }, { selectors: THIRD_PARTY_WIDGET_SELECTORS, chars: FORBIDDEN_CHARS });
+
+      if (findings.length > 0) {
+        const lines = findings.slice(0, 5).map((f) => `  [${f.ch}] "${f.ctx}"\n    at: ${f.path}`);
+        throw new Error(
+          `Found ${findings.length} forbidden em/en-dash(es) in ${path}:\n${lines.join('\n')}`
+        );
       }
     });
   }

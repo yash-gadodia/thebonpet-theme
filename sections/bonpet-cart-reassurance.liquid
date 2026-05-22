@@ -4,10 +4,11 @@
   Shipping progress widget is shared with the cart drawer via snippets/bonpet-shipping-progress.liquid.
 {%- endcomment -%}
 
-{%- if cart.item_count > 0 -%}
-<section class="tbp-v3 tbp-cart-reassure" aria-label="Shipping & trust">
+{%- comment -%} Always render the wrapper so JS can refresh it after cart updates {%- endcomment -%}
+<section class="tbp-v3 tbp-cart-reassure" data-tbp-reactive aria-label="Shipping & trust" {% if cart.item_count == 0 %}hidden{% endif %}>
   <div class="page-width">
     <div class="tbp-cart-reassure-inner">
+      {%- if cart.item_count > 0 -%}
 
       {%- comment -%} Shared shipping progress widget (3-tier, FREE-first) {%- endcomment -%}
       {% render 'bonpet-shipping-progress' %}
@@ -44,11 +45,44 @@
 
       {%- comment -%} V3 delivery-promise (tracking pings, 3 attempts, NinjaVan, WA reschedule), compact for cart {%- endcomment -%}
       {% render 'bonpet-delivery-promise', compact: true %}
-
+      {%- endif -%}
     </div>
   </div>
 </section>
-{%- endif -%}
+
+<script>
+  (function () {
+    if (window.__tbpCartReassureMounted) return;
+    window.__tbpCartReassureMounted = true;
+    if (typeof subscribe !== 'function' || typeof PUB_SUB_EVENTS === 'undefined') return;
+
+    function refresh() {
+      var host = document.querySelector('.tbp-cart-reassure[data-tbp-reactive]');
+      if (!host) return;
+      var shopifySection = host.closest('.shopify-section');
+      if (!shopifySection) return;
+      var sectionId = shopifySection.id.replace('shopify-section-', '');
+      fetch('/cart?section_id=' + encodeURIComponent(sectionId), { headers: { 'Accept': 'text/html' } })
+        .then(function (r) { return r.text(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var newSection = doc.querySelector('.tbp-cart-reassure[data-tbp-reactive]');
+          if (!newSection) return;
+          var newInner = newSection.querySelector('.tbp-cart-reassure-inner');
+          var curInner = host.querySelector('.tbp-cart-reassure-inner');
+          if (newInner && curInner) curInner.innerHTML = newInner.innerHTML;
+          if (newSection.hasAttribute('hidden')) {
+            host.setAttribute('hidden', '');
+          } else {
+            host.removeAttribute('hidden');
+          }
+        })
+        .catch(function (e) { console.error('[tbp] cart-reassure refresh failed', e); });
+    }
+
+    subscribe(PUB_SUB_EVENTS.cartUpdate, function () { refresh(); });
+  })();
+</script>
 
 <style>
   .tbp-cart-reassure {

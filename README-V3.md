@@ -1,9 +1,16 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.40.0 (2026-05-16) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.41.0 (2026-05-22) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.41.0** (2026-05-22) - 🐾 Site-wide paw trail + reactive cart reassurance fix.
+  - 🐾 **Paw trail dividers**: thin 36px bands auto-injected between content sections on every page; 2 paws per band, alternating dog/cat, drifting in from left/right as you scroll.
+  - ✨ IntersectionObserver-driven fade + drift, opacity 0.16, brand teal. Footprint-trail rhythm.
+  - 📱 Mobile: 30px paws + 26px band + max-2 paws per band so it stays cute on small screens.
+  - ♿ Respects `prefers-reduced-motion` (fades only, no drift).
+  - 🛒 **Cart reassurance bug fix**: shipping progress bar + volume-tier nudge on `/cart` page now reactively re-render when qty changes. Previously they were Liquid-rendered once and never updated because Dawn's cart-items section render list didn't include `bonpet-cart-reassurance`. Now the section subscribes to `PUB_SUB_EVENTS.cartUpdate` and re-fetches itself via Section Rendering API. Drawer already worked.
+  - 📁 New snippet: `snippets/bonpet-paw-trail.liquid`. Touched: `layout/theme.liquid`, `sections/bonpet-cart-reassurance.liquid`.
 - **v3.40.0** (2026-05-16) - 🚚 Surface delivery cost + self-collect on PDPs and in cart drawer.
   - 📦 **PDP delivery notice (new)**: tan-cream callout under price on every product page reads "🚚 Cold-chain delivery from $9 · FREE on orders $100+" and "🏪 Or self-collect FREE at 5 Siglap Road". Kills the shipping-shock-at-checkout pattern surfaced by the abandoned-cart audit (97% of abandons were under $80, 62% had a trial code applied).
   - 🛒 **Cart drawer + cart page progress bar**: added a self-collect fallback line under the existing $80/$100 progress widget. Customers under $100 see "🏪 Or self-collect FREE at 5 Siglap Road" so they have an out without paying delivery.

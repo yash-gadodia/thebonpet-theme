@@ -1,0 +1,179 @@
+{%- comment -%}
+  V3 Global Paw Trail — site-wide signature texture.
+  Auto-injects thin paw-print bands between content sections on every page.
+  Paws fade/drift in via IntersectionObserver, alternating left/right per band.
+  Skips first section (hero), last section (footer), and any section that already
+  carries its own paw wallpaper (e.g. bonpet-how-it-works) so we never double up.
+  Respects prefers-reduced-motion. Mobile shrinks paw size and band height.
+{%- endcomment -%}
+
+<svg class="tbp-paw-trail-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="tbp-trail-paw-dog" viewBox="0 0 40 40">
+      <ellipse cx="9" cy="15" rx="3.6" ry="5"/>
+      <ellipse cx="16" cy="8" rx="3.6" ry="5"/>
+      <ellipse cx="24" cy="8" rx="3.6" ry="5"/>
+      <ellipse cx="31" cy="15" rx="3.6" ry="5"/>
+      <path d="M20 18 C 11 18, 8 28, 13 34 C 16 38, 24 38, 27 34 C 32 28, 29 18, 20 18 Z"/>
+    </symbol>
+    <symbol id="tbp-trail-paw-cat" viewBox="0 0 40 40">
+      <circle cx="11" cy="13" r="3.1"/>
+      <circle cx="17" cy="8" r="3.1"/>
+      <circle cx="23" cy="8" r="3.1"/>
+      <circle cx="29" cy="13" r="3.1"/>
+      <path d="M20 17 C 13 17, 10 23, 13 29 C 15 33, 25 33, 27 29 C 30 23, 27 17, 20 17 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<style>
+  .tbp-paw-trail-defs { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
+
+  .tbp-paw-trail-divider {
+    position: relative;
+    width: 100%;
+    height: 36px;
+    margin: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .tbp-paw-trail-paw {
+    position: absolute;
+    top: 50%;
+    width: 42px; height: 42px;
+    color: var(--tbp-primary-mid, #107965);
+    fill: currentColor;
+    opacity: 0;
+    transition: opacity 700ms cubic-bezier(.4,.0,.2,1),
+                transform 700ms cubic-bezier(.4,.0,.2,1);
+    transition-delay: calc(var(--i, 0) * 160ms);
+    will-change: opacity, transform;
+  }
+  /* Left-side band: paws walk in from the left */
+  .tbp-paw-trail-divider:not([data-side="right"]) .tbp-paw-trail-paw {
+    left: var(--x, 18%);
+    transform: translate(-48px, -50%) rotate(calc(var(--r, 0deg) - 10deg)) scale(.82);
+  }
+  .tbp-paw-trail-divider:not([data-side="right"]).in-view .tbp-paw-trail-paw {
+    opacity: .16;
+    transform: translate(0, -50%) rotate(var(--r, 0deg)) scale(1);
+  }
+  /* Right-side band: paws walk in from the right */
+  .tbp-paw-trail-divider[data-side="right"] .tbp-paw-trail-paw {
+    right: var(--x, 18%);
+    transform: translate(48px, -50%) rotate(calc(var(--r, 0deg) + 10deg)) scale(.82);
+  }
+  .tbp-paw-trail-divider[data-side="right"].in-view .tbp-paw-trail-paw {
+    opacity: .16;
+    transform: translate(0, -50%) rotate(var(--r, 0deg)) scale(1);
+  }
+
+  @media (max-width: 767px) {
+    .tbp-paw-trail-divider { height: 26px; }
+    .tbp-paw-trail-paw { width: 30px; height: 30px; }
+    /* Hide any paw beyond the first two on mobile to keep it light */
+    .tbp-paw-trail-paw:nth-of-type(n+3) { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tbp-paw-trail-paw {
+      transition: opacity 320ms ease;
+    }
+    .tbp-paw-trail-divider:not([data-side="right"]) .tbp-paw-trail-paw,
+    .tbp-paw-trail-divider[data-side="right"] .tbp-paw-trail-paw {
+      transform: translate(0, -50%) rotate(var(--r, 0deg));
+    }
+    .tbp-paw-trail-divider.in-view .tbp-paw-trail-paw { opacity: .16; }
+  }
+</style>
+
+<script>
+  (function () {
+    if (window.__tbpPawTrailMounted) return;
+    window.__tbpPawTrailMounted = true;
+
+    var CONFIGS = [
+      [
+        { x: '12%', r: '-14deg', cat: false, i: 0 },
+        { x: '24%', r: '6deg',   cat: true,  i: 1 }
+      ],
+      [
+        { x: '14%', r: '-6deg', cat: true,  i: 0 },
+        { x: '28%', r: '12deg', cat: false, i: 1 }
+      ],
+      [
+        { x: '10%', r: '-18deg', cat: false, i: 0 },
+        { x: '22%', r: '4deg',   cat: true,  i: 1 }
+      ]
+    ];
+
+    function buildDivider(idx) {
+      var d = document.createElement('div');
+      d.className = 'tbp-paw-trail-divider';
+      d.setAttribute('aria-hidden', 'true');
+      if (idx % 2 === 1) d.setAttribute('data-side', 'right');
+      var cfg = CONFIGS[idx % CONFIGS.length];
+      cfg.forEach(function (p) {
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'tbp-paw-trail-paw');
+        svg.setAttribute('style', '--i:' + p.i + ';--x:' + p.x + ';--r:' + p.r);
+        var use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+        use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', p.cat ? '#tbp-trail-paw-cat' : '#tbp-trail-paw-dog');
+        use.setAttribute('href', p.cat ? '#tbp-trail-paw-cat' : '#tbp-trail-paw-dog');
+        svg.appendChild(use);
+        d.appendChild(svg);
+      });
+      return d;
+    }
+
+    function init() {
+      var main = document.getElementById('MainContent') || document.querySelector('main') || document.body;
+      if (!main) return;
+      var children = Array.prototype.slice.call(main.children).filter(function (el) {
+        return el.classList && el.classList.contains('shopify-section');
+      });
+      if (children.length < 3) return;
+
+      var trailIdx = 0;
+      children.forEach(function (sec, idx) {
+        if (idx === 0) return;
+        if (idx === children.length - 1) return;
+        var prev = children[idx - 1];
+        // Skip if either neighbour already carries paw wallpaper
+        if ((prev && prev.querySelector('.tbp-hiw-bg-paws')) ||
+            sec.querySelector('.tbp-hiw-bg-paws')) return;
+        // Skip if the section type is a known non-content band (promo bars, app blocks)
+        if (sec.querySelector('.tbp-promo-bar') ||
+            sec.querySelector('.tbp-reassurance-band')) return;
+        var divider = buildDivider(trailIdx);
+        sec.insertAdjacentElement('beforebegin', divider);
+        trailIdx++;
+      });
+
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.tbp-paw-trail-divider').forEach(function (d) {
+          d.classList.add('in-view');
+        });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.tbp-paw-trail-divider').forEach(function (d) {
+        io.observe(d);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
