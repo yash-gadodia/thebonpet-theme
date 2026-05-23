@@ -1,9 +1,12 @@
 # The Bon Pet — V3 Theme
 
-**Current version:** v3.41.0 (2026-05-22) - marker in `layout/theme.liquid` line 2.
+**Current version:** v3.42.0 (2026-05-23) - marker in `layout/theme.liquid` line 2.
 **Base:** Shopify Dawn 15.4.0, forked from the current live theme on 2026-04-19.
 
 ## Changelog
+- **v3.42.0** (2026-05-23) - 🏪 Self-collect is now $3 (more locations coming soon).
+  - 💵 Self-collect at 5 Siglap Road now $3 instead of free; "more locations coming soon" trailer everywhere it's mentioned.
+  - 📁 Touches: snippets/bonpet-shipping-progress.liquid (cart/drawer fallback line), snippets/bonpet-product-delivery-notice.liquid (PDP notice), sections/header-group.json (promo bar secondary message), sections/bonpet-llms-txt.liquid (LLMs.txt delivery section).
 - **v3.41.0** (2026-05-22) - 🐾 Site-wide paw trail + reactive cart reassurance fix.
   - 🐾 **Paw trail dividers**: thin 36px bands auto-injected between content sections on every page; 2 paws per band, alternating dog/cat, drifting in from left/right as you scroll.
   - ✨ IntersectionObserver-driven fade + drift, opacity 0.16, brand teal. Footprint-trail rhythm.
